@@ -12,7 +12,10 @@ export default function Footer() {
               <div className="bg-indigo-600 p-1.5 rounded-lg">
                 <Wrench className="w-4 h-4 text-white" />
               </div>
-              <span className="font-bold text-gray-900 text-lg">UnTrackt</span>
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-gray-900 text-lg">UnTrackt</span>
+                <span className="beta-badge">Beta</span>
+              </div>
             </div>
             <p className="text-sm text-gray-500 leading-relaxed">
               Free, private, and always in your browser. No accounts. No servers. No nonsense.

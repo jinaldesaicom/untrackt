@@ -13,9 +13,12 @@ export default function Header() {
             <div className="bg-indigo-600 p-1.5 rounded-lg">
               <Wrench className="w-4 h-4 text-white" />
             </div>
-            <span className="font-bold text-gray-900 text-lg tracking-tight">
-              UnTrackt
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-gray-900 text-lg tracking-tight">
+                UnTrackt
+              </span>
+              <span className="beta-badge">Beta</span>
+            </div>
           </Link>
 
           {/* Search */}

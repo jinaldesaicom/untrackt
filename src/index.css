@@ -9,6 +9,9 @@
 }
 
 @layer components {
+  .beta-badge {
+    @apply inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-amber-700;
+  }
   .tool-card {
     @apply bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-pointer;
   }

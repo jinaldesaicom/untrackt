@@ -22,6 +22,9 @@ export default function Home() {
       {/* Hero */}
       <section className="bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20 text-center">
+          <div className="mb-4 flex justify-center">
+            <span className="beta-badge">Beta Release</span>
+          </div>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-3">
             88+ free tools. Runs in your browser. Zero tracking.
           </h1>
