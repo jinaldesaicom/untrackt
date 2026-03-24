@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import SEOHead from '../../components/SEOHead.jsx'
 import DisclaimerCard from '../../components/DisclaimerCard.jsx'
+import useDebounce from '../../hooks/useDebounce.js'
 
 export default function MortgageCalculator() {
   const [inputs, setInputs] = useState({
@@ -14,19 +15,20 @@ export default function MortgageCalculator() {
     pmiRate: 0.5,
     hoaFees: 0,
   })
+  const debouncedInputs = useDebounce(inputs, 300)
 
-  const homePrice = parseFloat(inputs.homePrice) || 0
-  const downPayment = inputs.downPaymentType === '%'
-    ? homePrice * (parseFloat(inputs.downPaymentValue) / 100)
-    : parseFloat(inputs.downPaymentValue) || 0
+  const homePrice = parseFloat(debouncedInputs.homePrice) || 0
+  const downPayment = debouncedInputs.downPaymentType === '%'
+    ? homePrice * (parseFloat(debouncedInputs.downPaymentValue) / 100)
+    : parseFloat(debouncedInputs.downPaymentValue) || 0
   const principal = homePrice - downPayment
-  const monthlyRate = parseFloat(inputs.interestRate) / 100 / 12
-  const numberOfPayments = parseFloat(inputs.loanTerm) * 12
-  const monthlyPropertyTax = (parseFloat(inputs.propertyTax) || 0) / 12
-  const monthlyInsurance = (parseFloat(inputs.homeInsurance) || 0) / 12
+  const monthlyRate = parseFloat(debouncedInputs.interestRate) / 100 / 12
+  const numberOfPayments = parseFloat(debouncedInputs.loanTerm) * 12
+  const monthlyPropertyTax = (parseFloat(debouncedInputs.propertyTax) || 0) / 12
+  const monthlyInsurance = (parseFloat(debouncedInputs.homeInsurance) || 0) / 12
   const ltv = homePrice > 0 ? (principal / homePrice) * 100 : 0
-  const monthlyPmi = ltv > 80 ? (principal * (parseFloat(inputs.pmiRate) / 100 / 12)) : 0
-  const monthlyHoa = (parseFloat(inputs.hoaFees) || 0)
+  const monthlyPmi = ltv > 80 ? (principal * (parseFloat(debouncedInputs.pmiRate) / 100 / 12)) : 0
+  const monthlyHoa = (parseFloat(debouncedInputs.hoaFees) || 0)
 
   const monthlyPI = monthlyRate === 0
     ? principal / numberOfPayments
@@ -46,7 +48,7 @@ export default function MortgageCalculator() {
   let balance = principal
   let totalPrincipal = 0
   let totalInt = 0
-  for (let year = 1; year <= Math.min(parseInt(inputs.loanTerm), 40); year++) {
+  for (let year = 1; year <= Math.min(parseInt(debouncedInputs.loanTerm), 40); year++) {
     let yearPrincipal = 0
     let yearInterest = 0
     for (let m = 0; m < 12; m++) {

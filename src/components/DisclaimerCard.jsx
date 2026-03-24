@@ -4,7 +4,7 @@ export default function DisclaimerCard({ type = 'general' }) {
   const disclaimerText = {
     finance: 'For educational and estimation purposes only. This is not financial advice. Consult a qualified financial advisor.',
     legal: 'This tool analyzes text structure only. It does NOT provide legal advice. Have all documents reviewed by a qualified legal professional.',
-    health: 'This tool is for informational purposes only. It is not a substitute for professional medical advice. Consult a healthcare provider.',
+    health: 'This is an estimation tool only. Not medical advice. Consult a qualified healthcare professional for medical guidance.',
     general: 'For estimation purposes only. Consult a professional for accurate or binding decisions.',
     freelance: 'Estimates only. Consult a professional for binding contracts or legal/tax advice.',
   }

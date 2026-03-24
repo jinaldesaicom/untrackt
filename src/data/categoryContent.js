@@ -57,30 +57,28 @@ export const categoryContent = {
     seoDescription: 'Free student tools: citation generator, GPA calculator, grade projector, study planner. No tracking, student-friendly.'
   },
   health: {
-    title: 'Health & Wellness Calculators',
-    tagline: 'BMI, fitness, sleep, and hydration tracking',
-    description: 'Monitor your health with evidence-based calculators. Track BMI, calculate water intake needs, optimize your sleep cycles, and understand metabolic requirements - informational tools designed to support your wellness journey.',
+    title: 'Health Tools',
+    tagline: 'Evidence-based health calculators',
+    description: 'Free health calculators and reference tools for everyday wellness decisions. Calculate TDEE, track body metrics, understand lab results, and plan your health goals - privately, with no data ever leaving your device.',
     useCases: [
-      'Calculate BMI and body composition',
-      'Determine daily water intake needs',
-      'Optimize sleep with cycle calculations',
-      'Track fitness progress and goals',
-      'Calculate daily caloric requirements'
+      'Calculate your daily calorie needs',
+      'Estimate body fat percentage',
+      'Understand blood pressure readings',
+      'Plan pregnancy milestones',
     ],
-    seoDescription: 'Free health calculators: BMI calculator, water intake calculator, sleep cycle optimizer. Educational tools only, not medical advice.'
+    seoDescription: 'Free health calculators including TDEE calculator, BMI, body fat estimator, blood pressure classifier, macro calculator and more. Private, runs in your browser.'
   },
   general: {
-    title: 'General Utilities',
-    tagline: 'Password generation, QR codes, tip splitting',
-    description: 'Handy utilities for everyday tasks. Generate secure passwords, create QR codes, split bills fairly, and more - simple tools that solve common problems without complexity.',
+    title: 'General Tools',
+    tagline: 'Everyday utilities for everyone',
+    description: 'A collection of versatile everyday tools - from color palette generators to typing speed tests, countdowns to case converters. Useful for everyone, regardless of profession.',
     useCases: [
-      'Generate strong, secure passwords',
-      'Create QR codes instantly',
-      'Split bills and tips between groups',
-      'Unit conversions (length, weight, temperature)',
-      'URL encoding and decoding'
+      'Generate color palettes for design projects',
+      'Test and improve your typing speed',
+      'Convert text between different cases',
+      'Generate meta tags for SEO',
     ],
-    seoDescription: 'Free utility tools: password generator, QR code creator, tip calculator, unit converter. Simple, secure, no tracking.'
+    seoDescription: 'Free general purpose tools including color palette generator, typing speed test, countdown timer, random number generator, and more. No account needed.'
   }
 }
 

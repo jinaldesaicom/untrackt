@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Moon, Sun } from 'lucide-react'
+import { ToolLayout } from '../../components/ToolLayout.jsx'
 
 const CYCLE_MINUTES = 90
 const FALL_ASLEEP_MINUTES = 14
@@ -61,6 +62,12 @@ export default function SleepCycleCalculator() {
   const results = mode === 'wakeup' ? getSleepTimes(date) : getWakeTimes(date)
 
   return (
+    <ToolLayout
+      title="Sleep Cycle Calculator"
+      description="Estimate better bedtimes or wake-up times using 90-minute sleep cycles and a small fall-asleep buffer."
+      path="/tools/sleep-cycle-calculator"
+      disclaimerType="health"
+    >
     <div className="space-y-5">
       {/* Mode toggle */}
       <div className="flex rounded-xl border border-gray-200 overflow-hidden w-fit">
@@ -131,5 +138,6 @@ export default function SleepCycleCalculator() {
         These times account for ~14 minutes to fall asleep.
       </div>
     </div>
+    </ToolLayout>
   )
 }

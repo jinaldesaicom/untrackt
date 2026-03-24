@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom'
 import ToolGrid from '../components/ToolGrid.jsx'
 import SEOHead from '../components/SEOHead.jsx'
 import tools, { categories, categoryColorMap } from '../data/tools.js'
+import categoryContent from '../data/categoryContent.js'
 import { getIcon } from '../icons.js'
 
 export default function CategoryPage() {
@@ -9,6 +10,7 @@ export default function CategoryPage() {
   const category = categories.find((c) => c.id === categoryId)
   const categoryTools = tools.filter((t) => t.category === categoryId)
   const colors = categoryColorMap[categoryId] || categoryColorMap['general']
+  const content = categoryContent[categoryId]
 
   if (!category) {
     return (
@@ -25,7 +27,7 @@ export default function CategoryPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <SEOHead
         title={`${category.name} Tools - Free & Private | UnTrackt`}
-        description={`Free ${category.name.toLowerCase()} tools that run in your browser. No sign-up, no tracking, no data stored on any server.`}
+        description={content?.seoDescription || `Free ${category.name.toLowerCase()} tools that run in your browser. No sign-up, no tracking, no data stored on any server.`}
         path={`/category/${category.id}`}
       />
 
@@ -48,11 +50,19 @@ export default function CategoryPage() {
               {categoryTools.length} tools
             </span>
           </div>
-          <p className="text-gray-500 dark:text-gray-400 mt-1 leading-relaxed">{category.description}</p>
+          <p className="text-gray-500 dark:text-gray-400 mt-1 leading-relaxed">{content?.description || category.description}</p>
+          {content?.useCases?.length > 0 && (
+            <div className="mt-4 flex flex-wrap gap-2">
+              {content.useCases.slice(0, 4).map((useCase) => (
+                <span key={useCase} className="px-3 py-1 rounded-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-xs text-gray-600 dark:text-gray-300">
+                  {useCase}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Tools Grid */}
       <ToolGrid tools={categoryTools} />
     </div>
   )

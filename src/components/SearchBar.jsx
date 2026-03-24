@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Search, X } from 'lucide-react'
 import { getIcon } from '../icons.js'
 import tools, { categoryColorMap } from '../data/tools.js'
+import useDebounce from '../hooks/useDebounce.js'
 
 export default function SearchBar({ large = false }) {
   const [query, setQuery] = useState('')
@@ -12,6 +13,7 @@ export default function SearchBar({ large = false }) {
   const containerRef = useRef(null)
   const inputRef = useRef(null)
   const navigate = useNavigate()
+  const debouncedQuery = useDebounce(query, 150)
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -23,23 +25,28 @@ export default function SearchBar({ large = false }) {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  const handleChange = (e) => {
-    const q = e.target.value
-    setQuery(q)
+  useEffect(() => {
     setActiveIndex(-1)
-    if (q.trim().length < 1) {
+
+    if (debouncedQuery.trim().length < 1) {
       setResults([])
       setOpen(false)
       return
     }
-    const lower = q.toLowerCase()
+
+    const lower = debouncedQuery.toLowerCase()
     const filtered = tools.filter((t) =>
       t.name.toLowerCase().includes(lower) ||
       t.description.toLowerCase().includes(lower) ||
       t.tags.some((tag) => tag.toLowerCase().includes(lower))
     ).slice(0, 6)
+
     setResults(filtered)
     setOpen(true)
+  }, [debouncedQuery])
+
+  const handleChange = (e) => {
+    setQuery(e.target.value)
   }
 
   const handleSelect = (tool) => {
@@ -122,7 +129,7 @@ export default function SearchBar({ large = false }) {
       )}
 
       {open && query.trim() && results.length === 0 && (
-        <div className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-xl px-4 py-5 text-center text-sm text-gray-500">
+        <div className="absolute z-50 w-full mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-xl px-4 py-5 text-center text-sm text-gray-500 dark:text-gray-400">
           No tools found for "{query}"
         </div>
       )}

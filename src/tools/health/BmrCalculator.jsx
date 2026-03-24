@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { ToolLayout } from '../../components/ToolLayout.jsx'
 
 const ACTIVITY_LEVELS = [
   { label: 'Sedentary (little/no exercise)', value: 1.2 },
@@ -46,6 +47,12 @@ export default function BmrCalculator() {
   const fmt = (n) => Math.round(n).toLocaleString()
 
   return (
+    <ToolLayout
+      title="BMR Calculator"
+      description="Calculate your basal metabolic rate and daily calorie estimates privately in your browser."
+      path="/tools/bmr-calculator"
+      disclaimerType="health"
+    >
     <div className="space-y-5">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* Age */}
@@ -145,5 +152,6 @@ export default function BmrCalculator() {
         </div>
       )}
     </div>
+    </ToolLayout>
   )
 }

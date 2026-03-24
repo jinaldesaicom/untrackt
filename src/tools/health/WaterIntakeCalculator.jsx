@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Droplets } from 'lucide-react'
+import { ToolLayout } from '../../components/ToolLayout.jsx'
 
 const ACTIVITY_FACTORS = [
   { label: 'Sedentary (desk work)', value: 0 },
@@ -33,6 +34,12 @@ export default function WaterIntakeCalculator() {
   const filled = Math.min(glasses, 12)
 
   return (
+    <ToolLayout
+      title="Water Intake Calculator"
+      description="Estimate a daily hydration target based on weight, activity, and climate without sharing any personal data."
+      path="/tools/water-intake-calculator"
+      disclaimerType="health"
+    >
     <div className="space-y-5">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
@@ -100,5 +107,6 @@ export default function WaterIntakeCalculator() {
         </div>
       )}
     </div>
+    </ToolLayout>
   )
 }

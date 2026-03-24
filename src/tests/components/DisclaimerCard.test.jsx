@@ -12,6 +12,6 @@ describe('DisclaimerCard', () => {
     expect(screen.getByText(/does not provide legal advice/i)).toBeInTheDocument()
 
     render(<DisclaimerCard type="health" />)
-    expect(screen.getByText(/not a substitute for professional medical advice/i)).toBeInTheDocument()
+    expect(screen.getByText(/not medical advice/i)).toBeInTheDocument()
   })
 })

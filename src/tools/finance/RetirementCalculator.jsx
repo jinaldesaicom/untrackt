@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import SEOHead from '../../components/SEOHead.jsx'
 import DisclaimerCard from '../../components/DisclaimerCard.jsx'
+import useDebounce from '../../hooks/useDebounce.js'
 
 export default function RetirementCalculator() {
   const [inputs, setInputs] = useState({
@@ -14,23 +15,24 @@ export default function RetirementCalculator() {
     inflationRate: 3,
     lifeExpectancy: 85,
   })
+  const debouncedInputs = useDebounce(inputs, 300)
 
-  const yearsToRetirement = parseInt(inputs.retirementAge) - parseInt(inputs.currentAge)
-  const monthlyPreReturn = parseFloat(inputs.preReturnRate) / 100 / 12
+  const yearsToRetirement = parseInt(debouncedInputs.retirementAge) - parseInt(debouncedInputs.currentAge)
+  const monthlyPreReturn = parseFloat(debouncedInputs.preReturnRate) / 100 / 12
   const preRetirementMonths = yearsToRetirement * 12
 
-  let savingsAtRetirement = parseFloat(inputs.currentSavings) || 0
+  let savingsAtRetirement = parseFloat(debouncedInputs.currentSavings) || 0
   for (let i = 0; i < preRetirementMonths; i++) {
-    savingsAtRetirement = savingsAtRetirement * (1 + monthlyPreReturn) + (parseFloat(inputs.monthlyContribution) || 0)
+    savingsAtRetirement = savingsAtRetirement * (1 + monthlyPreReturn) + (parseFloat(debouncedInputs.monthlyContribution) || 0)
   }
 
   // Adjust for inflation
-  const inflationFactor = Math.pow(1 + parseFloat(inputs.inflationRate) / 100, yearsToRetirement)
-  const monthlyExpensesAdjusted = (parseFloat(inputs.monthlyExpenses) || 0) * inflationFactor
+  const inflationFactor = Math.pow(1 + parseFloat(debouncedInputs.inflationRate) / 100, yearsToRetirement)
+  const monthlyExpensesAdjusted = (parseFloat(debouncedInputs.monthlyExpenses) || 0) * inflationFactor
 
   // Monthly income from savings
-  const monthlyPostReturn = parseFloat(inputs.postReturnRate) / 100 / 12
-  const yearsInRetirement = parseInt(inputs.lifeExpectancy) - parseInt(inputs.retirementAge)
+  const monthlyPostReturn = parseFloat(debouncedInputs.postReturnRate) / 100 / 12
+  const yearsInRetirement = parseInt(debouncedInputs.lifeExpectancy) - parseInt(debouncedInputs.retirementAge)
   const monthsInRetirement = yearsInRetirement * 12
 
   // Monthly withdrawal = expenses (assuming drawdown)
@@ -58,7 +60,7 @@ export default function RetirementCalculator() {
   const projections = []
   let testBalance = savingsAtRetirement
   for (let year = 1; year <= yearsInRetirement; year++) {
-    const age = parseInt(inputs.retirementAge) + year
+    const age = parseInt(debouncedInputs.retirementAge) + year
     for (let m = 0; m < 12; m++) {
       testBalance = testBalance * (1 + monthlyPostReturn) - monthlyExpensesAdjusted
     }
@@ -66,7 +68,7 @@ export default function RetirementCalculator() {
       age,
       year,
       balance: Math.max(0, testBalance),
-      inflationAdjustedValue: Math.max(0, testBalance) / Math.pow(1 + parseFloat(inputs.inflationRate) / 100, year),
+      inflationAdjustedValue: Math.max(0, testBalance) / Math.pow(1 + parseFloat(debouncedInputs.inflationRate) / 100, year),
     })
   }
 

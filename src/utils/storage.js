@@ -1,4 +1,8 @@
 const RECENT_TOOLS_KEY = 'untrackt:recentTools'
+const THEME_KEY = 'untrackt:theme'
+const FAVORITES_KEY = 'untrackt:favorites'
+
+const VALID_THEMES = new Set(['light', 'dark', 'system'])
 
 function canUseStorage() {
   try {
@@ -55,4 +59,47 @@ export function getPreference(key, defaultValue = null) {
 
 export function setPreference(key, value) {
   setItem(`untrackt:pref:${key}`, value)
+}
+
+export function getTheme() {
+  const theme = getItem(THEME_KEY, 'system')
+  return VALID_THEMES.has(theme) ? theme : 'system'
+}
+
+export function setTheme(theme) {
+  if (!VALID_THEMES.has(theme)) return
+  setItem(THEME_KEY, theme)
+}
+
+export function getFavorites() {
+  const favorites = getItem(FAVORITES_KEY, [])
+  return Array.isArray(favorites) ? favorites.filter(Boolean) : []
+}
+
+export function addFavorite(toolId) {
+  if (!toolId) return getFavorites()
+  const current = getFavorites()
+  if (current.includes(toolId)) return current
+  const next = [...current, toolId]
+  setItem(FAVORITES_KEY, next)
+  return next
+}
+
+export function removeFavorite(toolId) {
+  const next = getFavorites().filter((id) => id !== toolId)
+  setItem(FAVORITES_KEY, next)
+  return next
+}
+
+export function isFavorite(toolId) {
+  return getFavorites().includes(toolId)
+}
+
+export function toggleFavorite(toolId) {
+  return isFavorite(toolId) ? removeFavorite(toolId) : addFavorite(toolId)
+}
+
+export function clearFavorites() {
+  setItem(FAVORITES_KEY, [])
+  return []
 }

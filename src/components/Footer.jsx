@@ -4,7 +4,7 @@ import { categories } from '../data/tools.js'
 
 export default function Footer() {
   return (
-    <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-16 transition-colors">
+    <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 mt-16 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="flex flex-col md:flex-row justify-between gap-8">
           <div className="max-w-xs">
@@ -24,6 +24,9 @@ export default function Footer() {
               <ShieldCheck className="w-4 h-4" />
               <span>No tracking. No cookies. No accounts. Ever.</span>
             </div>
+            <Link to="/favorites" className="inline-flex mt-4 text-sm text-indigo-600 dark:text-indigo-400 hover:underline">
+              View saved tools
+            </Link>
           </div>
 
           <div>

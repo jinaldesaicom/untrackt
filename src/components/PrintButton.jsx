@@ -16,7 +16,7 @@ export default function PrintButton({ label = 'Print / Save as PDF', printTarget
     <button
       onClick={handlePrint}
       disabled={isPreparing}
-      className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 text-white font-medium text-sm hover:bg-blue-700 disabled:bg-gray-400 transition-colors ${className}`}
+      className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 text-white font-medium text-sm hover:bg-blue-700 disabled:bg-gray-400 dark:disabled:bg-gray-600 transition-colors ${className}`}
     >
       <Printer className="w-4 h-4" />
       {isPreparing ? 'Preparing PDF...' : label}

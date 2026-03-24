@@ -3,6 +3,7 @@ import { Routes, Route, useParams, Link } from 'react-router-dom'
 import Layout from './components/Layout.jsx'
 import Home from './pages/Home.jsx'
 import CategoryPage from './pages/CategoryPage.jsx'
+import FavoritesPage from './pages/FavoritesPage.jsx'
 import DisclaimerBadge from './components/DisclaimerBadge.jsx'
 import ToolCard from './components/ToolCard.jsx'
 import ToolSkeleton from './components/ToolSkeleton.jsx'
@@ -10,6 +11,7 @@ import SEOHead from './components/SEOHead.jsx'
 import tools, { categories, categoryColorMap } from './data/tools.js'
 import { getIcon } from './icons.js'
 import { addRecentTool } from './utils/storage.js'
+import { useTheme } from './hooks/useTheme.js'
 
 function ToolPage() {
   const { toolId } = useParams()
@@ -94,10 +96,13 @@ function ToolPage() {
 }
 
 export default function App() {
+  const { theme, isDark } = useTheme()
+
   return (
-    <Layout>
+    <Layout theme={theme} isDark={isDark}>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/favorites" element={<FavoritesPage />} />
         <Route path="/category/:categoryId" element={<CategoryPage />} />
         <Route path="/tools/:toolId" element={<ToolPage />} />
       </Routes>

@@ -1,11 +1,13 @@
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
+import { Heart } from 'lucide-react'
 import SearchBar from '../components/SearchBar.jsx'
 import ToolGrid from '../components/ToolGrid.jsx'
 import SEOHead from '../components/SEOHead.jsx'
 import tools, { categories, categoryColorMap } from '../data/tools.js'
 import { getIcon } from '../icons.js'
 import { getRecentTools } from '../utils/storage.js'
+import { useFavorites } from '../hooks/useFavorites.js'
 
 function getRandomFeaturedTools(count = 6) {
   const shuffled = [...tools].sort(() => Math.random() - 0.5)
@@ -13,7 +15,13 @@ function getRandomFeaturedTools(count = 6) {
 }
 
 export default function Home() {
+  const { favorites } = useFavorites()
   const featured = useMemo(() => getRandomFeaturedTools(6), [])
+  const favoriteTools = useMemo(() => {
+    return favorites
+      .map((id) => tools.find((tool) => tool.id === id))
+      .filter(Boolean)
+  }, [favorites])
   const recentTools = useMemo(() => {
     const recentIds = getRecentTools()
     return recentIds
@@ -87,22 +95,45 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">Why UnTrackt?</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-white border border-gray-200 rounded-xl p-5">
-            <h3 className="text-base font-semibold text-gray-900">Runs in your browser</h3>
-            <p className="text-sm text-gray-500 mt-2">Nothing you type ever leaves your device.</p>
+          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-5">
+            <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100">Runs in your browser</h3>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">Nothing you type ever leaves your device.</p>
           </div>
-          <div className="bg-white border border-gray-200 rounded-xl p-5">
-            <h3 className="text-base font-semibold text-gray-900">Instant results</h3>
-            <p className="text-sm text-gray-500 mt-2">No loading spinners. No server round trips.</p>
+          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-5">
+            <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100">Instant results</h3>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">No loading spinners. No server round trips.</p>
           </div>
-          <div className="bg-white border border-gray-200 rounded-xl p-5">
-            <h3 className="text-base font-semibold text-gray-900">Forever free</h3>
-            <p className="text-sm text-gray-500 mt-2">No account. No subscription. No catch.</p>
+          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-5">
+            <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100">Forever free</h3>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">No account. No subscription. No catch.</p>
           </div>
         </div>
       </section>
 
-      {/* Recently Used */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <div className="flex items-end justify-between mb-6">
+          <div>
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white">Saved tools</h2>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Quick access to the tools you use most</p>
+          </div>
+          {favoriteTools.length > 6 && (
+            <Link to="/favorites" className="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline">
+              View all favorites
+            </Link>
+          )}
+        </div>
+
+        {favoriteTools.length > 0 ? (
+          <ToolGrid tools={favoriteTools.slice(0, 6)} />
+        ) : (
+          <div className="rounded-2xl border border-dashed border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 px-6 py-10 text-center">
+            <Heart className="w-10 h-10 mx-auto text-rose-400 dark:text-rose-300 mb-3" />
+            <p className="text-base font-semibold text-gray-900 dark:text-gray-100">Click ♥ on any tool to save it here</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">Saved tools live only on this device, and every tool still works even if storage is cleared.</p>
+          </div>
+        )}
+      </section>
+
       {recentTools.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
           <div className="flex items-end justify-between mb-6">

@@ -1,9 +1,14 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://untrackt.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/favorites</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://untrackt.com/category/dev</loc>
@@ -36,82 +41,22 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://untrackt.com/tools/json-formatter</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://untrackt.com/tools/base64-tool</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://untrackt.com/tools/bmr-calculator</loc>
+    <loc>https://untrackt.com/tools/uuid-generator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://untrackt.com/tools/citation-generator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://untrackt.com/tools/color-converter</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://untrackt.com/tools/compound-interest-calculator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://untrackt.com/tools/cron-parser</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://untrackt.com/tools/css-gradient-generator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://untrackt.com/tools/essay-outline-builder</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://untrackt.com/tools/fire-number-calculator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://untrackt.com/tools/flashcard-session</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://untrackt.com/tools/gpa-calculator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://untrackt.com/tools/hash-generator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://untrackt.com/tools/hourly-rate-calculator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://untrackt.com/tools/html-entity-encoder</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://untrackt.com/tools/http-status-lookup</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://untrackt.com/tools/json-formatter</loc>
+    <loc>https://untrackt.com/tools/regex-tester</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -121,7 +66,37 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://untrackt.com/tools/loan-calculator</loc>
+    <loc>https://untrackt.com/tools/hash-generator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/unix-timestamp-converter</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/cron-parser</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/html-entity-encoder</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/color-converter</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/css-gradient-generator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/http-status-lookup</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -131,12 +106,12 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://untrackt.com/tools/markdown-previewer</loc>
+    <loc>https://untrackt.com/tools/text-diff-checker</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://untrackt.com/tools/meeting-cost-calculator</loc>
+    <loc>https://untrackt.com/tools/markdown-previewer</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -146,12 +121,22 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://untrackt.com/tools/password-generator</loc>
+    <loc>https://untrackt.com/tools/svg-optimizer</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://untrackt.com/tools/percentage-calculator</loc>
+    <loc>https://untrackt.com/tools/url-encoder-decoder</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/gpa-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/word-counter</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -161,12 +146,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://untrackt.com/tools/qr-code-generator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://untrackt.com/tools/quadratic-solver</loc>
+    <loc>https://untrackt.com/tools/citation-generator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -176,7 +156,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://untrackt.com/tools/regex-tester</loc>
+    <loc>https://untrackt.com/tools/percentage-calculator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -191,7 +171,22 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://untrackt.com/tools/sleep-cycle-calculator</loc>
+    <loc>https://untrackt.com/tools/unit-converter</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/essay-outline-builder</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/flashcard-session</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/quadratic-solver</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -201,12 +196,72 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://untrackt.com/tools/svg-optimizer</loc>
+    <loc>https://untrackt.com/tools/hourly-rate-calculator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://untrackt.com/tools/text-diff-checker</loc>
+    <loc>https://untrackt.com/tools/meeting-cost-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/working-days-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/invoice-generator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/project-timeline-estimator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/tax-bracket-estimator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/discount-markup-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/contract-analyzer</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/proposal-builder</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/client-profitability-estimator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/late-payment-fee-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/timezone-scheduler</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/password-generator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/qr-code-generator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -216,22 +271,67 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://untrackt.com/tools/unit-converter</loc>
+    <loc>https://untrackt.com/tools/color-palette-generator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://untrackt.com/tools/unix-timestamp-converter</loc>
+    <loc>https://untrackt.com/tools/aspect-ratio-calculator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://untrackt.com/tools/url-encoder-decoder</loc>
+    <loc>https://untrackt.com/tools/image-to-base64</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://untrackt.com/tools/uuid-generator</loc>
+    <loc>https://untrackt.com/tools/countdown-timer</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/word-frequency-counter</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/typing-speed-test</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/random-number-generator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/binary-text-converter</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/case-converter</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/json-to-csv-converter</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/text-to-slug</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/meta-tag-generator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/bmr-calculator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -241,12 +341,142 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://untrackt.com/tools/word-counter</loc>
+    <loc>https://untrackt.com/tools/sleep-cycle-calculator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://untrackt.com/tools/working-days-calculator</loc>
+    <loc>https://untrackt.com/tools/tdee-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/ideal-weight-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/body-fat-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/macro-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/blood-pressure-classifier</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/heart-rate-zone-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/pregnancy-due-date-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/ovulation-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/alcohol-unit-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/calorie-burn-estimator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/medical-unit-converter</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/vaccination-age-guide</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/compound-interest-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/loan-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/fire-number-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/mortgage-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/sip-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/retirement-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/rule-of-72-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/break-even-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/inflation-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/net-worth-snapshot</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/savings-goal-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/credit-card-payoff-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/roi-calculator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/currency-converter</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://untrackt.com/tools/emergency-fund-calculator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
