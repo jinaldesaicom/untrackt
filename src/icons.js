@@ -46,7 +46,7 @@ import {
   Braces, Binary, Fingerprint, BookOpen, AlignLeft, Timer,
   DollarSign, Users, CalendarDays, ShieldCheck, QrCode, Receipt,
   Flame, Droplets, Moon, TrendingUp, Landmark, PiggyBank,
-  Code2, GraduationCap, Briefcase, Grid3x3, Heart, Wrench,
+  Code2, GraduationCap, Briefcase, Grid3x3, Heart, Wrench, Search, Calculator,
 } from 'lucide-react'
 
 export const iconMap = {
@@ -74,6 +74,8 @@ export const iconMap = {
   Grid3x3,
   Heart,
   Wrench,
+  Search,
+  Calculator,
 }
 
 export function getIcon(name) {

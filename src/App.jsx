@@ -1,25 +1,25 @@
-import { Suspense, lazy } from 'react'
+import { Suspense, useEffect } from 'react'
 import { Routes, Route, useParams, Link } from 'react-router-dom'
 import Layout from './components/Layout.jsx'
 import Home from './pages/Home.jsx'
 import CategoryPage from './pages/CategoryPage.jsx'
 import DisclaimerBadge from './components/DisclaimerBadge.jsx'
 import ToolCard from './components/ToolCard.jsx'
+import ToolSkeleton from './components/ToolSkeleton.jsx'
+import SEOHead from './components/SEOHead.jsx'
 import tools, { categories, categoryColorMap } from './data/tools.js'
 import { getIcon } from './icons.js'
-
-function ToolSuspenseFallback() {
-  return (
-    <div className="max-w-7xl mx-auto px-4 py-16 text-center">
-      <div className="inline-block w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
-      <p className="text-gray-500 mt-3 text-sm">Loading tool...</p>
-    </div>
-  )
-}
+import { addRecentTool } from './utils/storage.js'
 
 function ToolPage() {
   const { toolId } = useParams()
   const tool = tools.find((t) => t.id === toolId)
+
+  useEffect(() => {
+    if (tool?.id) {
+      addRecentTool(tool.id)
+    }
+  }, [tool?.id])
 
   if (!tool) {
     return (
@@ -38,6 +38,14 @@ function ToolPage() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <SEOHead
+        title={`${tool.name} - Free Online Tool | UnTrackt`}
+        description={`${tool.description} Free, private, runs in your browser. No data sent to any server.`}
+        path={tool.path}
+        toolName={tool.name}
+        category={category?.name || tool.category}
+      />
+
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-sm text-gray-500 mb-6 flex-wrap">
         <Link to="/" className="hover:text-indigo-600 transition-colors">Home</Link>
@@ -64,7 +72,7 @@ function ToolPage() {
       <DisclaimerBadge />
 
       {/* Tool UI */}
-      <Suspense fallback={<ToolSuspenseFallback />}>
+      <Suspense fallback={<ToolSkeleton />}>
         <ToolComponent />
       </Suspense>
 

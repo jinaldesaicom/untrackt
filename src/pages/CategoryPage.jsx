@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
 import ToolGrid from '../components/ToolGrid.jsx'
+import SEOHead from '../components/SEOHead.jsx'
 import tools, { categories, categoryColorMap } from '../data/tools.js'
 import { getIcon } from '../icons.js'
 
@@ -22,6 +23,12 @@ export default function CategoryPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <SEOHead
+        title={`${category.name} Tools - Free & Private | UnTrackt`}
+        description={`Free ${category.name.toLowerCase()} tools that run in your browser. No sign-up, no tracking, no data stored on any server.`}
+        path={`/category/${category.id}`}
+      />
+
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-sm text-gray-500 mb-8">
         <Link to="/" className="hover:text-indigo-600 transition-colors">Home</Link>
