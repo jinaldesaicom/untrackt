@@ -38,8 +38,8 @@ export default function Header() {
         </div>
 
         {/* Mobile category nav */}
-        <div className="lg:hidden pb-2 -mx-4 px-4 overflow-x-auto">
-          <CategoryNav />
+        <div className="lg:hidden pb-2 -mx-4 px-4 overflow-x-auto no-scrollbar">
+          <CategoryNav mobile />
         </div>
       </div>
     </header>
