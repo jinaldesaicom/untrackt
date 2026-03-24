@@ -52,10 +52,16 @@ function markdownToHtml(md) {
   let inUl = false
   let inOl = false
 
+  const closeLists = () => {
+    if (inUl) { out.push('</ul>'); inUl = false }
+    if (inOl) { out.push('</ol>'); inOl = false }
+  }
+
   for (let i = 0; i < lines.length; i += 1) {
     const line = lines[i]
 
     if (line.startsWith('```')) {
+      closeLists()
       if (!inCode) out.push('<pre><code>')
       else out.push('</code></pre>')
       inCode = !inCode
@@ -68,6 +74,7 @@ function markdownToHtml(md) {
     }
 
     if (/^\|.+\|$/.test(line) && /^\|[- :|]+\|$/.test(lines[i + 1] || '')) {
+      closeLists()
       const headers = line.split('|').slice(1, -1).map((x) => x.trim())
       const rows = []
       i += 2
@@ -89,38 +96,33 @@ function markdownToHtml(md) {
     }
 
     if (/^#{1,6}\s+/.test(line)) {
+      closeLists()
       const level = line.match(/^#+/)[0].length
       out.push(`<h${level}>${parseInline(line.replace(/^#{1,6}\s+/, ''))}</h${level}>`)
       continue
     }
 
     if (/^>\s+/.test(line)) {
+      closeLists()
       out.push(`<blockquote>${parseInline(line.replace(/^>\s+/, ''))}</blockquote>`)
       continue
     }
 
     if (/^-\s+/.test(line)) {
-      if (!inUl) out.push('<ul>')
+      if (!inUl) { closeLists(); out.push('<ul>') }
       inUl = true
       out.push(`<li>${parseInline(line.replace(/^-\s+/, ''))}</li>`)
       continue
     }
 
     if (/^\d+\.\s+/.test(line)) {
-      if (!inOl) out.push('<ol>')
+      if (!inOl) { closeLists(); out.push('<ol>') }
       inOl = true
       out.push(`<li>${parseInline(line.replace(/^\d+\.\s+/, ''))}</li>`)
       continue
     }
 
-    if (inUl && !/^-\s+/.test(line)) {
-      out.push('</ul>')
-      inUl = false
-    }
-    if (inOl && !/^\d+\.\s+/.test(line)) {
-      out.push('</ol>')
-      inOl = false
-    }
+    closeLists()
 
     if (/^---+$/.test(line.trim())) {
       out.push('<hr />')

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { RefreshCw } from 'lucide-react'
 import SEOHead from '../../components/SEOHead.jsx'
-import DisclaimerBadge from '../../components/DisclaimerBadge.jsx'
 import CopyButton from '../../components/CopyButton.jsx'
 
 const FALLBACK_RATES = {
@@ -67,7 +66,6 @@ export default function CurrencyConverter() {
         toolName="Currency Converter"
       />
 
-      <DisclaimerBadge />
 
       <div className="max-w-2xl">
         {error && (

@@ -12,7 +12,7 @@ export default function SavingsGoalCalculator() {
   const removeGoal = (id) => setGoals(goals.filter(g => g.id !== id))
   const updateGoal = (id, field, value) => setGoals(goals.map(g => g.id === id ? { ...g, [field]: value } : g))
 
-  const fmt = (v) => v.toLocaleString('en-US', { style: 'currency', maximumFractionDigits: 0 })
+  const fmt = (v) => v.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
 
   const getProgress = (goal) => {
     if (!goal.deadline) return 0

@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import SEOHead from '../../components/SEOHead.jsx'
-import DisclaimerBadge from '../../components/DisclaimerBadge.jsx'
 import { calculateInflation, calculateFutureValue, getAvailableYears } from '../../data/inflationData.js'
 
 export default function InflationCalculator() {
@@ -30,7 +29,6 @@ export default function InflationCalculator() {
           toolName="Inflation Calculator"
         />
 
-        <DisclaimerBadge />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-1 space-y-4">
@@ -147,7 +145,6 @@ export default function InflationCalculator() {
           toolName="Inflation Calculator"
         />
 
-        <DisclaimerBadge />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-1 space-y-4">

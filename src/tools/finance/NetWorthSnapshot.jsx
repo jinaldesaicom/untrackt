@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Plus, Trash2, PieChart } from 'lucide-react'
 import SEOHead from '../../components/SEOHead.jsx'
-import DisclaimerBadge from '../../components/DisclaimerBadge.jsx'
 
 export default function NetWorthSnapshot() {
   const [assets, setAssets] = useState([{ id: 1, category: 'Cash & Savings', label: '', value: 0 }])
@@ -34,7 +33,6 @@ export default function NetWorthSnapshot() {
         toolName="Net Worth Snapshot"
       />
 
-      <DisclaimerBadge />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">

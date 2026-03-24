@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import SEOHead from '../../components/SEOHead.jsx'
-import DisclaimerBadge from '../../components/DisclaimerBadge.jsx'
 import DisclaimerCard from '../../components/DisclaimerCard.jsx'
 
 export default function RetirementCalculator() {
@@ -80,7 +79,6 @@ export default function RetirementCalculator() {
         toolName="Retirement Calculator"
       />
 
-      <DisclaimerBadge />
       <DisclaimerCard type="finance" />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

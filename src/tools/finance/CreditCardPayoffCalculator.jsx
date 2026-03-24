@@ -39,7 +39,7 @@ export default function CreditCardPayoffCalculator() {
   }
 
   const result = calculate()
-  const fmt = (v) => v.toLocaleString('en-US', { style: 'currency', maximumFractionDigits: 0 })
+  const fmt = (v) => v.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
 
   const comparePayment = (extra) => {
     let balance = inputs.balance

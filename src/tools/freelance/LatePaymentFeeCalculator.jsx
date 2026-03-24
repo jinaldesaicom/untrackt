@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Copy } from 'lucide-react'
 import SEOHead from '../../components/SEOHead.jsx'
-import DisclaimerBadge from '../../components/DisclaimerBadge.jsx'
 import CopyButton from '../../components/CopyButton.jsx'
 
 export default function LatePaymentFeeCalculator() {
@@ -98,7 +97,6 @@ Thank you,`
         toolName="Late Payment Fee Calculator"
       />
 
-      <DisclaimerBadge />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Form */}

@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import SEOHead from '../../components/SEOHead.jsx'
-import DisclaimerBadge from '../../components/DisclaimerBadge.jsx'
 import CopyButton from '../../components/CopyButton.jsx'
 
 export default function DiscountMarkupCalculator() {
@@ -47,7 +46,6 @@ export default function DiscountMarkupCalculator() {
         toolName="Discount & Markup Calculator"
       />
 
-      <DisclaimerBadge />
 
       <div className="space-y-6">
         {/* Tabs */}

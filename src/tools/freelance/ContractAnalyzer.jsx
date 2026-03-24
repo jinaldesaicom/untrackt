@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import SEOHead from '../../components/SEOHead.jsx'
-import DisclaimerBadge from '../../components/DisclaimerBadge.jsx'
 import DisclaimerCard from '../../components/DisclaimerCard.jsx'
 
 const STOP_WORDS = new Set([
@@ -69,7 +68,6 @@ export default function ContractAnalyzer() {
         toolName="Contract Analyzer"
       />
 
-      <DisclaimerBadge />
       <DisclaimerCard type="legal" />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

@@ -22,7 +22,7 @@ export default function EmergencyFundCalculator() {
   const isComplete = currentSavings >= targetFund
   const percentComplete = Math.min(100, (currentSavings / targetFund) * 100)
 
-  const fmt = (v) => v.toLocaleString('en-US', { style: 'currency', maximumFractionDigits: 0 })
+  const fmt = (v) => v.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
 
   const savingsRates = [100, 250, 500, 1000]
   const getSavingsPlan = (monthlyRate) => {

@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Plus, Trash2, ChevronUp, ChevronDown } from 'lucide-react'
 import SEOHead from '../../components/SEOHead.jsx'
-import DisclaimerBadge from '../../components/DisclaimerBadge.jsx'
 import CopyButton from '../../components/CopyButton.jsx'
 
 export default function ProjectTimelineEstimator() {
@@ -149,7 +148,6 @@ export default function ProjectTimelineEstimator() {
         toolName="Project Timeline Estimator"
       />
 
-      <DisclaimerBadge />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Form */}

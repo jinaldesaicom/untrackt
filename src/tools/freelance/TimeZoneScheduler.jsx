@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Plus, Trash2 } from 'lucide-react'
 import SEOHead from '../../components/SEOHead.jsx'
-import DisclaimerBadge from '../../components/DisclaimerBadge.jsx'
 import CopyButton from '../../components/CopyButton.jsx'
 import * as storage from '../../utils/storage.js'
 
@@ -120,7 +119,6 @@ export default function TimeZoneScheduler() {
         toolName="Time Zone Scheduler"
       />
 
-      <DisclaimerBadge />
 
       <div className="space-y-6">
         {/* Date Picker */}

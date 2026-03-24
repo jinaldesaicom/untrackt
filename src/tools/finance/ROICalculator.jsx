@@ -8,7 +8,7 @@ export default function ROICalculator() {
   const [realEstateInputs, setRealEstateInputs] = useState({ purchasePrice: 300000, downPayment: 60000, annualRent: 36000, annualExpenses: 6000, appreciation: 3 })
   const [marketingInputs, setMarketingInputs] = useState({ marketingCost: 5000, revenue: 50000, previousRevenue: 40000 })
 
-  const fmt = (v) => v.toLocaleString('en-US', { style: 'currency', maximumFractionDigits: 0 })
+  const fmt = (v) => v.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
   const pct = (v) => v.toFixed(2)
 
   const basicROI = (basicInputs.returns / basicInputs.investment) * 100

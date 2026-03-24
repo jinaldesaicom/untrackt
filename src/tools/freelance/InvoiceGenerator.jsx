@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Plus, Trash2, ChevronUp, ChevronDown } from 'lucide-react'
 import SEOHead from '../../components/SEOHead.jsx'
-import DisclaimerBadge from '../../components/DisclaimerBadge.jsx'
 import DisclaimerCard from '../../components/DisclaimerCard.jsx'
 import PrintButton from '../../components/PrintButton.jsx'
 import CopyButton from '../../components/CopyButton.jsx'
@@ -165,7 +164,6 @@ export default function InvoiceGenerator() {
         toolName="Invoice Generator"
       />
 
-      <DisclaimerBadge />
 
       <div className="space-y-6">
         <div className="flex flex-wrap gap-2 mb-4">
@@ -483,7 +481,7 @@ export default function InvoiceGenerator() {
           </div>
 
           {/* Preview Section */}
-          <div className="hidden lg:block sticky top-6 h-fit">
+          <div className="hidden lg:block print:block sticky top-6 h-fit">
             <div id="invoice-preview" className="bg-white p-8 rounded-xl border border-gray-200 shadow-sm print:shadow-none print:border-0 print:p-0">
               <div className="space-y-6">
                 {/* Header */}
@@ -685,28 +683,18 @@ export default function InvoiceGenerator() {
 
       <style>{`
         @media print {
-          body {
-            margin: 0;
-            padding: 0;
-            background: white;
-          }
-          .no-print, .btn-secondary, [class*="btn-"], h2, label, input, textarea, select, .max-h-96, .flex-wrap, input[type="date"], input[type="email"], input[type="tel"], [class*="hidden lg:"] {
-            display: none !important;
-          }
+          body * { visibility: hidden; }
+          #invoice-preview,
+          #invoice-preview * { visibility: visible; }
           #invoice-preview {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: block !important;
             box-shadow: none !important;
             border: none !important;
             padding: 0 !important;
-            max-width: 100%;
-          }
-          .print\:shadow-none {
-            box-shadow: none;
-          }
-          .print\:border-0 {
-            border: none;
-          }
-          .print\:p-0 {
-            padding: 0;
           }
         }
       `}</style>

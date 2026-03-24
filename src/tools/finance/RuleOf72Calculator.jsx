@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import SEOHead from '../../components/SEOHead.jsx'
-import DisclaimerBadge from '../../components/DisclaimerBadge.jsx'
 import DisclaimerCard from '../../components/DisclaimerCard.jsx'
 
 export default function RuleOf72Calculator() {
@@ -25,7 +24,6 @@ export default function RuleOf72Calculator() {
         toolName="Rule of 72 Calculator"
       />
 
-      <DisclaimerBadge />
       <DisclaimerCard type="finance" />
 
       <div className="space-y-6">

@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Plus, Trash2 } from 'lucide-react'
 import SEOHead from '../../components/SEOHead.jsx'
-import DisclaimerBadge from '../../components/DisclaimerBadge.jsx'
 
 export default function ClientProfitabilityEstimator() {
   const [clients, setClients] = useState([])
@@ -71,7 +70,6 @@ export default function ClientProfitabilityEstimator() {
         toolName="Client Profitability Estimator"
       />
 
-      <DisclaimerBadge />
 
       <div className="space-y-6">
         <button onClick={addClient} disabled={clients.length >= 10} className="btn-primary">

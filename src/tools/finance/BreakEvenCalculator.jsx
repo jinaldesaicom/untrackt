@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import SEOHead from '../../components/SEOHead.jsx'
-import DisclaimerBadge from '../../components/DisclaimerBadge.jsx'
 import DisclaimerCard from '../../components/DisclaimerCard.jsx'
 
 export default function BreakEvenCalculator() {
@@ -46,7 +45,6 @@ export default function BreakEvenCalculator() {
           toolName="Break-Even Calculator"
         />
 
-        <DisclaimerBadge />
         <DisclaimerCard type="finance" />
 
         <div className="space-y-6">
@@ -156,7 +154,6 @@ export default function BreakEvenCalculator() {
           toolName="Break-Even Calculator"
         />
 
-        <DisclaimerBadge />
         <DisclaimerCard type="finance" />
 
         <div className="space-y-6">
