@@ -1,0 +1,81 @@
+// Explicit icon registry — only imports the icons actually used by tools
+// This allows Vite/Rollup to tree-shake unused Lucide icons
+export {
+  Braces,
+  Binary,
+  Fingerprint,
+  BookOpen,
+  AlignLeft,
+  Timer,
+  DollarSign,
+  Users,
+  CalendarDays,
+  ShieldCheck,
+  QrCode,
+  Receipt,
+  Flame,
+  Droplets,
+  Moon,
+  TrendingUp,
+  Landmark,
+  PiggyBank,
+  // UI icons
+  Code2,
+  GraduationCap,
+  Briefcase,
+  Grid3x3,
+  Heart,
+  Wrench,
+  Search,
+  X,
+  Copy,
+  Check,
+  RefreshCw,
+  Plus,
+  Trash2,
+  Play,
+  Pause,
+  RotateCcw,
+  Square,
+  Download,
+  Sun,
+  ShieldCheck as Shield,
+} from 'lucide-react'
+
+import {
+  Braces, Binary, Fingerprint, BookOpen, AlignLeft, Timer,
+  DollarSign, Users, CalendarDays, ShieldCheck, QrCode, Receipt,
+  Flame, Droplets, Moon, TrendingUp, Landmark, PiggyBank,
+  Code2, GraduationCap, Briefcase, Grid3x3, Heart, Wrench,
+} from 'lucide-react'
+
+export const iconMap = {
+  Braces,
+  Binary,
+  Fingerprint,
+  BookOpen,
+  AlignLeft,
+  Timer,
+  DollarSign,
+  Users,
+  CalendarDays,
+  ShieldCheck,
+  QrCode,
+  Receipt,
+  Flame,
+  Droplets,
+  Moon,
+  TrendingUp,
+  Landmark,
+  PiggyBank,
+  Code2,
+  GraduationCap,
+  Briefcase,
+  Grid3x3,
+  Heart,
+  Wrench,
+}
+
+export function getIcon(name) {
+  return iconMap[name] || Wrench
+}

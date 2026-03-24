@@ -1,0 +1,52 @@
+import { useParams, Link } from 'react-router-dom'
+import ToolGrid from '../components/ToolGrid.jsx'
+import tools, { categories, categoryColorMap } from '../data/tools.js'
+import { getIcon } from '../icons.js'
+
+export default function CategoryPage() {
+  const { categoryId } = useParams()
+  const category = categories.find((c) => c.id === categoryId)
+  const categoryTools = tools.filter((t) => t.category === categoryId)
+  const colors = categoryColorMap[categoryId] || categoryColorMap['general']
+
+  if (!category) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-16 text-center">
+        <h1 className="text-2xl font-bold text-gray-900 mb-2">Category not found</h1>
+        <Link to="/" className="text-indigo-600 hover:underline">← Back to Home</Link>
+      </div>
+    )
+  }
+
+  const Icon = getIcon(category.icon)
+
+  return (
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      {/* Breadcrumb */}
+      <nav className="flex items-center gap-2 text-sm text-gray-500 mb-8">
+        <Link to="/" className="hover:text-indigo-600 transition-colors">Home</Link>
+        <span>/</span>
+        <span className="text-gray-900 font-medium">{category.name}</span>
+      </nav>
+
+      {/* Header */}
+      <div className="flex items-start gap-4 mb-8">
+        <div className={`p-3 rounded-xl ${colors.bg} shrink-0`}>
+          <Icon className={`w-8 h-8 ${colors.icon}`} />
+        </div>
+        <div>
+          <div className="flex items-center gap-3 flex-wrap">
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900">{category.name}</h1>
+            <span className={`px-2.5 py-0.5 rounded-full text-sm font-medium text-white ${colors.pill}`}>
+              {categoryTools.length} tools
+            </span>
+          </div>
+          <p className="text-gray-500 mt-1 leading-relaxed">{category.description}</p>
+        </div>
+      </div>
+
+      {/* Tools Grid */}
+      <ToolGrid tools={categoryTools} />
+    </div>
+  )
+}
