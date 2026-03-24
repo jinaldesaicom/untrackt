@@ -7,7 +7,7 @@ export default function CategoryNav({ mobile = false }) {
     : 'flex items-center gap-1 py-1'
 
   return (
-    <nav className={navClass}>
+    <nav className={navClass} aria-label="Main navigation">
       {categories.map((cat) => {
         const colors = categoryColorMap[cat.id]
         return (

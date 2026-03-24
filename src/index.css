@@ -19,6 +19,15 @@
   .dark body {
     @apply bg-gray-900 text-gray-100;
   }
+
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:focus-visible {
+    @apply outline-none ring-2 ring-indigo-500 ring-offset-2 ring-offset-white dark:ring-offset-gray-900;
+  }
 }
 
 @layer components {
@@ -52,6 +61,18 @@
   }
   .flip-value {
     animation: flip-in 0.6s ease;
+  }
+  .animate-page-in {
+    animation: page-in 150ms ease-out;
+  }
+  .animate-heart-pop {
+    animation: heart-pop 300ms ease;
+  }
+  .animate-toast-in {
+    animation: toast-in 180ms ease-out;
+  }
+  .animate-count-up {
+    animation: count-up 480ms ease-out;
   }
   .confetti-burst::before,
   .confetti-burst::after {
@@ -89,6 +110,54 @@
   }
   100% {
     transform: translateY(0) rotate(-2deg);
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heart-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes count-up {
+  from {
+    opacity: 0.4;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 

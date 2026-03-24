@@ -1,4 +1,5 @@
 const RECENT_TOOLS_KEY = 'untrackt:recentTools'
+const RECENT_SEARCHES_KEY = 'untrackt:recentSearches'
 const THEME_KEY = 'untrackt:theme'
 const FAVORITES_KEY = 'untrackt:favorites'
 
@@ -53,6 +54,19 @@ export function addRecentTool(toolId) {
   setItem(RECENT_TOOLS_KEY, next)
 }
 
+export function getRecentSearches() {
+  const searches = getItem(RECENT_SEARCHES_KEY, [])
+  return Array.isArray(searches) ? searches.slice(0, 3) : []
+}
+
+export function addRecentSearch(searchTerm) {
+  const value = String(searchTerm || '').trim()
+  if (!value) return
+  const current = getRecentSearches()
+  const next = [value, ...current.filter((item) => item !== value)].slice(0, 3)
+  setItem(RECENT_SEARCHES_KEY, next)
+}
+
 export function getPreference(key, defaultValue = null) {
   return getItem(`untrackt:pref:${key}`, defaultValue)
 }
@@ -102,4 +116,13 @@ export function toggleFavorite(toolId) {
 export function clearFavorites() {
   setItem(FAVORITES_KEY, [])
   return []
+}
+
+export function clearAllUntracktStorage() {
+  if (!canUseStorage()) return
+  Object.keys(window.localStorage).forEach((key) => {
+    if (key.startsWith('untrackt:')) {
+      window.localStorage.removeItem(key)
+    }
+  })
 }

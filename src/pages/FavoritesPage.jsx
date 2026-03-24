@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom'
 import { Heart } from 'lucide-react'
 import SEOHead from '../components/SEOHead.jsx'
 import ToolGrid from '../components/ToolGrid.jsx'
+import EmptyState from '../components/EmptyState.jsx'
 import tools from '../data/tools.js'
 import { useFavorites } from '../hooks/useFavorites.js'
 
@@ -41,16 +41,12 @@ export default function FavoritesPage() {
       {favoriteTools.length > 0 ? (
         <ToolGrid tools={favoriteTools} />
       ) : (
-        <div className="rounded-2xl border border-dashed border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 px-6 py-14 text-center">
-          <Heart className="w-12 h-12 mx-auto text-rose-400 dark:text-rose-300 mb-4" />
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">No saved tools yet</h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 max-w-md mx-auto">
-            Use the heart button on any tool card to pin it here for faster access.
-          </p>
-          <Link to="/" className="btn-primary inline-flex mt-6">
-            Browse all tools
-          </Link>
-        </div>
+        <EmptyState
+          icon={Heart}
+          title="No saved tools yet"
+          description="Use the heart button on any tool card to pin it here for faster access."
+          action={{ label: 'Browse all tools', onClick: () => (window.location.href = '/') }}
+        />
       )}
     </div>
   )

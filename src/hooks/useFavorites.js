@@ -17,17 +17,22 @@ export function FavoritesProvider({ children }) {
   const [favorites, setFavorites] = useState(() => readFavorites())
 
   const toggleFavorite = (toolId) => {
-    if (!toolId) return
+    if (!toolId) return false
 
+    let added = false
     setFavorites((current) => {
       if (current.includes(toolId)) {
         persistRemoveFavorite(toolId)
+        added = false
         return current.filter((id) => id !== toolId)
       }
 
       persistAddFavorite(toolId)
+      added = true
       return [...current, toolId]
     })
+
+    return added
   }
 
   const clearFavorites = () => {

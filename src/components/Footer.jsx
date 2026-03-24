@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ShieldCheck, Wrench } from 'lucide-react'
-import { categories } from '../data/tools.js'
+import tools, { categories } from '../data/tools.js'
 
 export default function Footer() {
   return (
@@ -24,9 +24,13 @@ export default function Footer() {
               <ShieldCheck className="w-4 h-4" />
               <span>No tracking. No cookies. No accounts. Ever.</span>
             </div>
-            <Link to="/favorites" className="inline-flex mt-4 text-sm text-indigo-600 dark:text-indigo-400 hover:underline">
-              View saved tools
-            </Link>
+            <div className="mt-4 flex flex-wrap gap-3 text-sm">
+              <Link to="/favorites" className="text-indigo-600 dark:text-indigo-400 hover:underline">Favorites</Link>
+              <Link to="/my-stats" className="text-indigo-600 dark:text-indigo-400 hover:underline">My Stats</Link>
+              <Link to="/privacy" className="text-indigo-600 dark:text-indigo-400 hover:underline">Privacy Policy</Link>
+              <Link to="/terms" className="text-indigo-600 dark:text-indigo-400 hover:underline">Terms of Use</Link>
+              <Link to="/about" className="text-indigo-600 dark:text-indigo-400 hover:underline">About</Link>
+            </div>
           </div>
 
           <div>
@@ -43,8 +47,10 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-gray-100 dark:border-gray-700 text-center text-xs text-gray-400 dark:text-gray-500">
-          © {new Date().getFullYear()} UnTrackt — All tools run 100% in your browser. Built with React + Vite.
+        <div className="mt-8 pt-6 border-t border-gray-100 dark:border-gray-700 text-center text-xs text-gray-400 dark:text-gray-500 space-y-1">
+          <p>© {new Date().getFullYear()} UnTrackt</p>
+          <p>Made with ♥ for privacy</p>
+          <p>{tools.length} free tools. All computation runs in your browser.</p>
         </div>
       </div>
     </footer>
