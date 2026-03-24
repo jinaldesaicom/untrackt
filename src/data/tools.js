@@ -46,6 +46,29 @@ const CompoundInterestCalculator = lazy(() => import('../tools/finance/CompoundI
 const LoanCalculator = lazy(() => import('../tools/finance/LoanCalculator.jsx'))
 const FireNumberCalculator = lazy(() => import('../tools/finance/FireNumberCalculator.jsx'))
 
+const InvoiceGenerator = lazy(() => import('../tools/freelance/InvoiceGenerator.jsx'))
+const ProjectTimelineEstimator = lazy(() => import('../tools/freelance/ProjectTimelineEstimator.jsx'))
+const TaxBracketEstimator = lazy(() => import('../tools/freelance/TaxBracketEstimator.jsx'))
+const DiscountMarkupCalculator = lazy(() => import('../tools/freelance/DiscountMarkupCalculator.jsx'))
+const ContractAnalyzer = lazy(() => import('../tools/freelance/ContractAnalyzer.jsx'))
+const ProposalBuilder = lazy(() => import('../tools/freelance/ProposalBuilder.jsx'))
+const ClientProfitabilityEstimator = lazy(() => import('../tools/freelance/ClientProfitabilityEstimator.jsx'))
+const LatePaymentFeeCalculator = lazy(() => import('../tools/freelance/LatePaymentFeeCalculator.jsx'))
+const TimeZoneScheduler = lazy(() => import('../tools/freelance/TimeZoneScheduler.jsx'))
+
+const MortgageCalculator = lazy(() => import('../tools/finance/MortgageCalculator.jsx'))
+const SIPCalculator = lazy(() => import('../tools/finance/SIPCalculator.jsx'))
+const RetirementCalculator = lazy(() => import('../tools/finance/RetirementCalculator.jsx'))
+const RuleOf72Calculator = lazy(() => import('../tools/finance/RuleOf72Calculator.jsx'))
+const BreakEvenCalculator = lazy(() => import('../tools/finance/BreakEvenCalculator.jsx'))
+const InflationCalculator = lazy(() => import('../tools/finance/InflationCalculator.jsx'))
+const NetWorthSnapshot = lazy(() => import('../tools/finance/NetWorthSnapshot.jsx'))
+const SavingsGoalCalculator = lazy(() => import('../tools/finance/SavingsGoalCalculator.jsx'))
+const CreditCardPayoffCalculator = lazy(() => import('../tools/finance/CreditCardPayoffCalculator.jsx'))
+const ROICalculator = lazy(() => import('../tools/finance/ROICalculator.jsx'))
+const CurrencyConverter = lazy(() => import('../tools/finance/CurrencyConverter.jsx'))
+const EmergencyFundCalculator = lazy(() => import('../tools/finance/EmergencyFundCalculator.jsx'))
+
 export const categories = [
   { id: 'dev', name: 'Dev Tools', icon: 'Code2', color: 'violet', description: 'Utilities for developers: formatters, encoders, generators.' },
   { id: 'student', name: 'Student', icon: 'GraduationCap', color: 'blue', description: 'Tools to help students study, track grades, and manage time.' },
@@ -101,6 +124,16 @@ const tools = [
   { id: 'hourly-rate-calculator', name: 'Hourly Rate Calculator', description: 'Calculate your minimum and recommended freelance rate', category: 'freelance', icon: 'DollarSign', path: '/tools/hourly-rate-calculator', component: HourlyRateCalculator, tags: ['hourly rate', 'freelance', 'salary', 'income', 'consulting'] },
   { id: 'meeting-cost-calculator', name: 'Meeting Cost Calculator', description: 'See how much that meeting is actually costing your team', category: 'freelance', icon: 'Users', path: '/tools/meeting-cost-calculator', component: MeetingCostCalculator, tags: ['meeting', 'cost', 'salary', 'team', 'productivity', 'waste'] },
   { id: 'working-days-calculator', name: 'Working Days Calculator', description: 'Count business days between two dates', category: 'freelance', icon: 'CalendarDays', path: '/tools/working-days-calculator', component: WorkingDaysCalculator, tags: ['working days', 'business days', 'calendar', 'date', 'holidays'] },
+
+  { id: 'invoice-generator', name: 'Invoice Generator', description: 'Create professional invoices with PDF export and template saving', category: 'freelance', icon: 'FileText', path: '/tools/invoice-generator', component: InvoiceGenerator, tags: ['invoice', 'invoicing', 'pdf', 'receipt', 'payment', 'template'] },
+  { id: 'project-timeline-estimator', name: 'Project Timeline Estimator', description: 'Estimate project timelines with dependencies, critical path analysis, and Gantt chart visualization', category: 'freelance', icon: 'Calendar', path: '/tools/project-timeline-estimator', component: ProjectTimelineEstimator, tags: ['project', 'timeline', 'gantt', 'estimation', 'schedule', 'dependencies'] },
+  { id: 'tax-bracket-estimator', name: 'Tax Bracket Estimator', description: 'Calculate taxes across 8 countries with effective and marginal rates', category: 'freelance', icon: 'TrendingUp', path: '/tools/tax-bracket-estimator', component: TaxBracketEstimator, tags: ['tax', 'brackets', 'income tax', 'effective rate', 'marginal', 'international'] },
+  { id: 'discount-markup-calculator', name: 'Discount & Markup Calculator', description: 'Calculate discounts, markups, profit margins, and bulk pricing tables', category: 'freelance', icon: 'Percent', path: '/tools/discount-markup-calculator', component: DiscountMarkupCalculator, tags: ['discount', 'markup', 'margin', 'pricing', 'profit', 'bulk'] },
+  { id: 'contract-analyzer', name: 'Contract Analyzer', description: 'Analyze contracts for readability, keywords, passive voice, and key terms extraction', category: 'freelance', icon: 'FileText', path: '/tools/contract-analyzer', component: ContractAnalyzer, tags: ['contract', 'analysis', 'legal', 'readability', 'keywords', 'text'] },
+  { id: 'proposal-builder', name: 'Proposal Builder', description: 'Build professional proposals with auto-save and live word count', category: 'freelance', icon: 'Pen', path: '/tools/proposal-builder', component: ProposalBuilder, tags: ['proposal', 'business', 'pitch', 'auto-save', 'writing', 'template'] },
+  { id: 'client-profitability-estimator', name: 'Client Profitability Estimator', description: 'Track client profitability with hourly rate, overhead, and stress factors', category: 'freelance', icon: 'Users', path: '/tools/client-profitability-estimator', component: ClientProfitabilityEstimator, tags: ['client', 'profitability', 'score', 'comparison', 'revenue', 'metrics'] },
+  { id: 'late-payment-fee-calculator', name: 'Late Payment Fee Calculator', description: 'Calculate late payment fees with daily/monthly compounding and payment reminders', category: 'freelance', icon: 'AlertCircle', path: '/tools/late-payment-fee-calculator', component: LatePaymentFeeCalculator, tags: ['late payment', 'fee', 'invoice', 'reminder', 'penalty', 'debt'] },
+  { id: 'timezone-scheduler', name: 'Time Zone Scheduler', description: 'Find overlapping meeting times across 8+ time zones with DST support', category: 'freelance', icon: 'Globe', path: '/tools/timezone-scheduler', component: TimeZoneScheduler, tags: ['timezone', 'scheduling', 'meeting', 'asia', 'europe', 'dst'] },
   { id: 'password-generator', name: 'Password Generator', description: 'Generate cryptographically secure random passwords', category: 'general', icon: 'ShieldCheck', path: '/tools/password-generator', component: PasswordGenerator, tags: ['password', 'generator', 'secure', 'random', 'crypto', 'security'] },
   { id: 'qr-code-generator', name: 'QR Code Generator', description: 'Generate QR codes for URLs or any text, download as PNG', category: 'general', icon: 'QrCode', path: '/tools/qr-code-generator', component: QrCodeGenerator, tags: ['qr code', 'qr', 'barcode', 'url', 'share', 'scan'] },
   { id: 'tip-splitter', name: 'Tip & Bill Splitter', description: 'Split bills and calculate tips between people', category: 'general', icon: 'Receipt', path: '/tools/tip-splitter', component: TipSplitter, tags: ['tip', 'bill', 'split', 'restaurant', 'percent', 'share'] },
@@ -110,6 +143,19 @@ const tools = [
   { id: 'compound-interest-calculator', name: 'Compound Interest Calculator', description: 'See how your investments grow with compound interest', category: 'finance', icon: 'TrendingUp', path: '/tools/compound-interest-calculator', component: CompoundInterestCalculator, tags: ['compound interest', 'investment', 'savings', 'growth', 'interest rate'] },
   { id: 'loan-calculator', name: 'Loan / EMI Calculator', description: 'Calculate monthly payments and total interest on any loan', category: 'finance', icon: 'Landmark', path: '/tools/loan-calculator', component: LoanCalculator, tags: ['loan', 'emi', 'mortgage', 'interest', 'payment', 'amortization'] },
   { id: 'fire-number-calculator', name: 'FIRE Number Calculator', description: 'Calculate your Financial Independence number and retirement timeline', category: 'finance', icon: 'PiggyBank', path: '/tools/fire-number-calculator', component: FireNumberCalculator, tags: ['fire', 'financial independence', 'retire early', 'savings', 'wealth'] },
+
+  { id: 'mortgage-calculator', name: 'Mortgage Calculator', description: 'Calculate monthly payments, amortization schedule, and PMI removal dates', category: 'finance', icon: 'Home', path: '/tools/mortgage-calculator', component: MortgageCalculator, tags: ['mortgage', 'payment', 'amortization', 'pmi', 'home loan', 'property'] },
+  { id: 'sip-calculator', name: 'SIP Calculator', description: 'Calculate SIP (monthly) vs Lumpsum investment growth and returns', category: 'finance', icon: 'TrendingUp', path: '/tools/sip-calculator', component: SIPCalculator, tags: ['sip', 'systematic investment', 'mutual fund', 'lumpsum', 'return', 'simulation'] },
+  { id: 'retirement-calculator', name: 'Retirement Calculator', description: 'Plan retirement with age, savings, contributions, and longevity projection', category: 'finance', icon: 'PiggyBank', path: '/tools/retirement-calculator', component: RetirementCalculator, tags: ['retirement', 'planning', 'pension', 'savings', 'age', 'longevity'] },
+  { id: 'rule-of-72-calculator', name: 'Rule of 72 Calculator', description: 'Calculate doubling time for investments and compare estimate vs actual', category: 'finance', icon: 'Calculator', path: '/tools/rule-of-72-calculator', component: RuleOf72Calculator, tags: ['rule of 72', 'doubling time', 'investment', 'compound', 'growth', 'rate'] },
+  { id: 'break-even-calculator', name: 'Break-Even Calculator', description: 'Find your break-even point for products, services, or investments', category: 'finance', icon: 'TrendingUp', path: '/tools/break-even-calculator', component: BreakEvenCalculator, tags: ['break-even', 'business', 'revenue', 'investment', 'roi', 'payback'] },
+  { id: 'inflation-calculator', name: 'Inflation Calculator', description: 'Calculate inflation-adjusted values using historical US CPI data (1950-2024)', category: 'finance', icon: 'TrendingUp', path: '/tools/inflation-calculator', component: InflationCalculator, tags: ['inflation', 'cpi', 'purchasing power', 'historical', 'economics', 'value'] },
+  { id: 'net-worth-snapshot', name: 'Net Worth Snapshot', description: 'Calculate your net worth from assets and liabilities with breakdowns', category: 'finance', icon: 'PieChart', path: '/tools/net-worth-snapshot', component: NetWorthSnapshot, tags: ['net worth', 'assets', 'liabilities', 'wealth', 'balance sheet', 'tracker'] },
+  { id: 'savings-goal-calculator', name: 'Savings Goal Calculator', description: 'Track multiple savings goals with progress, deadlines, and monthly targets', category: 'finance', icon: 'Target', path: '/tools/savings-goal-calculator', component: SavingsGoalCalculator, tags: ['savings', 'goal', 'tracking', 'deadline', 'progress', 'targets'] },
+  { id: 'credit-card-payoff-calculator', name: 'Credit Card Payoff Calculator', description: 'Calculate payoff timeline, compare strategies, and see amortization schedule', category: 'finance', icon: 'CreditCard', path: '/tools/credit-card-payoff-calculator', component: CreditCardPayoffCalculator, tags: ['credit card', 'payoff', 'debt', 'interest', 'amortization', 'strategy'] },
+  { id: 'roi-calculator', name: 'ROI Calculator', description: 'Calculate ROI for basic investments, real estate CAP rate, and marketing campaigns', category: 'finance', icon: 'TrendingUp', path: '/tools/roi-calculator', component: ROICalculator, tags: ['roi', 'return', 'investment', 'real estate', 'marketing', 'analysis'] },
+  { id: 'currency-converter', name: 'Currency Converter', description: 'Convert between 20+ currencies with real-time rates and offline fallback', category: 'finance', icon: 'DollarSign', path: '/tools/currency-converter', component: CurrencyConverter, tags: ['currency', 'converter', 'exchange rate', 'forex', 'international', 'rates'] },
+  { id: 'emergency-fund-calculator', name: 'Emergency Fund Calculator', description: 'Calculate emergency fund needs based on monthly essentials and coverage months', category: 'finance', icon: 'Shield', path: '/tools/emergency-fund-calculator', component: EmergencyFundCalculator, tags: ['emergency fund', 'savings', 'financial security', 'essentials', 'planning', 'safety'] },
 ]
 
 export default tools
