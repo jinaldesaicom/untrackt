@@ -85,17 +85,17 @@ export default function SearchBar({ large = false }) {
           onKeyDown={handleKeyDown}
           onFocus={() => query.trim() && setOpen(true)}
           placeholder="Search tools..."
-          className={`w-full bg-white border border-gray-200 rounded-xl pl-9 pr-9 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${large ? 'py-3 text-base' : 'py-2'}`}
+          className={`w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-xl pl-9 pr-9 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${large ? 'py-3 text-base' : 'py-2'}`}
         />
         {query && (
-          <button onClick={clearQuery} className="absolute right-3 text-gray-400 hover:text-gray-600">
+          <button onClick={clearQuery} className="absolute right-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
             <X className="w-4 h-4" />
           </button>
         )}
       </div>
 
       {open && results.length > 0 && (
-        <div className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-xl overflow-hidden">
+        <div className="absolute z-50 w-full mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-xl overflow-hidden">
           {results.map((tool, idx) => {
             const Icon = getIcon(tool.icon)
             const colors = categoryColorMap[tool.category]
@@ -103,14 +103,14 @@ export default function SearchBar({ large = false }) {
               <button
                 key={tool.id}
                 onClick={() => handleSelect(tool)}
-                className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-gray-50 transition-colors ${activeIndex === idx ? 'bg-indigo-50' : ''}`}
+                className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors ${activeIndex === idx ? 'bg-indigo-50 dark:bg-indigo-900/40' : ''}`}
               >
                 <div className={`p-1.5 rounded-lg ${colors.bg} shrink-0`}>
                   <Icon className={`w-4 h-4 ${colors.icon}`} />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 truncate">{tool.name}</p>
-                  <p className="text-xs text-gray-500 truncate">{tool.description}</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">{tool.name}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{tool.description}</p>
                 </div>
                 <span className={`shrink-0 text-xs font-medium text-white px-2 py-0.5 rounded-full ${colors.pill}`}>
                   {tool.category}

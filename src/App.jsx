@@ -24,8 +24,8 @@ function ToolPage() {
   if (!tool) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-16 text-center">
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">Tool not found</h1>
-        <Link to="/" className="text-indigo-600 hover:underline">← Back to Home</Link>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Tool not found</h1>
+        <Link to="/" className="text-indigo-600 dark:text-indigo-400 hover:underline">← Back to Home</Link>
       </div>
     )
   }
@@ -47,24 +47,24 @@ function ToolPage() {
       />
 
       {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 text-sm text-gray-500 mb-6 flex-wrap">
-        <Link to="/" className="hover:text-indigo-600 transition-colors">Home</Link>
+      <nav className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-6 flex-wrap">
+        <Link to="/" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Home</Link>
         <span>/</span>
-        <Link to={`/category/${tool.category}`} className="hover:text-indigo-600 transition-colors">
+        <Link to={`/category/${tool.category}`} className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
           {category?.name || tool.category}
         </Link>
         <span>/</span>
-        <span className="text-gray-900 font-medium">{tool.name}</span>
+        <span className="text-gray-900 dark:text-gray-100 font-medium">{tool.name}</span>
       </nav>
 
       {/* Tool title */}
       <div className="flex items-start gap-3 mb-5">
-        <div className={`p-2.5 rounded-xl ${colors.bg} shrink-0`}>
+        <div className={`p-2.5 rounded-xl ${colors.bg} ${colors.darkBg} shrink-0`}>
           <Icon className={`w-6 h-6 ${colors.icon}`} />
         </div>
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-gray-900">{tool.name}</h1>
-          <p className="text-gray-500 text-sm mt-0.5">{tool.description}</p>
+          <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{tool.name}</h1>
+          <p className="text-gray-500 dark:text-gray-400 text-sm mt-0.5">{tool.description}</p>
         </div>
       </div>
 
@@ -79,7 +79,7 @@ function ToolPage() {
       {/* Related tools */}
       {relatedTools.length > 0 && (
         <div className="mt-14">
-          <h2 className="text-lg font-bold text-gray-900 mb-4">
+          <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
             Other tools in {category?.name || tool.category}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

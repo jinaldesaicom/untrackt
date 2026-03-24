@@ -79,12 +79,12 @@ export const categories = [
 ]
 
 export const categoryColorMap = {
-  dev: { bg: 'bg-violet-100', text: 'text-violet-700', border: 'border-violet-200', icon: 'text-violet-500', pill: 'bg-violet-500' },
-  student: { bg: 'bg-blue-100', text: 'text-blue-700', border: 'border-blue-200', icon: 'text-blue-500', pill: 'bg-blue-500' },
-  freelance: { bg: 'bg-amber-100', text: 'text-amber-700', border: 'border-amber-200', icon: 'text-amber-500', pill: 'bg-amber-500' },
-  general: { bg: 'bg-gray-100', text: 'text-gray-700', border: 'border-gray-200', icon: 'text-gray-500', pill: 'bg-gray-500' },
-  health: { bg: 'bg-green-100', text: 'text-green-700', border: 'border-green-200', icon: 'text-green-500', pill: 'bg-green-500' },
-  finance: { bg: 'bg-emerald-100', text: 'text-emerald-700', border: 'border-emerald-200', icon: 'text-emerald-500', pill: 'bg-emerald-500' },
+  dev:      { bg: 'bg-violet-100',  darkBg: 'dark:bg-violet-900/30',  text: 'text-violet-700',  darkText: 'dark:text-violet-300',  border: 'border-violet-200',  darkBorder: 'dark:border-violet-800',  icon: 'text-violet-500',  pill: 'bg-violet-500'  },
+  student:  { bg: 'bg-blue-100',    darkBg: 'dark:bg-blue-900/30',    text: 'text-blue-700',    darkText: 'dark:text-blue-300',    border: 'border-blue-200',    darkBorder: 'dark:border-blue-800',    icon: 'text-blue-500',    pill: 'bg-blue-500'    },
+  freelance:{ bg: 'bg-amber-100',   darkBg: 'dark:bg-amber-900/30',   text: 'text-amber-700',   darkText: 'dark:text-amber-300',   border: 'border-amber-200',   darkBorder: 'dark:border-amber-800',   icon: 'text-amber-500',   pill: 'bg-amber-500'   },
+  general:  { bg: 'bg-gray-100',    darkBg: 'dark:bg-gray-700',       text: 'text-gray-700',    darkText: 'dark:text-gray-300',    border: 'border-gray-200',    darkBorder: 'dark:border-gray-600',    icon: 'text-gray-500',    pill: 'bg-gray-500'    },
+  health:   { bg: 'bg-green-100',   darkBg: 'dark:bg-green-900/30',   text: 'text-green-700',   darkText: 'dark:text-green-300',   border: 'border-green-200',   darkBorder: 'dark:border-green-800',   icon: 'text-green-500',   pill: 'bg-green-500'   },
+  finance:  { bg: 'bg-emerald-100', darkBg: 'dark:bg-emerald-900/30', text: 'text-emerald-700', darkText: 'dark:text-emerald-300', border: 'border-emerald-200', darkBorder: 'dark:border-emerald-800', icon: 'text-emerald-500', pill: 'bg-emerald-500' },
 }
 
 const tools = [

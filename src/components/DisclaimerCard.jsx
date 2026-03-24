@@ -12,8 +12,8 @@ export default function DisclaimerCard({ type = 'general' }) {
   const text = disclaimerText[type] || disclaimerText.general
 
   return (
-    <div className="flex items-start gap-3 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-900 mb-6">
-      <AlertTriangle className="w-5 h-5 text-amber-600 mt-0.5 shrink-0" />
+    <div className="flex items-start gap-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl px-4 py-3 text-sm text-amber-900 dark:text-amber-300 mb-6">
+      <AlertTriangle className="w-5 h-5 text-amber-600 dark:text-amber-400 mt-0.5 shrink-0" />
       <span>{text}</span>
     </div>
   )

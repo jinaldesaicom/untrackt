@@ -14,10 +14,10 @@ export default function ToolCard({ tool }) {
             <Icon className={`w-5 h-5 ${colors.icon}`} />
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="font-semibold text-gray-900 text-sm leading-tight group-hover:text-indigo-600 transition-colors">
+            <h3 className="font-semibold text-gray-900 dark:text-gray-100 text-sm leading-tight group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
               {tool.name}
             </h3>
-            <p className="text-gray-500 text-xs mt-1 leading-relaxed line-clamp-2">
+            <p className="text-gray-500 dark:text-gray-400 text-xs mt-1 leading-relaxed line-clamp-2">
               {tool.description}
             </p>
           </div>
