@@ -84,7 +84,7 @@ export default function JwtDecoder() {
         <JsonPanel title="Payload" value={decoded.payload} />
         <div className="rounded-xl border border-gray-200 bg-white p-4">
           <h3 className="text-sm font-semibold text-gray-900 mb-2">Signature</h3>
-          <pre className="text-xs font-mono bg-gray-50 p-3 rounded-lg break-all min-h-[140px]">{decoded.signature || 'N/A'}</pre>
+          <pre className="text-xs font-mono bg-gray-50 p-3 rounded-lg break-all whitespace-pre-wrap min-h-[140px]">{decoded.signature || 'N/A'}</pre>
         </div>
       </div>
 
