@@ -49,7 +49,7 @@ export default function SEOHead({
       description: 'Free browser-based tools with zero tracking',
       potentialAction: {
         '@type': 'SearchAction',
-        target: 'https://untrackt.com/?search={search_term_string}',
+        target: 'https://untrackt.com/search?q={search_term_string}',
         'query-input': 'required name=search_term_string',
       },
     }

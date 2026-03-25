@@ -15,9 +15,13 @@ export function logError(error, context = {}) {
 
   console.error('[UnTrackt Error]', entry)
 
-  const current = getItem(ERROR_LOG_KEY, [])
-  const next = [entry, ...(Array.isArray(current) ? current : [])].slice(0, MAX_ERRORS)
-  setItem(ERROR_LOG_KEY, next)
+  try {
+    const current = getItem(ERROR_LOG_KEY, [])
+    const next = [entry, ...(Array.isArray(current) ? current : [])].slice(0, MAX_ERRORS)
+    setItem(ERROR_LOG_KEY, next)
+  } catch {
+    // Never allow client-side error logging to break the app flow.
+  }
 }
 
 export function getErrorLog() {

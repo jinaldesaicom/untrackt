@@ -8,6 +8,7 @@ import MyStatsPage from './pages/MyStatsPage.jsx'
 import AboutPage from './pages/AboutPage.jsx'
 import PrivacyPage from './pages/PrivacyPage.jsx'
 import TermsPage from './pages/TermsPage.jsx'
+import SearchResultsPage from './pages/SearchResultsPage.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'
 import DisclaimerBadge from './components/DisclaimerBadge.jsx'
 import RelatedTools from './components/RelatedTools.jsx'
@@ -106,6 +107,7 @@ export default function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
+          <Route path="/search" element={<SearchResultsPage />} />
           <Route path="/category/:categoryId" element={<CategoryPage />} />
           <Route path="/tools/:toolId" element={<ToolPage />} />
           <Route path="*" element={<NotFoundPage />} />
