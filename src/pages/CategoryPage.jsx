@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useSearchParams } from 'react-router-dom'
 import ToolGrid from '../components/ToolGrid.jsx'
 import SEOHead from '../components/SEOHead.jsx'
 import tools, { categories, categoryColorMap } from '../data/tools.js'
@@ -9,10 +9,12 @@ import { getMostUsedTools } from '../utils/localStats.js'
 
 export default function CategoryPage() {
   const { categoryId } = useParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const category = categories.find((c) => c.id === categoryId)
   const [sortBy, setSortBy] = useState('default')
   const [activeTag, setActiveTag] = useState('all')
   const categoryTools = useMemo(() => tools.filter((t) => t.category === categoryId), [categoryId])
+  const activeSubcategory = searchParams.get('sub') || 'all'
   const colors = categoryColorMap[categoryId] || categoryColorMap['general']
   const content = categoryContent[categoryId]
   const mostUsed = getMostUsedTools(50)
@@ -22,16 +24,19 @@ export default function CategoryPage() {
     return acc
   }, {})
 
+  const subcategories = useMemo(() => Array.from(new Set(categoryTools.map((tool) => tool.subcategory).filter(Boolean))), [categoryTools])
+  const scopedTools = useMemo(() => activeSubcategory === 'all' ? categoryTools : categoryTools.filter((tool) => tool.subcategory === activeSubcategory), [activeSubcategory, categoryTools])
+
   const tags = useMemo(() => {
     const allTags = new Set()
-    categoryTools.forEach((tool) => tool.tags.forEach((tag) => allTags.add(tag)))
+    scopedTools.forEach((tool) => tool.tags.forEach((tag) => allTags.add(tag)))
     return Array.from(allTags).slice(0, 14)
-  }, [categoryTools])
+  }, [scopedTools])
 
   const filteredTools = useMemo(() => {
     const base = activeTag === 'all'
-      ? categoryTools
-      : categoryTools.filter((tool) => tool.tags.includes(activeTag))
+      ? scopedTools
+      : scopedTools.filter((tool) => tool.tags.includes(activeTag))
 
     if (sortBy === 'a-z') {
       return [...base].sort((a, b) => a.name.localeCompare(b.name))
@@ -40,7 +45,7 @@ export default function CategoryPage() {
       return [...base].sort((a, b) => (visitMap[b.id] || 0) - (visitMap[a.id] || 0))
     }
     return base
-  }, [activeTag, categoryTools, sortBy, visitMap])
+  }, [activeTag, scopedTools, sortBy, visitMap])
 
   const popularTools = [...categoryTools]
     .sort((a, b) => (visitMap[b.id] || 0) - (visitMap[a.id] || 0))
@@ -63,7 +68,7 @@ export default function CategoryPage() {
       <SEOHead
         title={`${category.name} Tools - Free & Private | UnTrackt`}
         description={content?.seoDescription || `Free ${category.name.toLowerCase()} tools that run in your browser. No sign-up, no tracking, no data stored on any server.`}
-        path={`/category/${category.id}`}
+        path={activeSubcategory === 'all' ? `/category/${category.id}` : `/category/${category.id}?sub=${activeSubcategory}`}
       />
 
       {/* Breadcrumb */}
@@ -106,6 +111,15 @@ export default function CategoryPage() {
             <ToolGrid tools={popularTools} />
           </div>
         </section>
+      ) : null}
+
+      {subcategories.length > 0 ? (
+        <div className="mb-6 flex flex-wrap gap-2" aria-label="Filter by subcategory">
+          <button type="button" onClick={() => setSearchParams({})} className={`rounded-full px-3 py-1 text-xs font-medium border ${activeSubcategory === 'all' ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-gray-700 border-gray-200 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700'}`}>All</button>
+          {subcategories.map((subcategory) => (
+            <button key={subcategory} type="button" onClick={() => setSearchParams({ sub: subcategory })} className={`rounded-full px-3 py-1 text-xs font-medium border ${activeSubcategory === subcategory ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-gray-700 border-gray-200 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700'}`}>{subcategory}</button>
+          ))}
+        </div>
       ) : null}
 
       <div className="mb-5 flex flex-wrap items-center gap-2">

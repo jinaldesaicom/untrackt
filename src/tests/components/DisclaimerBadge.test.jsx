@@ -10,6 +10,7 @@ describe('DisclaimerBadge', () => {
     render(<DisclaimerBadge />)
     expect(screen.getByText(/100% private/i)).toBeInTheDocument()
     expect(screen.getByText(/no data is sent to any server/i)).toBeInTheDocument()
+    expect(screen.getByText(/save data in this browser only/i)).toBeInTheDocument()
   })
 
   it('shows shield icon or privacy-related content', () => {

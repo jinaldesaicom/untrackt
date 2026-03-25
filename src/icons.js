@@ -12,6 +12,7 @@ import {
   CalendarDays,
   Calculator,
   CaseSensitive,
+  Check,
   Code2,
   CreditCard,
   Crop,
@@ -53,7 +54,6 @@ import {
   Wrench,
   X,
   Copy,
-  Check,
   RefreshCw,
   Plus,
   Trash2,
@@ -63,6 +63,7 @@ import {
   Square,
   Download,
   Sun,
+  Zap,
 } from 'lucide-react'
 
 export {
@@ -79,9 +80,9 @@ export {
   CalendarDays,
   Calculator,
   CaseSensitive,
+  Check,
   Code2,
   Copy,
-  Check,
   CreditCard,
   Crop,
   DollarSign,
@@ -130,6 +131,7 @@ export {
   Wine,
   Wrench,
   X,
+  Zap,
   ShieldCheck as Shield,
 }
 
@@ -147,6 +149,7 @@ export const iconMap = {
   CalendarDays,
   Calculator,
   CaseSensitive,
+  Check,
   Code2,
   CreditCard,
   Crop,
@@ -186,6 +189,7 @@ export const iconMap = {
   Users,
   Wine,
   Wrench,
+  Zap,
 }
 
 export function getIcon(name) {

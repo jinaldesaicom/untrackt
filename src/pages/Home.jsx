@@ -5,7 +5,7 @@ import SearchBar from '../components/SearchBar.jsx'
 import ToolGrid from '../components/ToolGrid.jsx'
 import SEOHead from '../components/SEOHead.jsx'
 import EmptyState from '../components/EmptyState.jsx'
-import tools, { categories, categoryColorMap } from '../data/tools.js'
+import tools, { categories, categoryColorMap, toolCount } from '../data/tools.js'
 import { getIcon } from '../icons.js'
 import { getRecentTools } from '../utils/storage.js'
 import { useFavorites } from '../hooks/useFavorites.js'
@@ -53,7 +53,7 @@ export default function Home() {
     <div>
       <SEOHead
         title="Free Online Tools - No Tracking | UnTrackt"
-        description="88+ free tools for developers, students, freelancers and more. Runs entirely in your browser. Zero tracking, zero accounts, zero data collection."
+        description={`${toolCount}+ free tools for developers, students, freelancers and more. Runs entirely in your browser. Zero tracking, zero accounts, zero data collection.`}
         path="/"
       />
 
@@ -63,7 +63,7 @@ export default function Home() {
             <span className="beta-badge">Beta Release</span>
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 dark:text-white mb-3">
-            <span className="inline-block animate-count-up">{tools.length}+</span> free tools. Runs in your browser. Zero tracking.
+            <span className="inline-block animate-count-up">{toolCount}+</span> free tools. Runs in your browser. Zero tracking.
           </h1>
           <p className="text-lg text-gray-500 dark:text-gray-400 mb-8 max-w-xl mx-auto">
             No accounts. No servers. No nonsense.
@@ -93,7 +93,7 @@ export default function Home() {
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">Browse by Category</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-4">
           {categories.map((cat) => {
             const Icon = getIcon(cat.icon)
             const colors = categoryColorMap[cat.id]

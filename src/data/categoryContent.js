@@ -79,6 +79,30 @@ export const categoryContent = {
       'Generate meta tags for SEO',
     ],
     seoDescription: 'Free general purpose tools including color palette generator, typing speed test, countdown timer, random number generator, and more. No account needed.'
+  },
+  seo: {
+    title: 'SEO Tools',
+    tagline: 'Optimize your content for search',
+    description: 'Free SEO tools that run entirely in your browser. Analyze meta tags, generate schema markup, check keyword density, preview social cards, and more — with zero data sent to any server.',
+    useCases: [
+      'Generate and preview meta tags instantly',
+      'Create JSON-LD schema markup for any page',
+      'Analyze keyword density in your content',
+      'Preview how your links look on social media',
+    ],
+    seoDescription: 'Free SEO tools including meta tag generator, schema markup generator, keyword density analyzer, robots.txt builder, open graph previewer and more. Private, runs in your browser.'
+  },
+  productivity: {
+    title: 'Productivity Tools',
+    tagline: 'Work smarter, not harder',
+    description: 'Free productivity tools to organize your tasks, capture ideas, and stay focused. Everything runs in your browser — your data stays on your device, never on our servers.',
+    useCases: [
+      'Manage tasks with a Kanban board',
+      'Plan your day with time blocking',
+      'Capture ideas instantly with brain dump',
+      'Prioritize tasks with Eisenhower Matrix',
+    ],
+    seoDescription: 'Free productivity tools including Kanban board, daily planner, Eisenhower matrix, decision matrix, todo list, notepad, and more. Private, runs in your browser.'
   }
 }
 

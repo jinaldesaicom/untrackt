@@ -1,4 +1,6 @@
 import { lazy } from 'react'
+import { seoTools } from './tools/seoTools.js'
+import { productivityTools } from './tools/productivityTools.js'
 
 const JsonFormatter = lazy(() => import('../tools/dev/JsonFormatter.jsx'))
 const Base64Tool = lazy(() => import('../tools/dev/Base64Tool.jsx'))
@@ -100,6 +102,8 @@ export const categories = [
   { id: 'general', name: 'General', icon: 'Grid3x3', color: 'gray', description: 'Everyday utilities everyone can use.' },
   { id: 'health', name: 'Health', icon: 'Heart', color: 'green', description: 'Calculators for fitness, nutrition, and wellness.' },
   { id: 'finance', name: 'Finance', icon: 'TrendingUp', color: 'emerald', description: 'Personal finance calculators and planners.' },
+  { id: 'seo', name: 'SEO Tools', icon: 'TrendingUp', color: 'rose-500', description: 'Search engine optimization tools for better rankings', tagline: 'Optimize your content for search' },
+  { id: 'productivity', name: 'Productivity', icon: 'Zap', color: 'cyan-500', description: 'Tools to organize your work and get more done', tagline: 'Work smarter, not harder' },
 ]
 
 export const categoryColorMap = {
@@ -109,9 +113,11 @@ export const categoryColorMap = {
   general:  { bg: 'bg-gray-100',    darkBg: 'dark:bg-gray-700',       text: 'text-gray-700',    darkText: 'dark:text-gray-300',    border: 'border-gray-200',    darkBorder: 'dark:border-gray-600',    icon: 'text-gray-500',    pill: 'bg-gray-500'    },
   health:   { bg: 'bg-green-100',   darkBg: 'dark:bg-green-900/30',   text: 'text-green-700',   darkText: 'dark:text-green-300',   border: 'border-green-200',   darkBorder: 'dark:border-green-800',   icon: 'text-green-500',   pill: 'bg-green-500'   },
   finance:  { bg: 'bg-emerald-100', darkBg: 'dark:bg-emerald-900/30', text: 'text-emerald-700', darkText: 'dark:text-emerald-300', border: 'border-emerald-200', darkBorder: 'dark:border-emerald-800', icon: 'text-emerald-500', pill: 'bg-emerald-500' },
+  seo:      { bg: 'bg-rose-100',    darkBg: 'dark:bg-rose-900/30',    text: 'text-rose-700',    darkText: 'dark:text-rose-300',    border: 'border-rose-200',    darkBorder: 'dark:border-rose-800',    icon: 'text-rose-500',    pill: 'bg-rose-500' },
+  productivity:{ bg: 'bg-cyan-100', darkBg: 'dark:bg-cyan-900/30',   text: 'text-cyan-700',    darkText: 'dark:text-cyan-300',   border: 'border-cyan-200',   darkBorder: 'dark:border-cyan-800',   icon: 'text-cyan-500',    pill: 'bg-cyan-500' },
 }
 
-const tools = [
+const baseTools = [
   { id: 'json-formatter', name: 'JSON Formatter', description: 'Validate and prettify JSON instantly', category: 'dev', icon: 'Braces', path: '/tools/json-formatter', component: JsonFormatter, tags: ['json', 'format', 'validate', 'pretty print', 'minify'] },
   { id: 'base64-tool', name: 'Base64 Tool', description: 'Encode and decode Base64 strings in real-time', category: 'dev', icon: 'Binary', path: '/tools/base64-tool', component: Base64Tool, tags: ['base64', 'encode', 'decode', 'binary', 'string'] },
   { id: 'uuid-generator', name: 'UUID Generator', description: 'Generate secure random UUIDs using the Web Crypto API', category: 'dev', icon: 'Fingerprint', path: '/tools/uuid-generator', component: UuidGenerator, tags: ['uuid', 'guid', 'random', 'unique id', 'generator'] },
@@ -205,5 +211,13 @@ const tools = [
   { id: 'currency-converter', name: 'Currency Converter', description: 'Convert between 20+ currencies with real-time rates and offline fallback', category: 'finance', icon: 'DollarSign', path: '/tools/currency-converter', component: CurrencyConverter, tags: ['currency', 'converter', 'exchange rate', 'forex', 'international', 'rates'] },
   { id: 'emergency-fund-calculator', name: 'Emergency Fund Calculator', description: 'Calculate emergency fund needs based on monthly essentials and coverage months', category: 'finance', icon: 'Shield', path: '/tools/emergency-fund-calculator', component: EmergencyFundCalculator, tags: ['emergency fund', 'savings', 'financial security', 'essentials', 'planning', 'safety'] },
 ]
+
+export const tools = [
+  ...baseTools,
+  ...seoTools,
+  ...productivityTools,
+]
+
+export const toolCount = tools.length
 
 export default tools

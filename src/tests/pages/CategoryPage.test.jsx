@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import CategoryPage from '../../pages/CategoryPage.jsx'
@@ -49,5 +49,14 @@ describe('CategoryPage', () => {
     expect(screen.getByRole('heading', { name: /student/i })).toBeInTheDocument()
     const studentCount = tools.filter((t) => t.category === 'student').length
     expect(screen.getByText(`${studentCount} tools`)).toBeInTheDocument()
+  })
+
+  it('shows subcategory tabs for seo category', () => {
+    renderCategoryPage('seo')
+
+    const subcategoryFilter = screen.getByLabelText(/filter by subcategory/i)
+
+    expect(within(subcategoryFilter).getByRole('button', { name: /^content$/i })).toBeInTheDocument()
+    expect(within(subcategoryFilter).getByRole('button', { name: /^technical$/i })).toBeInTheDocument()
   })
 })

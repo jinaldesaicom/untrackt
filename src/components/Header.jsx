@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom'
 import { Wrench, Moon, Sun, Monitor, Heart, BarChart3 } from 'lucide-react'
 import SearchBar from './SearchBar.jsx'
 import CategoryNav from './CategoryNav.jsx'
+import CategoriesDropdown from './CategoriesDropdown.jsx'
+import MobileDrawer from './MobileDrawer.jsx'
 import { useTheme } from '../hooks/useTheme.js'
 import { useFavorites } from '../hooks/useFavorites.js'
 
@@ -41,8 +43,10 @@ export default function Header() {
           </div>
 
           <div className="hidden lg:flex items-center ml-auto">
-            <CategoryNav />
+            <CategoriesDropdown />
           </div>
+
+          <MobileDrawer />
 
           <Link
             to="/my-stats"

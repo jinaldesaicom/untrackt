@@ -21,9 +21,9 @@ describe('Home', () => {
     expect(screen.getByText(/no accounts/i)).toBeInTheDocument()
   })
 
-  it('renders all 6 category cards', () => {
+  it('renders all 8 category cards', () => {
     renderHome()
-    expect(categories).toHaveLength(6)
+    expect(categories).toHaveLength(8)
     categories.forEach((cat) => {
       // Each category link shows the category name
       const matches = screen.getAllByText(cat.name)
