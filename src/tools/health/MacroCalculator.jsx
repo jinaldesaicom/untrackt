@@ -74,7 +74,7 @@ export default function MacroCalculator() {
           </div>
 
           <Panel>
-            <div className="flex flex-col md:flex-row gap-6 items-center">
+            <div className="flex flex-col gap-6 items-center">
               <div className="relative h-48 w-48 rounded-full" style={donutStyle}>
                 <div className="absolute inset-6 rounded-full bg-white dark:bg-gray-900 flex items-center justify-center text-center">
                   <div>
@@ -83,7 +83,7 @@ export default function MacroCalculator() {
                   </div>
                 </div>
               </div>
-              <div className="flex-1 grid gap-3 sm:grid-cols-3 w-full">
+              <div className="flex-1 grid gap-3 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 w-full min-w-0">
                 <StatCard label="Protein" value={`${Math.round(ratios.protein * 100)}%`} helper="4 kcal per gram" tone="blue" />
                 <StatCard label="Fat" value={`${Math.round(ratios.fat * 100)}%`} helper="9 kcal per gram" tone="amber" />
                 <StatCard label="Carbs" value={`${Math.round(ratios.carbs * 100)}%`} helper="4 kcal per gram" tone="green" />

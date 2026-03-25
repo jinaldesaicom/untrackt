@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { getItem, setItem } from '../../utils/storage.js'
 
 const HISTORY_KEY = 'untrackt:scientificHistory'
@@ -55,7 +55,7 @@ export default function ScientificCalculator() {
     'ln(', 'log2(', 'abs(', 'round(', '!',
   ], [])
 
-  const run = () => {
+  const run = useCallback(() => {
     try {
       const val = evaluate(expr, radians)
       const text = Number.isFinite(val) ? String(val) : 'Error'
@@ -67,17 +67,27 @@ export default function ScientificCalculator() {
     } catch {
       setResult('Error')
     }
-  }
+  }, [expr, history, radians])
 
   useEffect(() => {
     const onKey = (e) => {
+      const tagName = e.target?.tagName
+      const isEditable = tagName === 'INPUT' || tagName === 'TEXTAREA' || tagName === 'SELECT' || e.target?.isContentEditable
+      if (isEditable) {
+        if (e.key === 'Enter') {
+          e.preventDefault()
+          run()
+        }
+        return
+      }
+
       if (/[0-9+\-*/().]/.test(e.key)) setExpr((v) => v + e.key)
       else if (e.key === 'Backspace') setExpr((v) => v.slice(0, -1))
       else if (e.key === 'Enter') run()
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  })
+  }, [run])
 
   return (
     <div className="space-y-4">

@@ -128,7 +128,7 @@ export default function RuleOf72Calculator() {
           <p className="text-blue-900 text-sm mb-3">
             The Rule of 72 is a quick way to estimate how long it takes for money to double at a given interest rate.
           </p>
-          <p className="text-blue-900 text-sm mb-3 font-mono bg-white p-3 rounded">
+          <p className="text-blue-900 dark:text-blue-100 text-sm mb-3 font-mono bg-white dark:bg-gray-900/60 p-3 rounded">
             Years to double = 72 ÷ Annual Rate (%)
           </p>
           <p className="text-blue-900 text-sm">

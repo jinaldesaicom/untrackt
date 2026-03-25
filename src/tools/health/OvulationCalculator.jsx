@@ -93,7 +93,7 @@ export default function OvulationCalculator() {
 
           <Panel>
             <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">3-cycle view</h2>
-            <div className="mt-4 grid gap-5 xl:grid-cols-3">
+            <div className="mt-4 grid gap-5 grid-cols-1">
               {cycles.map((cycle, index) => {
                 const days = buildMiniCalendar(cycle.ovulation, cycle)
                 return (

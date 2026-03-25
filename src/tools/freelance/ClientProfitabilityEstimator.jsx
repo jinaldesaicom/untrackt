@@ -44,15 +44,15 @@ export default function ClientProfitabilityEstimator() {
   }
 
   const getScoreColor = (score) => {
-    if (score >= 70) return 'text-green-600'
-    if (score >= 40) return 'text-yellow-600'
-    return 'text-red-600'
+    if (score >= 70) return 'text-green-600 dark:text-green-300'
+    if (score >= 40) return 'text-yellow-600 dark:text-yellow-300'
+    return 'text-red-600 dark:text-red-300'
   }
 
   const getScoreBg = (score) => {
-    if (score >= 70) return 'bg-green-50'
-    if (score >= 40) return 'bg-yellow-50'
-    return 'bg-red-50'
+    if (score >= 70) return 'bg-green-50 dark:bg-green-900/40'
+    if (score >= 40) return 'bg-yellow-50 dark:bg-yellow-900/40'
+    return 'bg-red-50 dark:bg-red-900/40'
   }
 
   const sortedClients = clients
@@ -182,7 +182,7 @@ export default function ClientProfitabilityEstimator() {
             {/* Comparison */}
             {sortedClients.length > 0 && (
               <div className="lg:col-span-2">
-                <h2 className="font-semibold text-lg text-gray-900 mb-4">Client Comparison</h2>
+                <h2 className="font-semibold text-lg text-gray-900 dark:text-gray-100 mb-4">Client Comparison</h2>
                 <div className="space-y-3">
                   {sortedClients.map((client, idx) => {
                     const isBest = idx === 0
@@ -191,16 +191,16 @@ export default function ClientProfitabilityEstimator() {
                       <div
                         key={client.id}
                         className={`p-4 rounded-xl border-2 ${
-                          isBest ? 'border-green-500 bg-green-50' :
-                          isWorst ? 'border-red-500 bg-red-50' :
-                          'border-gray-200 bg-white'
+                          isBest ? 'border-green-500 bg-green-50 dark:bg-green-950/40 dark:border-green-800' :
+                          isWorst ? 'border-red-500 bg-red-50 dark:bg-red-950/40 dark:border-red-800' :
+                          'border-gray-200 bg-white dark:bg-gray-900 dark:border-gray-700'
                         }`}
                       >
                         <div className="flex justify-between items-start mb-3">
                           <div>
-                            <h3 className="font-semibold text-gray-900">{client.name || 'Unnamed Client'}</h3>
-                            {isBest && <p className="text-xs text-green-600 font-semibold">⭐ Your Best Client</p>}
-                            {isWorst && <p className="text-xs text-red-600 font-semibold">⚠️ Needs Attention</p>}
+                            <h3 className="font-semibold text-gray-900 dark:text-gray-100">{client.name || 'Unnamed Client'}</h3>
+                            {isBest && <p className="text-xs text-green-600 dark:text-green-300 font-semibold">⭐ Your Best Client</p>}
+                            {isWorst && <p className="text-xs text-red-600 dark:text-red-300 font-semibold">⚠️ Needs Attention</p>}
                           </div>
                           <div className={`text-right ${getScoreColor(client.metrics.profitScore)}`}>
                             <p className="text-sm font-medium">Profitability</p>
@@ -210,16 +210,16 @@ export default function ClientProfitabilityEstimator() {
 
                         <div className="grid grid-cols-3 gap-4 text-sm">
                           <div>
-                            <p className="text-gray-600">Effective Rate</p>
-                            <p className="font-semibold text-gray-900">{fmt(client.metrics.effectiveRate)}/hr</p>
+                            <p className="text-gray-600 dark:text-gray-300">Effective Rate</p>
+                            <p className="font-semibold text-gray-900 dark:text-gray-100">{fmt(client.metrics.effectiveRate)}/hr</p>
                           </div>
                           <div>
-                            <p className="text-gray-600">Total Hours</p>
-                            <p className="font-semibold text-gray-900">{client.metrics.totalHours.toFixed(1)}</p>
+                            <p className="text-gray-600 dark:text-gray-300">Total Hours</p>
+                            <p className="font-semibold text-gray-900 dark:text-gray-100">{client.metrics.totalHours.toFixed(1)}</p>
                           </div>
                           <div>
-                            <p className="text-gray-600">Monthly Revenue</p>
-                            <p className="font-semibold text-gray-900">{fmt(client.revenue)}</p>
+                            <p className="text-gray-600 dark:text-gray-300">Monthly Revenue</p>
+                            <p className="font-semibold text-gray-900 dark:text-gray-100">{fmt(client.revenue)}</p>
                           </div>
                         </div>
 

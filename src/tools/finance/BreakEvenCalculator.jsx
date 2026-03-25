@@ -105,25 +105,25 @@ export default function BreakEvenCalculator() {
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-xl border border-gray-200">
-            <h3 className="font-semibold text-gray-900 mb-4">Profit/Loss at Various Volumes</h3>
+          <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
+            <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-4">Profit/Loss at Various Volumes</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
-                <thead className="bg-gray-50 border-b border-gray-200">
+                <thead className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                   <tr>
-                    <th className="text-left px-3 py-2 font-semibold text-gray-700">Volume</th>
-                    <th className="text-center px-3 py-2 font-semibold text-gray-700">Units</th>
-                    <th className="text-right px-3 py-2 font-semibold text-gray-700">Revenue</th>
-                    <th className="text-right px-3 py-2 font-semibold text-gray-700">Profit/Loss</th>
+                    <th className="text-left px-3 py-2 font-semibold text-gray-700 dark:text-gray-200">Volume</th>
+                    <th className="text-center px-3 py-2 font-semibold text-gray-700 dark:text-gray-200">Units</th>
+                    <th className="text-right px-3 py-2 font-semibold text-gray-700 dark:text-gray-200">Revenue</th>
+                    <th className="text-right px-3 py-2 font-semibold text-gray-700 dark:text-gray-200">Profit/Loss</th>
                   </tr>
                 </thead>
                 <tbody>
                   {profitTable.map((row, idx) => (
-                    <tr key={idx} className={`border-b border-gray-100 ${row.profit < 0 ? 'bg-red-50' : 'bg-green-50'}`}>
-                      <td className="px-3 py-2 text-gray-900 font-medium">{row.volumePercent.toFixed(0)}%</td>
-                      <td className="px-3 py-2 text-center text-gray-900">{Math.round(row.units).toLocaleString()}</td>
-                      <td className="px-3 py-2 text-right text-gray-900">{fmt(row.revenue)}</td>
-                      <td className={`px-3 py-2 text-right font-semibold ${row.profit >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                    <tr key={idx} className={`border-b border-gray-100 dark:border-gray-800 ${row.profit < 0 ? 'bg-red-50 dark:bg-red-950/40' : 'bg-green-50 dark:bg-green-950/40'}`}>
+                      <td className="px-3 py-2 text-gray-900 dark:text-gray-100 font-medium">{row.volumePercent.toFixed(0)}%</td>
+                      <td className="px-3 py-2 text-center text-gray-900 dark:text-gray-100">{Math.round(row.units).toLocaleString()}</td>
+                      <td className="px-3 py-2 text-right text-gray-900 dark:text-gray-100">{fmt(row.revenue)}</td>
+                      <td className={`px-3 py-2 text-right font-semibold ${row.profit >= 0 ? 'text-green-600 dark:text-green-300' : 'text-red-600 dark:text-red-300'}`}>
                         {fmt(row.profit)}
                       </td>
                     </tr>

@@ -264,17 +264,17 @@ export default function ColorPaletteGenerator() {
 
         <div className="space-y-6">
           <Panel>
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5">
               {palette.map((color) => {
                 const details = describeColor(color)
                 return (
-                  <div key={color} className="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-                    <div className="h-28" style={{ backgroundColor: color }} />
-                    <div className="p-4 text-sm text-gray-600 dark:text-gray-300 space-y-1">
-                      <p className="font-semibold text-gray-900 dark:text-gray-100">{details.hex}</p>
-                      <p>{details.rgb}</p>
-                      <p>{details.hsl}</p>
-                      <CopyButton text={details.hex} label="Copy" className="mt-2" />
+                  <div key={color} className="rounded-2xl border border-gray-200 dark:border-gray-700 min-w-0">
+                    <div className="h-28 rounded-t-2xl" style={{ backgroundColor: color }} />
+                    <div className="p-4 text-sm text-gray-600 dark:text-gray-300 space-y-2 min-w-0">
+                      <p className="font-semibold text-gray-900 dark:text-gray-100 break-all">{details.hex}</p>
+                      <p className="font-mono text-xs break-all">{details.rgb}</p>
+                      <p className="font-mono text-xs break-all">{details.hsl}</p>
+                      <CopyButton text={details.hex} label="Copy HEX" className="mt-1 w-full justify-center" />
                     </div>
                   </div>
                 )

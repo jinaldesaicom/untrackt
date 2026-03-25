@@ -113,19 +113,19 @@ export default function WorkingDaysCalculator() {
 
       {/* Results */}
       {result ? (
-        <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-5">
+        <div className="bg-indigo-50 dark:bg-gray-900 border border-indigo-100 dark:border-gray-700 rounded-xl p-5">
           <div className="grid grid-cols-3 gap-4 text-center">
             <div>
               <p className="text-3xl font-bold text-indigo-700">{result.working}</p>
-              <p className="text-xs text-gray-500 mt-1">Working Days</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Working Days</p>
             </div>
             <div>
-              <p className="text-3xl font-bold text-gray-800">{result.calendar}</p>
-              <p className="text-xs text-gray-500 mt-1">Calendar Days</p>
+              <p className="text-3xl font-bold text-gray-800 dark:text-gray-100">{result.calendar}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Calendar Days</p>
             </div>
             <div>
               <p className="text-3xl font-bold text-gray-400">{result.weekendsExcluded}</p>
-              <p className="text-xs text-gray-500 mt-1">Weekends Excluded</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Weekends Excluded</p>
             </div>
           </div>
         </div>

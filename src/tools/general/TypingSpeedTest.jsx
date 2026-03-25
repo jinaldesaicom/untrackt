@@ -5,7 +5,24 @@ import { ToolLayout, Panel, StatCard, SegmentedToggle } from '../../components/T
 
 function getSample(mode) {
   if (mode === 'code') {
-    return TYPING_WORDS.code.slice(0, 5).join(' ')
+    return `const result = items
+  .filter((item) => item.active)
+  .map((item) => item.name)
+  .join(', ')
+
+function debounce(callback, delay) {
+  let timeoutId
+  return (...args) => {
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(() => callback(...args), delay)
+  }
+}
+
+try {
+  await navigator.clipboard.writeText(text)
+} catch (error) {
+  console.error(error)
+}`
   }
 
   const words = TYPING_WORDS[mode]
@@ -78,6 +95,16 @@ export default function TypingSpeedTest() {
 
   const words = sample.split(' ')
   const typedWords = typed.split(' ')
+  const codeLines = useMemo(() => (mode === 'code' ? sample.split('\n') : []), [mode, sample])
+  const codeLineOffsets = useMemo(() => {
+    if (mode !== 'code') return []
+    let offset = 0
+    return codeLines.map((line) => {
+      const start = offset
+      offset += line.length + 1
+      return start
+    })
+  }, [mode, codeLines])
 
   return (
     <ToolLayout
@@ -105,21 +132,51 @@ export default function TypingSpeedTest() {
         </div>
 
         <Panel>
-          <div className="leading-8 text-lg">
-            {words.map((word, wordIndex) => {
-              const typedWord = typedWords[wordIndex] || ''
-              const isCurrent = wordIndex === Math.max(typedWords.length - 1, 0)
-              return (
-                <span key={`${word}-${wordIndex}`} className={`inline-block mr-3 mb-2 px-1 rounded ${isCurrent ? 'bg-indigo-100 dark:bg-indigo-950/40' : ''}`}>
-                  {word.split('').map((character, charIndex) => {
-                    const typedCharacter = typedWord[charIndex]
-                    const className = typedCharacter == null ? 'text-gray-500 dark:text-gray-400' : typedCharacter === character ? 'text-green-600 dark:text-green-400' : 'text-rose-600 dark:text-rose-400'
-                    return <span key={`${wordIndex}-${charIndex}`} className={className}>{character}</span>
-                  })}
-                </span>
-              )
-            })}
-          </div>
+          {mode === 'code' ? (
+            <div className="rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+              <div className="px-4 py-2 text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700">
+                typing-practice.js
+              </div>
+              <div className="overflow-x-auto bg-gray-50 dark:bg-gray-900/60">
+                <div className="min-w-full font-mono text-sm leading-6">
+                  {codeLines.map((line, lineIndex) => (
+                    <div key={lineIndex} className="flex">
+                      <span className="w-12 shrink-0 px-3 text-right select-none text-gray-400 dark:text-gray-500 border-r border-gray-200 dark:border-gray-800">
+                        {lineIndex + 1}
+                      </span>
+                      <span className="flex-1 px-3 text-left whitespace-pre">
+                        {(line || ' ').split('').map((character, charIndex) => {
+                          const typedCharacter = typed[codeLineOffsets[lineIndex] + charIndex]
+                          const className = typedCharacter == null
+                            ? 'text-gray-500 dark:text-gray-400'
+                            : typedCharacter === character
+                              ? 'text-green-600 dark:text-green-400'
+                              : 'text-rose-600 dark:text-rose-400'
+                          return <span key={`${lineIndex}-${charIndex}`} className={className}>{character}</span>
+                        })}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="leading-8 text-lg">
+              {words.map((word, wordIndex) => {
+                const typedWord = typedWords[wordIndex] || ''
+                const isCurrent = wordIndex === Math.max(typedWords.length - 1, 0)
+                return (
+                  <span key={`${word}-${wordIndex}`} className={`inline-block mr-3 mb-2 px-1 rounded ${isCurrent ? 'bg-indigo-100 dark:bg-indigo-950/40' : ''}`}>
+                    {word.split('').map((character, charIndex) => {
+                      const typedCharacter = typedWord[charIndex]
+                      const className = typedCharacter == null ? 'text-gray-500 dark:text-gray-400' : typedCharacter === character ? 'text-green-600 dark:text-green-400' : 'text-rose-600 dark:text-rose-400'
+                      return <span key={`${wordIndex}-${charIndex}`} className={className}>{character}</span>
+                    })}
+                  </span>
+                )
+              })}
+            </div>
+          )}
         </Panel>
 
         <Panel>
