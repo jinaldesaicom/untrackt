@@ -3,21 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { Search } from 'lucide-react'
 import SEOHead from '../components/SEOHead.jsx'
 import ToolGrid from '../components/ToolGrid.jsx'
-import tools from '../data/tools.js'
-
-function findMatchingTools(query) {
-  const normalizedQuery = query.trim().toLowerCase()
-
-  if (!normalizedQuery) {
-    return []
-  }
-
-  return tools.filter((tool) => (
-    tool.name.toLowerCase().includes(normalizedQuery) ||
-    tool.description.toLowerCase().includes(normalizedQuery) ||
-    tool.tags.some((tag) => tag.toLowerCase().includes(normalizedQuery))
-  ))
-}
+import { findMatchingTools } from '../utils/searchTools.js'
 
 export default function SearchResultsPage() {
   const [searchParams] = useSearchParams()

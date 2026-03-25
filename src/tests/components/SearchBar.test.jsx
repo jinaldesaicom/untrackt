@@ -1,12 +1,18 @@
 import { render, screen, waitFor } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
+import { MemoryRouter, useLocation } from 'react-router-dom'
 import userEvent from '@testing-library/user-event'
 import SearchBar from '../../components/SearchBar.jsx'
+
+function LocationDisplay() {
+  const location = useLocation()
+  return <div data-testid="location-display">{`${location.pathname}${location.search}`}</div>
+}
 
 function renderSearchBar(props = {}) {
   return render(
     <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <SearchBar {...props} />
+      <LocationDisplay />
     </MemoryRouter>
   )
 }
@@ -80,6 +86,36 @@ describe('SearchBar', () => {
     // After clicking, dropdown closes and input is cleared
     await waitFor(() => {
       expect(screen.queryByDisplayValue('json')).not.toBeInTheDocument()
+    })
+  })
+
+  it('pressing Enter navigates to the search results page with the typed query', async () => {
+    const user = userEvent.setup()
+    renderSearchBar()
+    const input = screen.getByPlaceholderText('Search tools...')
+
+    await user.type(input, 'json')
+    expect(await screen.findByText('JSON Formatter')).toBeInTheDocument()
+
+    await user.keyboard('{Enter}')
+
+    await waitFor(() => {
+      expect(screen.getByTestId('location-display')).toHaveTextContent('/search?q=json')
+    })
+  })
+
+  it('pressing Enter with a highlighted suggestion still opens the search results page', async () => {
+    const user = userEvent.setup()
+    renderSearchBar()
+    const input = screen.getByPlaceholderText('Search tools...')
+
+    await user.type(input, 'json')
+    expect(await screen.findByText('JSON Formatter')).toBeInTheDocument()
+
+    await user.keyboard('{ArrowDown}{Enter}')
+
+    await waitFor(() => {
+      expect(screen.getByTestId('location-display')).toHaveTextContent('/search?q=json')
     })
   })
 })

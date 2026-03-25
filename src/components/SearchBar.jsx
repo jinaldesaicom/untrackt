@@ -2,9 +2,10 @@ import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Search, X } from 'lucide-react'
 import { getIcon } from '../icons.js'
-import tools, { categoryColorMap } from '../data/tools.js'
+import { categoryColorMap } from '../data/tools.js'
 import useDebounce from '../hooks/useDebounce.js'
 import { addRecentSearch, getRecentSearches } from '../utils/storage.js'
+import { findMatchingTools } from '../utils/searchTools.js'
 
 export default function SearchBar({ large = false }) {
   const [query, setQuery] = useState('')
@@ -49,12 +50,7 @@ export default function SearchBar({ large = false }) {
       return
     }
 
-    const lower = debouncedQuery.toLowerCase()
-    const filtered = tools.filter((t) =>
-      t.name.toLowerCase().includes(lower) ||
-      t.description.toLowerCase().includes(lower) ||
-      t.tags.some((tag) => tag.toLowerCase().includes(lower))
-    ).slice(0, 6)
+    const filtered = findMatchingTools(debouncedQuery, 6)
 
     setResults(filtered)
     setOpen(true)
@@ -75,7 +71,22 @@ export default function SearchBar({ large = false }) {
     navigate(tool.path)
   }
 
+  const submitSearch = () => {
+    const trimmedQuery = query.trim()
+    if (!trimmedQuery) return
+
+    addRecentSearch(trimmedQuery)
+    setRecentSearches(getRecentSearches())
+    setOpen(false)
+    navigate(`/search?q=${encodeURIComponent(trimmedQuery)}`)
+  }
+
   const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      submitSearch()
+      return
+    }
+
     if (!open) return
     if (e.key === 'ArrowDown') {
       e.preventDefault()
@@ -83,10 +94,6 @@ export default function SearchBar({ large = false }) {
     } else if (e.key === 'ArrowUp') {
       e.preventDefault()
       setActiveIndex((i) => Math.max(i - 1, -1))
-    } else if (e.key === 'Enter') {
-      if (activeIndex >= 0 && results[activeIndex]) {
-        handleSelect(results[activeIndex])
-      }
     } else if (e.key === 'Escape') {
       setOpen(false)
       inputRef.current?.blur()
