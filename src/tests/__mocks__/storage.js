@@ -1,0 +1,18 @@
+import { vi } from 'vitest'
+
+export const getItem = vi.fn((key, defaultValue = null) => defaultValue)
+export const setItem = vi.fn()
+export const removeItem = vi.fn()
+export const getRecentTools = vi.fn(() => [])
+export const addRecentTool = vi.fn()
+export const getPreference = vi.fn((key, defaultValue = null) => defaultValue)
+export const setPreference = vi.fn()
+export const getTheme = vi.fn(() => 'system')
+export const setTheme = vi.fn()
+export const getFavorites = vi.fn(() => [])
+export const addFavorite = vi.fn()
+export const removeFavorite = vi.fn()
+export const isFavorite = vi.fn(() => false)
+export const toggleFavorite = vi.fn()
+export const clearFavorites = vi.fn()
+export const clearAllUntracktStorage = vi.fn()

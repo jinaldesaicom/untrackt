@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import useDebounce from '../../hooks/useDebounce.js'
 
 const FREQ_OPTIONS = [
   { label: 'Daily (365×/year)', n: 365 },
@@ -14,12 +15,13 @@ export default function CompoundInterestCalculator() {
   const [years, setYears] = useState('20')
   const [monthly, setMonthly] = useState('200')
   const [showAll, setShowAll] = useState(false)
+  const debouncedValues = useDebounce({ principal, rate, freq, years, monthly }, 300)
 
-  const P = parseFloat(principal) || 0
-  const r = (parseFloat(rate) || 0) / 100
-  const n = freq
-  const t = parseFloat(years) || 0
-  const m = parseFloat(monthly) || 0
+  const P = parseFloat(debouncedValues.principal) || 0
+  const r = (parseFloat(debouncedValues.rate) || 0) / 100
+  const n = debouncedValues.freq
+  const t = parseFloat(debouncedValues.years) || 0
+  const m = parseFloat(debouncedValues.monthly) || 0
 
   const rows = []
   for (let y = 1; y <= Math.min(t, 100); y++) {

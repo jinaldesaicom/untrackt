@@ -1,10 +1,19 @@
 import { render, screen } from '@testing-library/react'
+import { HelmetProvider } from 'react-helmet-async'
 import userEvent from '@testing-library/user-event'
 import BmrCalculator from '../../../tools/health/BmrCalculator.jsx'
 
+function renderTool() {
+  return render(
+    <HelmetProvider>
+      <BmrCalculator />
+    </HelmetProvider>
+  )
+}
+
 describe('BmrCalculator', () => {
   it('renders all input fields', () => {
-    render(<BmrCalculator />)
+    renderTool()
     expect(screen.getByText('Age')).toBeInTheDocument()
     expect(screen.getByText('Gender')).toBeInTheDocument()
     expect(screen.getByText('Weight')).toBeInTheDocument()
@@ -15,7 +24,7 @@ describe('BmrCalculator', () => {
   })
 
   it('with valid male inputs, shows a positive BMR value', () => {
-    render(<BmrCalculator />)
+    renderTool()
     // Defaults: male, 30yo, 70kg, 175cm — valid values
     expect(screen.getByText(/bmr \(mifflin-st jeor\)/i)).toBeInTheDocument()
     // Should show a number followed by kcal
@@ -25,7 +34,7 @@ describe('BmrCalculator', () => {
 
   it('with valid female inputs, shows a different BMR value', async () => {
     const user = userEvent.setup()
-    render(<BmrCalculator />)
+    renderTool()
     const selects = screen.getAllByRole('combobox')
     // genderSelect is the first combobox
     const maleBmrEl = screen.getByText(/BMR \(Mifflin-St Jeor\)/i).closest('div')
@@ -38,7 +47,7 @@ describe('BmrCalculator', () => {
 
   it('Mifflin-St Jeor formula: Male, 30y, 70kg, 175cm, sedentary → BMR ≈ 1,649, TDEE ≈ 1,979', async () => {
     const user = userEvent.setup()
-    render(<BmrCalculator />)
+    renderTool()
     // Set sedentary activity level (1.2) — it's the first option in ACTIVITY_LEVELS
     const selects = screen.getAllByRole('combobox')
     // Activity level is the second combobox (after gender)
@@ -53,7 +62,7 @@ describe('BmrCalculator', () => {
 
   it('kg/lbs toggle switches unit label', async () => {
     const user = userEvent.setup()
-    render(<BmrCalculator />)
+    renderTool()
     // Toggle weight to lbs
     const lbsBtns = screen.getAllByRole('button', { name: /lbs/i })
     await user.click(lbsBtns[0])
@@ -61,7 +70,7 @@ describe('BmrCalculator', () => {
   })
 
   it('disclaimer text is visible in the component', () => {
-    render(<BmrCalculator />)
-    expect(screen.getByText(/consult a dietitian/i)).toBeInTheDocument()
+    renderTool()
+    expect(screen.getByText(/not medical advice/i)).toBeInTheDocument()
   })
 })

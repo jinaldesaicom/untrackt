@@ -7,7 +7,7 @@ export default function CategoryNav({ mobile = false }) {
     : 'flex items-center gap-1 py-1'
 
   return (
-    <nav className={navClass}>
+    <nav className={navClass} aria-label="Main navigation">
       {categories.map((cat) => {
         const colors = categoryColorMap[cat.id]
         return (
@@ -15,10 +15,10 @@ export default function CategoryNav({ mobile = false }) {
             key={cat.id}
             to={`/category/${cat.id}`}
             className={({ isActive }) =>
-              `shrink-0 rounded-full font-medium whitespace-nowrap transition-colors ${mobile ? 'px-3.5 py-2 text-[13px] snap-start' : 'px-3 py-1.5 text-xs'} ${
+              `shrink-0 rounded-full font-medium whitespace-nowrap transition-colors duration-200 ${mobile ? 'px-3.5 py-2 text-[13px] snap-start' : 'px-3 py-1.5 text-xs'} ${
                 isActive
                   ? `${colors.pill} text-white`
-                  : `${colors.bg} ${colors.text} hover:opacity-80`
+                  : `${colors.bg} ${colors.darkBg} ${colors.text} ${colors.darkText} hover:opacity-80`
               }`
             }
           >
