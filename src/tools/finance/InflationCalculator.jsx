@@ -92,13 +92,13 @@ export default function InflationCalculator() {
             {result && (
               <>
                 <div className="grid grid-cols-3 gap-3">
-                  <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                  <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 min-w-0">
                     <p className="text-xs text-blue-600 mb-1">Original Amount</p>
-                    <p className="text-2xl font-bold text-blue-700">${parseFloat(amount).toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
+                    <p className="text-xl sm:text-2xl font-bold text-blue-700 break-all leading-tight">${parseFloat(amount).toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
                   </div>
-                  <div className="bg-green-50 border border-green-200 rounded-xl p-4">
+                  <div className="bg-green-50 border border-green-200 rounded-xl p-4 min-w-0">
                     <p className="text-xs text-green-600 mb-1">Adjusted Value</p>
-                    <p className="text-2xl font-bold text-green-700">${result.adjustedAmount.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
+                    <p className="text-xl sm:text-2xl font-bold text-green-700 break-all leading-tight">${result.adjustedAmount.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
                   </div>
                   <div className="bg-orange-50 border border-orange-200 rounded-xl p-4">
                     <p className="text-xs text-orange-600 mb-1">Cumulative Inflation</p>
@@ -202,13 +202,13 @@ export default function InflationCalculator() {
 
           <div className="lg:col-span-2 space-y-6">
             <div className="grid grid-cols-2 gap-3">
-              <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+              <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 min-w-0">
                 <p className="text-xs text-blue-600 mb-1">Current Amount</p>
-                <p className="text-2xl font-bold text-blue-700">${parseFloat(amount).toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
+                <p className="text-xl sm:text-2xl font-bold text-blue-700 break-all leading-tight">${parseFloat(amount).toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
               </div>
-              <div className="bg-red-50 border border-red-200 rounded-xl p-4">
+              <div className="bg-red-50 border border-red-200 rounded-xl p-4 min-w-0">
                 <p className="text-xs text-red-600 mb-1">Future Spending Power</p>
-                <p className="text-2xl font-bold text-red-700">${futureVal.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
+                <p className="text-xl sm:text-2xl font-bold text-red-700 break-all leading-tight">${futureVal.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
               </div>
             </div>
 

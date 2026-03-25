@@ -131,18 +131,18 @@ export default function DiscountMarkupCalculator() {
               <CopyButton text={`Original: ${fmt(discount.originalPrice)}, Discount: -${fmt(discount.originalPrice - discountSalePrice)}, Sale Price: ${fmt(discountSalePrice)}`} className="w-full justify-center" />
             </div>
 
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 space-y-4">
-              <h3 className="font-semibold text-gray-900">Formula</h3>
-              <div className="bg-white p-4 rounded-lg font-mono text-sm text-gray-700 space-y-2">
+            <div className="bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900 rounded-xl p-6 space-y-4">
+              <h3 className="font-semibold text-gray-900 dark:text-gray-100">Formula</h3>
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg font-mono text-sm text-gray-700 dark:text-gray-200 space-y-2">
                 {discount.discountMethod === 'percent' ? (
                   <>
                     <p>Sale Price = Original × (1 - Discount%)</p>
-                    <p className="text-xs text-gray-600">= ${discount.originalPrice} × (1 - {discount.discountValue}%)</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-300">= ${discount.originalPrice} × (1 - {discount.discountValue}%)</p>
                   </>
                 ) : (
                   <>
                     <p>Sale Price = Original - Discount Amount</p>
-                    <p className="text-xs text-gray-600">= ${discount.originalPrice} - ${discount.discountValue}</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-300">= ${discount.originalPrice} - ${discount.discountValue}</p>
                   </>
                 )}
               </div>
@@ -216,18 +216,18 @@ export default function DiscountMarkupCalculator() {
               <CopyButton text={`Cost: ${fmt(markup.costPrice)}, Markup: +${fmt(markupProfit)}, Selling Price: ${fmt(markupSellingPrice)}`} className="w-full justify-center" />
             </div>
 
-            <div className="bg-green-50 border border-green-200 rounded-xl p-6 space-y-4">
-              <h3 className="font-semibold text-gray-900">Formula</h3>
-              <div className="bg-white p-4 rounded-lg font-mono text-sm text-gray-700 space-y-2">
+            <div className="bg-green-50 dark:bg-green-950/40 border border-green-200 dark:border-green-900 rounded-xl p-6 space-y-4">
+              <h3 className="font-semibold text-gray-900 dark:text-gray-100">Formula</h3>
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg font-mono text-sm text-gray-700 dark:text-gray-200 space-y-2">
                 {markup.markupMethod === 'percent' ? (
                   <>
                     <p>Selling = Cost × (1 + Markup%)</p>
-                    <p className="text-xs text-gray-600">= ${markup.costPrice} × (1 + {markup.markupValue}%)</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-300">= ${markup.costPrice} × (1 + {markup.markupValue}%)</p>
                   </>
                 ) : (
                   <>
                     <p>Selling = Cost + Markup Amount</p>
-                    <p className="text-xs text-gray-600">= ${markup.costPrice} + ${markup.markupValue}</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-300">= ${markup.costPrice} + ${markup.markupValue}</p>
                   </>
                 )}
               </div>
@@ -291,12 +291,12 @@ export default function DiscountMarkupCalculator() {
               <CopyButton text={`Revenue: ${fmt(margin.revenue)}, Cost: ${fmt(margin.cost)}, Profit: ${fmt(marginGain)}, Margin: ${marginPercent.toFixed(2)}%`} className="w-full justify-center" />
             </div>
 
-            <div className="bg-purple-50 border border-purple-200 rounded-xl p-6 space-y-4">
-              <h3 className="font-semibold text-gray-900">Formula</h3>
-              <div className="bg-white p-4 rounded-lg font-mono text-sm text-gray-700 space-y-2">
+            <div className="bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-900 rounded-xl p-6 space-y-4">
+              <h3 className="font-semibold text-gray-900 dark:text-gray-100">Formula</h3>
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg font-mono text-sm text-gray-700 dark:text-gray-200 space-y-2">
                 <p>Gross Margin % = (Revenue - Cost) / Revenue × 100</p>
-                <p className="text-xs text-gray-600">= (${margin.revenue} - ${margin.cost}) / ${margin.revenue} × 100</p>
-                <p className="text-xs text-gray-600">= {marginPercent.toFixed(2)}%</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300">= (${margin.revenue} - ${margin.cost}) / ${margin.revenue} × 100</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300">= {marginPercent.toFixed(2)}%</p>
               </div>
             </div>
           </div>

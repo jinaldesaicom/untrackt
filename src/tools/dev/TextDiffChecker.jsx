@@ -84,18 +84,32 @@ export default function TextDiffChecker() {
         {stats.added} added | {stats.removed} removed | {stats.same} unchanged
       </div>
 
-      <div className="rounded-xl border border-gray-200 bg-white p-4">
-        <h3 className="font-semibold text-gray-900 mb-2">Diff View</h3>
-        <pre className="whitespace-pre-wrap break-words font-mono text-sm">
-          {chunks.map((chunk, idx) => (
-            <span
-              key={idx}
-              className={chunk.type === 'added' ? 'bg-green-100' : chunk.type === 'removed' ? 'bg-red-100' : 'bg-gray-100'}
-            >
-              {chunk.value}
-            </span>
-          ))}
-        </pre>
+      <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-4">
+        <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Diff View</h3>
+        {mode === 'line' ? (
+          <div className="font-mono text-sm rounded-lg overflow-hidden border border-gray-100 dark:border-gray-700">
+            {chunks.map((chunk, idx) => (
+              <div
+                key={idx}
+                className={`px-3 py-0.5 text-gray-800 dark:text-gray-200 ${chunk.type === 'added' ? 'bg-green-100 dark:bg-green-900/40' : chunk.type === 'removed' ? 'bg-red-100 dark:bg-red-900/40' : 'bg-white dark:bg-gray-900'}`}
+              >
+                <span className="select-none text-gray-400 dark:text-gray-500 mr-2">{chunk.type === 'added' ? '+' : chunk.type === 'removed' ? '-' : ' '}</span>
+                {chunk.value}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <pre className="whitespace-pre-wrap break-words font-mono text-sm text-gray-800 dark:text-gray-200">
+            {chunks.map((chunk, idx) => (
+              <span
+                key={idx}
+                className={chunk.type === 'added' ? 'bg-green-100 dark:bg-green-900/40' : chunk.type === 'removed' ? 'bg-red-100 dark:bg-red-900/40' : 'bg-gray-100 dark:bg-gray-800'}
+              >
+                {chunk.value}
+              </span>
+            ))}
+          </pre>
+        )}
       </div>
     </div>
   )

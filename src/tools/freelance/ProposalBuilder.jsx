@@ -98,11 +98,11 @@ export default function ProposalBuilder() {
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-xs text-blue-900 space-y-1">
                 <p className="font-semibold mb-2">Suggested Word Counts:</p>
                 {[
-                  ('Executive Summary', 75),
-                  ('Problem Statement', 150),
-                  ('Solution', 200),
-                  ('Investment', 100),
-                  ('About Us', 150),
+                  ['Executive Summary', 75],
+                  ['Problem Statement', 150],
+                  ['Solution', 200],
+                  ['Investment', 100],
+                  ['About Us', 150],
                 ].map(([name, target]) => (
                   <p key={name}><span className="font-medium">{name}:</span> ~{target} words</p>
                 ))}

@@ -75,9 +75,9 @@ export default function WordFrequencyCounter() {
               {[
                 ['Words', analysis.totalWords], ['Unique', analysis.uniqueWords], ['Characters', analysis.characters], ['Sentences', analysis.sentences], ['Paragraphs', analysis.paragraphs],
               ].map(([label, value]) => (
-                <div key={label} className="rounded-2xl border border-gray-200 dark:border-gray-700 p-4 text-center">
-                  <p className="text-xs uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400">{label}</p>
-                  <p className="mt-2 text-2xl font-bold text-gray-900 dark:text-gray-100">{value}</p>
+                <div key={label} className="rounded-2xl border border-gray-200 dark:border-gray-700 p-4 text-center min-w-0">
+                  <p className="text-[11px] uppercase tracking-[0.08em] text-gray-500 dark:text-gray-400 break-words leading-tight">{label}</p>
+                  <p className="mt-2 text-2xl font-bold text-gray-900 dark:text-gray-100 break-words">{value}</p>
                 </div>
               ))}
             </div>

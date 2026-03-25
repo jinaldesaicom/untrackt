@@ -185,7 +185,7 @@ export default function MarkdownPreviewer() {
         ) : null}
 
         {viewMode !== 'editor' ? (
-          <div className="rounded-xl border border-gray-200 bg-white p-4 prose prose-sm max-w-none overflow-auto min-h-[280px]" dangerouslySetInnerHTML={{ __html: html }} />
+          <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 prose prose-sm dark:prose-invert max-w-none overflow-auto min-h-[280px]" dangerouslySetInnerHTML={{ __html: html }} />
         ) : null}
       </div>
 

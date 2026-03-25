@@ -372,10 +372,9 @@ export default function ProjectTimelineEstimator() {
                 </tr>
               </thead>
               <tbody>
-                {tasksWithDates.map(task => {
-                  if (!task.name) return null
+                {tasksWithDates.filter(task => task.name).map((task, idx, namedTasks) => {
                   const isCritical = criticalPath.includes(task.id)
-                  const bgClass = isCritical ? 'bg-red-50' : ''
+                  const bgClass = isCritical && idx !== namedTasks.length - 1 ? 'bg-red-50' : ''
                   return (
                     <tr key={task.id} className={`border-b border-gray-200 ${bgClass}`}>
                       <td className="px-3 py-2 text-gray-900 font-medium">{task.name}</td>
