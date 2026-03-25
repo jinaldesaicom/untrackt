@@ -101,7 +101,7 @@ export default function OvulationCalculator() {
                     <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">Cycle {index + 1}</p>
                     <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Ovulation: {formatDate(cycle.ovulation)}</p>
                     <div className="mt-4 grid grid-cols-7 gap-1 text-center text-xs">
-                      {['S','M','T','W','T','F','S'].map((day) => <span key={day} className="text-gray-400 dark:text-gray-500">{day}</span>)}
+                      {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, dayIndex) => <span key={`${day}-${dayIndex}`} className="text-gray-400 dark:text-gray-500">{day}</span>)}
                       {days.map((day) => (
                         <div
                           key={day.date.toISOString()}

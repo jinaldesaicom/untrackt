@@ -44,6 +44,10 @@ function getHeatmapDays(daily) {
   return cells
 }
 
+function getRecentVisitKey(entry, index) {
+  return `${entry.toolId}-${entry.timestamp}-${index}`
+}
+
 export default function MyStatsPage() {
   const allStats = getAllStats()
   const mostUsed = getMostUsedTools(5)
@@ -136,10 +140,10 @@ export default function MyStatsPage() {
             <h2 className="text-xl font-bold text-gray-900 dark:text-white">Recently visited</h2>
             <div className="mt-4 panel-card">
               <ul className="space-y-2 text-sm">
-                {recent.map((entry) => {
+                {recent.map((entry, index) => {
                   const tool = tools.find((candidate) => candidate.id === entry.toolId)
                   return (
-                    <li key={`${entry.toolId}-${entry.timestamp}`} className="flex items-center justify-between gap-2">
+                    <li key={getRecentVisitKey(entry, index)} className="flex items-center justify-between gap-2">
                       <span className="font-medium text-gray-900 dark:text-gray-100">{tool?.name || entry.toolId}</span>
                       <span className="text-gray-500 dark:text-gray-400">{new Date(entry.timestamp).toLocaleString()}</span>
                     </li>

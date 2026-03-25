@@ -158,4 +158,28 @@ describe('MyStatsPage', () => {
     renderPage(<MyStatsPage />)
     expect(screen.getByRole('heading', { name: /Usage heatmap/i })).toBeInTheDocument()
   })
+
+  it('renders recent visits with duplicate timestamps without key warnings', () => {
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {})
+
+    localStats.getAllStats.mockReturnValue({
+      totalVisits: 3,
+      tools: { 'pomodoro-timer': { visits: 3 } },
+      history: [],
+      daily: {},
+    })
+    localStats.getRecentVisits.mockReturnValue([
+      { toolId: 'pomodoro-timer', timestamp: '2026-03-25T12:41:51.623Z' },
+      { toolId: 'pomodoro-timer', timestamp: '2026-03-25T12:41:51.623Z' },
+    ])
+
+    renderPage(<MyStatsPage />)
+
+    expect(screen.getAllByText(/pomodoro-timer/i).length).toBeGreaterThan(0)
+    expect(consoleError).not.toHaveBeenCalledWith(
+      expect.stringContaining('Encountered two children with the same key')
+    )
+
+    consoleError.mockRestore()
+  })
 })

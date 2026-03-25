@@ -21,4 +21,20 @@ describe('OvulationCalculator', () => {
       )
     }).not.toThrow()
   })
+
+  it('renders weekday headers without duplicate key warnings', () => {
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {})
+
+    render(
+      <HelmetProvider>
+        <OvulationCalculator />
+      </HelmetProvider>
+    )
+
+    expect(consoleError).not.toHaveBeenCalledWith(
+      expect.stringContaining('Encountered two children with the same key')
+    )
+
+    consoleError.mockRestore()
+  })
 })
