@@ -64,16 +64,16 @@ export default function PasswordGenerator() {
   return (
     <div className="space-y-5">
       {/* Password display */}
-      <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
+      <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
         <div className="flex items-center gap-3">
-          <code className="flex-1 font-mono text-xl text-gray-900 break-all select-all min-h-[2rem]">
-            {password || <span className="text-gray-400 text-sm">Select at least one character type</span>}
+          <code className="flex-1 font-mono text-xl text-gray-900 dark:text-gray-100 break-all select-all min-h-[2rem]">
+            {password || <span className="text-gray-400 dark:text-gray-500 text-sm">Select at least one character type</span>}
           </code>
           <div className="flex items-center gap-1 shrink-0">
-            <button onClick={copy} className="p-2 rounded-lg hover:bg-gray-200 transition-colors text-gray-500" title="Copy">
+            <button onClick={copy} className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-gray-500 dark:text-gray-400" title="Copy" aria-label="Copy password">
               {copied ? <Check className="w-5 h-5 text-green-500" /> : <Copy className="w-5 h-5" />}
             </button>
-            <button onClick={regen} className="p-2 rounded-lg hover:bg-gray-200 transition-colors text-gray-500" title="Regenerate">
+            <button onClick={regen} className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-gray-500 dark:text-gray-400" title="Regenerate" aria-label="Generate new password">
               <RefreshCw className="w-5 h-5" />
             </button>
           </div>
@@ -83,32 +83,37 @@ export default function PasswordGenerator() {
       {/* Strength meter */}
       <div>
         <div className="flex items-center justify-between mb-1.5">
-          <span className="text-xs text-gray-500">Strength</span>
+          <span className="text-xs text-gray-500 dark:text-gray-400">Strength</span>
           <span className={`text-xs font-semibold ${strength.color.replace('bg-', 'text-')}`}>{strength.label}</span>
         </div>
-        <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+        <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden" role="progressbar" aria-valuenow={Math.round(entropy)} aria-valuemin={0} aria-valuemax={100} aria-label={`Password strength: ${strength.label}`}>
           <div
             className={`h-full rounded-full transition-all duration-300 ${strength.color}`}
             style={{ width: strength.width }}
           />
         </div>
-        <p className="text-xs text-gray-400 mt-1">{Math.round(entropy)} bits of entropy</p>
+        <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">{Math.round(entropy)} bits of entropy</p>
       </div>
 
       {/* Length slider */}
       <div>
         <div className="flex items-center justify-between mb-1.5">
-          <label className="text-sm font-medium text-gray-700">Length</label>
-          <span className="text-sm font-semibold text-indigo-600 w-8 text-right">{length}</span>
+          <label htmlFor="pw-length" className="text-sm font-medium text-gray-700 dark:text-gray-300">Length</label>
+          <span className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 w-8 text-right">{length}</span>
         </div>
         <input
+          id="pw-length"
           type="range"
-          min="8" max="64"
+          min={8} max={64}
           value={length}
           onChange={(e) => setLength(Number(e.target.value))}
+          aria-valuemin={8}
+          aria-valuemax={64}
+          aria-valuenow={length}
+          aria-label={`Password length: ${length} characters`}
           className="w-full accent-indigo-600"
         />
-        <div className="flex justify-between text-xs text-gray-400 mt-0.5">
+        <div className="flex justify-between text-xs text-gray-400 dark:text-gray-500 mt-0.5">
           <span>8</span><span>64</span>
         </div>
       </div>
@@ -123,7 +128,7 @@ export default function PasswordGenerator() {
               onChange={() => toggle(key)}
               className="w-4 h-4 rounded accent-indigo-600"
             />
-            <span className="text-sm text-gray-700">{label}</span>
+            <span className="text-sm text-gray-700 dark:text-gray-300">{label}</span>
           </label>
         ))}
       </div>

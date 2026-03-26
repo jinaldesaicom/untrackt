@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import CopyButton from '../../components/CopyButton.jsx'
 
 function detectBase(value) {
   if (value.startsWith('0x')) return 16
@@ -50,21 +51,24 @@ export default function NumberBaseConverter() {
 
       {parsed != null ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-          <div className="rounded-lg border border-gray-200 p-3 bg-white flex justify-between"><span>Decimal</span><span className="font-mono">{parsed}</span></div>
-          <div className="rounded-lg border border-gray-200 p-3 bg-white flex justify-between"><span>Binary</span><span className="font-mono">{formatBinary(parsed.toString(2), bitLength)}</span></div>
-          <div className="rounded-lg border border-gray-200 p-3 bg-white flex justify-between"><span>Hexadecimal</span><span className="font-mono">{parsed.toString(16).toUpperCase()}</span></div>
-          <div className="rounded-lg border border-gray-200 p-3 bg-white flex justify-between"><span>Octal</span><span className="font-mono">{parsed.toString(8)}</span></div>
+          <div className="rounded-lg border border-gray-200 dark:border-gray-700 p-3 bg-white dark:bg-gray-900 flex justify-between items-center"><span className="text-gray-700 dark:text-gray-300">Decimal</span><div className="flex items-center gap-2"><span className="font-mono text-gray-900 dark:text-gray-100">{parsed}</span><CopyButton text={String(parsed)} label="" className="p-1" /></div></div>
+          <div className="rounded-lg border border-gray-200 dark:border-gray-700 p-3 bg-white dark:bg-gray-900 flex justify-between items-center"><span className="text-gray-700 dark:text-gray-300">Binary</span><div className="flex items-center gap-2"><span className="font-mono text-gray-900 dark:text-gray-100">{formatBinary(parsed.toString(2), bitLength)}</span><CopyButton text={formatBinary(parsed.toString(2), bitLength)} label="" className="p-1" /></div></div>
+          <div className="rounded-lg border border-gray-200 dark:border-gray-700 p-3 bg-white dark:bg-gray-900 flex justify-between items-center"><span className="text-gray-700 dark:text-gray-300">Hexadecimal</span><div className="flex items-center gap-2"><span className="font-mono text-gray-900 dark:text-gray-100">{parsed.toString(16).toUpperCase()}</span><CopyButton text={parsed.toString(16).toUpperCase()} label="" className="p-1" /></div></div>
+          <div className="rounded-lg border border-gray-200 dark:border-gray-700 p-3 bg-white dark:bg-gray-900 flex justify-between items-center"><span className="text-gray-700 dark:text-gray-300">Octal</span><div className="flex items-center gap-2"><span className="font-mono text-gray-900 dark:text-gray-100">{parsed.toString(8)}</span><CopyButton text={parsed.toString(8)} label="" className="p-1" /></div></div>
         </div>
       ) : <p className="text-sm text-red-600">Invalid number input</p>}
 
-      <div className="rounded-xl border border-gray-200 bg-white p-4 space-y-2">
-        <h3 className="font-semibold">Manual Base Converter</h3>
+      <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-4 space-y-2">
+        <h3 className="font-semibold text-gray-900 dark:text-gray-100">Manual Base Converter</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
           <input type="number" min="2" max="36" value={fromBase} onChange={(e) => setFromBase(Number(e.target.value))} className="input-field" />
           <input type="number" min="2" max="36" value={toBase} onChange={(e) => setToBase(Number(e.target.value))} className="input-field" />
           <input type="number" min="8" max="64" step="8" value={bitLength} onChange={(e) => setBitLength(Number(e.target.value))} className="input-field" />
         </div>
-        <p className="font-mono text-sm">Converted: {manual || 'N/A'}</p>
+        <div className="flex items-center gap-2">
+          <span className="font-mono text-sm text-gray-900 dark:text-gray-100">Converted: {manual || 'N/A'}</span>
+          {manual && <CopyButton text={manual} label="Copy" />}
+        </div>
       </div>
     </div>
   )

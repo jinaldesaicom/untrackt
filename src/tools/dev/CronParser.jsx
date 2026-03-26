@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import CopyButton from '../../components/CopyButton.jsx'
 
 const PRESETS = {
   '@hourly': '0 * * * *',
@@ -135,29 +136,35 @@ export default function CronParser() {
 
       {computed.parsed ? (
         <>
-          <div className="rounded-xl border border-gray-200 bg-white p-4">
-            <h3 className="font-semibold text-gray-900">Plain English</h3>
-            <p className="text-sm text-gray-600 mt-1">{computed.description}</p>
+          <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-4">
+            <div className="flex items-center justify-between gap-2">
+              <h3 className="font-semibold text-gray-900 dark:text-gray-100">Plain English</h3>
+              <CopyButton text={computed.description} label="Copy" />
+            </div>
+            <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">{computed.description}</p>
           </div>
 
-          <div className="rounded-xl border border-gray-200 bg-white p-4">
-            <h3 className="font-semibold text-gray-900 mb-2">Next 5 Runs</h3>
-            <ul className="text-sm text-gray-700 space-y-1">
+          <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-4">
+            <div className="flex items-center justify-between gap-2 mb-2">
+              <h3 className="font-semibold text-gray-900 dark:text-gray-100">Next 5 Runs</h3>
+              <CopyButton text={computed.next.map(r => r.toLocaleString()).join('\n')} label="Copy" />
+            </div>
+            <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-1">
               {computed.next.map((run, idx) => (
                 <li key={idx}>{run.toLocaleString()}</li>
               ))}
             </ul>
           </div>
 
-          <div className="rounded-xl border border-gray-200 bg-white p-4 overflow-x-auto">
-            <h3 className="font-semibold text-gray-900 mb-2">Field Breakdown</h3>
+          <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-4 overflow-x-auto">
+            <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Field Breakdown</h3>
             <table className="w-full text-sm">
               <tbody>
-                <tr><td className="py-1 pr-3 font-medium">Minute</td><td>{computed.parsed.parts[0]}</td></tr>
-                <tr><td className="py-1 pr-3 font-medium">Hour</td><td>{computed.parsed.parts[1]}</td></tr>
-                <tr><td className="py-1 pr-3 font-medium">Day</td><td>{computed.parsed.parts[2]}</td></tr>
-                <tr><td className="py-1 pr-3 font-medium">Month</td><td>{computed.parsed.parts[3]} ({MONTHS.join(', ')})</td></tr>
-                <tr><td className="py-1 pr-3 font-medium">Weekday</td><td>{computed.parsed.parts[4]} ({WEEKDAYS.join(', ')})</td></tr>
+                <tr><td className="py-1 pr-3 font-medium text-gray-700 dark:text-gray-300">Minute</td><td className="text-gray-600 dark:text-gray-400">{computed.parsed.parts[0]}</td></tr>
+                <tr><td className="py-1 pr-3 font-medium text-gray-700 dark:text-gray-300">Hour</td><td className="text-gray-600 dark:text-gray-400">{computed.parsed.parts[1]}</td></tr>
+                <tr><td className="py-1 pr-3 font-medium text-gray-700 dark:text-gray-300">Day</td><td className="text-gray-600 dark:text-gray-400">{computed.parsed.parts[2]}</td></tr>
+                <tr><td className="py-1 pr-3 font-medium text-gray-700 dark:text-gray-300">Month</td><td className="text-gray-600 dark:text-gray-400">{computed.parsed.parts[3]}</td></tr>
+                <tr><td className="py-1 pr-3 font-medium text-gray-700 dark:text-gray-300">Weekday</td><td className="text-gray-600 dark:text-gray-400">{computed.parsed.parts[4]}</td></tr>
               </tbody>
             </table>
           </div>

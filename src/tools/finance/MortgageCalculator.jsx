@@ -82,9 +82,9 @@ export default function MortgageCalculator() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Form */}
         <div className="lg:col-span-1 space-y-4">
-          <div className="bg-white p-6 rounded-xl border border-gray-200 space-y-4">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Home Price ($)</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Home Price ($)</label>
               <input
                 type="number"
                 value={inputs.homePrice}
@@ -96,7 +96,7 @@ export default function MortgageCalculator() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Down Payment</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Down Payment</label>
               <div className="flex gap-2">
                 <input
                   type="number"
@@ -117,7 +117,7 @@ export default function MortgageCalculator() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Loan Term (years)</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Loan Term (years)</label>
               <select
                 value={inputs.loanTerm}
                 onChange={e => setInputs({ ...inputs, loanTerm: e.target.value })}
@@ -130,7 +130,7 @@ export default function MortgageCalculator() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Annual Interest Rate (%)</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Annual Interest Rate (%)</label>
               <input
                 type="number"
                 value={inputs.interestRate}
@@ -142,7 +142,7 @@ export default function MortgageCalculator() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Annual Property Tax ($)</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Annual Property Tax ($)</label>
               <input
                 type="number"
                 value={inputs.propertyTax}
@@ -153,7 +153,7 @@ export default function MortgageCalculator() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Annual Home Insurance ($)</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Annual Home Insurance ($)</label>
               <input
                 type="number"
                 value={inputs.homeInsurance}
@@ -164,7 +164,7 @@ export default function MortgageCalculator() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">PMI Rate (%)</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">PMI Rate (%)</label>
               <input
                 type="number"
                 value={inputs.pmiRate}
@@ -176,7 +176,7 @@ export default function MortgageCalculator() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Monthly HOA Fees ($)</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monthly HOA Fees ($)</label>
               <input
                 type="number"
                 value={inputs.hoaFees}
@@ -192,76 +192,76 @@ export default function MortgageCalculator() {
         <div className="lg:col-span-2 space-y-6">
           {/* Payment Breakdown */}
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
-              <p className="text-xs text-blue-600 mb-1">Principal & Interest</p>
-              <p className="text-2xl font-bold text-blue-700">{fmt(monthlyPI)}</p>
+            <div className="bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900 rounded-xl p-4">
+              <p className="text-xs text-blue-600 dark:text-blue-400 mb-1">Principal & Interest</p>
+              <p className="text-2xl font-bold text-blue-700 dark:text-blue-300">{fmt(monthlyPI)}</p>
             </div>
-            <div className="bg-orange-50 border border-orange-200 rounded-xl p-4">
-              <p className="text-xs text-orange-600 mb-1">Tax</p>
-              <p className="text-2xl font-bold text-orange-700">{fmt(monthlyPropertyTax)}</p>
+            <div className="bg-orange-50 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-900 rounded-xl p-4">
+              <p className="text-xs text-orange-600 dark:text-orange-400 mb-1">Tax</p>
+              <p className="text-2xl font-bold text-orange-700 dark:text-orange-300">{fmt(monthlyPropertyTax)}</p>
             </div>
-            <div className="bg-green-50 border border-green-200 rounded-xl p-4">
-              <p className="text-xs text-green-600 mb-1">Insurance</p>
-              <p className="text-2xl font-bold text-green-700">{fmt(monthlyInsurance)}</p>
+            <div className="bg-green-50 dark:bg-green-950/40 border border-green-200 dark:border-green-900 rounded-xl p-4">
+              <p className="text-xs text-green-600 dark:text-green-400 mb-1">Insurance</p>
+              <p className="text-2xl font-bold text-green-700 dark:text-green-300">{fmt(monthlyInsurance)}</p>
             </div>
             {monthlyPmi > 0 && (
-              <div className="bg-red-50 border border-red-200 rounded-xl p-4">
-                <p className="text-xs text-red-600 mb-1">PMI</p>
-                <p className="text-2xl font-bold text-red-700">{fmt(monthlyPmi)}</p>
+              <div className="bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 rounded-xl p-4">
+                <p className="text-xs text-red-600 dark:text-red-400 mb-1">PMI</p>
+                <p className="text-2xl font-bold text-red-700 dark:text-red-300">{fmt(monthlyPmi)}</p>
               </div>
             )}
             {monthlyHoa > 0 && (
-              <div className="bg-purple-50 border border-purple-200 rounded-xl p-4">
-                <p className="text-xs text-purple-600 mb-1">HOA</p>
-                <p className="text-2xl font-bold text-purple-700">{fmt(monthlyHoa)}</p>
+              <div className="bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-900 rounded-xl p-4">
+                <p className="text-xs text-purple-600 dark:text-purple-400 mb-1">HOA</p>
+                <p className="text-2xl font-bold text-purple-700 dark:text-purple-300">{fmt(monthlyHoa)}</p>
               </div>
             )}
-            <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-4 lg:col-span-1">
-              <p className="text-xs text-indigo-600 mb-1">Total Monthly</p>
-              <p className="text-2xl font-bold text-indigo-700">{fmt(monthlyPayment)}</p>
+            <div className="bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-900 rounded-xl p-4 lg:col-span-1">
+              <p className="text-xs text-indigo-600 dark:text-indigo-400 mb-1">Total Monthly</p>
+              <p className="text-2xl font-bold text-indigo-700 dark:text-indigo-300">{fmt(monthlyPayment)}</p>
             </div>
           </div>
 
           {/* Summary */}
-          <div className="bg-white p-6 rounded-xl border border-gray-200">
-            <h3 className="font-semibold text-gray-900 mb-4">Loan Summary</h3>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
+            <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-4">Loan Summary</h3>
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
-                <p className="text-gray-600 mb-1">Home Price</p>
-                <p className="font-semibold text-gray-900">{fmt(homePrice)}</p>
+                <p className="text-gray-600 dark:text-gray-400 mb-1">Home Price</p>
+                <p className="font-semibold text-gray-900 dark:text-gray-100">{fmt(homePrice)}</p>
               </div>
               <div>
-                <p className="text-gray-600 mb-1">Down Payment</p>
-                <p className="font-semibold text-gray-900">{fmt(downPayment)}</p>
+                <p className="text-gray-600 dark:text-gray-400 mb-1">Down Payment</p>
+                <p className="font-semibold text-gray-900 dark:text-gray-100">{fmt(downPayment)}</p>
               </div>
               <div>
-                <p className="text-gray-600 mb-1">Loan Amount</p>
-                <p className="font-semibold text-gray-900">{fmt(principal)}</p>
+                <p className="text-gray-600 dark:text-gray-400 mb-1">Loan Amount</p>
+                <p className="font-semibold text-gray-900 dark:text-gray-100">{fmt(principal)}</p>
               </div>
               <div>
-                <p className="text-gray-600 mb-1">Total Interest</p>
-                <p className="font-semibold text-red-600">{fmt(totalInterest)}</p>
+                <p className="text-gray-600 dark:text-gray-400 mb-1">Total Interest</p>
+                <p className="font-semibold text-red-600 dark:text-red-400">{fmt(totalInterest)}</p>
               </div>
               <div>
-                <p className="text-gray-600 mb-1">Total Paid</p>
-                <p className="font-semibold text-gray-900">{fmt(totalPayment)}</p>
+                <p className="text-gray-600 dark:text-gray-400 mb-1">Total Paid</p>
+                <p className="font-semibold text-gray-900 dark:text-gray-100">{fmt(totalPayment)}</p>
               </div>
               <div>
-                <p className="text-gray-600 mb-1">LTV Ratio</p>
-                <p className="font-semibold text-gray-900">{ltv.toFixed(1)}%</p>
+                <p className="text-gray-600 dark:text-gray-400 mb-1">LTV Ratio</p>
+                <p className="font-semibold text-gray-900 dark:text-gray-100">{ltv.toFixed(1)}%</p>
               </div>
               {monthlyPmi > 0 && (
                 <div>
-                  <p className="text-gray-600 mb-1">PMI Drops Off</p>
-                  <p className="font-semibold text-gray-900">{pmiRemovalDate.toLocaleDateString()}</p>
+                  <p className="text-gray-600 dark:text-gray-400 mb-1">PMI Drops Off</p>
+                  <p className="font-semibold text-gray-900 dark:text-gray-100">{pmiRemovalDate.toLocaleDateString()}</p>
                 </div>
               )}
             </div>
           </div>
 
           {/* Principal vs Interest */}
-          <div className="bg-white p-6 rounded-xl border border-gray-200">
-            <h3 className="font-semibold text-gray-900 mb-4">Principal vs Interest</h3>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
+            <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-4">Principal vs Interest</h3>
             <div className="flex rounded-lg overflow-hidden h-8 mb-3">
               <div className="bg-blue-500" style={{ width: `${pctPrincipal}%` }} />
               <div className="bg-red-400" style={{ width: `${pctInterest}%` }} />
@@ -279,25 +279,25 @@ export default function MortgageCalculator() {
           </div>
 
           {/* Amortization */}
-          <div className="bg-white p-6 rounded-xl border border-gray-200">
-            <h3 className="font-semibold text-gray-900 mb-4">Amortization Schedule (Year by Year)</h3>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
+            <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-4">Amortization Schedule (Year by Year)</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
-                <thead className="bg-gray-50 border-b border-gray-200">
+                <thead className="bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
                   <tr>
-                    <th className="text-left px-3 py-2 font-semibold text-gray-700">Year</th>
-                    <th className="text-right px-3 py-2 font-semibold text-gray-700">Principal</th>
-                    <th className="text-right px-3 py-2 font-semibold text-gray-700">Interest</th>
-                    <th className="text-right px-3 py-2 font-semibold text-gray-700">Balance</th>
+                    <th className="text-left px-3 py-2 font-semibold text-gray-700 dark:text-gray-300">Year</th>
+                    <th className="text-right px-3 py-2 font-semibold text-gray-700 dark:text-gray-300">Principal</th>
+                    <th className="text-right px-3 py-2 font-semibold text-gray-700 dark:text-gray-300">Interest</th>
+                    <th className="text-right px-3 py-2 font-semibold text-gray-700 dark:text-gray-300">Balance</th>
                   </tr>
                 </thead>
                 <tbody>
                   {schedule.map((row, idx) => (
-                    <tr key={idx} className="border-b border-gray-100 hover:bg-gray-50">
-                      <td className="px-3 py-2 text-gray-900 font-medium">{row.year}</td>
-                      <td className="px-3 py-2 text-right text-gray-900">{fmt(row.principal)}</td>
-                      <td className="px-3 py-2 text-right text-gray-900">{fmt(row.interest)}</td>
-                      <td className="px-3 py-2 text-right text-gray-900 font-semibold">{fmt(row.balance)}</td>
+                    <tr key={idx} className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                      <td className="px-3 py-2 text-gray-900 dark:text-gray-100 font-medium">{row.year}</td>
+                      <td className="px-3 py-2 text-right text-gray-900 dark:text-gray-100">{fmt(row.principal)}</td>
+                      <td className="px-3 py-2 text-right text-gray-900 dark:text-gray-100">{fmt(row.interest)}</td>
+                      <td className="px-3 py-2 text-right text-gray-900 dark:text-gray-100 font-semibold">{fmt(row.balance)}</td>
                     </tr>
                   ))}
                 </tbody>

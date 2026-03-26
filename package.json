@@ -3,6 +3,27 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "description": "88+ free browser-based tools. Zero tracking. Zero accounts. 100% private.",
+  "author": "Jinal Desai",
+  "license": "MIT",
+  "homepage": "https://untrackt.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jinaldesaicom/untrackt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jinaldesaicom/untrackt/issues"
+  },
+  "keywords": [
+    "privacy",
+    "tools",
+    "calculator",
+    "browser",
+    "offline",
+    "pwa",
+    "react",
+    "vite"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",

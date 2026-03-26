@@ -1,6 +1,8 @@
 import { getItem, setItem, removeItem } from './storage.js'
 
 const STATS_KEY = 'untrackt:localStats'
+const MAX_HISTORY = 500
+const MAX_DAILY_KEYS = 365
 
 function getTodayKey(date = new Date()) {
   return date.toISOString().slice(0, 10)
@@ -23,7 +25,18 @@ function readStats() {
   }
 }
 
+function trimDailyStats(daily) {
+  const keys = Object.keys(daily).sort()
+  if (keys.length <= MAX_DAILY_KEYS) return daily
+  const trimmed = {}
+  keys.slice(-MAX_DAILY_KEYS).forEach((key) => { trimmed[key] = daily[key] })
+  return trimmed
+}
+
 function writeStats(stats) {
+  // Cap history and daily to prevent unbounded growth
+  stats.history = stats.history.slice(0, MAX_HISTORY)
+  stats.daily = trimDailyStats(stats.daily)
   setItem(STATS_KEY, stats)
 }
 

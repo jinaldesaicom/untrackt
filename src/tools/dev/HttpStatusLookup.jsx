@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import CopyButton from '../../components/CopyButton.jsx'
 
 const STATUSES = [
   [100, 'Continue', 'Request received; continue sending body.', 'Large uploads with Expect: 100-continue.'],
@@ -61,11 +62,11 @@ const STATUSES = [
 ]
 
 function classColor(code) {
-  if (code >= 500) return 'bg-red-50 border-red-200 text-red-700'
-  if (code >= 400) return 'bg-orange-50 border-orange-200 text-orange-700'
-  if (code >= 300) return 'bg-blue-50 border-blue-200 text-blue-700'
-  if (code >= 200) return 'bg-green-50 border-green-200 text-green-700'
-  return 'bg-gray-50 border-gray-200 text-gray-700'
+  if (code >= 500) return 'bg-red-50 dark:bg-red-950/30 border-red-200 dark:border-red-800 text-red-700 dark:text-red-300'
+  if (code >= 400) return 'bg-orange-50 dark:bg-orange-950/30 border-orange-200 dark:border-orange-800 text-orange-700 dark:text-orange-300'
+  if (code >= 300) return 'bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300'
+  if (code >= 200) return 'bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-800 text-green-700 dark:text-green-300'
+  return 'bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300'
 }
 
 export default function HttpStatusLookup() {
@@ -96,13 +97,16 @@ export default function HttpStatusLookup() {
       {Object.entries(grouped).map(([group, list]) => (
         list.length > 0 ? (
           <section key={group}>
-            <h3 className="text-lg font-bold text-gray-900 mb-2">{group}</h3>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{group}</h3>
             <div className="space-y-2">
               {list.map(([code, name, description, whenSeen]) => (
                 <article key={code} className={`rounded-xl border p-4 ${classColor(code)}`}>
-                  <div className="flex items-center gap-3 mb-1">
-                    <span className="text-2xl font-bold">{code}</span>
-                    <h4 className="font-semibold">{name}</h4>
+                  <div className="flex items-center justify-between gap-3 mb-1">
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl font-bold">{code}</span>
+                      <h4 className="font-semibold">{name}</h4>
+                    </div>
+                    <CopyButton text={`${code} ${name}`} label="Copy" className="text-xs" />
                   </div>
                   <p className="text-sm">{description}</p>
                   <p className="text-sm mt-1"><span className="font-semibold">In practice:</span> {whenSeen}</p>
