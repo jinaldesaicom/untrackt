@@ -64,4 +64,23 @@ describe('PomodoroTimer', () => {
     act(() => { vi.advanceTimersByTime(1000) })
     expect(screen.getByText('24:59')).toBeInTheDocument()
   })
+
+  it('increments completed pomodoros when a work session finishes', () => {
+    render(<PomodoroTimer />)
+
+    fireEvent.click(screen.getByRole('button', { name: /start/i }))
+    act(() => { vi.advanceTimersByTime(25 * 60 * 1000) })
+
+    expect(screen.getByText('1')).toBeInTheDocument()
+  })
+
+  it('increments completed pomodoros when a short break finishes', () => {
+    render(<PomodoroTimer />)
+
+    fireEvent.click(screen.getByRole('button', { name: /short break/i }))
+    fireEvent.click(screen.getByRole('button', { name: /start/i }))
+    act(() => { vi.advanceTimersByTime(5 * 60 * 1000) })
+
+    expect(screen.getByText('1')).toBeInTheDocument()
+  })
 })

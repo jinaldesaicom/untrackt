@@ -1,20 +1,23 @@
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
+import { HelmetProvider } from 'react-helmet-async'
 import Home from '../../pages/Home.jsx'
 import { categories } from '../../data/tools.js'
 
 function renderHome() {
   return render(
-    <MemoryRouter>
-      <Home />
-    </MemoryRouter>
+    <HelmetProvider>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <Home />
+      </MemoryRouter>
+    </HelmetProvider>
   )
 }
 
 describe('Home', () => {
   it('renders hero section', () => {
     renderHome()
-    expect(screen.getByText(/88\+ free tools/i)).toBeInTheDocument()
+    expect(screen.getByText(/free tools\./i)).toBeInTheDocument()
     expect(screen.getByText(/no accounts/i)).toBeInTheDocument()
   })
 

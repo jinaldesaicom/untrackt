@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Developer Tools OG image">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7c3aed" />
+      <stop offset="100%" stop-color="#4f46e5" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <g opacity="0.18" fill="#ffffff">
+    <circle cx="120" cy="110" r="40" /><circle cx="240" cy="110" r="40" /><circle cx="360" cy="110" r="40" />
+    <circle cx="120" cy="220" r="40" /><circle cx="240" cy="220" r="40" /><circle cx="360" cy="220" r="40" />
+    <circle cx="120" cy="330" r="40" /><circle cx="240" cy="330" r="40" /><circle cx="360" cy="330" r="40" />
+  </g>
+  <text x="600" y="250" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="88" font-weight="700">UnTrackt</text>
+  <text x="600" y="325" text-anchor="middle" fill="#e0e7ff" font-family="Arial, sans-serif" font-size="40" font-weight="600">Developer Tools</text>
+  <text x="600" y="390" text-anchor="middle" fill="#f8fafc" font-family="Arial, sans-serif" font-size="34">88+ Free Browser Tools</text>
+  <text x="600" y="445" text-anchor="middle" fill="#f8fafc" font-family="Arial, sans-serif" font-size="28">Zero Tracking • Zero Accounts • 100% Private</text>
+</svg>

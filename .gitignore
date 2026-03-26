@@ -16,4 +16,8 @@ pnpm-debug.log*
 Thumbs.db
 
 .idea/
-.vscode/
+
+# Test artifacts
+*-report.json
+test-output*.txt
+latest-full.txt

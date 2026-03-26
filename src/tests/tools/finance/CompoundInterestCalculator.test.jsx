@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import CompoundInterestCalculator from '../../../tools/finance/CompoundInterestCalculator.jsx'
 
@@ -25,8 +25,9 @@ describe('CompoundInterestCalculator', () => {
     await user.selectOptions(freqSelect, '1') // Yearly (1×/year)
     await user.clear(yearsInput); await user.type(yearsInput, '1')
     await user.clear(monthlyInput); await user.type(monthlyInput, '0')
-    // Final balance should be $1,100
-    expect(screen.getAllByText('$1,100').length).toBeGreaterThanOrEqual(1)
+    await waitFor(() => {
+      expect(screen.getAllByText('$1,100').length).toBeGreaterThanOrEqual(1)
+    })
   })
 
   it('final balance is greater than principal', async () => {
@@ -41,9 +42,10 @@ describe('CompoundInterestCalculator', () => {
     render(<CompoundInterestCalculator />)
     const yearsInput = screen.getAllByRole('spinbutton')[2]
     await user.clear(yearsInput); await user.type(yearsInput, '5')
-    // Table should have 5 rows (shown up to 12 by default)
-    const rows = document.querySelectorAll('tbody tr')
-    expect(rows.length).toBe(5)
+    await waitFor(() => {
+      const rows = document.querySelectorAll('tbody tr')
+      expect(rows.length).toBe(5)
+    })
   })
 
   it('disclaimer text is present', () => {

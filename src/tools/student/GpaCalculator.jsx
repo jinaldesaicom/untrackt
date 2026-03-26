@@ -49,14 +49,14 @@ export default function GpaCalculator() {
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-gray-200">
-              <th className="text-left font-medium text-gray-600 pb-2 pr-3">Course Name</th>
-              <th className="text-left font-medium text-gray-600 pb-2 pr-3 w-24">Credits</th>
-              <th className="text-left font-medium text-gray-600 pb-2 pr-3">Grade</th>
+            <tr className="border-b border-gray-200 dark:border-gray-700">
+              <th className="text-left font-medium text-gray-600 dark:text-gray-400 pb-2 pr-3">Course Name</th>
+              <th className="text-left font-medium text-gray-600 dark:text-gray-400 pb-2 pr-3 w-24">Credits</th>
+              <th className="text-left font-medium text-gray-600 dark:text-gray-400 pb-2 pr-3">Grade</th>
               <th className="pb-2 w-8"></th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
             {courses.map((course) => (
               <tr key={course.id}>
                 <td className="py-2 pr-3">
@@ -111,13 +111,13 @@ export default function GpaCalculator() {
       </button>
 
       {/* Result */}
-      <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-5 flex items-center justify-between flex-wrap gap-4">
+        <div className="bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900 rounded-xl p-5 flex items-center justify-between flex-wrap gap-4">
         <div>
-          <p className="text-sm text-gray-600">Total Credits</p>
-          <p className="text-2xl font-bold text-gray-900">{totalCredits}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-300">Total Credits</p>
+            <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{totalCredits}</p>
         </div>
         <div className="text-right">
-          <p className="text-sm text-gray-600">Cumulative GPA</p>
+            <p className="text-sm text-gray-600 dark:text-gray-300">Cumulative GPA</p>
           <p className={`text-4xl font-bold ${gpaColor()}`}>
             {gpa ?? '—'}
           </p>

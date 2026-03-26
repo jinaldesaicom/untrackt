@@ -2,26 +2,182 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
 @layer base {
   body {
     @apply bg-gray-50 text-gray-900 antialiased;
   }
+  .dark body {
+    @apply bg-gray-900 text-gray-100;
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:focus-visible {
+    @apply outline-none ring-2 ring-indigo-500 ring-offset-2 ring-offset-white dark:ring-offset-gray-900;
+  }
 }
 
 @layer components {
+  .beta-badge {
+    @apply inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-amber-700;
+  }
+  .panel-card {
+    @apply rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-900;
+  }
   .tool-card {
-    @apply bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-pointer;
+    @apply bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-pointer
+      dark:bg-gray-800 dark:border-gray-700;
   }
   .btn-primary {
     @apply bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-indigo-700 transition-colors duration-150 text-sm;
   }
   .btn-secondary {
-    @apply bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-200 transition-colors duration-150 text-sm;
+    @apply bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-200 transition-colors duration-150 text-sm
+      dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600;
   }
   .input-field {
-    @apply w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent;
+    @apply w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent
+      dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100 dark:placeholder-gray-500;
   }
   .textarea-field {
-    @apply w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent font-mono resize-y;
+    @apply w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent font-mono resize-y
+      dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100 dark:placeholder-gray-500;
+  }
+  .flip-tile {
+    @apply relative overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-4 py-5 text-center shadow-sm;
+  }
+  .flip-value {
+    animation: flip-in 0.6s ease;
+  }
+  .animate-page-in {
+    animation: page-in 150ms ease-out;
+  }
+  .animate-heart-pop {
+    animation: heart-pop 300ms ease;
+  }
+  .animate-toast-in {
+    animation: toast-in 180ms ease-out;
+  }
+  .animate-count-up {
+    animation: count-up 480ms ease-out;
+  }
+  .confetti-burst::before,
+  .confetti-burst::after {
+    content: '';
+    position: absolute;
+    inset: -30%;
+    background-image:
+      radial-gradient(circle, rgba(99,102,241,0.85) 0 4px, transparent 5px),
+      radial-gradient(circle, rgba(244,63,94,0.75) 0 4px, transparent 5px),
+      radial-gradient(circle, rgba(16,185,129,0.75) 0 4px, transparent 5px),
+      radial-gradient(circle, rgba(245,158,11,0.75) 0 4px, transparent 5px);
+    background-size: 18% 18%;
+    animation: confetti-float 1.6s ease-in-out infinite;
+    pointer-events: none;
   }
 }
+
+@keyframes flip-in {
+  0% {
+    transform: rotateX(-90deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes confetti-float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(4deg);
+  }
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heart-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes count-up {
+  from {
+    opacity: 0.4;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Dark mode: cascade to raw utility classes in tool component panels ── */
+/* Unlayered rules have higher cascade precedence than @layer utilities,    */
+/* automatically darkening panels without modifying individual tool files.  */
+.dark .bg-white           { background-color: rgb(31 41 55);  }  /* gray-800 */
+.dark .bg-gray-50         { background-color: rgb(17 24 39);  }  /* gray-900 */
+.dark .bg-gray-100        { background-color: rgb(55 65 81);  }  /* gray-700 */
+.dark .bg-gray-200        { background-color: rgb(75 85 99);  }  /* gray-600 */
+.dark .border-gray-100,
+.dark .border-gray-200    { border-color: rgb(55 65 81);      }  /* gray-700 */
+.dark .border-gray-300    { border-color: rgb(75 85 99);      }  /* gray-600 */
+.dark .text-gray-900,
+.dark .text-gray-800      { color: rgb(229 231 235);          }  /* gray-200 */
+.dark .text-gray-700      { color: rgb(209 213 219);          }  /* gray-300 */
+.dark .text-gray-600,
+.dark .text-gray-500      { color: rgb(156 163 175);          }  /* gray-400 */
+.dark .text-gray-400      { color: rgb(107 114 128);          }  /* gray-500 */
+.dark .hover\:bg-gray-50:hover,
+.dark .hover\:bg-gray-100:hover { background-color: rgb(55 65 81);  }  /* gray-700 */
+.dark .hover\:bg-gray-200:hover { background-color: rgb(75 85 99);  }  /* gray-600 */
+.dark .divide-gray-200 > :not([hidden]) ~ :not([hidden]) { border-color: rgb(55 65 81); }

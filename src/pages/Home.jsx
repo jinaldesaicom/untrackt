@@ -1,42 +1,98 @@
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
+import { Heart, Lock, Zap, Globe } from 'lucide-react'
 import SearchBar from '../components/SearchBar.jsx'
 import ToolGrid from '../components/ToolGrid.jsx'
+import SEOHead from '../components/SEOHead.jsx'
+import EmptyState from '../components/EmptyState.jsx'
 import tools, { categories, categoryColorMap } from '../data/tools.js'
 import { getIcon } from '../icons.js'
+import { getRecentTools } from '../utils/storage.js'
+import { useFavorites } from '../hooks/useFavorites.js'
+import { getAllStats } from '../utils/localStats.js'
 
 function getRandomFeaturedTools(count = 6) {
   const shuffled = [...tools].sort(() => Math.random() - 0.5)
   return shuffled.slice(0, count)
 }
 
+function getToolOfTheDay() {
+  const key = new Date().toISOString().slice(0, 10)
+  const seed = key.split('-').reduce((acc, part) => acc + Number(part), 0)
+  return tools[seed % tools.length]
+}
+
 export default function Home() {
+  const { favorites } = useFavorites()
   const featured = useMemo(() => getRandomFeaturedTools(6), [])
+  const toolOfTheDay = useMemo(() => getToolOfTheDay(), [])
+
+  const favoriteTools = useMemo(() => {
+    return favorites
+      .map((id) => tools.find((tool) => tool.id === id))
+      .filter(Boolean)
+  }, [favorites])
+
+  const recentTools = useMemo(() => {
+    const recentIds = getRecentTools()
+    return recentIds
+      .map((id) => tools.find((tool) => tool.id === id))
+      .filter(Boolean)
+      .slice(0, 6)
+  }, [])
+
   const toolCounts = {}
   tools.forEach((t) => {
     toolCounts[t.category] = (toolCounts[t.category] || 0) + 1
   })
 
+  const stats = getAllStats()
+  const usedCount = Object.keys(stats.tools || {}).length
+
   return (
     <div>
-      {/* Hero */}
-      <section className="bg-white border-b border-gray-100">
+      <SEOHead
+        title="Free Online Tools - No Tracking | UnTrackt"
+        description="88+ free tools for developers, students, freelancers and more. Runs entirely in your browser. Zero tracking, zero accounts, zero data collection."
+        path="/"
+      />
+
+      <section className="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20 text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-3">
-            88+ free tools. Runs in your browser. Zero tracking.
+          <div className="mb-4 flex justify-center">
+            <span className="beta-badge">Beta Release</span>
+          </div>
+          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 dark:text-white mb-3">
+            <span className="inline-block animate-count-up">{tools.length}+</span> free tools. Runs in your browser. Zero tracking.
           </h1>
-          <p className="text-lg text-gray-500 mb-8 max-w-xl mx-auto">
+          <p className="text-lg text-gray-500 dark:text-gray-400 mb-8 max-w-xl mx-auto">
             No accounts. No servers. No nonsense.
           </p>
           <div className="max-w-lg mx-auto">
             <SearchBar large />
           </div>
+          <div className="mt-7 flex flex-wrap justify-center gap-3 text-xs sm:text-sm">
+            <span className="inline-flex items-center gap-1 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-emerald-700 dark:border-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-200"><Lock className="w-3.5 h-3.5" /> No tracking</span>
+            <span className="inline-flex items-center gap-1 rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-amber-700 dark:border-amber-700 dark:bg-amber-900/40 dark:text-amber-200"><Zap className="w-3.5 h-3.5" /> Instant results</span>
+            <span className="inline-flex items-center gap-1 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-indigo-700 dark:border-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-200"><Globe className="w-3.5 h-3.5" /> Works offline</span>
+          </div>
+          {usedCount > 0 ? (
+            <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">You have used {usedCount} tools so far (stored locally on this device).</p>
+          ) : null}
         </div>
       </section>
 
-      {/* Categories */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h2 className="text-xl font-bold text-gray-900 mb-6">Browse by Category</h2>
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10" aria-label="Tool of the day">
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white">Tool of the day</h2>
+        <Link to={toolOfTheDay.path} className="mt-4 block rounded-2xl border border-indigo-200 bg-indigo-50 p-6 transition-all hover:shadow-lg dark:border-indigo-700 dark:bg-indigo-900/30">
+          <p className="text-xs uppercase tracking-wide text-indigo-600 dark:text-indigo-300">Try today&apos;s tool</p>
+          <h3 className="mt-1 text-2xl font-bold text-indigo-900 dark:text-indigo-100">{toolOfTheDay.name}</h3>
+          <p className="mt-2 text-sm text-indigo-800/90 dark:text-indigo-200">{toolOfTheDay.description}</p>
+        </Link>
+      </section>
+
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">Browse by Category</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
           {categories.map((cat) => {
             const Icon = getIcon(cat.icon)
@@ -45,31 +101,65 @@ export default function Home() {
               <Link
                 key={cat.id}
                 to={`/category/${cat.id}`}
-                className={`flex flex-col items-center text-center p-4 rounded-xl border ${colors.border} ${colors.bg} hover:shadow-md hover:-translate-y-0.5 transition-all duration-200`}
+                className={`flex flex-col items-center text-center p-4 rounded-xl border ${colors.border} ${colors.darkBorder} ${colors.bg} ${colors.darkBg} hover:shadow-md hover:-translate-y-0.5 transition-all duration-200`}
               >
-                <div className={`p-2 rounded-lg bg-white mb-2 shadow-sm`}>
+                <div className="p-2 rounded-lg bg-white dark:bg-gray-700 mb-2 shadow-sm">
                   <Icon className={`w-6 h-6 ${colors.icon}`} />
                 </div>
-                <span className={`font-semibold text-sm ${colors.text}`}>{cat.name}</span>
-                <span className="text-xs text-gray-400 mt-0.5">{toolCounts[cat.id] || 0} tools</span>
-                <span className="text-xs text-indigo-600 font-medium mt-2">View all →</span>
+                <span className={`font-semibold text-sm ${colors.text} ${colors.darkText}`}>{cat.name}</span>
+                <span className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{toolCounts[cat.id] || 0} tools</span>
+                <span className="text-xs text-indigo-600 dark:text-indigo-400 font-medium mt-2">View all</span>
               </Link>
             )
           })}
         </div>
       </section>
 
-      {/* Featured Tools */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <div className="flex items-end justify-between mb-6">
+          <div>
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white">Saved tools</h2>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Quick access to the tools you use most</p>
+          </div>
+          {favoriteTools.length > 6 && (
+            <Link to="/favorites" className="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline">
+              View all favorites
+            </Link>
+          )}
+        </div>
+
+        {favoriteTools.length > 0 ? (
+          <ToolGrid tools={favoriteTools.slice(0, 6)} />
+        ) : (
+          <EmptyState
+            icon={Heart}
+            title="No saved tools yet"
+            description="Click the heart icon on any tool card to save it here."
+          />
+        )}
+      </section>
+
+      {recentTools.length > 0 && (
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+          <div className="flex items-end justify-between mb-6">
+            <div>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white">Recently Used Tools</h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Pick up where you left off</p>
+            </div>
+          </div>
+          <ToolGrid tools={recentTools} />
+        </section>
+      )}
+
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-gray-900">Featured Tools</h2>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white">Featured Tools</h2>
         </div>
         <ToolGrid tools={featured} />
       </section>
 
-      {/* All Tools */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-        <h2 className="text-xl font-bold text-gray-900 mb-6">All Tools</h2>
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">All Tools</h2>
         <ToolGrid tools={tools} />
       </section>
     </div>

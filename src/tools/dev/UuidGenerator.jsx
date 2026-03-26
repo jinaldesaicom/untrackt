@@ -42,10 +42,10 @@ export default function UuidGenerator() {
   return (
     <div className="space-y-6">
       {/* Single UUID */}
-      <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
-        <label className="text-sm font-medium text-gray-700 mb-3 block">Generated UUID</label>
+      <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5">
+        <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3 block">Generated UUID</label>
         <div className="flex items-center gap-3">
-          <code className="flex-1 font-mono text-lg text-indigo-700 bg-white border border-gray-200 rounded-lg px-4 py-3 break-all select-all">
+          <code className="flex-1 font-mono text-lg text-indigo-700 dark:text-indigo-300 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-3 break-all select-all">
             {single}
           </code>
           <CopyButton text={single} />
@@ -65,7 +65,7 @@ export default function UuidGenerator() {
       {showBulk && bulk.length > 0 && (
         <div>
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-sm font-semibold text-gray-700">Bulk UUIDs</h3>
+            <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300">Bulk UUIDs</h3>
             <button
               onClick={() => navigator.clipboard.writeText(bulk.join('\n'))}
               className="text-xs text-indigo-600 hover:underline"
@@ -75,9 +75,9 @@ export default function UuidGenerator() {
           </div>
           <div className="space-y-2">
             {bulk.map((uuid, i) => (
-              <div key={i} className="flex items-center gap-3 bg-white border border-gray-200 rounded-lg px-3 py-2">
+              <div key={i} className="flex items-center gap-3 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2">
                 <span className="text-xs text-gray-400 w-5 shrink-0">{i + 1}.</span>
-                <code className="flex-1 font-mono text-sm text-gray-800 select-all">{uuid}</code>
+                <code className="flex-1 font-mono text-sm text-gray-800 dark:text-gray-200 select-all">{uuid}</code>
                 <CopyButton text={uuid} small />
               </div>
             ))}

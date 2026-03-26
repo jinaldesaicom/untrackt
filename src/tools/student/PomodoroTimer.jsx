@@ -32,6 +32,7 @@ export default function PomodoroTimer() {
   const [running, setRunning] = useState(false)
   const [pomodoros, setPomodoros] = useState(0)
   const intervalRef = useRef(null)
+  const timeRef = useRef(MODES[0].duration)
   const mode = MODES[modeIdx]
 
   const formatTime = (secs) => {
@@ -41,17 +42,16 @@ export default function PomodoroTimer() {
   }
 
   const tick = useCallback(() => {
-    setTimeLeft((t) => {
-      if (t <= 1) {
-        clearInterval(intervalRef.current)
-        setRunning(false)
-        playBeep()
-        if (modeIdx === 0) setPomodoros((p) => p + 1)
-        return 0
-      }
-      return t - 1
-    })
-  }, [modeIdx])
+    if (timeRef.current <= 0) return
+    timeRef.current -= 1
+    setTimeLeft(timeRef.current)
+    if (timeRef.current === 0) {
+      clearInterval(intervalRef.current)
+      setRunning(false)
+      playBeep()
+      setPomodoros((p) => p + 1)
+    }
+  }, [])
 
   useEffect(() => {
     if (running) {
@@ -72,12 +72,14 @@ export default function PomodoroTimer() {
     clearInterval(intervalRef.current)
     setRunning(false)
     setModeIdx(idx)
+    timeRef.current = MODES[idx].duration
     setTimeLeft(MODES[idx].duration)
   }
 
   const reset = () => {
     clearInterval(intervalRef.current)
     setRunning(false)
+    timeRef.current = mode.duration
     setTimeLeft(mode.duration)
   }
 

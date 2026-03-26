@@ -1,15 +1,21 @@
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
+import { HelmetProvider } from 'react-helmet-async'
 import CategoryPage from '../../pages/CategoryPage.jsx'
 import tools from '../../data/tools.js'
 
 function renderCategoryPage(categoryId) {
   return render(
-    <MemoryRouter initialEntries={[`/category/${categoryId}`]}>
-      <Routes>
-        <Route path="/category/:categoryId" element={<CategoryPage />} />
-      </Routes>
-    </MemoryRouter>
+    <HelmetProvider>
+      <MemoryRouter
+        initialEntries={[`/category/${categoryId}`]}
+        future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+      >
+        <Routes>
+          <Route path="/category/:categoryId" element={<CategoryPage />} />
+        </Routes>
+      </MemoryRouter>
+    </HelmetProvider>
   )
 }
 
