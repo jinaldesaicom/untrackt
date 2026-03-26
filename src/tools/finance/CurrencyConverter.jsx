@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { RefreshCw } from 'lucide-react'
 import SEOHead from '../../components/SEOHead.jsx'
 import CopyButton from '../../components/CopyButton.jsx'
+import { getItem, setItem } from '../../utils/storage.js'
 
 const FALLBACK_RATES = {
   'USD': 1, 'EUR': 0.92, 'GBP': 0.79, 'JPY': 149.50, 'AUD': 1.53,
@@ -10,37 +11,48 @@ const FALLBACK_RATES = {
   'KRW': 1319.50, 'ZAR': 18.65, 'RUB': 100.50, 'TRY': 32.50, 'BRL': 4.97
 }
 
+const CACHE_KEY = 'untrackt:pref:currencyRates'
+const CACHE_MAX_AGE = 24 * 60 * 60 * 1000 // 24 hours
+
+function getCachedRates() {
+  const cached = getItem(CACHE_KEY, null)
+  if (!cached || !cached.rates || !cached.timestamp) return null
+  if (Date.now() - cached.timestamp > CACHE_MAX_AGE) return null
+  return cached
+}
+
 export default function CurrencyConverter() {
-  const [rates, setRates] = useState(FALLBACK_RATES)
+  const cached = getCachedRates()
+  const [rates, setRates] = useState(cached?.rates || FALLBACK_RATES)
   const [amount, setAmount] = useState(100)
   const [fromCurrency, setFromCurrency] = useState('USD')
   const [toCurrency, setToCurrency] = useState('EUR')
   const [isLoading, setIsLoading] = useState(false)
-  const [lastUpdate, setLastUpdate] = useState(null)
-  const [error, setError] = useState(null)
+  const [lastUpdate, setLastUpdate] = useState(cached ? new Date(cached.timestamp) : null)
+  const [error, setError] = useState(cached ? null : null)
 
   useEffect(() => {
-    fetchRates()
+    if (!cached) fetchRates()
   }, [])
 
   const fetchRates = async () => {
     try {
       setIsLoading(true)
       setError(null)
-      const response = await fetch('https://open.er-api.com/v6/latest/USD', { timeout: 5000 })
+      const response = await fetch('https://open.er-api.com/v6/latest/USD')
       if (response.ok) {
         const data = await response.json()
         if (data.rates) {
           setRates(data.rates)
-          setLastUpdate(new Date())
+          const now = new Date()
+          setLastUpdate(now)
+          setItem(CACHE_KEY, { rates: data.rates, timestamp: now.getTime() })
         }
       } else {
-        setRates(FALLBACK_RATES)
-        setError('Using offline rates')
+        setError('Using cached/offline rates')
       }
     } catch (err) {
-      setRates(FALLBACK_RATES)
-      setError('Using offline rates (API unavailable)')
+      setError('Using cached/offline rates (API unavailable)')
     } finally {
       setIsLoading(false)
     }

@@ -9,7 +9,7 @@ export default function MetaTagGenerator() {
     url: 'https://untrackt.com/example',
     siteName: 'UnTrackt',
     pageType: 'website',
-    imageUrl: 'https://untrackt.com/og-image.png',
+    imageUrl: 'https://untrackt.com/og-image.svg',
     twitterHandle: '@untrackt',
     keywords: 'tools, privacy, browser',
     author: 'UnTrackt',

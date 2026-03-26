@@ -1,7 +1,8 @@
+import { memo } from 'react'
 import { NavLink } from 'react-router-dom'
 import { categories, categoryColorMap } from '../data/tools.js'
 
-export default function CategoryNav({ mobile = false }) {
+function CategoryNav({ mobile = false }) {
   const navClass = mobile
     ? 'flex items-center gap-2 py-1.5 pr-4 min-w-max snap-x snap-mandatory'
     : 'flex items-center gap-1 py-1'
@@ -29,3 +30,5 @@ export default function CategoryNav({ mobile = false }) {
     </nav>
   )
 }
+
+export default memo(CategoryNav)

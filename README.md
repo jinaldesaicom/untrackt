@@ -53,7 +53,7 @@ Every tool runs in the browser. Inputs are processed locally. There is no backen
 ### Installation
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/untrackt.git
+git clone https://github.com/jinaldesaicom/untrackt.git
 cd untrackt
 npm install
 npm run dev
@@ -94,6 +94,16 @@ Open http://localhost:5173
 Hosted on Cloudflare Pages.
 Auto-deploys from the main branch.
 
+## Contributing
+
+Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting a pull request.
+
+This project follows the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md).
+
+## Security
+
+To report a vulnerability, please see [SECURITY.md](SECURITY.md).
+
 ## License
 
-MIT License
+[MIT License](LICENSE)

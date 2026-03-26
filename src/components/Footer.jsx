@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ShieldCheck, Wrench } from 'lucide-react'
+import { ShieldCheck, Wrench, MessageSquare } from 'lucide-react'
 import tools, { categories } from '../data/tools.js'
 
 export default function Footer() {
@@ -45,10 +45,24 @@ export default function Footer() {
               ))}
             </ul>
           </div>
+
+          <div>
+            <h3 className="text-xs font-semibold text-gray-900 dark:text-gray-100 uppercase tracking-wider mb-3">Feedback</h3>
+            <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed max-w-[14rem]">
+              Found a bug or have a suggestion? We'd love to hear from you.
+            </p>
+            <a
+              href="mailto:support@untrackt.com"
+              className="inline-flex items-center gap-1.5 mt-3 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline"
+            >
+              <MessageSquare className="w-3.5 h-3.5" />
+              Submit feedback
+            </a>
+          </div>
         </div>
 
         <div className="mt-8 pt-6 border-t border-gray-100 dark:border-gray-700 text-center text-xs text-gray-400 dark:text-gray-500 space-y-1">
-          <p>© {new Date().getFullYear()} UnTrackt</p>
+          <p>&copy; {new Date().getFullYear()} UnTrackt</p>
           <p>Made with ♥ for privacy</p>
           <p>{tools.length} free tools. All computation runs in your browser.</p>
         </div>

@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import CopyButton from '../../components/CopyButton.jsx'
 
 const PRESETS = [
   { label: 'Email', pattern: '^[\\w.-]+@[\\w.-]+\\.[A-Za-z]{2,}$' },
@@ -42,7 +43,7 @@ export default function RegexTester() {
         if (one && one.index != null) {
           matches.push({ value: one[0], index: one.index })
           highlighted += escapeHtml(source.slice(0, one.index))
-          highlighted += `<mark class="bg-yellow-200 px-0.5 rounded">${escapeHtml(one[0])}</mark>`
+          highlighted += `<mark class="bg-yellow-200 dark:bg-yellow-700/60 px-0.5 rounded">${escapeHtml(one[0])}</mark>`
           highlighted += escapeHtml(source.slice(one.index + one[0].length))
         } else {
           highlighted = escapeHtml(source)
@@ -56,10 +57,11 @@ export default function RegexTester() {
         const start = hit.index
         const end = start + hit[0].length
         highlighted += escapeHtml(source.slice(lastIndex, start))
-        highlighted += `<mark class="bg-yellow-200 px-0.5 rounded">${escapeHtml(source.slice(start, end))}</mark>`
+        highlighted += `<mark class="bg-yellow-200 dark:bg-yellow-700/60 px-0.5 rounded">${escapeHtml(source.slice(start, end))}</mark>`
         lastIndex = end
         if (hit[0] === '') {
-          regex.lastIndex += 1
+          regex.lastIndex = Math.min(regex.lastIndex + 1, source.length)
+          if (regex.lastIndex >= source.length) break
         }
       }
       highlighted += escapeHtml(source.slice(lastIndex))
@@ -73,7 +75,7 @@ export default function RegexTester() {
   return (
     <div className="space-y-5">
       <div>
-        <label className="text-sm font-medium text-gray-700">Pattern</label>
+        <label className="text-sm font-medium text-gray-700 dark:text-gray-200">Pattern</label>
         <input
           value={pattern}
           onChange={(e) => setPattern(e.target.value)}
@@ -84,10 +86,10 @@ export default function RegexTester() {
       </div>
 
       <div>
-        <span className="text-sm font-medium text-gray-700">Flags</span>
+        <span className="text-sm font-medium text-gray-700 dark:text-gray-200">Flags</span>
         <div className="mt-2 flex flex-wrap gap-2">
           {['g', 'i', 'm', 's'].map((flag) => (
-            <label key={flag} className="inline-flex items-center gap-2 text-sm text-gray-600 bg-gray-100 rounded-lg px-3 py-1.5">
+            <label key={flag} className="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-lg px-3 py-1.5">
               <input
                 type="checkbox"
                 checked={flags[flag]}
@@ -100,7 +102,7 @@ export default function RegexTester() {
       </div>
 
       <div>
-        <span className="text-sm font-medium text-gray-700">Common Patterns</span>
+        <span className="text-sm font-medium text-gray-700 dark:text-gray-200">Common Patterns</span>
         <div className="mt-2 flex flex-wrap gap-2">
           {PRESETS.map((preset) => (
             <button
@@ -115,7 +117,7 @@ export default function RegexTester() {
       </div>
 
       <div>
-        <label className="text-sm font-medium text-gray-700">Test String</label>
+        <label className="text-sm font-medium text-gray-700 dark:text-gray-200">Test String</label>
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -124,25 +126,28 @@ export default function RegexTester() {
         />
       </div>
 
-      <div className="rounded-xl border border-gray-200 bg-white p-4">
+      <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-4">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="font-semibold text-gray-900">Highlighted Matches</h3>
-          <span className="text-sm text-gray-500">{result.matches.length} matches</span>
+          <h3 className="font-semibold text-gray-900 dark:text-gray-100">Highlighted Matches</h3>
+          <span className="text-sm text-gray-500 dark:text-gray-400">{result.matches.length} matches</span>
         </div>
         <pre
-          className="whitespace-pre-wrap break-words font-mono text-sm bg-gray-50 rounded-lg p-3 min-h-[120px]"
+          className="whitespace-pre-wrap break-words font-mono text-sm bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg p-3 min-h-[120px]"
           dangerouslySetInnerHTML={{ __html: result.highlighted }}
         />
       </div>
 
-      <div className="rounded-xl border border-gray-200 bg-white p-4">
-        <h3 className="font-semibold text-gray-900 mb-2">Match List</h3>
+      <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-4">
+        <div className="flex items-center justify-between mb-2">
+          <h3 className="font-semibold text-gray-900 dark:text-gray-100">Match List</h3>
+          {result.matches.length > 0 && <CopyButton text={result.matches.map(m => m.value).join('\n')} label="Copy all" />}
+        </div>
         {result.matches.length === 0 ? (
-          <p className="text-sm text-gray-500">No matches yet.</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">No matches yet.</p>
         ) : (
           <ul className="space-y-1 text-sm font-mono">
             {result.matches.map((match, idx) => (
-              <li key={`${match.index}-${idx}`} className="bg-gray-50 rounded px-2 py-1">
+              <li key={`${match.index}-${idx}`} className="bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded px-2 py-1">
                 #{idx + 1} [{match.index}] {match.value}
               </li>
             ))}

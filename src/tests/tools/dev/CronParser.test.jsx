@@ -37,8 +37,8 @@ describe('CronParser', () => {
     await user.clear(input)
     await user.type(input, '* * * * *')
 
-    const runs = screen.getByText(/next 5 runs/i).nextElementSibling
-    expect(within(runs).getAllByRole('listitem')).toHaveLength(5)
+    const runsPanel = screen.getByText(/next 5 runs/i).closest('.rounded-xl')
+    expect(within(runsPanel).getAllByRole('listitem')).toHaveLength(5)
 
     await user.clear(input)
     await user.type(input, 'bad cron')

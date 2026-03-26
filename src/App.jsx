@@ -13,6 +13,7 @@ import NotFoundPage from './pages/NotFoundPage.jsx'
 import DisclaimerBadge from './components/DisclaimerBadge.jsx'
 import RelatedTools from './components/RelatedTools.jsx'
 import ToolFAQ from './components/ToolFAQ.jsx'
+import ToolGuide from './components/ToolGuide.jsx'
 import ToolSkeleton from './components/ToolSkeleton.jsx'
 import SEOHead from './components/SEOHead.jsx'
 import Breadcrumb from './components/Breadcrumb.jsx'
@@ -79,6 +80,8 @@ function ToolPage() {
           <ToolComponent />
         </Suspense>
       </ErrorBoundary>
+
+      <ToolGuide toolId={tool.id} />
 
       {richContent?.longDescription ? (
         <section aria-label="Tool details" className="mt-8 rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-900">

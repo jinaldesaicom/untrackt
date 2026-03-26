@@ -72,7 +72,8 @@ describe('ToolFAQ', () => {
       <ToolFAQ toolId="json-formatter" />
     )
     const buttons = screen.getAllByRole('button')
-    expect(buttons).toHaveLength(2)
+    // 2 FAQ buttons + 1 expand all button
+    expect(buttons).toHaveLength(3)
   })
 
   it('does not render when no FAQs for toolId', () => {
@@ -95,7 +96,8 @@ describe('ToolFAQ', () => {
       <ToolFAQ toolId="json-formatter" />
     )
     const buttons = screen.getAllByRole('button')
-    const secondButton = buttons[1]
+    // buttons[0] is expand all, buttons[1] is first FAQ, buttons[2] is second FAQ
+    const secondButton = buttons[2]
     await user.click(secondButton)
     expect(screen.getByText('Yes, UnTrackt works offline.')).toBeInTheDocument()
   })

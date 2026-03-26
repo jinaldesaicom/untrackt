@@ -55,19 +55,20 @@ describe('RelatedTools', () => {
     return render(<MemoryRouter>{component}</MemoryRouter>)
   }
 
-  it('renders Other dev tools heading for dev category', () => {
+  it('renders Try next heading for dev category', () => {
     renderWithRouter(
       <RelatedTools currentToolId="json-formatter" category="dev" />
     )
-    expect(screen.getByText(/Other.*Developer.*tools/i)).toBeInTheDocument()
+    expect(screen.getByText('Try next')).toBeInTheDocument()
   })
 
-  it('shows 3 related tools maximum', () => {
+  it('shows up to 4 related tools', () => {
     renderWithRouter(
       <RelatedTools currentToolId="json-formatter" category="dev" />
     )
+    // links include tool cards + "See all" link
     const links = screen.getAllByRole('link')
-    expect(links.length).toBeLessThanOrEqual(3)
+    expect(links.length).toBeLessThanOrEqual(5)
   })
 
   it('does not show the current tool in related tools list', () => {
@@ -100,7 +101,7 @@ describe('RelatedTools', () => {
     renderWithRouter(
       <RelatedTools currentToolId="json-formatter" category="dev" />
     )
-    expect(screen.getByLabelText(/Other.*dev.*tools/i)).toBeInTheDocument()
+    expect(screen.getByLabelText('Related tools')).toBeInTheDocument()
   })
 
   it('displays tool names and descriptions', () => {
@@ -113,7 +114,7 @@ describe('RelatedTools', () => {
 
   it('returns null when no related tools exist', () => {
     const { container } = renderWithRouter(
-      <RelatedTools currentToolId="json-formatter" category="nonexistent" />
+      <RelatedTools currentToolId="regex-tester" category="nonexistent" />
     )
     expect(container.firstChild).toBeNull()
   })

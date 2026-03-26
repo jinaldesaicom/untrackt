@@ -24,6 +24,7 @@ export default function FavoritesPage() {
         title="Your Favorite Tools | UnTrackt"
         description="View and manage your favorite UnTrackt tools. Saved locally on your device with zero tracking."
         path="/favorites"
+        noindex
       />
 
       <div className="flex items-center justify-between gap-4 flex-wrap mb-8">
