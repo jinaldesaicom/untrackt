@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { memo, useCallback, useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Search, X } from 'lucide-react'
 import { getIcon } from '../icons.js'
@@ -7,7 +7,7 @@ import useDebounce from '../hooks/useDebounce.js'
 import { addRecentSearch, getRecentSearches } from '../utils/storage.js'
 import { findMatchingTools } from '../utils/searchTools.js'
 
-export default function SearchBar({ large = false }) {
+function SearchBar({ large = false }) {
   const [query, setQuery] = useState('')
   const [results, setResults] = useState([])
   const [activeIndex, setActiveIndex] = useState(-1)
@@ -109,7 +109,7 @@ export default function SearchBar({ large = false }) {
     inputRef.current?.focus()
   }
 
-  const highlightMatch = (text) => {
+  const highlightMatch = useCallback((text) => {
     const q = query.trim()
     if (!q) return text
     const index = text.toLowerCase().indexOf(q.toLowerCase())
@@ -122,7 +122,7 @@ export default function SearchBar({ large = false }) {
         {text.slice(index + q.length)}
       </>
     )
-  }
+  }, [query])
 
   return (
     <div ref={containerRef} className="relative w-full">
@@ -206,3 +206,5 @@ export default function SearchBar({ large = false }) {
     </div>
   )
 }
+
+export default memo(SearchBar)

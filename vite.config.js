@@ -93,7 +93,7 @@ export default defineConfig({
         },
       }
     },
-    chunkSizeWarningLimit: 500,
+    chunkSizeWarningLimit: 300,
   },
   server: {
     warmup: {

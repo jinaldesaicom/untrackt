@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { Link } from 'react-router-dom'
 import { Wrench, Moon, Sun, Monitor, Heart, BarChart3 } from 'lucide-react'
 import SearchBar from './SearchBar.jsx'
@@ -12,14 +13,45 @@ const THEME_META = {
   system: { label: 'system', icon: Monitor },
 }
 
-export default function Header() {
+const ThemeToggle = memo(function ThemeToggle() {
   const { theme, setTheme } = useTheme()
-  const { favorites } = useFavorites()
-
   const themeIndex = THEME_ORDER.indexOf(theme)
   const nextTheme = THEME_ORDER[(themeIndex + 1) % THEME_ORDER.length]
   const ThemeIcon = THEME_META[theme].icon
 
+  return (
+    <button
+      onClick={() => setTheme(nextTheme)}
+      aria-label={`Switch to ${nextTheme} mode`}
+      title={`Theme: ${THEME_META[theme].label}. Click to switch to ${nextTheme}.`}
+      className="shrink-0 p-2 rounded-lg text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-800 transition-colors duration-200"
+    >
+      <ThemeIcon className="w-5 h-5" />
+    </button>
+  )
+})
+
+const FavoritesLink = memo(function FavoritesLink() {
+  const { favorites } = useFavorites()
+
+  return (
+    <Link
+      to="/favorites"
+      className="relative shrink-0 p-2 rounded-lg text-gray-500 hover:text-rose-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-rose-300 dark:hover:bg-gray-800 transition-colors duration-200"
+      aria-label={`View favorite tools (${favorites.length})`}
+      title={`Favorite tools (${favorites.length})`}
+    >
+      <Heart className="w-5 h-5" />
+      {favorites.length > 0 && (
+        <span className="absolute -top-1 -right-1 min-w-[1.1rem] h-[1.1rem] px-1 rounded-full bg-rose-500 text-[10px] leading-[1.1rem] text-white text-center font-semibold">
+          {favorites.length > 99 ? '99+' : favorites.length}
+        </span>
+      )}
+    </Link>
+  )
+})
+
+export default function Header() {
   return (
     <header className="sticky top-0 z-40 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 transition-colors duration-200 backdrop-blur supports-[backdrop-filter]:bg-white/90 supports-[backdrop-filter]:dark:bg-gray-900/90">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,28 +85,8 @@ export default function Header() {
             <BarChart3 className="w-5 h-5" />
           </Link>
 
-          <Link
-            to="/favorites"
-            className="relative shrink-0 p-2 rounded-lg text-gray-500 hover:text-rose-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-rose-300 dark:hover:bg-gray-800 transition-colors duration-200"
-            aria-label={`View favorite tools (${favorites.length})`}
-            title={`Favorite tools (${favorites.length})`}
-          >
-            <Heart className="w-5 h-5" />
-            {favorites.length > 0 && (
-              <span className="absolute -top-1 -right-1 min-w-[1.1rem] h-[1.1rem] px-1 rounded-full bg-rose-500 text-[10px] leading-[1.1rem] text-white text-center font-semibold">
-                {favorites.length > 99 ? '99+' : favorites.length}
-              </span>
-            )}
-          </Link>
-
-          <button
-            onClick={() => setTheme(nextTheme)}
-            aria-label={`Switch to ${nextTheme} mode`}
-            title={`Theme: ${THEME_META[theme].label}. Click to switch to ${nextTheme}.`}
-            className="shrink-0 p-2 rounded-lg text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-800 transition-colors duration-200"
-          >
-            <ThemeIcon className="w-5 h-5" />
-          </button>
+          <FavoritesLink />
+          <ThemeToggle />
         </div>
 
         <div className="sm:hidden pb-3">

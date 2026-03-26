@@ -52,9 +52,7 @@ export default function Footer() {
               Found a bug or have a suggestion? We'd love to hear from you.
             </p>
             <a
-              href="https://github.com/untrackt/untrackt/issues"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="mailto:support@untrackt.com"
               className="inline-flex items-center gap-1.5 mt-3 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline"
             >
               <MessageSquare className="w-3.5 h-3.5" />

@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { Link } from 'react-router-dom'
 import tools, { categories, categoryColorMap } from '../data/tools.js'
 import { getIcon } from '../icons.js'
@@ -26,7 +27,7 @@ const TOOL_CHAINS = {
   'currency-converter': ['inflation-calculator', 'compound-interest-calculator', 'discount-markup-calculator'],
 }
 
-export default function RelatedTools({ currentToolId, category }) {
+function RelatedTools({ currentToolId, category }) {
   const categoryId = category || 'general'
   const categoryInfo = categories.find((item) => item.id === categoryId)
 
@@ -78,3 +79,5 @@ export default function RelatedTools({ currentToolId, category }) {
     </section>
   )
 }
+
+export default memo(RelatedTools)

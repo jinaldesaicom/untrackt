@@ -1,9 +1,9 @@
-import { useMemo, useState } from 'react'
+import { memo, useMemo, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { ChevronDown, ChevronsUpDown } from 'lucide-react'
 import { richDescriptions } from '../data/toolDescriptions.js'
 
-export default function ToolFAQ({ toolId }) {
+function ToolFAQ({ toolId }) {
   const [openIndex, setOpenIndex] = useState(0)
   const [allExpanded, setAllExpanded] = useState(false)
   const faqs = richDescriptions[toolId]?.faqs || []
@@ -103,3 +103,5 @@ export default function ToolFAQ({ toolId }) {
     </section>
   )
 }
+
+export default memo(ToolFAQ)
