@@ -1,5 +1,4 @@
 import { render, screen, act, fireEvent } from '@testing-library/react'
-import { vi, beforeEach, afterEach } from 'vitest'
 import PomodoroTimer from '../../../tools/student/PomodoroTimer.jsx'
 
 describe('PomodoroTimer', () => {

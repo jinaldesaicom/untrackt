@@ -1,4 +1,3 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { logError, getErrorLog, clearErrorLog } from '../../utils/errorReporter'
 import * as storage from '../../utils/storage'
 

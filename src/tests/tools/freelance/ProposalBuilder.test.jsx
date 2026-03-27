@@ -34,7 +34,7 @@ describe('ProposalBuilder', () => {
       target: { value: 'Custom summary' },
     })
 
-    await act(async () => {
+    act(() => {
       vi.advanceTimersByTime(3000)
     })
 

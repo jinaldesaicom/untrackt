@@ -1,31 +1,28 @@
 import { useMemo } from 'react'
-import { Link } from 'react-router-dom'
-import { Heart, Lock, Zap, Globe } from 'lucide-react'
+import { Link, useNavigate } from 'react-router-dom'
+import { Heart, Lock, Zap, Globe, Dices } from 'lucide-react'
 import SearchBar from '../components/SearchBar.jsx'
 import ToolGrid from '../components/ToolGrid.jsx'
 import SEOHead from '../components/SEOHead.jsx'
 import EmptyState from '../components/EmptyState.jsx'
-import tools, { categories, categoryColorMap } from '../data/tools.js'
+import tools, { categories, categoryColorMap, getToolsByCategory } from '../data/tools.js'
 import { getIcon } from '../icons.js'
 import { getRecentTools } from '../utils/storage.js'
 import { useFavorites } from '../hooks/useFavorites.js'
-import { getAllStats } from '../utils/localStats.js'
-
-function getRandomFeaturedTools(count = 6) {
-  const shuffled = [...tools].sort(() => Math.random() - 0.5)
-  return shuffled.slice(0, count)
-}
-
-function getToolOfTheDay() {
-  const key = new Date().toISOString().slice(0, 10)
-  const seed = key.split('-').reduce((acc, part) => acc + Number(part), 0)
-  return tools[seed % tools.length]
-}
+import { getAllStats, getTotalVisits } from '../utils/localStats.js'
+import { getToolOfTheDay, getPopularTools, getNewTools, getAllTags } from '../search/searchEngine.js'
 
 export default function Home() {
+  const navigate = useNavigate()
   const { favorites } = useFavorites()
-  const featured = useMemo(() => getRandomFeaturedTools(6), [])
   const toolOfTheDay = useMemo(() => getToolOfTheDay(), [])
+  const popularTools = useMemo(() => getPopularTools().slice(0, 6), [])
+  const newTools = useMemo(() => getNewTools().slice(0, 6), [])
+  const topTags = useMemo(() => getAllTags().slice(0, 20), [])
+
+  const totalVisits = getTotalVisits()
+  const isReturning = totalVisits > 5
+  const isPowerUser = totalVisits > 50
 
   const favoriteTools = useMemo(() => {
     return favorites
@@ -41,19 +38,19 @@ export default function Home() {
       .slice(0, 6)
   }, [])
 
-  const toolCounts = {}
-  tools.forEach((t) => {
-    toolCounts[t.category] = (toolCounts[t.category] || 0) + 1
-  })
-
   const stats = getAllStats()
   const usedCount = Object.keys(stats.tools || {}).length
+
+  const goToRandom = () => {
+    const randomTool = tools[Math.floor(Math.random() * tools.length)]
+    navigate(randomTool.path)
+  }
 
   return (
     <div>
       <SEOHead
         title="Free Online Tools - No Tracking | UnTrackt"
-        description="88+ free tools for developers, students, freelancers and more. Runs entirely in your browser. Zero tracking, zero accounts, zero data collection."
+        description="119+ free tools for developers, students, freelancers and more. Runs entirely in your browser. Zero tracking, zero accounts, zero data collection."
         path="/"
       />
 
@@ -65,9 +62,16 @@ export default function Home() {
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 dark:text-white mb-3">
             <span className="inline-block animate-count-up">{tools.length}+</span> free tools. Runs in your browser. Zero tracking.
           </h1>
-          <p className="text-lg text-gray-500 dark:text-gray-400 mb-8 max-w-xl mx-auto">
+          <p className="text-lg text-gray-500 dark:text-gray-400 mb-2 max-w-xl mx-auto">
             No accounts. No servers. No nonsense.
           </p>
+          {isPowerUser ? (
+            <p className="text-sm text-indigo-600 dark:text-indigo-400 mb-6">Welcome back, power user! You&apos;ve used {usedCount} tools across {totalVisits} visits.</p>
+          ) : isReturning ? (
+            <p className="text-sm text-indigo-600 dark:text-indigo-400 mb-6">Welcome back! Pick up where you left off.</p>
+          ) : (
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">Explore tools across {categories.length} categories.</p>
+          )}
           <div className="max-w-lg mx-auto">
             <SearchBar large />
           </div>
@@ -76,9 +80,6 @@ export default function Home() {
             <span className="inline-flex items-center gap-1 rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-amber-700 dark:border-amber-700 dark:bg-amber-900/40 dark:text-amber-200"><Zap className="w-3.5 h-3.5" /> Instant results</span>
             <span className="inline-flex items-center gap-1 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-indigo-700 dark:border-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-200"><Globe className="w-3.5 h-3.5" /> Works offline</span>
           </div>
-          {usedCount > 0 ? (
-            <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">You have used {usedCount} tools so far (stored locally on this device).</p>
-          ) : null}
         </div>
       </section>
 
@@ -93,10 +94,12 @@ export default function Home() {
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">Browse by Category</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {categories.map((cat) => {
             const Icon = getIcon(cat.icon)
             const colors = categoryColorMap[cat.id]
+            const catTools = getToolsByCategory(cat.id)
+            const topNames = catTools.filter((t) => t.isPopular).slice(0, 3).map((t) => t.name)
             return (
               <Link
                 key={cat.id}
@@ -107,8 +110,10 @@ export default function Home() {
                   <Icon className={`w-6 h-6 ${colors.icon}`} />
                 </div>
                 <span className={`font-semibold text-sm ${colors.text} ${colors.darkText}`}>{cat.name}</span>
-                <span className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{toolCounts[cat.id] || 0} tools</span>
-                <span className="text-xs text-indigo-600 dark:text-indigo-400 font-medium mt-2">View all</span>
+                <span className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{catTools.length} tools</span>
+                {topNames.length > 0 && (
+                  <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-1 line-clamp-1">{topNames.join(', ')}</p>
+                )}
               </Link>
             )
           })}
@@ -151,11 +156,44 @@ export default function Home() {
         </section>
       )}
 
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white">Featured Tools</h2>
+      {popularTools.length > 0 && (
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white">Popular Tools</h2>
+          </div>
+          <ToolGrid tools={popularTools} />
+        </section>
+      )}
+
+      {topTags.length > 0 && (
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12" aria-label="Browse by tag">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Browse by Tag</h2>
+          <div className="flex flex-wrap gap-2">
+            {topTags.map(({ tag, count }) => (
+              <Link
+                key={tag}
+                to={`/tags/${encodeURIComponent(tag)}`}
+                className="rounded-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-3 py-1.5 text-xs text-gray-700 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 hover:border-indigo-200 dark:hover:border-indigo-700 transition-colors"
+              >
+                {tag} <span className="text-gray-400 ml-1">{count}</span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <div className="rounded-2xl border border-dashed border-indigo-300 dark:border-indigo-700 bg-indigo-50 dark:bg-indigo-900/20 p-6 text-center">
+          <Dices className="w-8 h-8 text-indigo-500 mx-auto mb-2" />
+          <h2 className="text-lg font-bold text-gray-900 dark:text-white">Not sure what to use?</h2>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 mb-4">Try a random tool and discover something new.</p>
+          <button
+            onClick={goToRandom}
+            className="btn-primary inline-flex items-center gap-2"
+          >
+            <Dices className="w-4 h-4" /> Open Random Tool
+          </button>
         </div>
-        <ToolGrid tools={featured} />
       </section>
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">

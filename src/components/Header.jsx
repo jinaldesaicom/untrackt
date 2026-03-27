@@ -1,8 +1,11 @@
-import { memo } from 'react'
+import { memo, useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
-import { Wrench, Moon, Sun, Monitor, Heart, BarChart3 } from 'lucide-react'
+import { Wrench, Moon, Sun, Monitor, Heart, BarChart3, Menu, Search } from 'lucide-react'
 import SearchBar from './SearchBar.jsx'
-import CategoryNav from './CategoryNav.jsx'
+import CategoriesDropdown from './CategoriesDropdown.jsx'
+import MobileDrawer from './MobileDrawer.jsx'
+import MobileSearchOverlay from './MobileSearchOverlay.jsx'
+import RandomToolButton from './RandomToolButton.jsx'
 import { useTheme } from '../hooks/useTheme.js'
 import { useFavorites } from '../hooks/useFavorites.js'
 
@@ -52,51 +55,78 @@ const FavoritesLink = memo(function FavoritesLink() {
 })
 
 export default function Header() {
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
+  const openDrawer = useCallback(() => setDrawerOpen(true), [])
+  const closeDrawer = useCallback(() => setDrawerOpen(false), [])
+  const openSearch = useCallback(() => setSearchOpen(true), [])
+  const closeSearch = useCallback(() => setSearchOpen(false), [])
+
   return (
-    <header className="sticky top-0 z-40 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 transition-colors duration-200 backdrop-blur supports-[backdrop-filter]:bg-white/90 supports-[backdrop-filter]:dark:bg-gray-900/90">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-4 h-14">
-          <Link to="/" className="flex items-center gap-2 shrink-0">
-            <div className="bg-indigo-600 p-1.5 rounded-lg">
-              <Wrench className="w-4 h-4 text-white" />
+    <>
+      <header className="sticky top-0 z-40 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 transition-colors duration-200 backdrop-blur supports-[backdrop-filter]:bg-white/90 supports-[backdrop-filter]:dark:bg-gray-900/90">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-4 h-14">
+            {/* Mobile hamburger */}
+            <button
+              onClick={openDrawer}
+              className="lg:hidden shrink-0 p-2 rounded-lg text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800"
+              aria-label="Open menu"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
+
+            <Link to="/" className="flex items-center gap-2 shrink-0">
+              <div className="bg-indigo-600 p-1.5 rounded-lg">
+                <Wrench className="w-4 h-4 text-white" />
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-gray-900 dark:text-white text-lg tracking-tight">
+                  UnTrackt
+                </span>
+                <span className="beta-badge">Beta</span>
+              </div>
+            </Link>
+
+            {/* Desktop: Categories dropdown + search */}
+            <div className="hidden lg:flex items-center gap-2 ml-2">
+              <CategoriesDropdown />
             </div>
-            <div className="flex items-center gap-2">
-              <span className="font-bold text-gray-900 dark:text-white text-lg tracking-tight">
-                UnTrackt
-              </span>
-              <span className="beta-badge">Beta</span>
+
+            <div className="flex-1 max-w-sm hidden sm:block">
+              <SearchBar />
             </div>
-          </Link>
 
-          <div className="flex-1 max-w-sm hidden sm:block">
-            <SearchBar />
+            {/* Mobile search button */}
+            <button
+              onClick={openSearch}
+              className="sm:hidden ml-auto shrink-0 p-2 rounded-lg text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800"
+              aria-label="Search"
+            >
+              <Search className="w-5 h-5" />
+            </button>
+
+            <div className="hidden sm:flex items-center">
+              <RandomToolButton />
+            </div>
+
+            <Link
+              to="/my-stats"
+              className="relative shrink-0 p-2 rounded-lg text-gray-500 hover:text-indigo-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-indigo-300 dark:hover:bg-gray-800 transition-colors duration-200 hidden sm:block"
+              aria-label="My Stats"
+              title="My Stats"
+            >
+              <BarChart3 className="w-5 h-5" />
+            </Link>
+
+            <FavoritesLink />
+            <ThemeToggle />
           </div>
-
-          <div className="hidden lg:flex items-center ml-auto">
-            <CategoryNav />
-          </div>
-
-          <Link
-            to="/my-stats"
-            className="relative shrink-0 p-2 rounded-lg text-gray-500 hover:text-indigo-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-indigo-300 dark:hover:bg-gray-800 transition-colors duration-200"
-            aria-label="My Stats"
-            title="My Stats"
-          >
-            <BarChart3 className="w-5 h-5" />
-          </Link>
-
-          <FavoritesLink />
-          <ThemeToggle />
         </div>
+      </header>
 
-        <div className="sm:hidden pb-3">
-          <SearchBar />
-        </div>
-
-        <div className="lg:hidden pb-2 -mx-4 px-4 overflow-x-auto no-scrollbar">
-          <CategoryNav mobile />
-        </div>
-      </div>
-    </header>
+      <MobileDrawer open={drawerOpen} onClose={closeDrawer} />
+      <MobileSearchOverlay open={searchOpen} onClose={closeSearch} />
+    </>
   )
 }

@@ -176,8 +176,43 @@
 .dark .text-gray-700      { color: rgb(209 213 219);          }  /* gray-300 */
 .dark .text-gray-600,
 .dark .text-gray-500      { color: rgb(156 163 175);          }  /* gray-400 */
-.dark .text-gray-400      { color: rgb(107 114 128);          }  /* gray-500 */
+.dark .text-gray-400      { color: rgb(156 163 175);          }  /* gray-400 (bumped from gray-500 for better contrast) */
 .dark .hover\:bg-gray-50:hover,
 .dark .hover\:bg-gray-100:hover { background-color: rgb(55 65 81);  }  /* gray-700 */
 .dark .hover\:bg-gray-200:hover { background-color: rgb(75 85 99);  }  /* gray-600 */
 .dark .divide-gray-200 > :not([hidden]) ~ :not([hidden]) { border-color: rgb(55 65 81); }
+
+/* ─── High contrast mode support ─────────────────────────── */
+@media (prefers-contrast: more) {
+  :root {
+    --focus-ring: 3px;
+  }
+
+  body {
+    font-weight: 500;
+  }
+
+  .btn-primary {
+    @apply bg-indigo-800 border-2 border-indigo-950;
+  }
+  .btn-secondary {
+    @apply border-2 border-gray-400 dark:border-gray-300;
+  }
+  .input-field,
+  .textarea-field {
+    @apply border-2 border-gray-500 dark:border-gray-300;
+  }
+  .tool-card {
+    @apply border-2;
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 2px;
+  }
+}

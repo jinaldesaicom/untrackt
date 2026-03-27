@@ -50,7 +50,7 @@ describe('StudyTimer', () => {
     fireEvent.click(screen.getByRole('button', { name: /start/i }))
     expect(screen.getByRole('button', { name: /pause/i })).toBeInTheDocument()
 
-    await act(async () => {
+    act(() => {
       vi.advanceTimersByTime(1000)
     })
     expect(screen.getByText('24:59')).toBeInTheDocument()

@@ -104,7 +104,7 @@ describe('SearchBar', () => {
     })
   })
 
-  it('pressing Enter with a highlighted suggestion still opens the search results page', async () => {
+  it('pressing Enter with a highlighted suggestion navigates to that tool', async () => {
     const user = userEvent.setup()
     renderSearchBar()
     const input = screen.getByPlaceholderText('Search tools...')
@@ -115,7 +115,7 @@ describe('SearchBar', () => {
     await user.keyboard('{ArrowDown}{Enter}')
 
     await waitFor(() => {
-      expect(screen.getByTestId('location-display')).toHaveTextContent('/search?q=json')
+      expect(screen.getByTestId('location-display')).toHaveTextContent('/tools/json-formatter')
     })
   })
 })
