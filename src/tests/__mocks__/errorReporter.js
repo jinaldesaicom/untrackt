@@ -1,4 +1,3 @@
-import { vi } from 'vitest'
 
 export const logError = vi.fn()
 export const getErrorLog = vi.fn(() => [])

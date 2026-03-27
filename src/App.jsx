@@ -1,5 +1,5 @@
-import { Suspense, useEffect } from 'react'
-import { Routes, Route, useParams, useLocation } from 'react-router-dom'
+import { Suspense, useEffect, useCallback } from 'react'
+import { Routes, Route, useParams, useLocation, Link } from 'react-router-dom'
 import Layout from './components/Layout.jsx'
 import Home from './pages/Home.jsx'
 import CategoryPage from './pages/CategoryPage.jsx'
@@ -9,6 +9,7 @@ import AboutPage from './pages/AboutPage.jsx'
 import PrivacyPage from './pages/PrivacyPage.jsx'
 import TermsPage from './pages/TermsPage.jsx'
 import SearchResultsPage from './pages/SearchResultsPage.jsx'
+import TagPage from './pages/TagPage.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'
 import DisclaimerBadge from './components/DisclaimerBadge.jsx'
 import RelatedTools from './components/RelatedTools.jsx'
@@ -25,6 +26,7 @@ import { getIcon } from './icons.js'
 import { addRecentTool } from './utils/storage.js'
 import { recordToolVisit } from './utils/localStats.js'
 import { useTheme } from './hooks/useTheme.js'
+import { Share2, Tag } from 'lucide-react'
 
 function ToolPage() {
   const { toolId } = useParams()
@@ -36,6 +38,15 @@ function ToolPage() {
       recordToolVisit(tool.id)
     }
   }, [tool?.id])
+
+  const handleShare = useCallback(() => {
+    const url = window.location.href
+    if (navigator.share) {
+      navigator.share({ title: tool?.name, text: tool?.description, url }).catch(() => {})
+    } else if (navigator.clipboard) {
+      navigator.clipboard.writeText(url).catch(() => {})
+    }
+  }, [tool])
 
   if (!tool) {
     return <NotFoundPage />
@@ -61,15 +72,46 @@ function ToolPage() {
 
       <Breadcrumb category={tool.category} toolName={tool.name} toolPath={tool.path} />
 
-      {/* Tool title */}
-      <div className="flex items-start gap-3 mb-5">
+      {/* Tool title + share */}
+      <div className="flex items-start gap-3 mb-3">
         <div className={`p-2.5 rounded-xl ${colors.bg} ${colors.darkBg} shrink-0`}>
           <Icon className={`w-6 h-6 ${colors.icon}`} />
         </div>
-        <div>
+        <div className="flex-1">
           <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{tool.name}</h1>
           <p className="text-gray-500 dark:text-gray-400 text-sm mt-0.5">{tool.description}</p>
         </div>
+        <button
+          onClick={handleShare}
+          className="shrink-0 p-2 rounded-lg text-gray-400 hover:text-indigo-600 hover:bg-gray-100 dark:hover:text-indigo-400 dark:hover:bg-gray-800 transition-colors"
+          aria-label="Share this tool"
+          title="Share"
+        >
+          <Share2 className="w-5 h-5" />
+        </button>
+      </div>
+
+      {/* Metadata bar */}
+      <div className="flex flex-wrap items-center gap-2 mb-5 text-xs">
+        <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-white ${colors.pill}`}>
+          {category?.name || tool.category}
+        </span>
+        {tool.subcategory && (
+          <span className="px-2 py-0.5 rounded-full border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 capitalize">
+            {tool.subcategory}
+          </span>
+        )}
+        {tool.isNew && (
+          <span className="px-2 py-0.5 rounded-full bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300 font-semibold">New</span>
+        )}
+        {tool.isPopular && (
+          <span className="px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300 font-semibold">Popular</span>
+        )}
+        {tool.tags?.slice(0, 5).map((t) => (
+          <Link key={t} to={`/tags/${encodeURIComponent(t)}`} className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors">
+            <Tag className="w-3 h-3" /> {t}
+          </Link>
+        ))}
       </div>
 
       {/* Disclaimer */}
@@ -111,6 +153,7 @@ export default function App() {
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/search" element={<SearchResultsPage />} />
+          <Route path="/tags/:tag" element={<TagPage />} />
           <Route path="/category/:categoryId" element={<CategoryPage />} />
           <Route path="/tools/:toolId" element={<ToolPage />} />
           <Route path="*" element={<NotFoundPage />} />

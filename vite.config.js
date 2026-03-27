@@ -52,6 +52,8 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './src/tests/setup.js',
+    testTimeout: 15000,
+    pool: 'threads',
     coverage: {
       reporter: ['text', 'html'],
     },
@@ -88,6 +90,18 @@ export default defineConfig({
           }
           if (id.includes('src/tools/general/')) {
             return 'tools-general'
+          }
+          if (id.includes('src/tools/seo/')) {
+            return 'tools-seo'
+          }
+          if (id.includes('src/tools/productivity/')) {
+            return 'tools-productivity'
+          }
+          if (id.includes('src/data/tools/')) {
+            return 'tools-data'
+          }
+          if (id.includes('fuse.js') || id.includes('src/search/')) {
+            return 'search'
           }
           return undefined
         },

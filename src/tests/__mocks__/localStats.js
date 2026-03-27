@@ -1,4 +1,3 @@
-import { vi } from 'vitest'
 
 export const recordToolVisit = vi.fn()
 export const getToolStats = vi.fn(() => ({

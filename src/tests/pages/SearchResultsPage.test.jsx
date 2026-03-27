@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import SearchResultsPage from '../../pages/SearchResultsPage.jsx'
-import tools from '../../data/tools.js'
+import { searchTools } from '../../search/searchEngine.js'
 
 function renderSearchResults(entry = '/search?q=json') {
   return render(
@@ -23,14 +23,10 @@ describe('SearchResultsPage', () => {
   it('renders tools matching the q query parameter', () => {
     renderSearchResults('/search?q=json')
 
-    const expectedMatches = tools.filter((tool) => (
-      tool.name.toLowerCase().includes('json') ||
-      tool.description.toLowerCase().includes('json') ||
-      tool.tags.some((tag) => tag.toLowerCase().includes('json'))
-    ))
+    const expectedMatches = searchTools('json', 50)
 
     expect(screen.getByRole('heading', { name: /search results/i })).toBeInTheDocument()
-    expect(screen.getAllByText((_, element) => element?.tagName === 'P' && (element.textContent?.includes(`Showing ${expectedMatches.length} results for`) ?? false))).toHaveLength(1)
+    expect(screen.getAllByText((_, element) => element?.tagName === 'P' && (element.textContent?.includes(`Showing ${expectedMatches.length} result`) ?? false))).toHaveLength(1)
     expect(screen.getByText('JSON Formatter')).toBeInTheDocument()
     expect(screen.getByText('JSON to CSV Converter')).toBeInTheDocument()
   })

@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { Eye, Code } from 'lucide-react'
 import { getItem, setItem, removeItem } from '../../utils/storage.js'
 
 const STORAGE_KEY = 'untrackt:essayOutline'
@@ -13,6 +14,8 @@ export default function EssayOutlineBuilder() {
     body: [blankBody()],
     conclusion: { restate: '', summary: '', closing: '' },
   }))
+
+  const [previewMode, setPreviewMode] = useState('formatted')
 
   const updateAndSave = (next) => {
     setData(next)
@@ -103,9 +106,42 @@ export default function EssayOutlineBuilder() {
         </div>
       </div>
 
-      <div className="rounded-xl border border-gray-200 bg-white p-4">
-        <h3 className="font-semibold mb-2">Live Outline Preview</h3>
-        <pre className="whitespace-pre-wrap text-sm font-mono">{preview}</pre>
+      <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-4">
+        <div className="flex items-center justify-between mb-2">
+          <h3 className="font-semibold text-gray-900 dark:text-white">Live Outline Preview</h3>
+          <div className="flex gap-0.5 p-0.5 rounded-lg bg-gray-100 dark:bg-gray-800">
+            <button onClick={() => setPreviewMode('formatted')} className={`p-1 rounded-md transition-colors ${previewMode === 'formatted' ? 'bg-white dark:bg-gray-700 shadow-sm text-indigo-600 dark:text-indigo-400' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'}`} title="Formatted"><Eye className="w-3.5 h-3.5" /></button>
+            <button onClick={() => setPreviewMode('raw')} className={`p-1 rounded-md transition-colors ${previewMode === 'raw' ? 'bg-white dark:bg-gray-700 shadow-sm text-indigo-600 dark:text-indigo-400' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'}`} title="Plain Text"><Code className="w-3.5 h-3.5" /></button>
+          </div>
+        </div>
+        {previewMode === 'raw' ? (
+          <pre className="whitespace-pre-wrap text-sm font-mono text-gray-700 dark:text-gray-300">{preview}</pre>
+        ) : (
+          <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+            <h4 className="text-base font-bold text-gray-900 dark:text-white">I. Introduction</h4>
+            <div className="ml-4 space-y-1">
+              {data.intro.hook && <p><span className="font-semibold text-gray-800 dark:text-gray-200">A. Hook:</span> {data.intro.hook}</p>}
+              {data.intro.background && <p><span className="font-semibold text-gray-800 dark:text-gray-200">B. Background:</span> {data.intro.background}</p>}
+              {data.intro.thesis && <p className="border-l-2 border-indigo-400 pl-2"><span className="font-semibold text-indigo-700 dark:text-indigo-400">C. Thesis:</span> {data.intro.thesis}</p>}
+            </div>
+            <h4 className="text-base font-bold text-gray-900 dark:text-white mt-3">II. Body</h4>
+            {data.body.map((p, idx) => (
+              <div key={idx} className="ml-4 mb-2">
+                <p className="font-semibold text-gray-800 dark:text-gray-200">{idx + 1}. {p.topic || <span className="italic text-gray-400">Topic sentence</span>}</p>
+                <div className="ml-4 space-y-0.5">
+                  {p.points.map((pt, i) => pt && <p key={i} className="text-gray-600 dark:text-gray-400">{String.fromCharCode(97 + i)}. {pt}</p>)}
+                  {p.transition && <p className="text-xs italic text-gray-500 dark:text-gray-400 mt-1">↳ {p.transition}</p>}
+                </div>
+              </div>
+            ))}
+            <h4 className="text-base font-bold text-gray-900 dark:text-white mt-3">III. Conclusion</h4>
+            <div className="ml-4 space-y-1">
+              {data.conclusion.restate && <p><span className="font-semibold text-gray-800 dark:text-gray-200">A. Restate thesis:</span> {data.conclusion.restate}</p>}
+              {data.conclusion.summary && <p><span className="font-semibold text-gray-800 dark:text-gray-200">B. Summary:</span> {data.conclusion.summary}</p>}
+              {data.conclusion.closing && <p><span className="font-semibold text-gray-800 dark:text-gray-200">C. Closing:</span> {data.conclusion.closing}</p>}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )

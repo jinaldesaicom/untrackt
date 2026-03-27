@@ -1176,4 +1176,134 @@ export const richDescriptions = {
       { title: 'URL encoding basics', body: 'URLs can only contain a limited set of ASCII characters. Special characters are replaced with percent-encoded equivalents:\n• Space → %20 (or + in query strings)\n• & → %26\n• = → %3D\n• / → %2F\n\nThis ensures URLs are transmitted correctly across all systems.' },
     ],
   },
+  'keyword-density-analyzer': {
+    shortDescription: 'Analyze keyword frequency and density in your content.',
+    longDescription: 'Paste any text to see keyword frequency, density percentage, TF-IDF scores, and prominence analysis. Helps optimize content for target keywords without overstuffing.',
+    keywords: ['keyword density', 'seo analysis', 'keyword frequency', 'content optimization', 'tf-idf', 'keyword tool'],
+    faqs: [
+      { q: 'Does this tool send my content to a server?', a: 'No. All analysis happens in your browser — nothing is transmitted.' },
+      { q: 'What keyword density should I aim for?', a: 'Most SEO experts recommend 1–2% for primary keywords. The tool flags densities above 3% as potential overstuffing.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Paste or type your content into the text area.\n2. Optionally enter a target keyword to get specific density feedback.\n3. Review the top-20 keyword table, density percentages, and TF-IDF scores.\n4. Check the prominence score to see if your keyword appears early in the content.' },
+      { title: 'Understanding keyword density', body: '• Keyword density = (keyword count / total words) × 100.\n• 1–2% is generally ideal for primary keywords.\n• Above 3% risks keyword stuffing penalties.\n• TF-IDF weighs term frequency against document length for a more nuanced measure.' },
+    ],
+  },
+  'title-tag-checker': {
+    shortDescription: 'Check title tag length and preview SERP appearance.',
+    longDescription: 'Evaluate title tags for optimal length, keyword placement, and readability. Preview exactly how your title appears in Google search results on desktop and mobile.',
+    keywords: ['title tag checker', 'seo title', 'serp preview', 'google title', 'meta title', 'title length'],
+    faqs: [
+      { q: 'What is the ideal title tag length?', a: 'Google typically displays 50–60 characters. The tool shows both character and pixel width.' },
+      { q: 'Does keyword position matter?', a: 'Yes — keywords closer to the beginning of the title tend to carry more weight for SEO.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Enter your title tag text.\n2. See character count, estimated pixel width, and a live SERP preview.\n3. Toggle between desktop and mobile preview modes.\n4. Check the keyword position indicator if you entered a target keyword.' },
+      { title: 'Title tag best practices', body: '• Keep titles under 60 characters to avoid truncation.\n• Put primary keywords near the beginning.\n• Include your brand name at the end (e.g., "… | BrandName").\n• Make each page title unique and descriptive.' },
+    ],
+  },
+  'schema-markup-generator': {
+    shortDescription: 'Generate JSON-LD structured data for rich results.',
+    longDescription: 'Build valid JSON-LD schema markup for 11 common types including Article, Product, FAQ, LocalBusiness, and more. Copy the script tag directly into your pages for enhanced search appearance.',
+    keywords: ['schema markup', 'json-ld', 'structured data', 'rich results', 'seo schema', 'google rich snippets'],
+    faqs: [
+      { q: 'Which schema types are supported?', a: 'Article, Product, FAQ, LocalBusiness, BreadcrumbList, HowTo, Event, Person, Organization, WebSite, and Review.' },
+      { q: 'Do I need coding skills?', a: 'No — fill in the form fields and the JSON-LD is generated automatically.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Select a schema type from the dropdown.\n2. Fill in the required and optional fields.\n3. Copy the generated JSON-LD or the full script tag.\n4. Paste it into your page\'s <head> or before </body>.\n5. Validate with Google\'s Rich Results Test.' },
+      { title: 'Why structured data matters', body: '• Enables rich snippets (stars, FAQs, prices) in search results.\n• Helps search engines understand your content type.\n• Can significantly increase click-through rates.\n• Required for many Google Search features like recipe cards and event listings.' },
+    ],
+  },
+  'robots-txt-generator': {
+    shortDescription: 'Build and download a robots.txt file visually.',
+    longDescription: 'Use a visual editor with presets to create robots.txt rules for your website. Preview the output, add sitemap references, and download the file — all without touching a text editor.',
+    keywords: ['robots.txt generator', 'robots txt builder', 'crawl rules', 'seo robots', 'bot directives'],
+    faqs: [
+      { q: 'What does robots.txt do?', a: 'It tells search engine crawlers which pages they can and cannot access on your site.' },
+      { q: 'Can I use presets?', a: 'Yes — choose from Allow All, Block All, Block AI Bots, or Standard presets as starting points.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Choose a preset or start from scratch.\n2. Add user-agent rules with allow/disallow paths.\n3. Optionally add your sitemap URL.\n4. Preview the generated robots.txt.\n5. Copy or download the file.' },
+      { title: 'Robots.txt basics', body: '• Place robots.txt at your domain root (e.g., example.com/robots.txt).\n• User-agent: * applies to all bots.\n• Disallow: /admin/ blocks the /admin/ directory.\n• Allow: /admin/public/ creates exceptions within blocked paths.\n• Sitemap: https://example.com/sitemap.xml helps crawlers find your sitemap.' },
+    ],
+  },
+  'open-graph-previewer': {
+    shortDescription: 'Preview how links look on social platforms.',
+    longDescription: 'Enter Open Graph and Twitter Card metadata to see live previews of how your links will appear on Facebook, Twitter/X, and messaging apps. Generates the HTML meta tags you need.',
+    keywords: ['open graph preview', 'twitter card preview', 'social media preview', 'og tags', 'link preview'],
+    faqs: [
+      { q: 'Does this fetch my actual URL?', a: 'No — you enter the metadata manually and preview it locally.' },
+      { q: 'What image size should I use?', a: 'Facebook recommends 1200×630px. Twitter summary_large_image works best at 2:1 ratio.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Fill in the OG title, description, image URL, and URL fields.\n2. Optionally configure Twitter Card settings.\n3. See live previews for Facebook, Twitter/X, and iMessage.\n4. Copy the generated HTML meta tags into your page\'s <head>.' },
+      { title: 'Open Graph essentials', body: '• og:title — The title shown in the link preview.\n• og:description — A short summary (under 200 characters).\n• og:image — The preview image URL (use absolute URLs).\n• og:url — The canonical URL of the page.\n• twitter:card — Set to summary_large_image for big image previews.' },
+    ],
+  },
+  'todo-list': {
+    shortDescription: 'Simple, private todo list in your browser.',
+    longDescription: 'A distraction-free todo list that saves to your browser\'s local storage. Drag to reorder, filter by status, and track your progress — all without accounts or cloud sync.',
+    keywords: ['todo list', 'task manager', 'private todo', 'browser todo', 'productivity tool'],
+    faqs: [
+      { q: 'Is my data saved?', a: 'Yes, todos are saved in your browser\'s local storage and persist between sessions.' },
+      { q: 'Can I reorder tasks?', a: 'Yes — drag and drop to reorder your tasks.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Type a task and press Enter or click Add.\n2. Click the checkbox to mark tasks complete.\n3. Use filters to show all, active, or completed tasks.\n4. Drag tasks to reorder priorities.\n5. Use Clear Completed to remove finished tasks.' },
+      { title: 'Productivity tips', body: '• Start each day by adding your top 3 tasks.\n• Mark tasks complete as you finish them to build momentum.\n• Use the active filter during focus time to hide completed items.' },
+    ],
+  },
+  'kanban-board': {
+    shortDescription: 'Visual task board with drag-and-drop columns.',
+    longDescription: 'Organize tasks visually across To Do, In Progress, and Done columns. Drag cards between columns to track workflow status. Everything saves locally in your browser.',
+    keywords: ['kanban board', 'task board', 'project management', 'drag and drop', 'workflow board'],
+    faqs: [
+      { q: 'Can I add more columns?', a: 'The board has three standard columns: To Do, In Progress, and Done.' },
+      { q: 'Is data saved between sessions?', a: 'Yes, your board state is saved in browser local storage.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Add cards to the To Do column.\n2. Drag cards between columns as work progresses.\n3. Each column shows a card count badge.\n4. Delete cards you no longer need.' },
+      { title: 'Kanban method basics', body: '• Limit work in progress — focus on finishing tasks before starting new ones.\n• Move cards left to right as they progress.\n• A healthy board has fewer cards in "In Progress" than in "To Do".' },
+    ],
+  },
+  'eisenhower-matrix': {
+    shortDescription: 'Prioritize tasks with the Urgent/Important framework.',
+    longDescription: 'Sort tasks into four quadrants based on urgency and importance. The Eisenhower Matrix helps you focus on what truly matters and delegate or eliminate the rest.',
+    keywords: ['eisenhower matrix', 'priority matrix', 'task prioritization', 'urgent important', 'time management'],
+    faqs: [
+      { q: 'What are the four quadrants?', a: 'Do First (urgent + important), Schedule (important, not urgent), Delegate (urgent, not important), and Eliminate (neither).' },
+      { q: 'Can I move tasks between quadrants?', a: 'Yes — drag and drop tasks between any quadrant.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Add tasks to the Inbox.\n2. Drag each task to the appropriate quadrant.\n3. Focus on the "Do First" quadrant during your workday.\n4. Schedule time for "Schedule" items and delegate or eliminate the rest.' },
+      { title: 'The Eisenhower principle', body: '• Do First: Crisis, deadlines, emergencies.\n• Schedule: Long-term goals, planning, exercise, learning.\n• Delegate: Interruptions, some emails, certain meetings.\n• Eliminate: Time wasters, busy work, excessive social media.' },
+    ],
+  },
+  'notepad': {
+    shortDescription: 'Distraction-free writing with auto-save.',
+    longDescription: 'A clean, minimal notepad with multiple tabs, auto-save to local storage, word/character counts, and a markdown preview mode. Perfect for quick notes and drafts.',
+    keywords: ['notepad', 'text editor', 'markdown preview', 'writing tool', 'notes app', 'browser notepad'],
+    faqs: [
+      { q: 'How many tabs can I have?', a: 'Up to 5 tabs, each auto-saved independently.' },
+      { q: 'Does it support markdown?', a: 'Yes — toggle the preview mode to see rendered bold, italic, headings, and lists.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Start typing — your content auto-saves every few seconds.\n2. Create up to 5 tabs for different notes.\n3. Toggle markdown preview to see formatted output.\n4. Word and character counts update in real time.' },
+      { title: 'Markdown basics', body: '• **bold** → bold\n• *italic* → italic\n• # Heading 1, ## Heading 2\n• - Item → bullet list\n• 1. Item → numbered list' },
+    ],
+  },
+  'smart-goal-setter': {
+    shortDescription: 'Set structured SMART goals with tracking.',
+    longDescription: 'Break goals into Specific, Measurable, Achievable, Relevant, and Time-bound components. Track up to 10 goals with completeness indicators and mark them done when achieved.',
+    keywords: ['smart goals', 'goal setting', 'goal tracker', 'smart framework', 'objectives'],
+    faqs: [
+      { q: 'How many goals can I track?', a: 'Up to 10 goals at a time.' },
+      { q: 'What makes a goal SMART?', a: 'It must be Specific, Measurable, Achievable, Relevant, and Time-bound.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Click Add Goal and fill in each SMART component.\n2. The completeness indicator shows how well-defined your goal is.\n3. Mark goals complete when you achieve them.\n4. Review and refine goals that score low on completeness.' },
+      { title: 'SMART framework', body: '• Specific: What exactly do you want to accomplish?\n• Measurable: How will you track progress?\n• Achievable: Is it realistic given your resources?\n• Relevant: Does it align with your broader objectives?\n• Time-bound: What is the deadline?' },
+    ],
+  },
 }

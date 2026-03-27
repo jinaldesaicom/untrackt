@@ -1,4 +1,3 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { renderHook, act } from '@testing-library/react'
 import React from 'react'
 import { FavoritesProvider, useFavorites } from '../../hooks/useFavorites.js'

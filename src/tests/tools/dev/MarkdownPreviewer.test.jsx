@@ -43,7 +43,7 @@ describe('MarkdownPreviewer', () => {
     expect(screen.getByText('code').tagName).toBe('CODE')
     expect(screen.getByText(/words:/i)).toHaveTextContent(/5|6/)
 
-    await act(async () => {
+    act(() => {
       vi.advanceTimersByTime(2000)
     })
 
