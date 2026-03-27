@@ -1,4 +1,5 @@
-import { BarChart3, Eraser } from 'lucide-react'
+import { BarChart3, Eraser, HardDrive } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import SEOHead from '../components/SEOHead.jsx'
 import EmptyState from '../components/EmptyState.jsx'
 import tools, { categories } from '../data/tools.js'
@@ -112,6 +113,15 @@ export default function MyStatsPage() {
             <div className="panel-card"><p className="text-xs text-gray-500 dark:text-gray-400">Current streak</p><p className="mt-1 text-2xl font-bold text-gray-900 dark:text-white">{streak} day{streak === 1 ? '' : 's'}</p></div>
             <div className="panel-card"><p className="text-xs text-gray-500 dark:text-gray-400">Most used tool</p><p className="mt-1 text-base font-bold text-gray-900 dark:text-white">{mostUsedTool?.name || 'N/A'}</p></div>
           </section>
+
+          <div className="mt-6 flex items-center gap-3 rounded-xl border border-dashed border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/50 px-4 py-3">
+            <HardDrive className="w-4 h-4 text-gray-400 dark:text-gray-500 shrink-0" />
+            <p className="text-xs text-gray-500 dark:text-gray-400">
+              Want this data on another device?{' '}
+              <Link to="/tools/data-sync" className="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">Export or transfer it</Link>{' '}
+              — no account needed.
+            </p>
+          </div>
 
           <section className="mt-8" aria-label="Most used tools">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white">Your most used tools</h2>
