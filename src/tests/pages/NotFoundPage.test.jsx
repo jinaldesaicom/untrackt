@@ -36,12 +36,12 @@ describe('NotFoundPage', () => {
 
   it('displays 404 text', () => {
     renderPage(<NotFoundPage />)
-    expect(screen.getByRole('heading', { name: /404 - Tool Not Found/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /this tool drifted away/i })).toBeInTheDocument()
   })
 
   it('renders helpful message', () => {
     renderPage(<NotFoundPage />)
-    expect(screen.getByText(/page.*found|not.*found|error/i)).toBeInTheDocument()
+    expect(screen.getByText(/doesn.*exist|moved|looking for/i)).toBeInTheDocument()
   })
 
   it('has Go home or home link', () => {
