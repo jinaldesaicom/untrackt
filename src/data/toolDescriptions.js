@@ -27,6 +27,41 @@ export const richDescriptions = {
       { title: 'How the strength meter works', body: 'The meter estimates entropy based on the character pool size and password length. A larger pool (more character types) and longer length both increase entropy exponentially. The result is mapped to four levels: Weak, Fair, Strong, and Very Strong.' },
     ],
   },
+  'text-to-flowchart': {
+    shortDescription: 'Convert indented text into flowcharts and org charts instantly.',
+    longDescription: 'The UnTrackt Text to Flowchart tool turns simple indented text into interactive SVG flowcharts. Type plain text, indent child nodes with spaces, and watch a live diagram appear. Choose from five color themes, three node shapes, and export as SVG or PNG — all without any server or sign-up.',
+    keywords: ['text to flowchart', 'flowchart generator', 'diagram maker', 'org chart', 'mind map', 'text to diagram', 'tree diagram', 'svg chart'],
+    faqs: [
+      { q: 'How does the syntax work?', a: 'Each line becomes a node. Indent a line with spaces to make it a child of the line above with less indentation.' },
+      { q: 'Can I export the diagram?', a: 'Yes. Download as SVG for vector graphics or PNG for raster images. You can also copy the SVG markup to your clipboard.' },
+      { q: 'Is my data sent anywhere?', a: 'No. Everything runs locally in your browser — nothing is uploaded.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Type or paste text in the editor on the left — each line becomes a node.\n2. Indent lines with spaces to create parent-child connections.\n3. The flowchart updates live in the preview pane on the right.\n4. Use the toolbar to change theme, shape, zoom, or export the chart.' },
+      { title: 'Tips & tricks', body: '• Use 2-space indentation for clean nesting.\n• Try different themes (Indigo, Emerald, Amber, Rose, Slate) to match your presentation.\n• Pill-shaped nodes work great for status labels; rectangles suit process steps.\n• Use "Fit" zoom to auto-scale the chart to the viewport.' },
+      { title: 'Common use cases', body: '• Visualising decision trees or workflow processes.\n• Quick org charts from a team hierarchy list.\n• Mapping out feature requirements before coding.\n• Creating simple diagrams for documentation or presentations.' },
+    ],
+  },
+  'text-to-uml': {
+    shortDescription: 'Create 6 types of UML diagrams from simple text — sequence, class, use case, activity, state, and ER.',
+    longDescription: 'The UnTrackt Text to UML Diagram tool lets you write plain-text descriptions and instantly see professional UML diagrams. Supports sequence diagrams, class diagrams, use case diagrams, activity diagrams, state diagrams, and entity-relationship (ER) diagrams. Choose from five color themes, export as SVG or PNG, and use fullscreen mode for detailed viewing — all 100% client-side with zero data sent to any server.',
+    keywords: ['uml diagram', 'sequence diagram', 'class diagram', 'use case diagram', 'activity diagram', 'state diagram', 'er diagram', 'entity relationship', 'uml generator', 'plantuml alternative', 'text to uml', 'diagram maker', 'software design'],
+    faqs: [
+      { q: 'What UML diagram types are supported?', a: 'Six types: Sequence (participants & arrows), Class (classes, interfaces & inheritance), Use Case (actors & system features), Activity (workflows with decisions & branching), State (state machines & transitions), and ER (database entities & relationships).' },
+      { q: 'Is this like PlantUML?', a: 'It is inspired by PlantUML but runs entirely in your browser — no server needed, no data uploaded. The syntax is simplified for quick diagramming.' },
+      { q: 'Can I export diagrams?', a: 'Yes. Download as SVG for vector graphics, PNG for raster images, or copy the SVG markup to your clipboard.' },
+      { q: 'Is my data private?', a: 'Absolutely. Everything is processed locally in your browser. Nothing is transmitted.' },
+    ],
+    guide: [
+      { title: 'Sequence diagrams', body: '1. Optionally add a title with "title: My Flow".\n2. Write messages like "Alice -> Bob: Request".\n3. Use -> for solid arrows, --> for dashed (return), ->> for async, -->> for dashed async.\n4. Self-messages: "Server -> Server: Validate".\n5. Declare participant order with "participant Name".' },
+      { title: 'Class diagrams', body: '1. Define a class: "class Animal".\n2. Add members indented with 2 spaces: "+name: string", "+speak(): void".\n3. Use +/−/# for public/private/protected visibility.\n4. Add inheritance: "class Dog extends Animal".\n5. Define interfaces: "interface Serializable".' },
+      { title: 'Use case diagrams', body: '1. Define actors: "actor Customer".\n2. Define use cases: "usecase Browse Products".\n3. Connect with "Customer -> Browse Products".\n4. Actors and use cases are auto-created from connections.\n5. A dashed system boundary box appears around use cases.' },
+      { title: 'Activity diagrams', body: '1. Use [start] and [end] for start/end nodes.\n2. Plain text lines become action nodes.\n3. Use [if] for decision diamonds.\n4. Indent [yes] and [no] branches.\n5. Indentation controls the tree structure.' },
+      { title: 'State diagrams', body: '1. Write transitions: "Idle -> Processing: Start".\n2. Use [start] and [end] for initial/final states.\n3. Label transitions after a colon: "State -> State: Event".\n4. States are auto-discovered from transitions.\n5. States appear as rounded pill-shaped boxes.' },
+      { title: 'ER diagrams', body: '1. Define entities: "entity User".\n2. Indent fields with 2 spaces.\n3. Mark primary keys with * prefix or PK suffix.\n4. Mark foreign keys with FK suffix.\n5. Define relationships: "User 1--* Post" (one-to-many).' },
+      { title: 'Tips & tricks', body: '• Switch between all six diagram modes with the toggle buttons.\n• Try all five themes (Indigo, Emerald, Amber, Rose, Slate).\n• Use fullscreen mode for large diagrams.\n• The diagram auto-fits the preview; use zoom controls for manual adjustment.\n• Lines starting with // are treated as comments and ignored.' },
+    ],
+  },
   'mortgage-calculator': {
     shortDescription: 'Estimate mortgage payments and amortization.',
     longDescription: 'Calculate monthly mortgage payments, principal and interest split, and amortization timelines to plan home financing with confidence.',

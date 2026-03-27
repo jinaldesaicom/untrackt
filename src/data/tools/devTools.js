@@ -18,6 +18,8 @@ const MarkdownPreviewer = lazy(() => import('../../tools/dev/MarkdownPreviewer.j
 const NumberBaseConverter = lazy(() => import('../../tools/dev/NumberBaseConverter.jsx'))
 const SvgOptimizer = lazy(() => import('../../tools/dev/SvgOptimizer.jsx'))
 const UrlEncoderDecoder = lazy(() => import('../../tools/dev/UrlEncoderDecoder.jsx'))
+const TextToFlowchart = lazy(() => import('../../tools/dev/TextToFlowchart.jsx'))
+const TextToUML = lazy(() => import('../../tools/dev/TextToUML.jsx'))
 
 export const devTools = [
   { id: 'json-formatter', name: 'JSON Formatter', description: 'Validate and prettify JSON instantly', category: 'dev', subcategory: 'formatters', icon: 'Braces', path: '/tools/json-formatter', component: JsonFormatter, tags: ['json', 'format', 'validate', 'pretty print', 'minify'], isPopular: true, isNew: false },
@@ -38,4 +40,6 @@ export const devTools = [
   { id: 'number-base-converter', name: 'Number Base Converter', description: 'Convert between binary, octal, decimal, and hexadecimal', category: 'dev', subcategory: 'converters', icon: 'Binary', path: '/tools/number-base-converter', component: NumberBaseConverter, tags: ['binary', 'hex', 'octal', 'decimal', 'base converter', 'bits'], isPopular: false, isNew: false },
   { id: 'svg-optimizer', name: 'SVG Optimizer', description: 'Minify and clean SVG code directly in your browser', category: 'dev', subcategory: 'formatters', icon: 'Wrench', path: '/tools/svg-optimizer', component: SvgOptimizer, tags: ['svg', 'optimize', 'minify', 'vector', 'compress', 'markup'], isPopular: false, isNew: false },
   { id: 'url-encoder-decoder', name: 'URL Encoder/Decoder', description: 'Encode, decode, and parse URLs with query editing', category: 'dev', subcategory: 'encoders', icon: 'Search', path: '/tools/url-encoder-decoder', component: UrlEncoderDecoder, tags: ['url', 'encode', 'decode', 'query params', 'parser', 'uri'], isPopular: false, isNew: false },
+  { id: 'text-to-flowchart', name: 'Text to Flowchart', description: 'Turn indented text into flowcharts and org charts instantly', category: 'dev', subcategory: 'generators', icon: 'GitBranch', path: '/tools/text-to-flowchart', component: TextToFlowchart, tags: ['flowchart', 'diagram', 'chart', 'text to diagram', 'org chart', 'mind map', 'tree'], isPopular: false, isNew: true },
+  { id: 'text-to-uml', name: 'Text to UML Diagram', description: 'Create sequence and class diagrams from simple text syntax', category: 'dev', subcategory: 'generators', icon: 'Share2', path: '/tools/text-to-uml', component: TextToUML, tags: ['uml', 'sequence diagram', 'class diagram', 'diagram', 'plantuml', 'architecture', 'design'], isPopular: false, isNew: true },
 ]
