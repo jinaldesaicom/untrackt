@@ -38,3 +38,28 @@ export default function usePrefetchTool(toolId) {
 
   return api
 }
+
+const pageModules = {
+  '/': () => import('../pages/Home.jsx'),
+  '/favorites': () => import('../pages/FavoritesPage.jsx'),
+  '/my-stats': () => import('../pages/MyStatsPage.jsx'),
+  '/about': () => import('../pages/AboutPage.jsx'),
+  '/privacy': () => import('../pages/PrivacyPage.jsx'),
+  '/terms': () => import('../pages/TermsPage.jsx'),
+  '/search': () => import('../pages/SearchResultsPage.jsx'),
+}
+
+const prefetchedPages = new Set()
+
+export function prefetchRoute(path) {
+  const key = Object.keys(pageModules).find((k) => path === k || path.startsWith(k + '/'))
+  if (!key || prefetchedPages.has(key)) return
+  prefetchedPages.add(key)
+  pageModules[key]()
+}
+
+export function prefetchCategory() {
+  if (prefetchedPages.has('category')) return
+  prefetchedPages.add('category')
+  import('../pages/CategoryPage.jsx')
+}

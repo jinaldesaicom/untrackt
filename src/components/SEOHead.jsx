@@ -15,6 +15,8 @@ export default function SEOHead({
   faqs,
   noindex = false,
   jsonLd,
+  keywords,
+  breadcrumbs,
 }) {
   const canonicalUrl = `${BASE_URL}${path}`
   const resolvedTitle = title || (toolName ? `${toolName} | ${SITE_NAME}` : `${SITE_NAME} | Free Private Browser Tools`)
@@ -70,10 +72,24 @@ export default function SEOHead({
     }
     : null
 
+  const breadcrumbData = Array.isArray(breadcrumbs) && breadcrumbs.length > 0
+    ? {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbs.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: item.name,
+        item: item.url,
+      })),
+    }
+    : null
+
   return (
     <Helmet>
       <title>{resolvedTitle}</title>
       <meta name="description" content={description} />
+      {keywords ? <meta name="keywords" content={Array.isArray(keywords) ? keywords.join(', ') : keywords} /> : null}
       <meta name="author" content="UnTrackt" />
       <meta name="generator" content="UnTrackt" />
       <meta name="rating" content="general" />
@@ -106,6 +122,8 @@ export default function SEOHead({
       ) : null}
 
       {faqData ? <script type="application/ld+json">{JSON.stringify(faqData)}</script> : null}
+
+      {breadcrumbData ? <script type="application/ld+json">{JSON.stringify(breadcrumbData)}</script> : null}
     </Helmet>
   )
 }

@@ -1,16 +1,16 @@
-import { Suspense, useEffect, useCallback } from 'react'
+import { Suspense, lazy, useEffect, useCallback } from 'react'
 import { Routes, Route, useParams, useLocation, Link } from 'react-router-dom'
 import Layout from './components/Layout.jsx'
-import Home from './pages/Home.jsx'
-import CategoryPage from './pages/CategoryPage.jsx'
-import FavoritesPage from './pages/FavoritesPage.jsx'
-import MyStatsPage from './pages/MyStatsPage.jsx'
-import AboutPage from './pages/AboutPage.jsx'
-import PrivacyPage from './pages/PrivacyPage.jsx'
-import TermsPage from './pages/TermsPage.jsx'
-import SearchResultsPage from './pages/SearchResultsPage.jsx'
-import TagPage from './pages/TagPage.jsx'
-import NotFoundPage from './pages/NotFoundPage.jsx'
+const Home = lazy(() => import('./pages/Home.jsx'))
+const CategoryPage = lazy(() => import('./pages/CategoryPage.jsx'))
+const FavoritesPage = lazy(() => import('./pages/FavoritesPage.jsx'))
+const MyStatsPage = lazy(() => import('./pages/MyStatsPage.jsx'))
+const AboutPage = lazy(() => import('./pages/AboutPage.jsx'))
+const PrivacyPage = lazy(() => import('./pages/PrivacyPage.jsx'))
+const TermsPage = lazy(() => import('./pages/TermsPage.jsx'))
+const SearchResultsPage = lazy(() => import('./pages/SearchResultsPage.jsx'))
+const TagPage = lazy(() => import('./pages/TagPage.jsx'))
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage.jsx'))
 import DisclaimerBadge from './components/DisclaimerBadge.jsx'
 import RelatedTools from './components/RelatedTools.jsx'
 import ToolFAQ from './components/ToolFAQ.jsx'
@@ -68,6 +68,12 @@ function ToolPage() {
         category={category?.name || tool.category}
         ogImage={`https://untrackt.com/og-${tool.category}.svg`}
         faqs={richContent?.faqs}
+        keywords={richContent?.keywords}
+        breadcrumbs={[
+          { name: 'Home', url: 'https://untrackt.com' },
+          { name: category?.name || tool.category, url: `https://untrackt.com/category/${tool.category}` },
+          { name: tool.name, url: `https://untrackt.com${tool.path}` },
+        ]}
       />
 
       <Breadcrumb category={tool.category} toolName={tool.name} toolPath={tool.path} />
@@ -145,19 +151,21 @@ export default function App() {
   return (
     <Layout theme={theme} isDark={isDark}>
       <PageTransition key={location.pathname}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/favorites" element={<FavoritesPage />} />
-          <Route path="/my-stats" element={<MyStatsPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/privacy" element={<PrivacyPage />} />
-          <Route path="/terms" element={<TermsPage />} />
-          <Route path="/search" element={<SearchResultsPage />} />
-          <Route path="/tags/:tag" element={<TagPage />} />
-          <Route path="/category/:categoryId" element={<CategoryPage />} />
-          <Route path="/tools/:toolId" element={<ToolPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+        <Suspense fallback={<div className="min-h-[60vh]" />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/favorites" element={<FavoritesPage />} />
+            <Route path="/my-stats" element={<MyStatsPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/terms" element={<TermsPage />} />
+            <Route path="/search" element={<SearchResultsPage />} />
+            <Route path="/tags/:tag" element={<TagPage />} />
+            <Route path="/category/:categoryId" element={<CategoryPage />} />
+            <Route path="/tools/:toolId" element={<ToolPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Suspense>
       </PageTransition>
     </Layout>
   )

@@ -1,6 +1,7 @@
 import { memo } from 'react'
 import { NavLink } from 'react-router-dom'
 import { categories, categoryColorMap } from '../data/tools.js'
+import { prefetchCategory } from '../hooks/usePrefetchTool.js'
 
 function CategoryNav({ mobile = false }) {
   const navClass = mobile
@@ -15,6 +16,8 @@ function CategoryNav({ mobile = false }) {
           <NavLink
             key={cat.id}
             to={`/category/${cat.id}`}
+            onMouseEnter={prefetchCategory}
+            onFocus={prefetchCategory}
             className={({ isActive }) =>
               `shrink-0 rounded-full font-medium whitespace-nowrap transition-colors duration-200 ${mobile ? 'px-3.5 py-2 text-[13px] snap-start' : 'px-3 py-1.5 text-xs'} ${
                 isActive

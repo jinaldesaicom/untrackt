@@ -29,6 +29,13 @@ export function getErrorLog() {
   return Array.isArray(value) ? value : []
 }
 
+export function installGlobalHandlers() {
+  if (typeof window === 'undefined') return
+  window.addEventListener('unhandledrejection', (event) => {
+    logError(event.reason || 'Unhandled promise rejection', { type: 'unhandledrejection' })
+  })
+}
+
 export function clearErrorLog() {
   removeItem(ERROR_LOG_KEY)
 }

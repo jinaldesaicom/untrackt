@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import tools, { categories } from '../src/data/tools.js'
 
-const today = '2026-03-01'
+const today = new Date().toISOString().split('T')[0]
 const urls = []
 
 function add(loc, changefreq, priority) {

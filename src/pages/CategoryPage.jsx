@@ -91,6 +91,26 @@ export default function CategoryPage() {
         title={`${category.name} Tools - Free & Private | UnTrackt`}
         description={content?.seoDescription || `Free ${category.name.toLowerCase()} tools that run in your browser. No sign-up, no tracking, no data stored on any server.`}
         path={`/category/${category.id}`}
+        breadcrumbs={[
+          { name: 'Home', url: 'https://untrackt.com' },
+          { name: category.name, url: `https://untrackt.com/category/${category.id}` },
+        ]}
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          name: `${category.name} Tools`,
+          url: `https://untrackt.com/category/${category.id}`,
+          description: content?.seoDescription || `Free ${category.name.toLowerCase()} tools`,
+          mainEntity: {
+            '@type': 'ItemList',
+            itemListElement: categoryTools.map((t, i) => ({
+              '@type': 'ListItem',
+              position: i + 1,
+              name: t.name,
+              url: `https://untrackt.com${t.path}`,
+            })),
+          },
+        }}
       />
 
       {/* Breadcrumb */}
