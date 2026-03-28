@@ -16,6 +16,7 @@ const CalorieBurnEstimator = lazy(() => import('../../tools/health/CalorieBurnEs
 const MedicalUnitConverter = lazy(() => import('../../tools/health/MedicalUnitConverter.jsx'))
 const VaccinationAgeGuide = lazy(() => import('../../tools/health/VaccinationAgeGuide.jsx'))
 const MoodTracker = lazy(() => import('../../tools/health/MoodTracker.jsx'))
+const SymptomJournal = lazy(() => import('../../tools/health/SymptomJournal.jsx'))
 
 export const healthTools = [
   { id: 'bmr-calculator', name: 'BMR Calculator', description: 'Calculate your basal metabolic rate and daily calorie needs', category: 'health', subcategory: 'fitness', icon: 'Flame', path: '/tools/bmr-calculator', component: BmrCalculator, tags: ['bmr', 'calories', 'tdee', 'metabolism', 'diet', 'fitness'], isPopular: false, isNew: false },
@@ -34,4 +35,5 @@ export const healthTools = [
   { id: 'medical-unit-converter', name: 'Medical Unit Converter', description: 'Convert glucose, cholesterol, HbA1c, temperature, weight, and height.', category: 'health', subcategory: 'medical', icon: 'Calculator', path: '/tools/medical-unit-converter', component: MedicalUnitConverter, tags: ['medical units', 'glucose', 'cholesterol', 'hba1c', 'temperature', 'converter'], isPopular: false, isNew: false },
   { id: 'vaccination-age-guide', name: 'Vaccination Age Guide', description: 'Browse country-specific vaccination milestones and childhood schedules.', category: 'health', subcategory: 'medical', icon: 'Syringe', path: '/tools/vaccination-age-guide', component: VaccinationAgeGuide, tags: ['vaccination', 'immunization', 'schedule', 'cdc', 'nhs', 'reference'], isPopular: false, isNew: false },
   { id: 'mood-tracker', name: 'Mood Tracker', description: 'Log daily moods, activities, and journal notes with visual insights.', category: 'health', subcategory: 'wellness', icon: 'Heart', path: '/tools/mood-tracker', component: MoodTracker, tags: ['mood', 'tracker', 'mental health', 'wellness', 'journal', 'emotions', 'daily'], isPopular: false, isNew: true },
+  { id: 'symptom-journal', name: 'Symptom Journal', description: 'Privacy-first daily symptom logger — export as PDF for doctor visits.', category: 'health', subcategory: 'medical', icon: 'HeartPulse', path: '/tools/symptom-journal', component: SymptomJournal, tags: ['symptom', 'journal', 'tracker', 'health', 'medical', 'pain', 'log', 'pdf', 'doctor', 'export'], isPopular: false, isNew: true },
 ]

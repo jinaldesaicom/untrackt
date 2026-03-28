@@ -103,6 +103,62 @@ export const categoryContent = {
       'Prioritize tasks with Eisenhower Matrix',
     ],
     seoDescription: 'Free productivity tools including Kanban board, daily planner, Eisenhower matrix, decision matrix, todo list, notepad, and more. Private, runs in your browser.'
+  },
+  agile: {
+    title: 'Agile Tools',
+    tagline: 'Sprint planning, estimation, and team collaboration for agile teams',
+    description: 'A complete toolkit for agile teams — plan sprints, estimate stories, track velocity, run retrospectives, and build working agreements. Every tool runs 100% in your browser with data stored locally. No backend, no accounts, no tracking.',
+    useCases: [
+      'Plan sprints with capacity and velocity tracking',
+      'Estimate stories using planning poker or point calculators',
+      'Generate burndown charts from daily data',
+      'Build user stories with acceptance criteria',
+      'Run structured retrospectives with multiple formats',
+      'Create and manage Definition of Done and Definition of Ready',
+    ],
+    seoDescription: 'Free agile tools: sprint planner, velocity calculator, planning poker, burndown chart, retrospective board, user story builder, and more. Private, runs in your browser.'
+  },
+  pm: {
+    title: 'Project Management Tools',
+    tagline: 'Plan, track, and deliver projects with confidence',
+    description: 'A full suite of project management utilities — from work breakdown structures and Gantt charts to risk matrices and status reports. Everything runs in your browser with no data leaving your device.',
+    useCases: [
+      'Break down projects into tasks and milestones',
+      'Create Gantt charts and visual timelines',
+      'Track risks, assumptions, issues, and dependencies',
+      'Estimate effort, cost, and resource allocation',
+      'Generate RAG status reports and health dashboards',
+      'Manage action items, checklists, and KPIs'
+    ],
+    seoDescription: 'Free project management tools: WBS builder, Gantt chart generator, RAID log, risk matrix, cost estimator, status reports, and more. Browser-only, no tracking.'
+  },
+  'css-html': {
+    title: 'CSS/HTML Tools',
+    tagline: 'Visual CSS generators, HTML utilities, and design tools',
+    description: 'A comprehensive toolkit for frontend developers and designers. Build box shadows, border radii, flexbox layouts, CSS grids, animations, clip paths, glassmorphism and neumorphism effects — all with live previews. Format HTML, convert HTML to Markdown, generate favicons, and extract CSS variables. Everything runs in your browser.',
+    useCases: [
+      'Generate CSS box shadows, borders, and filter effects visually',
+      'Build flexbox and CSS grid layouts with live previews',
+      'Create keyframe animations with timing and easing controls',
+      'Design buttons, glassmorphism cards, and neumorphic elements',
+      'Format and beautify messy HTML code',
+      'Convert HTML to Markdown and extract CSS custom properties'
+    ],
+    seoDescription: 'Free CSS/HTML tools: box shadow generator, flexbox playground, grid builder, animation creator, filter generator, clip-path maker, HTML formatter, favicon generator, and more. Browser-only.'
+  },
+  'maths-science': {
+    title: 'Maths & Science Tools',
+    tagline: 'Mathematics, physics, chemistry, biology, and general science calculators',
+    description: 'A comprehensive suite of scientific calculators and reference tools covering mathematics (algebra, calculus, statistics, trigonometry), physics (kinematics, electricity, optics, thermodynamics), chemistry (mole calculator, equation balancer, periodic table, pH), biology (genetics, DNA/RNA, microscopy), and general science (unit converter, significant figures, error analysis). All tools run 100% in your browser.',
+    useCases: [
+      'Solve equations, matrices, and systems of linear equations',
+      'Calculate statistics, probability, and plot mathematical functions',
+      'Use SUVAT kinematics, Newton\'s laws, and energy/work calculators',
+      'Balance chemical equations and explore the periodic table',
+      'Generate Punnett squares and translate DNA/RNA sequences',
+      'Convert scientific units, calculate significant figures, and propagate errors'
+    ],
+    seoDescription: 'Free maths and science tools: equation solver, matrix calculator, graph plotter, kinematics, electricity, periodic table, pH calculator, genetics, DNA/RNA tools, unit converter, and more. Browser-only, no tracking.'
   }
 }
 

@@ -8,6 +8,9 @@ import { seoTools } from './tools/seoTools.js'
 import { productivityTools } from './tools/productivityTools.js'
 import { scrumTools } from './tools/scrumTools.js'
 import { cssHtmlTools } from './tools/cssHtmlTools.js'
+import { agileTools } from './tools/agileTools.js'
+import { pmTools } from './tools/pmTools.js'
+import { mathsScienceTools } from './tools/mathsScienceTools.js'
 
 export const categories = [
   { id: 'dev', name: 'Dev Tools', icon: 'Code2', color: 'violet', description: 'Utilities for developers: formatters, encoders, generators.' },
@@ -18,6 +21,10 @@ export const categories = [
   { id: 'finance', name: 'Finance', icon: 'TrendingUp', color: 'emerald', description: 'Personal finance calculators and planners.' },
   { id: 'seo', name: 'SEO Tools', icon: 'Search', color: 'rose', description: 'Search engine optimization tools for better rankings.' },
   { id: 'productivity', name: 'Productivity', icon: 'Zap', color: 'cyan', description: 'Tools to organize your work and get more done.' },
+  { id: 'agile', name: 'Agile Tools', icon: 'Kanban', color: 'orange', description: 'Sprint planning, estimation, retrospectives, and agile team tools.' },
+  { id: 'pm', name: 'Project Management', icon: 'FolderKanban', color: 'indigo', description: 'Planning, tracking, risk management, and reporting tools for projects.' },
+  { id: 'css-html', name: 'CSS/HTML Tools', icon: 'Paintbrush', color: 'teal', description: 'CSS generators, HTML utilities, and visual design tools.' },
+  { id: 'maths-science', name: 'Maths & Science Tools', icon: 'Atom', color: 'purple', description: 'Mathematics, physics, chemistry, biology, and general science calculators.' },
 ]
 
 export const categoryColorMap = {
@@ -29,6 +36,10 @@ export const categoryColorMap = {
   finance:  { bg: 'bg-emerald-100', darkBg: 'dark:bg-emerald-900/30', text: 'text-emerald-700', darkText: 'dark:text-emerald-300', border: 'border-emerald-200', darkBorder: 'dark:border-emerald-800', icon: 'text-emerald-500', pill: 'bg-emerald-500' },
   seo:      { bg: 'bg-rose-100',    darkBg: 'dark:bg-rose-900/30',    text: 'text-rose-700',    darkText: 'dark:text-rose-300',    border: 'border-rose-200',    darkBorder: 'dark:border-rose-800',    icon: 'text-rose-500',    pill: 'bg-rose-500'    },
   productivity: { bg: 'bg-cyan-100', darkBg: 'dark:bg-cyan-900/30', text: 'text-cyan-700', darkText: 'dark:text-cyan-300', border: 'border-cyan-200', darkBorder: 'dark:border-cyan-800', icon: 'text-cyan-500', pill: 'bg-cyan-500' },
+  agile: { bg: 'bg-orange-100', darkBg: 'dark:bg-orange-900/30', text: 'text-orange-700', darkText: 'dark:text-orange-300', border: 'border-orange-200', darkBorder: 'dark:border-orange-800', icon: 'text-orange-500', pill: 'bg-orange-500' },
+  pm: { bg: 'bg-indigo-100', darkBg: 'dark:bg-indigo-900/30', text: 'text-indigo-700', darkText: 'dark:text-indigo-300', border: 'border-indigo-200', darkBorder: 'dark:border-indigo-800', icon: 'text-indigo-500', pill: 'bg-indigo-500' },
+  'css-html': { bg: 'bg-teal-100', darkBg: 'dark:bg-teal-900/30', text: 'text-teal-700', darkText: 'dark:text-teal-300', border: 'border-teal-200', darkBorder: 'dark:border-teal-800', icon: 'text-teal-500', pill: 'bg-teal-500' },
+  'maths-science': { bg: 'bg-purple-100', darkBg: 'dark:bg-purple-900/30', text: 'text-purple-700', darkText: 'dark:text-purple-300', border: 'border-purple-200', darkBorder: 'dark:border-purple-800', icon: 'text-purple-500', pill: 'bg-purple-500' },
 }
 
 const tools = [
@@ -42,6 +53,9 @@ const tools = [
   ...productivityTools,
   ...scrumTools,
   ...cssHtmlTools,
+  ...agileTools,
+  ...pmTools,
+  ...mathsScienceTools,
 ]
 
 export function getToolsByCategory(category) {

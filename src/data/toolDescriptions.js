@@ -1341,4 +1341,981 @@ export const richDescriptions = {
       { title: 'SMART framework', body: '• Specific: What exactly do you want to accomplish?\n• Measurable: How will you track progress?\n• Achievable: Is it realistic given your resources?\n• Relevant: Does it align with your broader objectives?\n• Time-bound: What is the deadline?' },
     ],
   },
+
+  // ── Agile Tools ──────────────────────────────────────────────
+  'sprint-planner': {
+    shortDescription: 'Plan sprints with goals, stories, and progress tracking.',
+    longDescription: 'Create and manage sprints with goal setting, story assignment, status tracking, and progress visualization. All data stays in your browser.',
+    keywords: ['sprint planner', 'scrum', 'agile planning', 'sprint backlog', 'sprint goal'],
+    faqs: [
+      { q: 'Is my data stored on a server?', a: 'No. Everything is saved in your browser\'s local storage.' },
+      { q: 'How many sprints can I create?', a: 'There is no hard limit — create as many as you need.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Click "New Sprint" and enter a name, goal, and date range.\n2. Add stories with titles, point estimates, and assignees.\n3. Update story status as work progresses (To Do → In Progress → Done).\n4. Track progress via the completion bar on each sprint.' },
+    ],
+  },
+  'sprint-capacity-calculator': {
+    shortDescription: 'Calculate team sprint capacity based on availability.',
+    longDescription: 'Determine available team capacity for a sprint by accounting for individual hours, days off, ceremony overhead, and focus factor. Helps avoid over-commitment.',
+    keywords: ['sprint capacity', 'team capacity', 'availability calculator', 'agile capacity planning'],
+    faqs: [
+      { q: 'What is focus factor?', a: 'The percentage of time a team member spends on sprint work vs. meetings, context switching, and other overhead. Typically 60–80%.' },
+      { q: 'Are ceremony hours shared?', a: 'Yes. Total ceremony hours are divided equally across team members.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Set the sprint length in working days.\n2. Enter total ceremony hours (standup, planning, review, retro).\n3. Add team members with their daily hours, days off, and focus factor.\n4. View individual and total capacity calculations.' },
+    ],
+  },
+  'release-planning-calculator': {
+    shortDescription: 'Forecast release dates from velocity and backlog size.',
+    longDescription: 'Estimate when your backlog will be delivered based on team velocity, sprint length, and an optional buffer. See a sprint-by-sprint breakdown with dates.',
+    keywords: ['release planning', 'release forecast', 'agile release', 'delivery date estimator'],
+    faqs: [
+      { q: 'How accurate is the forecast?', a: 'It is an estimate based on constant velocity. Real velocity varies sprint to sprint.' },
+      { q: 'What is the buffer for?', a: 'Buffer accounts for unknowns, scope changes, and velocity fluctuations.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Enter total remaining story points in the backlog.\n2. Set your team\'s average velocity per sprint.\n3. Choose sprint length and an optional buffer percentage.\n4. View the estimated number of sprints, total days, and projected release date.' },
+    ],
+  },
+  'velocity-calculator': {
+    shortDescription: 'Track team velocity across sprints with visual charts.',
+    longDescription: 'Record committed vs. completed story points per sprint. View average velocity, rolling average, commitment rate, and trends to improve predictability.',
+    keywords: ['velocity calculator', 'sprint velocity', 'agile metrics', 'velocity chart', 'team performance'],
+    faqs: [
+      { q: 'What is a good commitment rate?', a: 'Aim for 80–100%. Consistently over-committing signals estimation issues.' },
+      { q: 'How many sprints should I track?', a: 'At least 3–5 sprints for a meaningful average. More data improves accuracy.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Add sprint entries with committed and completed story points.\n2. The chart updates automatically showing committed (light) vs. completed (dark) bars.\n3. Review metrics: average velocity, rolling 3-sprint average, commitment rate, and trend.\n4. Use the rolling average for more accurate sprint planning.' },
+    ],
+  },
+  'story-point-estimator': {
+    shortDescription: 'Estimate story points using complexity, effort, and uncertainty.',
+    longDescription: 'Break down estimation into three dimensions — complexity, effort, and uncertainty — then get a Fibonacci-scale story point recommendation. Helps teams estimate more consistently.',
+    keywords: ['story points', 'estimation', 'agile estimation', 'fibonacci points', 'story sizing'],
+    faqs: [
+      { q: 'Why Fibonacci numbers?', a: 'Fibonacci scale (1, 2, 3, 5, 8, 13, 21) reflects that larger items have more uncertainty, making fine-grained distinctions meaningless.' },
+      { q: 'How is the estimate calculated?', a: 'The average of complexity and effort scores is multiplied by the uncertainty factor, then mapped to the nearest Fibonacci number.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Click "Add Story" and enter a title.\n2. Select complexity level (trivial to very complex).\n3. Select effort level (minimal to very large).\n4. Choose uncertainty (low to very high).\n5. The recommended story point appears in the blue badge.' },
+    ],
+  },
+  'planning-poker': {
+    shortDescription: 'Run planning poker estimation sessions.',
+    longDescription: 'Facilitate planning poker with multiple participants and customizable card decks (Fibonacci, T-shirt, Powers of 2). Reveal votes simultaneously and identify consensus or outliers.',
+    keywords: ['planning poker', 'agile estimation', 'team voting', 'fibonacci cards', 'estimation session'],
+    faqs: [
+      { q: 'Can multiple people use this on one screen?', a: 'Yes. Add participants, then each person selects their vote one at a time. Votes are hidden until revealed.' },
+      { q: 'What decks are available?', a: 'Fibonacci (0–21), T-Shirt (XS–XXL), and Powers of 2 (0–32).' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Enter the story being estimated.\n2. Add team participants by name.\n3. Click each participant to make them active, then select a card to vote.\n4. Once all votes are in, click "Reveal Votes" to see results.\n5. Discuss outliers and re-vote if needed.' },
+    ],
+  },
+  'estimation-comparison': {
+    shortDescription: 'Compare estimated vs actual effort to improve accuracy.',
+    longDescription: 'Log story point estimates alongside actual effort. Track accuracy, variance, and trends over time to calibrate your team\'s estimation skills.',
+    keywords: ['estimation accuracy', 'estimate vs actual', 'agile metrics', 'estimation improvement'],
+    faqs: [
+      { q: 'What is a good accuracy percentage?', a: 'Above 80% is strong. Most teams improve over time as they calibrate.' },
+      { q: 'Does this track individual or team estimates?', a: 'It tracks per-story comparisons. You can use it for individual or team-level data.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Add stories with their estimated and actual story points.\n2. View accuracy, average variance, and the over/under breakdown.\n3. The chart shows estimated (light) vs. actual (colored) bars for visual comparison.\n4. Use insights to adjust future estimations.' },
+    ],
+  },
+  'daily-standup-template': {
+    shortDescription: 'Structured daily standup notes with history.',
+    longDescription: 'Record yesterday/today/blockers for each team member during daily standups. Saves by date so you can review past standups. Highlights blockers automatically.',
+    keywords: ['daily standup', 'scrum meeting', 'standup notes', 'team status', 'daily scrum'],
+    faqs: [
+      { q: 'Are past standups saved?', a: 'Yes. Each date\'s entries are saved locally. Navigate dates to review history.' },
+      { q: 'Can I share standup notes?', a: 'Use the Copy button to copy formatted notes to your clipboard for pasting into Slack, Teams, etc.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Add team members using "Add Member".\n2. Fill in yesterday\'s work, today\'s plan, and any blockers for each person.\n3. Blockers are highlighted at the top if any are reported.\n4. Use the date picker to navigate to past standups.\n5. Copy all notes to share with the team.' },
+    ],
+  },
+  'ceremony-timer': {
+    shortDescription: 'Timebox agile ceremonies with preset durations.',
+    longDescription: 'A countdown timer with presets for common agile ceremonies: standup, planning, review, retro, and refinement. Visual and audio alerts when time expires.',
+    keywords: ['ceremony timer', 'timebox', 'agile timer', 'standup timer', 'meeting timer'],
+    faqs: [
+      { q: 'Does it make a sound?', a: 'Yes. An audio tone plays when time expires. You can mute it with the sound toggle.' },
+      { q: 'Can I set custom durations?', a: 'Yes. Enter any duration in minutes and click Set.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Select a ceremony preset or enter a custom duration.\n2. Press Play to start the countdown.\n3. The timer turns amber in the last 60 seconds and red when finished.\n4. Press Reset to restart the current timer.' },
+    ],
+  },
+  'impediment-log': {
+    shortDescription: 'Track and manage team impediments.',
+    longDescription: 'Log blockers and impediments with priority, status, assignee, and dates. Filter by status to focus on open issues. All data stored locally in your browser.',
+    keywords: ['impediment log', 'blocker tracker', 'agile impediments', 'issue tracking', 'scrum master tool'],
+    faqs: [
+      { q: 'What is an impediment?', a: 'Anything blocking the team from making progress — technical issues, missing information, external dependencies, etc.' },
+      { q: 'Is this a replacement for Jira?', a: 'No. It is a lightweight local tool for quick impediment tracking during sprints.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Click "Log Impediment" to add a new blocker.\n2. Set title, description, priority, and assignee.\n3. Update status as the impediment is worked on (Open → In Progress → Resolved).\n4. Filter by status to focus on active blockers.' },
+    ],
+  },
+  'burndown-chart-generator': {
+    shortDescription: 'Generate sprint burndown charts from daily data.',
+    longDescription: 'Enter total sprint points and daily remaining effort to generate a visual burndown chart with ideal and actual trendlines. Export data as CSV.',
+    keywords: ['burndown chart', 'sprint burndown', 'agile chart', 'progress tracking', 'sprint progress'],
+    faqs: [
+      { q: 'What does the ideal line show?', a: 'A straight line from total points to zero, representing even daily completion.' },
+      { q: 'Can I export the chart?', a: 'You can export the data as CSV. The chart itself is an SVG rendered in the browser.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Set total story points and sprint length in days.\n2. Each day, enter the remaining points in the grid.\n3. The chart plots actual progress against the ideal burndown line.\n4. Use "Export CSV" to save data for external reporting.' },
+    ],
+  },
+  'user-story-builder': {
+    shortDescription: 'Build user stories with the standard format.',
+    longDescription: 'Create user stories using the "As a / I want / So that" template. Add acceptance criteria, priority, point estimates, and notes. Copy formatted stories to paste into your backlog tool.',
+    keywords: ['user story', 'story builder', 'agile requirements', 'as a i want', 'backlog item'],
+    faqs: [
+      { q: 'What format does this use?', a: 'The standard "As a [role], I want [feature], so that [benefit]" template.' },
+      { q: 'Can I add acceptance criteria?', a: 'Yes. Add multiple acceptance criteria per story.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Click "New Story" to create a user story.\n2. Fill in the role, desired feature, and benefit.\n3. Add acceptance criteria, priority, and story point estimates.\n4. Use the Copy button to export the formatted story.' },
+    ],
+  },
+  'acceptance-criteria-generator': {
+    shortDescription: 'Write Given/When/Then acceptance criteria.',
+    longDescription: 'Generate structured acceptance criteria using the Gherkin-style Given/When/Then format. Create multiple scenarios per story and copy the formatted output.',
+    keywords: ['acceptance criteria', 'given when then', 'gherkin', 'bdd', 'test scenarios'],
+    faqs: [
+      { q: 'What is Given/When/Then?', a: 'A structured format from BDD: Given a precondition, When an action occurs, Then the expected result happens.' },
+      { q: 'Can I use this with BDD tools?', a: 'Yes. The output follows Gherkin syntax and can be pasted into Cucumber or similar frameworks.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Optionally enter the user story being described.\n2. Fill in Given (precondition), When (action), and Then (outcome) for each scenario.\n3. Add multiple scenarios as needed.\n4. Preview and copy the formatted output.' },
+    ],
+  },
+  'epic-breakdown-assistant': {
+    shortDescription: 'Break epics into smaller user stories.',
+    longDescription: 'Decompose large epics into manageable user stories with priority and point estimates. Track total points per epic and across all epics.',
+    keywords: ['epic breakdown', 'story decomposition', 'agile backlog', 'epic to stories', 'work breakdown'],
+    faqs: [
+      { q: 'What is an epic?', a: 'A large body of work that can be broken into smaller user stories that each deliver value.' },
+      { q: 'How small should stories be?', a: 'Aim for stories that can be completed within one sprint. If a story is too large, break it down further.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Click "New Epic" and describe the high-level goal.\n2. Break it into stories with titles, priorities, and point estimates.\n3. Track total points per epic to gauge overall size.\n4. Delete or add stories as the scope becomes clearer.' },
+    ],
+  },
+  'story-mapping-tool': {
+    shortDescription: 'Create visual user story maps with release slicing.',
+    longDescription: 'Build user story maps organized by activities and tasks. Assign stories to releases for incremental delivery planning. Visualize the product backbone and prioritize features.',
+    keywords: ['story mapping', 'user story map', 'release planning', 'product backbone', 'feature mapping'],
+    faqs: [
+      { q: 'What is a story map?', a: 'A visual layout of user activities (left-to-right) and stories (top-to-bottom by priority), helping teams see the big picture.' },
+      { q: 'How do releases work?', a: 'Create release lanes and assign stories to them. Stories in Release 1 (MVP) ship first.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Create activities representing major user goals (left to right).\n2. Add tasks under each activity.\n3. Add stories under tasks and assign them to a release.\n4. Use release lanes to plan incremental delivery.' },
+    ],
+  },
+  'retrospective-board': {
+    shortDescription: 'Run sprint retrospectives with multiple formats.',
+    longDescription: 'Choose from four retrospective formats: Went Well/Improve/Actions, Glad/Sad/Mad, Start/Stop/Continue, and 4Ls (Liked/Learned/Lacked/Longed For). Add items, vote on them, and copy results.',
+    keywords: ['retrospective', 'retro board', 'sprint retro', 'team feedback', 'continuous improvement'],
+    faqs: [
+      { q: 'How many formats are available?', a: 'Four: Went Well/Improve/Actions, Glad/Sad/Mad, Start/Stop/Continue, and 4Ls.' },
+      { q: 'Can team members vote?', a: 'Yes. Click the thumbs-up icon on any item to vote. Items sort by votes automatically.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Select a retrospective format from the dropdown.\n2. Add items to each column.\n3. Vote on the most important items.\n4. Discuss top-voted items and create action items.\n5. Copy the board to share with the team.' },
+    ],
+  },
+  'definition-of-done-checklist': {
+    shortDescription: 'Track your team\'s Definition of Done criteria.',
+    longDescription: 'Create and manage a Definition of Done checklist with customizable criteria. Check items per story, track progress, and copy the checklist for team reference.',
+    keywords: ['definition of done', 'dod', 'quality checklist', 'done criteria', 'agile standards'],
+    faqs: [
+      { q: 'What is Definition of Done?', a: 'A shared checklist of criteria that must be met before a story can be considered complete.' },
+      { q: 'Can I customize the criteria?', a: 'Yes. Add, remove, or edit any criteria. Use "Defaults" to restore the starter set.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Review the default criteria and customize for your team.\n2. Check items as they are completed for each story.\n3. The progress bar shows overall completion.\n4. Use "Uncheck" to reset for the next story.\n5. Copy the checklist to share with the team.' },
+    ],
+  },
+  'definition-of-ready-checklist': {
+    shortDescription: 'Ensure stories are ready for sprint with a DoR checklist.',
+    longDescription: 'A Definition of Ready checklist to verify stories meet all prerequisites before entering a sprint. Customizable criteria with progress tracking.',
+    keywords: ['definition of ready', 'dor', 'ready checklist', 'refinement', 'backlog readiness'],
+    faqs: [
+      { q: 'When do I use this?', a: 'During backlog refinement. Check criteria for each story before it enters a sprint.' },
+      { q: 'How is it different from Definition of Done?', a: 'DoR checks if a story is ready to START. DoD checks if a story is ready to SHIP.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Review criteria during backlog refinement.\n2. Check items as they are confirmed for a story.\n3. A story is sprint-ready when all criteria are met.\n4. Customize criteria to match your team\'s needs.' },
+    ],
+  },
+  'working-agreement-builder': {
+    shortDescription: 'Build team working agreements collaboratively.',
+    longDescription: 'Define team norms and working agreements across categories like communication, meetings, code quality, and work-life balance. Mark rules as agreed-upon and share with the team.',
+    keywords: ['working agreement', 'team norms', 'team rules', 'social contract', 'team charter'],
+    faqs: [
+      { q: 'What is a working agreement?', a: 'A set of norms the team agrees to follow, covering communication, meetings, code practices, and collaboration.' },
+      { q: 'Should the whole team agree?', a: 'Yes. Working agreements work best when everyone participates in creating them and the team revisits them periodically.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Review the default rules and customize for your team.\n2. Add new rules in any category.\n3. Click the circle next to each rule to mark it as team-agreed.\n4. Copy the agreement to share via Slack, Confluence, or email.\n5. Revisit and update the agreement during retrospectives.' },
+    ],
+  },
+
+  // ── Project Management Tools ─────────────────────────────────
+  'task-breakdown-wbs': {
+    shortDescription: 'Build hierarchical work breakdown structures.',
+    longDescription: 'Create a tree of project deliverables, phases, and work packages. Add, edit, delete, collapse, and reorder nodes. Export the full WBS as JSON or CSV.',
+    keywords: ['wbs', 'work breakdown structure', 'task tree', 'project planning', 'hierarchy'],
+    faqs: [
+      { q: 'What is a WBS?', a: 'A Work Breakdown Structure is a hierarchical decomposition of a project into deliverables and tasks.' },
+      { q: 'Can I export my WBS?', a: 'Yes. Export as JSON for re-import or CSV for spreadsheets.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Click "Add Root" to create a top-level deliverable.\n2. Hover over any node and click + to add a child.\n3. Collapse/expand branches with the arrow icon.\n4. Export as JSON or CSV when finished.' },
+    ],
+  },
+  'gantt-chart-generator': {
+    shortDescription: 'Create Gantt charts with tasks, dates, and dependencies.',
+    longDescription: 'Add tasks with start and end dates, define dependency links between them, and view a visual Gantt chart. Export the chart as SVG.',
+    keywords: ['gantt chart', 'project schedule', 'timeline', 'dependencies', 'svg export'],
+    faqs: [
+      { q: 'Can I set dependencies?', a: 'Yes. Each task can depend on another task. Dependencies are shown as red arrows on the chart.' },
+      { q: 'How do I export?', a: 'Click the SVG button to download the Gantt chart as an SVG file.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Click "Add Task" and fill in name, start date, and end date.\n2. Optionally set a dependency from the dropdown.\n3. The Gantt chart renders automatically below the task list.\n4. Click "SVG" to export the chart.' },
+    ],
+  },
+  'project-timeline-planner': {
+    shortDescription: 'Plan timelines with milestones and phases.',
+    longDescription: 'Create project timelines by adding milestones and phases with dates. Reorder items and view a visual timeline showing progress.',
+    keywords: ['timeline', 'milestones', 'phases', 'project plan', 'visual timeline'],
+    faqs: [
+      { q: 'What\'s the difference between a milestone and a phase?', a: 'A milestone is a single point in time. A phase has a start and end date.' },
+      { q: 'Can I reorder items?', a: 'Yes. Use the up/down arrows next to each item.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Add milestones (single date) or phases (date range).\n2. Enter names and dates for each item.\n3. Use arrows to reorder items.\n4. The visual timeline updates automatically.' },
+    ],
+  },
+  'milestone-tracker': {
+    shortDescription: 'Track project milestones with status and progress.',
+    longDescription: 'Define project milestones with names, due dates, and notes. Toggle status between pending and done. View overall progress with a summary bar.',
+    keywords: ['milestone tracker', 'progress', 'project milestones', 'status tracking', 'deadlines'],
+    faqs: [
+      { q: 'How do I mark a milestone done?', a: 'Click the status icon next to the milestone to toggle between pending and done.' },
+      { q: 'Is there a progress summary?', a: 'Yes. A progress bar shows completed vs. total milestones.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Click "Add Milestone" and enter a name and due date.\n2. Click the icon to mark milestones as done.\n3. Add optional notes for context.\n4. Track progress via the summary bar at the top.' },
+    ],
+  },
+  'time-blocking-planner': {
+    shortDescription: 'Plan your day or week with time blocks.',
+    longDescription: 'Assign tasks to hourly time slots for any day of the week. Switch between day and week views. Copy or export your schedule.',
+    keywords: ['time blocking', 'schedule planner', 'day plan', 'week plan', 'time management'],
+    faqs: [
+      { q: 'What hours are shown?', a: '6 AM to 9 PM in one-hour slots.' },
+      { q: 'Can I export my schedule?', a: 'Yes. Use the Export button to download as text, or Copy to clipboard.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Select Day or Week view.\n2. Type tasks into the time slots.\n3. Switch days using the dropdown.\n4. Copy or export your schedule.' },
+    ],
+  },
+  'resource-allocation-planner': {
+    shortDescription: 'Assign team members to tasks with capacity tracking.',
+    longDescription: 'Add resources and tasks, then set percentage allocations per person per task. See total allocation per resource with over-allocation warnings.',
+    keywords: ['resource allocation', 'team capacity', 'assignment', 'workload', 'over-allocation'],
+    faqs: [
+      { q: 'What triggers an over-allocation warning?', a: 'When a resource\'s total allocation exceeds 100%.' },
+      { q: 'Can I see allocation percentages?', a: 'Yes. Each resource shows their total allocation alongside a visual indicator.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Add team members with their names and roles.\n2. Add tasks and enter allocation percentages per person.\n3. Watch for red warnings on over-allocated resources.\n4. Adjust allocations to balance the team.' },
+    ],
+  },
+  'effort-estimation-calculator': {
+    shortDescription: 'Estimate total effort hours with buffer adjustment.',
+    longDescription: 'List tasks with estimated hours. See total raw hours, apply a buffer percentage, and get the grand total effort. Useful for project proposals.',
+    keywords: ['effort estimation', 'task hours', 'buffer', 'project estimate', 'total effort'],
+    faqs: [
+      { q: 'What is the buffer for?', a: 'Buffer accounts for unknowns, context switching, and unexpected complexity. Typically 15–30%.' },
+      { q: 'How is total effort calculated?', a: 'Sum of task hours plus the buffer percentage applied to that sum.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Add tasks with estimated hours.\n2. Set a buffer percentage using the slider.\n3. View the summary: raw hours, buffer hours, and total effort.\n4. Adjust tasks or buffer as needed.' },
+    ],
+  },
+  'cost-estimator': {
+    shortDescription: 'Estimate project cost with rates and fixed costs.',
+    longDescription: 'Add variable cost items (hourly rate × hours) and fixed cost items. See a breakdown of variable, fixed, and total project cost.',
+    keywords: ['cost estimator', 'project budget', 'hourly rate', 'fixed cost', 'variable cost'],
+    faqs: [
+      { q: 'What\'s the difference between fixed and variable?', a: 'Variable costs depend on hours worked (rate × hours). Fixed costs are flat amounts (licenses, equipment).' },
+      { q: 'Can I mix both types?', a: 'Yes. Each line item is either variable or fixed.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Click "Add Line Item" and select variable or fixed.\n2. For variable: enter hours and hourly rate.\n3. For fixed: enter the flat amount.\n4. View the total project cost in the summary.' },
+    ],
+  },
+  'workload-calculator': {
+    shortDescription: 'Track per-person workload with capacity balancing.',
+    longDescription: 'Add team members with max hours, then assign tasks with hours and owners. View load bars per person with over-capacity warnings.',
+    keywords: ['workload calculator', 'team capacity', 'load balancing', 'task assignment', 'hours'],
+    faqs: [
+      { q: 'How is overload detected?', a: 'When assigned hours exceed the person\'s max hours, the bar turns red.' },
+      { q: 'Can tasks be unassigned?', a: 'Yes. Leave the assignee blank and the hours won\'t count toward anyone\'s load.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Add team members with their available hours.\n2. Add tasks with estimated hours and assign to team members.\n3. Check load bars to see who is over or under capacity.\n4. Reassign tasks to balance the workload.' },
+    ],
+  },
+  'raid-log': {
+    shortDescription: 'Track Risks, Assumptions, Issues, and Dependencies.',
+    longDescription: 'Maintain a RAID log with categorized entries. Set priority, owner, status, and dates. Filter by type, copy entries, or export as CSV.',
+    keywords: ['raid log', 'risks', 'assumptions', 'issues', 'dependencies', 'project governance'],
+    faqs: [
+      { q: 'What does RAID stand for?', a: 'Risks, Assumptions, Issues, and Dependencies — the four categories of project governance items.' },
+      { q: 'Can I export the log?', a: 'Yes. Export as CSV or copy to clipboard.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Click a type button (Risk, Assumption, Issue, Dependency) to add an entry.\n2. Fill in title, description, priority, owner, and status.\n3. Filter by type to focus on specific categories.\n4. Export as CSV for external sharing.' },
+    ],
+  },
+  'risk-assessment-matrix': {
+    shortDescription: 'Assess risks on a likelihood × impact heatmap.',
+    longDescription: 'Add risks with likelihood and impact ratings. See auto-calculated risk scores and a visual heatmap grid showing where each risk falls.',
+    keywords: ['risk matrix', 'heatmap', 'likelihood', 'impact', 'risk scoring', 'assessment'],
+    faqs: [
+      { q: 'How is the score calculated?', a: 'Score = Likelihood (1–5) × Impact (1–5). Scores range from 1 (low) to 25 (critical).' },
+      { q: 'What do the colors mean?', a: 'Green = low risk, yellow = medium, orange = high, red = critical.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Click "Add Risk" and describe the risk.\n2. Select likelihood and impact levels from the dropdowns.\n3. View the auto-calculated score and severity label.\n4. Check the heatmap to see all risks plotted visually.' },
+    ],
+  },
+  'dependency-tracker': {
+    shortDescription: 'Map task dependencies with blocked/unblocked status.',
+    longDescription: 'Define tasks and set dependencies between them. See which tasks are blocked vs. unblocked. View a simple dependency graph.',
+    keywords: ['dependency tracker', 'blocked', 'unblocked', 'task dependencies', 'graph'],
+    faqs: [
+      { q: 'How do I add a dependency?', a: 'Click the dependency pills below a task to toggle which tasks it depends on.' },
+      { q: 'What is a blocked task?', a: 'A task with one or more dependencies is considered blocked until those dependencies are resolved.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Add tasks with names.\n2. Click dependency badges to link tasks.\n3. Blocked tasks show an amber indicator.\n4. Use the graph view to visualize the dependency chain.' },
+    ],
+  },
+  'scope-change-log': {
+    shortDescription: 'Log and track project scope changes.',
+    longDescription: 'Record change requests with impact level, decision status (Pending, Approved, Rejected, Deferred), and approval tracking. Export as CSV.',
+    keywords: ['scope change', 'change request', 'impact assessment', 'approval', 'change log'],
+    faqs: [
+      { q: 'What decisions are available?', a: 'Pending, Approved, Rejected, and Deferred.' },
+      { q: 'Can I export changes?', a: 'Yes. Use the CSV export to share with stakeholders.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Click "Log Change" when a scope change is requested.\n2. Enter title, description, requester, and impact level.\n3. Set the decision status as discussions progress.\n4. Export as CSV for audit trails.' },
+    ],
+  },
+  'action-item-tracker': {
+    shortDescription: 'Track action items with owner, due date, and status.',
+    longDescription: 'Create action items with owners and due dates. Filter by status or owner. Overdue items are highlighted in red.',
+    keywords: ['action items', 'task tracker', 'owner', 'due date', 'status tracking'],
+    faqs: [
+      { q: 'How are overdue items shown?', a: 'Items past their due date with status other than Done are highlighted in red.' },
+      { q: 'Can I filter by owner?', a: 'Yes. Use the owner dropdown to see items for a specific person.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Click "Add Item" to create an action item.\n2. Set the title, owner, due date, and status.\n3. Filter by status (Open, In Progress, Done) or by owner.\n4. Watch for red highlights on overdue items.' },
+    ],
+  },
+  'project-status-report': {
+    shortDescription: 'Generate RAG status reports for project updates.',
+    longDescription: 'Set Red/Amber/Green status for Overall, Scope, Schedule, Budget, and Risk. Add key updates, risks, and next steps. Copy or export the report.',
+    keywords: ['status report', 'rag status', 'red amber green', 'project update', 'report generator'],
+    faqs: [
+      { q: 'What is RAG?', a: 'Red/Amber/Green — a traffic-light system to quickly communicate project health.' },
+      { q: 'Can I share the report?', a: 'Yes. Copy to clipboard or export as a text file.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Enter the project name and report date.\n2. Click the colored circles to set RAG status for each dimension.\n3. Fill in key updates, risks, and next steps.\n4. Copy or export the formatted report.' },
+    ],
+  },
+  'kpi-metrics-tracker': {
+    shortDescription: 'Define and track KPIs with trend sparklines.',
+    longDescription: 'Create KPIs with names, units, and targets. Add data points over time and see sparkline trend charts. Track whether metrics are meeting targets.',
+    keywords: ['kpi tracker', 'metrics', 'trend chart', 'performance', 'sparkline'],
+    faqs: [
+      { q: 'What is the dashed line on the chart?', a: 'It represents your target value for that KPI.' },
+      { q: 'How many data points do I need for a chart?', a: 'At least 2 data points are needed to render a sparkline.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Click "Add KPI" and enter a name, unit, and target.\n2. Add data points with dates and values.\n3. The sparkline shows the trend over time.\n4. The dashed line shows your target for comparison.' },
+    ],
+  },
+  'project-health-dashboard': {
+    shortDescription: 'Auto-score project health from scope, cost, time, and risk.',
+    longDescription: 'Rate four dimensions (scope, cost, time, risk) on a 0–100 scale. Get an auto-calculated overall health score with Healthy/At Risk/Critical labels and a summary table.',
+    keywords: ['project health', 'dashboard', 'health score', 'scope', 'cost', 'time', 'risk'],
+    faqs: [
+      { q: 'How is the overall score calculated?', a: 'It is the average of the four dimension scores.' },
+      { q: 'What do the labels mean?', a: '80–100 = Healthy, 60–79 = At Risk, below 60 = Critical.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Enter your project name.\n2. Adjust the sliders for Scope, Cost, Time, and Risk.\n3. The overall health score and label update automatically.\n4. Add notes for additional context.' },
+    ],
+  },
+  'checklist-builder': {
+    shortDescription: 'Build custom checklists with templates and progress tracking.',
+    longDescription: 'Create reusable checklists from scratch or from built-in templates (Product Launch, Team Onboarding, Code Review). Check items off, track progress, and copy results.',
+    keywords: ['checklist builder', 'custom checklist', 'templates', 'progress tracking', 'reusable'],
+    faqs: [
+      { q: 'What templates are available?', a: 'Blank, Product Launch, Team Onboarding, and Code Review.' },
+      { q: 'Can I reuse a checklist?', a: 'Yes. Click "Uncheck all" to reset for reuse, or create a new one from the same template.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Pick a template or start blank.\n2. Add or customize checklist items.\n3. Check items as they are completed.\n4. Track progress with the percentage bar.\n5. Copy the checklist to share.' },
+    ],
+  },
+
+  // ── CSS/HTML Tools ───────────────────────────────────────────
+  'css-box-shadow-generator': {
+    shortDescription: 'Generate CSS box shadow values visually.',
+    longDescription: 'Create and customize CSS box shadows with a visual editor. Add multiple shadow layers, adjust X/Y offsets, blur, spread, color, and inset — then copy the generated CSS instantly.',
+    keywords: ['box shadow', 'css shadow', 'shadow generator', 'css tool', 'multiple shadows'],
+    faqs: [
+      { q: 'Can I add multiple shadow layers?', a: 'Yes. Click "Add Shadow Layer" to stack shadows. Each layer has independent controls.' },
+      { q: 'What is inset?', a: 'Inset makes the shadow appear inside the element instead of outside.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Use sliders to adjust offset, blur, spread.\n2. Pick a shadow color and toggle inset if needed.\n3. Add more layers for complex effects.\n4. Preview updates live in the box above.\n5. Copy the generated CSS.' },
+    ],
+  },
+  'css-border-radius-generator': {
+    shortDescription: 'Generate CSS border-radius values with a visual editor.',
+    longDescription: 'Adjust each corner independently or link all corners together. Choose px, %, or rem units. See the shape update in real time and copy the CSS.',
+    keywords: ['border radius', 'css', 'rounded corners', 'corner builder'],
+    faqs: [
+      { q: 'Can I set each corner independently?', a: 'Yes. Uncheck "Link all corners" to adjust each corner separately.' },
+      { q: 'What units are available?', a: 'px, %, and rem.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Toggle "Link all corners" on or off.\n2. Drag sliders to set each corner radius.\n3. Choose your preferred unit.\n4. Preview the shape live.\n5. Copy the CSS.' },
+    ],
+  },
+  'css-flexbox-playground': {
+    shortDescription: 'Interactive CSS flexbox layout visualizer.',
+    longDescription: 'Toggle flex direction, wrap, justify-content, align-items, align-content, and gap. See colored flex items rearrange in real time. Copy the generated CSS.',
+    keywords: ['flexbox', 'css layout', 'flex', 'visualizer', 'justify-content', 'align-items'],
+    faqs: [
+      { q: 'Can I change the number of items?', a: 'Yes. Use the +/- buttons to add or remove flex items (1–12).' },
+      { q: 'Does it support all flex properties?', a: 'It covers direction, wrap, justify-content, align-items, align-content, and gap.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Pick values from the dropdown menus.\n2. Adjust the gap slider.\n3. Add or remove child items.\n4. Watch the layout update live.\n5. Copy the generated CSS.' },
+    ],
+  },
+  'css-grid-generator': {
+    shortDescription: 'Visual CSS Grid layout builder.',
+    longDescription: 'Set columns, rows, gaps, and sizes. Choose fr, px, %, or auto units. See the grid render live with numbered cells and copy the CSS.',
+    keywords: ['css grid', 'grid layout', 'columns', 'rows', 'grid template'],
+    faqs: [
+      { q: 'What units can I use?', a: 'fr, px, %, and auto for both columns and rows.' },
+      { q: 'Can I set custom column sizes?', a: 'Yes. Enter comma-separated values like "1,2,1" in the sizes field.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Set the number of columns and rows.\n2. Customize sizes (comma-separated).\n3. Adjust column and row gaps.\n4. View the live grid preview.\n5. Copy the CSS.' },
+    ],
+  },
+  'css-animation-generator': {
+    shortDescription: 'Build CSS keyframe animations with live preview.',
+    longDescription: 'Define @keyframes with custom offsets and CSS properties. Set duration, timing, delay, iterations, direction, and fill mode. Preview the animation and copy the CSS.',
+    keywords: ['css animation', 'keyframes', 'timing', 'easing', 'motion', 'transition'],
+    faqs: [
+      { q: 'Can I add multiple keyframes?', a: 'Yes. Click "Add" to insert keyframes at any percentage offset.' },
+      { q: 'How do I replay the animation?', a: 'Click the replay icon in the top-right of the preview.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Set animation name, duration, and timing.\n2. Define keyframes with offset % and CSS properties.\n3. Adjust iterations, direction, and fill mode.\n4. Watch the live preview.\n5. Copy the full @keyframes + animation CSS.' },
+    ],
+  },
+  'css-filter-generator': {
+    shortDescription: 'Adjust CSS filter effects with live preview.',
+    longDescription: 'Use sliders for blur, brightness, contrast, grayscale, hue-rotate, invert, opacity, saturate, and sepia. See the effect on a preview element and copy the CSS filter property.',
+    keywords: ['css filter', 'blur', 'brightness', 'contrast', 'grayscale', 'hue-rotate', 'sepia'],
+    faqs: [
+      { q: 'How many filters can I combine?', a: 'All 9 filters can be combined simultaneously. Only non-default values are included in the output.' },
+      { q: 'Can I reset all filters?', a: 'Yes. Click the reset button to restore all defaults.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Move sliders to adjust filter values.\n2. Preview the effect on the gradient box.\n3. Only changed values appear in the output.\n4. Copy the generated CSS filter property.' },
+    ],
+  },
+  'css-clip-path-maker': {
+    shortDescription: 'Build CSS clip-path polygon shapes visually.',
+    longDescription: 'Drag points on a canvas or pick from presets (triangle, diamond, pentagon, hexagon, star, arrow). See the clipped shape update live and copy the clip-path CSS.',
+    keywords: ['clip-path', 'polygon', 'css shape', 'mask', 'clip path maker'],
+    faqs: [
+      { q: 'Can I drag the points?', a: 'Yes. Click and drag any white circle on the canvas to move that vertex.' },
+      { q: 'What presets are available?', a: 'Triangle, diamond, pentagon, hexagon, star, and arrow.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Pick a preset shape or start with a triangle.\n2. Drag points to reshape, or click the canvas to add points.\n3. Fine-tune coordinates in the points panel.\n4. Copy the clip-path CSS.' },
+    ],
+  },
+  'css-units-converter': {
+    shortDescription: 'Convert between px, rem, em, vh, vw, and pt.',
+    longDescription: 'Enter a value and convert between CSS units. Set a custom base font size and viewport dimensions for accurate rem/em/vh/vw conversions. See all unit equivalents at once.',
+    keywords: ['css units', 'px to rem', 'rem to px', 'em', 'vh', 'vw', 'converter'],
+    faqs: [
+      { q: 'How are rem and em calculated?', a: 'Both use the base font size (default 16px). 1rem = 1em = base font size.' },
+      { q: 'How are vh/vw calculated?', a: '1vh = 1% of viewport height, 1vw = 1% of viewport width.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Enter a numeric value.\n2. Select "From" and "To" units.\n3. Adjust base font size and viewport if needed.\n4. See the result and quick reference for all units.\n5. Copy the converted value.' },
+    ],
+  },
+  'html-formatter-beautifier': {
+    shortDescription: 'Format and beautify messy HTML code.',
+    longDescription: 'Paste unformatted HTML and get it properly indented with consistent whitespace. Choose 2-space, 4-space, or tab indentation.',
+    keywords: ['html formatter', 'beautify', 'pretty print', 'indent', 'html cleanup'],
+    faqs: [
+      { q: 'Does it fix broken HTML?', a: 'It formats indentation and whitespace. It does not auto-close missing tags.' },
+      { q: 'What indent options are available?', a: '2 spaces, 4 spaces, or tabs.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Paste messy HTML in the left panel.\n2. Choose your indent style (2/4 spaces or tab).\n3. Formatted output appears on the right.\n4. Copy the result.' },
+    ],
+  },
+  'html-to-markdown': {
+    shortDescription: 'Convert HTML to clean Markdown.',
+    longDescription: 'Paste HTML and get Markdown output. Converts headings, bold, italic, links, images, lists, code blocks, blockquotes, and horizontal rules.',
+    keywords: ['html to markdown', 'converter', 'markdown', 'html', 'transform'],
+    faqs: [
+      { q: 'What HTML elements are supported?', a: 'Headings (h1–h6), bold, italic, links, images, lists, code, pre, blockquotes, paragraphs, and hr.' },
+      { q: 'Does it handle nested lists?', a: 'Basic list conversion is supported. Deeply nested lists may need manual adjustment.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Paste HTML in the left panel.\n2. Markdown output appears on the right.\n3. Copy the Markdown result.' },
+    ],
+  },
+  'favicon-generator': {
+    shortDescription: 'Generate all favicon sizes from one image.',
+    longDescription: 'Upload an SVG or PNG and generate all standard favicon sizes (16, 32, 48, 180, 192, 512). Download each individually or all at once. Copy the HTML link tags.',
+    keywords: ['favicon', 'icon generator', 'sizes', 'apple touch icon', 'meta tags'],
+    faqs: [
+      { q: 'What sizes are generated?', a: '16×16, 32×32, 48×48, 180×180 (Apple Touch Icon), 192×192 and 512×512 (Android Chrome).' },
+      { q: 'What input formats work?', a: 'SVG, PNG, and JPEG. Square images at least 512×512 give the best results.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Upload an SVG or PNG image.\n2. All favicon sizes are generated instantly.\n3. Download individual sizes or all at once.\n4. Copy the HTML link tags for your <head>.' },
+    ],
+  },
+  'button-generator': {
+    shortDescription: 'Build CSS buttons with a visual editor.',
+    longDescription: 'Customize text, colors (normal + hover), padding, font size, border, border-radius, shadow, and transition speed. Preview the button with hover and copy CSS + HTML.',
+    keywords: ['button generator', 'css button', 'hover effect', 'button builder'],
+    faqs: [
+      { q: 'Can I preview the hover state?', a: 'Yes. Hover over the preview button to see the hover colors in action.' },
+      { q: 'Does it generate HTML too?', a: 'Yes. Both CSS and the HTML button element are included in the output.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Enter button text.\n2. Adjust colors, padding, font, border, and shadow.\n3. Hover over the preview to test the hover state.\n4. Copy the generated CSS and HTML.' },
+    ],
+  },
+  'glassmorphism-generator': {
+    shortDescription: 'Create a CSS glassmorphism / frosted glass effect.',
+    longDescription: 'Build a trendy frosted-glass card with adjustable transparency, blur, saturation, and border. Preview on a colorful background and copy the CSS with backdrop-filter.',
+    keywords: ['glassmorphism', 'frosted glass', 'backdrop-filter', 'blur effect', 'css'],
+    faqs: [
+      { q: 'What is glassmorphism?', a: 'A design trend featuring semi-transparent backgrounds with a frosted glass blur, creating a sense of depth.' },
+      { q: 'Does backdrop-filter work everywhere?', a: 'It is supported in all modern browsers. The generated CSS includes the -webkit- prefix for Safari.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Adjust opacity, blur, saturation, and border.\n2. Pick a base color.\n3. See the glass card on the colorful background.\n4. Copy the generated CSS.' },
+    ],
+  },
+  'neumorphism-generator': {
+    shortDescription: 'Build soft UI neumorphism effects in CSS.',
+    longDescription: 'Create neumorphic (soft UI) elements with four shape modes: flat, concave, convex, and pressed. Adjust background color, distance, intensity, blur, and radius.',
+    keywords: ['neumorphism', 'soft ui', 'css shadows', 'skeuomorphism', 'soft design'],
+    faqs: [
+      { q: 'What are the shape modes?', a: 'Flat (standard), concave (inward curve), convex (outward curve), and pressed (inset shadow).' },
+      { q: 'Why does the background color matter?', a: 'Neumorphism works by creating light and dark shadows relative to the background, so the BG color is essential.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Pick a background color.\n2. Choose a shape mode (flat, concave, convex, pressed).\n3. Adjust distance, intensity, blur, and radius.\n4. Copy the generated CSS.' },
+    ],
+  },
+  'css-variable-extractor': {
+    shortDescription: 'Extract CSS custom properties from any stylesheet.',
+    longDescription: 'Paste CSS and instantly extract all custom properties (--variable declarations). View them in a table with color swatches and copy as a clean :root block.',
+    keywords: ['css variables', 'custom properties', 'extract', '--var', 'root block'],
+    faqs: [
+      { q: 'What does it extract?', a: 'All declarations that start with -- (CSS custom properties / variables).' },
+      { q: 'Does it show color previews?', a: 'Yes. If a variable value looks like a color (hex, rgb, hsl), a swatch is shown.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Paste CSS in the input panel.\n2. Variables are extracted instantly.\n3. Review the table for names, values, and color swatches.\n4. Copy the :root block.' },
+    ],
+  },
+
+  // ─── Maths & Science Tools ───
+  'matrix-calculator': {
+    shortDescription: 'Perform matrix operations up to 6×6.',
+    longDescription: 'Add, subtract, multiply matrices. Compute determinant, inverse, and transpose with step-by-step solutions for matrices up to 6×6.',
+    keywords: ['matrix', 'determinant', 'inverse', 'transpose', 'linear algebra', 'multiply matrices'],
+    faqs: [
+      { q: 'What size matrices are supported?', a: 'Up to 6×6 for all operations.' },
+      { q: 'Does it show step-by-step?', a: 'Yes, determinant and inverse calculations show cofactor expansion steps.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Set matrix dimensions.\n2. Enter values.\n3. Choose an operation.\n4. View results and steps.' }],
+  },
+  'equation-solver': {
+    shortDescription: 'Solve linear, quadratic, cubic equations and systems.',
+    longDescription: 'Solve linear, quadratic (with discriminant analysis), and cubic equations using Cardano\'s formula. Also solves 2×2 and 3×3 systems using Cramer\'s Rule.',
+    keywords: ['equation', 'quadratic', 'cubic', 'linear system', 'cramer rule', 'discriminant'],
+    faqs: [
+      { q: 'What types of equations?', a: 'Linear (ax+b=0), quadratic (ax²+bx+c=0), cubic, 2×2 systems, 3×3 systems.' },
+      { q: 'Does it handle complex roots?', a: 'Yes, quadratic solver shows complex roots when discriminant is negative.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Select equation type.\n2. Enter coefficients.\n3. View solutions with step-by-step working.' }],
+  },
+  'polynomial-calculator': {
+    shortDescription: 'Polynomial arithmetic, roots, and graphing.',
+    longDescription: 'Add, subtract, multiply polynomials. Find roots, evaluate at any x value, and visualize with an SVG plot.',
+    keywords: ['polynomial', 'roots', 'factor', 'algebra', 'graph', 'evaluate'],
+    faqs: [
+      { q: 'How do I enter a polynomial?', a: 'Enter coefficients from highest to lowest degree, separated by commas.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Enter polynomial coefficients.\n2. Choose operation.\n3. View result and graph.' }],
+  },
+  'statistics-calculator': {
+    shortDescription: 'Descriptive statistics with histogram and outlier detection.',
+    longDescription: 'Calculate mean, median, mode, range, standard deviation, variance, quartiles, IQR, and Z-scores. Detect outliers and view histogram.',
+    keywords: ['statistics', 'mean', 'median', 'standard deviation', 'histogram', 'quartile', 'outlier'],
+    faqs: [
+      { q: 'How do I enter data?', a: 'Enter numbers separated by commas or spaces.' },
+      { q: 'Does it detect outliers?', a: 'Yes, using the 1.5×IQR rule.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Enter comma-separated numbers.\n2. View all statistics, histogram, and outlier analysis.' }],
+  },
+  'probability-calculator': {
+    shortDescription: 'Permutations, combinations, and distributions.',
+    longDescription: 'Calculate permutations (nPr), combinations (nCr), binomial distribution probabilities, and normal distribution CDF approximation.',
+    keywords: ['probability', 'permutation', 'combination', 'binomial', 'normal distribution'],
+    faqs: [
+      { q: 'What distributions are supported?', a: 'Binomial and normal (Gaussian) distributions.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Select mode.\n2. Enter parameters.\n3. View probability results.' }],
+  },
+  'prime-number-tools': {
+    shortDescription: 'Prime checker, factorization, sieve, GCD/LCM.',
+    longDescription: 'Check if a number is prime, find prime factorization with steps, list primes in a range using the Sieve of Eratosthenes, and calculate GCD/LCM.',
+    keywords: ['prime', 'factorization', 'sieve', 'gcd', 'lcm', 'euclidean'],
+    faqs: [
+      { q: 'How large can numbers be?', a: 'Primality testing works for numbers up to several million. Factorization uses trial division.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Choose a mode.\n2. Enter number(s).\n3. View results with step-by-step working.' }],
+  },
+  'number-theory-calculator': {
+    shortDescription: 'Factorial, Fibonacci, modular arithmetic, Euler totient.',
+    longDescription: 'Calculate factorials (up to 1000 using BigInt), Fibonacci numbers, modular arithmetic with modular exponentiation, and Euler\'s totient function.',
+    keywords: ['factorial', 'fibonacci', 'modular arithmetic', 'euler totient', 'number theory'],
+    faqs: [
+      { q: 'How large can factorials get?', a: 'Up to 1000! using BigInt for exact results.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Select mode.\n2. Enter values.\n3. View results.' }],
+  },
+  'fraction-calculator': {
+    shortDescription: 'Fraction arithmetic with mixed numbers and conversions.',
+    longDescription: 'Add, subtract, multiply, divide fractions including mixed numbers. Automatically simplifies using GCD. Convert between fractions, decimals, and percentages.',
+    keywords: ['fraction', 'mixed number', 'simplify', 'decimal', 'percentage'],
+    faqs: [
+      { q: 'Does it support mixed numbers?', a: 'Yes, enter whole part and fraction separately.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Enter fractions.\n2. Choose operation.\n3. View simplified result and conversions.' }],
+  },
+  'logarithm-calculator': {
+    shortDescription: 'Log, natural log, antilog with step-by-step.',
+    longDescription: 'Calculate logarithms of any base, natural log (ln), antilog, and change of base. Shows step-by-step explanation of each calculation.',
+    keywords: ['logarithm', 'log', 'ln', 'antilog', 'change of base'],
+    faqs: [
+      { q: 'What bases are supported?', a: 'Any positive base. Common bases 10, e, and 2 are provided as presets.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Select mode.\n2. Enter value and base.\n3. View result with step-by-step.' }],
+  },
+  'trigonometry-calculator': {
+    shortDescription: 'Trig functions, unit circle, and triangle solver.',
+    longDescription: 'Calculate all 6 trig functions and their inverses. Convert degrees to radians. Interactive SVG unit circle. Triangle solver using Law of Sines/Cosines for SSS, SAS, ASA, AAS.',
+    keywords: ['trigonometry', 'sine', 'cosine', 'tangent', 'unit circle', 'triangle solver'],
+    faqs: [
+      { q: 'What triangle types can be solved?', a: 'SSS, SAS, ASA, and AAS configurations.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Enter angle or use unit circle.\n2. View all trig values.\n3. Use triangle solver for unknown sides/angles.' }],
+  },
+  'complex-number-calculator': {
+    shortDescription: 'Complex number arithmetic and polar form.',
+    longDescription: 'Add, subtract, multiply, divide complex numbers. Convert between rectangular and polar form. Calculate modulus, argument, and De Moivre\'s theorem with nth roots.',
+    keywords: ['complex number', 'polar form', 'modulus', 'argument', 'de moivre'],
+    faqs: [
+      { q: 'What is De Moivre\'s theorem?', a: 'It computes powers and roots of complex numbers in polar form: (r∠θ)^n = r^n ∠ nθ.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Enter complex numbers (a+bi).\n2. Choose operation.\n3. View result in both rectangular and polar form.' }],
+  },
+  'set-theory-calculator': {
+    shortDescription: 'Set operations with Venn diagram.',
+    longDescription: 'Compute union, intersection, difference, symmetric difference, and complement. View interactive Venn diagram SVG. Check subsets and generate power sets.',
+    keywords: ['set theory', 'union', 'intersection', 'venn diagram', 'power set'],
+    faqs: [
+      { q: 'How do I enter sets?', a: 'Enter elements separated by commas.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Enter elements for set A and B.\n2. View all operations and Venn diagram.\n3. Check subset relationships.' }],
+  },
+  'graph-plotter': {
+    shortDescription: 'Plot mathematical functions with SVG.',
+    longDescription: 'Plot up to 6 mathematical functions simultaneously on an SVG canvas. Adjustable x/y range, zoom, grid overlay, and color picker for each function.',
+    keywords: ['graph', 'plot', 'function', 'svg', 'math graph', 'coordinate'],
+    faqs: [
+      { q: 'What functions can I plot?', a: 'Standard math expressions using x as variable: sin(x), x^2, sqrt(x), log(x), etc.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Enter function expression(s).\n2. Adjust x/y range.\n3. View the SVG plot.' }],
+  },
+  'calculus-reference-tool': {
+    shortDescription: 'Derivative rules, integrals, limits, and Taylor series.',
+    longDescription: 'Quick reference for 15 derivative rules, 12 integral rules, a numerical limit calculator (two-sided), and 7 common Taylor series expansions.',
+    keywords: ['calculus', 'derivative', 'integral', 'limit', 'taylor series'],
+    faqs: [
+      { q: 'Can it compute symbolic derivatives?', a: 'No, it provides reference tables and a numerical limit approximation tool.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Browse derivative and integral rules.\n2. Use the limit calculator for numerical approximations.\n3. Reference Taylor series expansions.' }],
+  },
+  'binary-boolean-logic-calculator': {
+    shortDescription: 'Base converter, truth tables, and logic gates.',
+    longDescription: 'Convert between decimal, binary, hex, and octal. Generate truth tables for up to 5 variables. Interactive logic gate reference with 7 gates. Bitwise operations.',
+    keywords: ['binary', 'boolean', 'logic gate', 'truth table', 'hex', 'bitwise'],
+    faqs: [
+      { q: 'How many variables for truth tables?', a: 'Up to 5 variables with AND, OR, NOT, XOR, NAND, NOR gates.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Choose mode.\n2. Enter values or select variables.\n3. View conversions, truth tables, or gate outputs.' }],
+  },
+  'kinematics-calculator': {
+    shortDescription: 'SUVAT equations, projectile motion, free fall.',
+    longDescription: 'Enter any 3 SUVAT variables to solve for the unknowns. Includes projectile motion with initial height and free fall calculator with position intervals.',
+    keywords: ['kinematics', 'suvat', 'projectile', 'free fall', 'motion', 'velocity'],
+    faqs: [
+      { q: 'What are the SUVAT variables?', a: 's (displacement), u (initial velocity), v (final velocity), a (acceleration), t (time).' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Enter 3 known SUVAT values.\n2. View calculated unknowns.\n3. Try projectile or free fall mode.' }],
+  },
+  'newtons-laws-calculator': {
+    shortDescription: 'Force, weight, friction, and momentum calculator.',
+    longDescription: 'F=ma solver (any 2→3rd), weight on 8 celestial bodies, friction with inclined plane analysis, and elastic/inelastic collision momentum calculator.',
+    keywords: ['newton', 'force', 'mass', 'friction', 'momentum', 'collision'],
+    faqs: [
+      { q: 'What collision types?', a: 'Both elastic (kinetic energy conserved) and perfectly inelastic (objects stick together).' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Select mode.\n2. Enter known values.\n3. View calculated results with working.' }],
+  },
+  'energy-work-calculator': {
+    shortDescription: 'Kinetic energy, potential energy, work, power.',
+    longDescription: 'Calculate KE=½mv², PE=mgh, W=Fd·cos(θ) with force components, P=W/t with unit conversions, and efficiency percentage.',
+    keywords: ['energy', 'kinetic', 'potential', 'work', 'power', 'efficiency'],
+    faqs: [
+      { q: 'What is the efficiency calculator?', a: 'It calculates η = (useful output / total input) × 100%.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Choose energy type.\n2. Enter values.\n3. View results with unit conversions.' }],
+  },
+  'electricity-calculator': {
+    shortDescription: 'Ohm\'s Law, series/parallel, resistor color codes.',
+    longDescription: 'Ohm\'s Law 3-mode solver, power formulas, series/parallel resistance and capacitance, and 4-band resistor color code decoder with visual display.',
+    keywords: ['electricity', 'ohm', 'resistance', 'capacitor', 'resistor color code'],
+    faqs: [
+      { q: 'How does the color code work?', a: 'Select 4 bands to decode the resistance value and tolerance.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Choose mode.\n2. Enter values or select color bands.\n3. View calculated results.' }],
+  },
+  'wave-sound-calculator': {
+    shortDescription: 'Wave equations, decibels, Doppler effect.',
+    longDescription: 'v=fλ wave equation solver, decibel calculator with common sound level references, Doppler effect (approach/recede), and EM spectrum classifier.',
+    keywords: ['wave', 'sound', 'frequency', 'doppler', 'decibel', 'electromagnetic'],
+    faqs: [
+      { q: 'What is the Doppler effect?', a: 'The change in observed frequency when a source or observer is moving.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Select mode.\n2. Enter wave parameters.\n3. View results and reference tables.' }],
+  },
+  'optics-calculator': {
+    shortDescription: 'Snell\'s Law, lens/mirror equations, critical angle.',
+    longDescription: 'Snell\'s Law with total internal reflection detection, thin lens and mirror equations with image properties, and critical angle calculator for common media.',
+    keywords: ['optics', 'snell', 'lens', 'mirror', 'refraction', 'critical angle'],
+    faqs: [
+      { q: 'What is total internal reflection?', a: 'When light hits a boundary at an angle greater than the critical angle, it reflects entirely.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Choose mode.\n2. Enter refractive indices, focal length, or object distance.\n3. View results.' }],
+  },
+  'thermodynamics-calculator': {
+    shortDescription: 'Ideal gas law and named gas laws.',
+    longDescription: 'PV=nRT ideal gas calculator (solve for any variable), Boyle\'s/Charles\'s/Gay-Lussac\'s/Combined gas laws, thermal expansion, and Q=mcΔT heat transfer.',
+    keywords: ['thermodynamics', 'ideal gas', 'heat transfer', 'specific heat', 'gas law'],
+    faqs: [
+      { q: 'What value of R is used?', a: 'R = 0.08206 L·atm/(mol·K) for ideal gas calculations.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Select gas law.\n2. Enter known variables.\n3. View solved unknown with formula.' }],
+  },
+  'gravitational-calculator': {
+    shortDescription: 'Gravitational force, orbital mechanics, escape velocity.',
+    longDescription: 'Newton\'s law of gravitation F=Gm₁m₂/r², orbital velocity with period, escape velocity with planet comparison, and weight on 10 celestial bodies.',
+    keywords: ['gravity', 'orbit', 'escape velocity', 'planet', 'gravitational force'],
+    faqs: [
+      { q: 'What planets are included?', a: 'All 8 planets plus the Moon and Sun for weight comparisons.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Choose mode.\n2. Enter masses and distances.\n3. View gravitational calculations.' }],
+  },
+  'electromagnetic-calculator': {
+    shortDescription: 'Coulomb\'s Law, electric field, Faraday\'s law.',
+    longDescription: 'Coulomb\'s Law for electrostatic force, electric field and potential, Lorentz force on moving charges, Faraday\'s Law EMF, and circuit power analysis.',
+    keywords: ['electromagnetic', 'coulomb', 'electric field', 'faraday', 'lorentz force'],
+    faqs: [
+      { q: 'What is Faraday\'s Law?', a: 'EMF = -NΔΦ/Δt — induced voltage from changing magnetic flux.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Select mode.\n2. Enter charge, field, or flux values.\n3. View calculated results.' }],
+  },
+  'mole-calculator': {
+    shortDescription: 'Moles, grams, molecules conversion and molarity.',
+    longDescription: 'Convert between mass, moles, and molecules using molar mass. Calculate molarity and dilution (C₁V₁=C₂V₂). Quick-select common molar masses.',
+    keywords: ['mole', 'molar mass', 'avogadro', 'molarity', 'dilution'],
+    faqs: [
+      { q: 'What is Avogadro\'s number?', a: '6.022 × 10²³ — the number of particles in one mole.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Enter mass and molar mass.\n2. View moles and molecule count.\n3. Use molarity or dilution tool.' }],
+  },
+  'chemical-equation-balancer': {
+    shortDescription: 'Auto-balance chemical equations.',
+    longDescription: 'Enter a chemical equation and auto-balance it using brute-force method for up to 6 compounds. Supports parentheses like Ca(OH)₂. Shows atom count verification.',
+    keywords: ['chemical equation', 'balance', 'stoichiometry', 'reaction', 'chemistry'],
+    faqs: [
+      { q: 'How does balancing work?', a: 'It tries coefficient combinations systematically up to 20 to find the balanced equation.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Enter reactants and products.\n2. Click Balance.\n3. Verify with atom count table.' }],
+  },
+  'periodic-table-reference': {
+    shortDescription: 'Interactive periodic table with element details.',
+    longDescription: 'Browse all 118 elements in a color-coded periodic table. Click any element for details. Filter by category (metals, nonmetals, noble gases, etc.) and search by name or symbol.',
+    keywords: ['periodic table', 'element', 'atomic number', 'chemistry', 'metal', 'nonmetal'],
+    faqs: [
+      { q: 'What information is shown?', a: 'Atomic number, symbol, name, atomic mass, category, group, and period.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Click any element tile.\n2. Use search to find elements.\n3. Filter by category using the legend.' }],
+  },
+  'ph-calculator': {
+    shortDescription: 'Convert between pH, pOH, [H⁺], and [OH⁻].',
+    longDescription: 'Enter any one of pH, pOH, [H⁺], or [OH⁻] and get all others. Visual pH scale with position indicator, acid/base classification, and common solution reference.',
+    keywords: ['pH', 'pOH', 'acid', 'base', 'hydrogen ion', 'hydroxide'],
+    faqs: [
+      { q: 'What is the relationship?', a: 'pH + pOH = 14, [H⁺] = 10^(-pH), [H⁺]×[OH⁻] = 10⁻¹⁴ at 25°C.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Select input type.\n2. Enter value.\n3. View all conversions and pH scale position.' }],
+  },
+  'solution-concentration-calculator': {
+    shortDescription: 'Molarity, molality, mass percent, dilution, PPM.',
+    longDescription: 'Calculate solution concentration in multiple units: molarity (M), molality (m), mass percent, dilution (C₁V₁=C₂V₂), and parts per million/billion.',
+    keywords: ['molarity', 'molality', 'dilution', 'concentration', 'ppm', 'mass percent'],
+    faqs: [
+      { q: 'What is the dilution equation?', a: 'C₁V₁ = C₂V₂ — concentration times volume is conserved.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Select concentration mode.\n2. Enter known values.\n3. View calculated concentration.' }],
+  },
+  'gas-laws-calculator': {
+    shortDescription: 'Ideal gas, Boyle\'s, Charles\'s, and combined gas laws.',
+    longDescription: 'PV=nRT ideal gas calculator, Boyle\'s P₁V₁=P₂V₂, Charles\'s V₁/T₁=V₂/T₂, Gay-Lussac\'s P₁/T₁=P₂/T₂, combined gas law, and STP calculations.',
+    keywords: ['gas law', 'ideal gas', 'boyle', 'charles', 'STP', 'PV=nRT'],
+    faqs: [
+      { q: 'What are STP conditions?', a: '0°C (273.15 K) and 1 atm, with molar volume 22.414 L/mol.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Select gas law.\n2. Enter known values (leave one empty).\n3. View solved result.' }],
+  },
+  'genetics-calculator': {
+    shortDescription: 'Punnett squares and blood type inheritance.',
+    longDescription: 'Generate monohybrid and dihybrid Punnett squares with genotype/phenotype ratios. Blood type genetics with ABO alleles showing probability tables.',
+    keywords: ['genetics', 'punnett square', 'blood type', 'genotype', 'phenotype', 'inheritance'],
+    faqs: [
+      { q: 'What is a dihybrid cross?', a: 'A cross tracking two genes at once (e.g., AaBb × AaBb), producing a 4×4 Punnett square.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Choose cross type.\n2. Enter parent genotypes.\n3. View Punnett square and ratios.' }],
+  },
+  'dna-rna-tools': {
+    shortDescription: 'DNA transcription, RNA translation, and sequence stats.',
+    longDescription: 'Transcribe DNA to mRNA, translate to amino acid sequences with codon breakdown, view GC content and base composition, and reference the full RNA codon table.',
+    keywords: ['DNA', 'RNA', 'transcription', 'translation', 'codon', 'amino acid'],
+    faqs: [
+      { q: 'What is the start codon?', a: 'AUG (codes for Methionine) — translation begins here.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Enter DNA or RNA sequence.\n2. Choose transcription, translation, or stats.\n3. View results.' }],
+  },
+  'microscopy-calculator': {
+    shortDescription: 'Magnification, FOV, scale bar, and resolution.',
+    longDescription: 'Calculate total magnification, field of view at different powers, actual size from image size, scale bar conversions, and resolution limits.',
+    keywords: ['microscope', 'magnification', 'field of view', 'scale bar', 'resolution'],
+    faqs: [
+      { q: 'How is total magnification calculated?', a: 'Total = Eyepiece × Objective (e.g., 10× × 40× = 400×).' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Select mode.\n2. Enter known values.\n3. View calculated results and reference tables.' }],
+  },
+  'unit-converter-scientific': {
+    shortDescription: 'Convert between scientific units across 10 categories.',
+    longDescription: 'Convert length, mass, time, temperature, energy, pressure, force, volume, speed, and frequency units. Shows all conversions at once with scientific notation for extreme values.',
+    keywords: ['unit converter', 'SI units', 'metric', 'energy', 'pressure', 'scientific'],
+    faqs: [
+      { q: 'How many unit categories?', a: '10 categories: length, mass, time, temperature, energy, pressure, force, volume, speed, frequency.' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Select category.\n2. Enter value and units.\n3. View conversion and all equivalent values.' }],
+  },
+  'significant-figures-calculator': {
+    shortDescription: 'Count, round, and calculate with significant figures.',
+    longDescription: 'Count significant figures in any number with rule explanations, round to N sig figs, and perform arithmetic with proper sig fig handling.',
+    keywords: ['significant figures', 'sig figs', 'rounding', 'precision', 'scientific notation'],
+    faqs: [
+      { q: 'Are trailing zeros significant?', a: 'Only with a decimal point (100. has 3 sig figs, 100 has 1).' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Choose count, round, or calculate mode.\n2. Enter numbers.\n3. View sig fig analysis.' }],
+  },
+  'error-uncertainty-calculator': {
+    shortDescription: 'Absolute, relative, and propagation of errors.',
+    longDescription: 'Calculate absolute and relative error, combine uncertainties with error propagation rules, and compute statistical uncertainty (mean, SD, SEM, 95% CI).',
+    keywords: ['error', 'uncertainty', 'absolute error', 'relative error', 'propagation', 'standard error'],
+    faqs: [
+      { q: 'How are uncertainties combined?', a: 'Add/Sub: δ = √(δA² + δB²). Mul/Div: δ/result = √((δA/A)² + (δB/B)²).' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Choose error type.\n2. Enter values and uncertainties.\n3. View calculated errors and formulas.' }],
+  },
+  'half-life-calculator': {
+    shortDescription: 'Radioactive decay, dating, and isotope reference.',
+    longDescription: 'Calculate remaining amount after decay, find half-life from data, date samples using decay ratios, and reference 10 common isotopes with their half-lives.',
+    keywords: ['half-life', 'radioactive decay', 'carbon dating', 'isotope', 'decay constant'],
+    faqs: [
+      { q: 'What is the decay formula?', a: 'N = N₀ × (½)^(t/t½) or equivalently N = N₀ × e^(−λt).' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Select mode.\n2. Enter known values.\n3. View decay results and visual chart.' }],
+  },
+  'scientific-notation-calculator': {
+    shortDescription: 'Convert and calculate in scientific notation.',
+    longDescription: 'Convert numbers to/from scientific and engineering notation with SI prefix identification. Perform arithmetic (×, ÷, +, −) in scientific notation with step-by-step working.',
+    keywords: ['scientific notation', 'engineering notation', 'exponent', 'SI prefix', 'standard form'],
+    faqs: [
+      { q: 'What is engineering notation?', a: 'Like scientific notation but exponents are multiples of 3 (matching SI prefixes).' },
+    ],
+    guide: [{ title: 'How to use', body: '1. Enter a number or use examples.\n2. View scientific/engineering notation.\n3. Use calculate mode for arithmetic.' }],
+  },
 }

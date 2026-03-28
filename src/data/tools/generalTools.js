@@ -15,6 +15,11 @@ const CaseConverter = lazy(() => import('../../tools/general/CaseConverter.jsx')
 const JsonToCsvConverter = lazy(() => import('../../tools/general/JsonToCsvConverter.jsx'))
 const TextToSlug = lazy(() => import('../../tools/general/TextToSlug.jsx'))
 const MetaTagGenerator = lazy(() => import('../../tools/general/MetaTagGenerator.jsx'))
+const ImageCompressor = lazy(() => import('../../tools/general/ImageCompressor.jsx'))
+const ImageConverter = lazy(() => import('../../tools/general/ImageConverter.jsx'))
+const TimeZoneConverter = lazy(() => import('../../tools/general/TimeZoneConverter.jsx'))
+const ClipboardManager = lazy(() => import('../../tools/general/ClipboardManager.jsx'))
+const TextSnippets = lazy(() => import('../../tools/general/TextSnippets.jsx'))
 
 export const generalTools = [
   { id: 'password-generator', name: 'Password Generator', description: 'Generate cryptographically secure random passwords', category: 'general', subcategory: 'generators', icon: 'ShieldCheck', path: '/tools/password-generator', component: PasswordGenerator, tags: ['password', 'generator', 'secure', 'random', 'crypto', 'security'], isPopular: true, isNew: false },
@@ -32,4 +37,9 @@ export const generalTools = [
   { id: 'json-to-csv-converter', name: 'JSON to CSV Converter', description: 'Convert JSON arrays to CSV and CSV back to JSON with previews', category: 'general', subcategory: 'utilities', icon: 'FileJson', path: '/tools/json-to-csv-converter', component: JsonToCsvConverter, tags: ['json', 'csv', 'converter', 'download', 'table', 'export'], isPopular: false, isNew: false },
   { id: 'text-to-slug', name: 'Text to Slug', description: 'Turn titles and text into clean URL slugs, hashtags, and file-safe names', category: 'general', subcategory: 'text', icon: 'Link2', path: '/tools/text-to-slug', component: TextToSlug, tags: ['slug', 'seo', 'url', 'hashtag', 'transliteration', 'batch'], isPopular: false, isNew: false },
   { id: 'meta-tag-generator', name: 'Meta Tag Generator', description: 'Generate page meta tags, Open Graph, Twitter cards, and JSON-LD', category: 'general', subcategory: 'utilities', icon: 'Tags', path: '/tools/meta-tag-generator', component: MetaTagGenerator, tags: ['meta tags', 'seo', 'open graph', 'twitter card', 'json-ld', 'html'], isPopular: false, isNew: false },
+  { id: 'image-compressor', name: 'Image Compressor', description: 'Compress and convert images to JPEG, PNG, or WebP in your browser', category: 'general', subcategory: 'utilities', icon: 'ImageDown', path: '/tools/image-compressor', component: ImageCompressor, tags: ['image', 'compress', 'resize', 'jpeg', 'png', 'webp', 'optimize', 'photo'], isPopular: false, isNew: true },
+  { id: 'image-converter', name: 'Image Converter', description: 'Convert images between PNG, JPEG, WebP, AVIF, and ICO', category: 'general', subcategory: 'utilities', icon: 'RefreshCw', path: '/tools/image-converter', component: ImageConverter, tags: ['image', 'converter', 'png', 'jpg', 'jpeg', 'webp', 'ico', 'avif', 'format'], isPopular: false, isNew: true },
+  { id: 'time-zone-converter', name: 'Time Zone Converter', description: 'Convert times between time zones and compare multiple zones at once', category: 'general', subcategory: 'utilities', icon: 'Clock', path: '/tools/time-zone-converter', component: TimeZoneConverter, tags: ['time zone', 'timezone', 'convert', 'utc', 'gmt', 'world clock', 'international', 'schedule'], isPopular: false, isNew: true },
+  { id: 'clipboard-manager', name: 'Clipboard Manager', description: 'Save, search, pin, and copy text clips with duplicate detection', category: 'general', subcategory: 'utilities', icon: 'Clipboard', path: '/tools/clipboard-manager', component: ClipboardManager, tags: ['clipboard', 'copy', 'paste', 'clips', 'snippets', 'save', 'pin', 'text'], isPopular: false, isNew: true },
+  { id: 'text-snippets', name: 'Text Snippets', description: 'Create shortcode expansions with dynamic placeholders and prefix triggers', category: 'general', subcategory: 'text', icon: 'Braces', path: '/tools/text-snippets', component: TextSnippets, tags: ['snippets', 'text expansion', 'shortcode', 'template', 'macro', 'clipboard', 'placeholder'], isPopular: false, isNew: true },
 ]

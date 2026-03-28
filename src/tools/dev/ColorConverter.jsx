@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { getItem, setItem } from '../../utils/storage.js'
 
 const PALETTE_KEY = 'untrackt:colorPalette'
@@ -148,88 +148,222 @@ function contrast(hex1, hex2) {
   return (a + 0.05) / (b + 0.05)
 }
 
+const FORMATS = ['hex', 'rgb', 'hsl', 'hsv', 'css-name']
+
+function hsvToRgb(h, s, v) {
+  s /= 100; v /= 100
+  const c = v * s
+  const x = c * (1 - Math.abs(((h / 60) % 2) - 1))
+  const m = v - c
+  let r1 = 0, g1 = 0, b1 = 0
+  if (h < 60) [r1, g1, b1] = [c, x, 0]
+  else if (h < 120) [r1, g1, b1] = [x, c, 0]
+  else if (h < 180) [r1, g1, b1] = [0, c, x]
+  else if (h < 240) [r1, g1, b1] = [0, x, c]
+  else if (h < 300) [r1, g1, b1] = [x, 0, c]
+  else [r1, g1, b1] = [c, 0, x]
+  return { r: Math.round((r1 + m) * 255), g: Math.round((g1 + m) * 255), b: Math.round((b1 + m) * 255) }
+}
+
+function NumberInput({ label, value, onChange, min, max }) {
+  return (
+    <label className="flex flex-col gap-1">
+      <span className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">{label}</span>
+      <input type="number" min={min} max={max} value={value} onChange={(e) => onChange(clamp(Number(e.target.value) || 0, min, max))} className="input-field text-center font-mono" />
+    </label>
+  )
+}
+
 export default function ColorConverter() {
-  const [input, setInput] = useState('#1a2b3c')
+  const [format, setFormat] = useState('hex')
+  const [hexVal, setHexVal] = useState('#1a2b3c')
+  const [rgb, setRgb] = useState({ r: 26, g: 43, b: 60 })
+  const [hsl, setHsl] = useState({ h: 210, s: 40, l: 17 })
+  const [hsv, setHsv] = useState({ h: 210, s: 57, v: 24 })
+  const [cssName, setCssName] = useState('teal')
   const [picker, setPicker] = useState('#1a2b3c')
   const [secondColor, setSecondColor] = useState('#ffffff')
   const [palette, setPalette] = useState(() => getItem(PALETTE_KEY, []))
 
-  const color = useMemo(() => parseColor(input), [input])
+  const syncFromRgb = (r, g, b) => {
+    const hex = rgbToHex(r, g, b)
+    setHexVal(hex)
+    setRgb({ r, g, b })
+    setHsl(rgbToHsl(r, g, b))
+    setHsv(rgbToHsv(r, g, b))
+    setPicker(hex)
+    const name = Object.entries(CSS_NAMES).find(([, val]) => val.toLowerCase() === hex.toLowerCase())
+    setCssName(name ? name[0] : '')
+  }
+
+  const handleHexChange = (val) => {
+    setHexVal(val)
+    const parsed = hexToRgb(val)
+    if (parsed) syncFromRgb(parsed.r, parsed.g, parsed.b)
+  }
+
+  const handleRgbChange = (key, val) => {
+    const next = { ...rgb, [key]: val }
+    setRgb(next)
+    syncFromRgb(next.r, next.g, next.b)
+  }
+
+  const handleHslChange = (key, val) => {
+    const next = { ...hsl, [key]: val }
+    setHsl(next)
+    const converted = hslToRgb(next.h, next.s, next.l)
+    const hex = rgbToHex(converted.r, converted.g, converted.b)
+    setHexVal(hex)
+    setRgb(converted)
+    setHsv(rgbToHsv(converted.r, converted.g, converted.b))
+    setPicker(hex)
+    const name = Object.entries(CSS_NAMES).find(([, v]) => v.toLowerCase() === hex.toLowerCase())
+    setCssName(name ? name[0] : '')
+  }
+
+  const handleHsvChange = (key, val) => {
+    const next = { ...hsv, [key]: val }
+    setHsv(next)
+    const converted = hsvToRgb(next.h, next.s, next.v)
+    const hex = rgbToHex(converted.r, converted.g, converted.b)
+    setHexVal(hex)
+    setRgb(converted)
+    setHsl(rgbToHsl(converted.r, converted.g, converted.b))
+    setPicker(hex)
+    const name = Object.entries(CSS_NAMES).find(([, v]) => v.toLowerCase() === hex.toLowerCase())
+    setCssName(name ? name[0] : '')
+  }
+
+  const handleCssNameChange = (val) => {
+    setCssName(val)
+    const lower = val.trim().toLowerCase()
+    if (CSS_NAMES[lower]) {
+      const parsed = hexToRgb(CSS_NAMES[lower])
+      if (parsed) syncFromRgb(parsed.r, parsed.g, parsed.b)
+    }
+  }
+
+  const handlePicker = (e) => {
+    const val = e.target.value
+    setPicker(val)
+    setHexVal(val)
+    setFormat('hex')
+    const parsed = hexToRgb(val)
+    if (parsed) syncFromRgb(parsed.r, parsed.g, parsed.b)
+  }
+
+  const currentHex = hexToRgb(hexVal) ? rgbToHex(hexToRgb(hexVal).r, hexToRgb(hexVal).g, hexToRgb(hexVal).b) : picker
   const outputs = useMemo(() => {
-    if (!color) return null
-    const hex = rgbToHex(color.r, color.g, color.b)
-    const hsl = rgbToHsl(color.r, color.g, color.b)
-    const hsv = rgbToHsv(color.r, color.g, color.b)
-    const cssName = Object.entries(CSS_NAMES).find(([, val]) => val.toLowerCase() === hex.toLowerCase())?.[0] || 'No exact name'
+    const hex = rgbToHex(rgb.r, rgb.g, rgb.b)
+    const h = rgbToHsl(rgb.r, rgb.g, rgb.b)
+    const v = rgbToHsv(rgb.r, rgb.g, rgb.b)
+    const name = Object.entries(CSS_NAMES).find(([, val]) => val.toLowerCase() === hex.toLowerCase())?.[0] || 'No exact name'
     return {
       hex,
-      rgb: `rgb(${color.r}, ${color.g}, ${color.b})`,
-      hsl: `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`,
-      hsv: `hsv(${hsv.h}, ${hsv.s}%, ${hsv.v}%)`,
-      cssName,
+      rgb: `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`,
+      hsl: `hsl(${h.h}, ${h.s}%, ${h.l}%)`,
+      hsv: `hsv(${v.h}, ${v.s}%, ${v.v}%)`,
+      cssName: name,
     }
-  }, [color])
-
-  useEffect(() => {
-    if (outputs?.hex) {
-      setPicker(outputs.hex)
-    }
-  }, [outputs?.hex])
+  }, [rgb])
 
   const secondParsed = useMemo(() => parseColor(secondColor), [secondColor])
   const secondHex = secondParsed ? rgbToHex(secondParsed.r, secondParsed.g, secondParsed.b) : '#ffffff'
-  const ratio = outputs ? contrast(outputs.hex, secondHex) : 1
+  const ratio = contrast(outputs.hex, secondHex)
 
   const savePalette = () => {
-    if (!outputs) return
     const next = [outputs.hex, ...palette.filter((c) => c !== outputs.hex)].slice(0, 12)
     setPalette(next)
     setItem(PALETTE_KEY, next)
   }
 
+  const loadFromPalette = (c) => {
+    setFormat('hex')
+    setHexVal(c)
+    const parsed = hexToRgb(c)
+    if (parsed) syncFromRgb(parsed.r, parsed.g, parsed.b)
+  }
+
   return (
     <div className="space-y-4">
-      <input value={input} onChange={(e) => setInput(e.target.value)} className="input-field" placeholder="HEX, RGB, HSL, HSV, or CSS name" />
-
-      <div className="flex items-center gap-3">
-        <input type="color" value={picker} onChange={(e) => { setPicker(e.target.value); setInput(e.target.value) }} className="w-14 h-10" />
-        <p className="text-sm text-gray-500">Visual picker: {picker}</p>
+      <div className="flex flex-wrap gap-2">
+        {FORMATS.map((f) => (
+          <button key={f} onClick={() => setFormat(f)} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${format === f ? 'bg-blue-600 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'}`}>
+            {f === 'css-name' ? 'CSS Name' : f.toUpperCase()}
+          </button>
+        ))}
       </div>
 
-      {outputs ? (
-        <>
-          <div className="h-24 rounded-xl border border-gray-200" style={{ backgroundColor: outputs.hex }} />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-            {Object.entries(outputs).map(([key, value]) => (
-              <div key={key} className="rounded-lg border border-gray-200 p-3 bg-white flex justify-between items-center gap-2">
-                <div>
-                  <p className="text-xs text-gray-500 uppercase">{key}</p>
-                  <p className="font-mono text-sm">{value}</p>
-                </div>
-                <button className="btn-secondary" onClick={() => navigator.clipboard.writeText(String(value))}>Copy</button>
-              </div>
-            ))}
-          </div>
-
-          <button className="btn-primary" onClick={savePalette}>Save to palette</button>
-
-          <div className="rounded-xl border border-gray-200 bg-white p-4">
-            <h3 className="font-semibold text-gray-900 mb-2">Contrast Checker</h3>
-            <input value={secondColor} onChange={(e) => setSecondColor(e.target.value)} className="input-field mb-2" placeholder="Second color" />
-            <p className="text-sm text-gray-700">Contrast ratio: {ratio.toFixed(2)}:1</p>
-            <p className="text-sm text-gray-500">AA normal text: {ratio >= 4.5 ? 'Pass' : 'Fail'} | AAA normal text: {ratio >= 7 ? 'Pass' : 'Fail'}</p>
-          </div>
-        </>
-      ) : (
-        <p className="text-sm text-red-600">Unable to parse color input.</p>
+      {format === 'hex' && (
+        <input value={hexVal} onChange={(e) => handleHexChange(e.target.value)} className="input-field font-mono" placeholder="#1a2b3c" />
       )}
 
+      {format === 'rgb' && (
+        <div className="grid grid-cols-3 gap-3">
+          <NumberInput label="R" value={rgb.r} onChange={(v) => handleRgbChange('r', v)} min={0} max={255} />
+          <NumberInput label="G" value={rgb.g} onChange={(v) => handleRgbChange('g', v)} min={0} max={255} />
+          <NumberInput label="B" value={rgb.b} onChange={(v) => handleRgbChange('b', v)} min={0} max={255} />
+        </div>
+      )}
+
+      {format === 'hsl' && (
+        <div className="grid grid-cols-3 gap-3">
+          <NumberInput label="H°" value={hsl.h} onChange={(v) => handleHslChange('h', v)} min={0} max={360} />
+          <NumberInput label="S%" value={hsl.s} onChange={(v) => handleHslChange('s', v)} min={0} max={100} />
+          <NumberInput label="L%" value={hsl.l} onChange={(v) => handleHslChange('l', v)} min={0} max={100} />
+        </div>
+      )}
+
+      {format === 'hsv' && (
+        <div className="grid grid-cols-3 gap-3">
+          <NumberInput label="H°" value={hsv.h} onChange={(v) => handleHsvChange('h', v)} min={0} max={360} />
+          <NumberInput label="S%" value={hsv.s} onChange={(v) => handleHsvChange('s', v)} min={0} max={100} />
+          <NumberInput label="V%" value={hsv.v} onChange={(v) => handleHsvChange('v', v)} min={0} max={100} />
+        </div>
+      )}
+
+      {format === 'css-name' && (
+        <>
+          <input value={cssName} onChange={(e) => handleCssNameChange(e.target.value)} className="input-field" placeholder="e.g. teal, navy, orange" list="css-color-names" />
+          <datalist id="css-color-names">
+            {Object.keys(CSS_NAMES).map((name) => <option key={name} value={name} />)}
+          </datalist>
+        </>
+      )}
+
+      <div className="flex items-center gap-3">
+        <input type="color" value={picker} onChange={handlePicker} className="w-14 h-10" />
+        <p className="text-sm text-gray-500 dark:text-gray-400">Visual picker: {picker}</p>
+      </div>
+
+      <div className="h-24 rounded-xl border border-gray-200 dark:border-gray-700" style={{ backgroundColor: outputs.hex }} />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+        {Object.entries(outputs).map(([key, value]) => (
+          <div key={key} className="rounded-lg border border-gray-200 dark:border-gray-700 p-3 bg-white dark:bg-gray-800 flex justify-between items-center gap-2">
+            <div>
+              <p className="text-xs text-gray-500 dark:text-gray-400 uppercase">{key === 'cssName' ? 'CSS Name' : key}</p>
+              <p className="font-mono text-sm">{value}</p>
+            </div>
+            <button className="btn-secondary" onClick={() => navigator.clipboard.writeText(String(value))}>Copy</button>
+          </div>
+        ))}
+      </div>
+
+      <button className="btn-primary" onClick={savePalette}>Save to palette</button>
+
+      <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4">
+        <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Contrast Checker</h3>
+        <input value={secondColor} onChange={(e) => setSecondColor(e.target.value)} className="input-field mb-2" placeholder="Second color" />
+        <p className="text-sm text-gray-700 dark:text-gray-300">Contrast ratio: {ratio.toFixed(2)}:1</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400">AA normal text: {ratio >= 4.5 ? 'Pass' : 'Fail'} | AAA normal text: {ratio >= 7 ? 'Pass' : 'Fail'}</p>
+      </div>
+
       {palette.length > 0 ? (
-        <div className="rounded-xl border border-gray-200 bg-white p-4">
-          <h3 className="font-semibold text-gray-900 mb-2">Recent Palette</h3>
+        <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4">
+          <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Recent Palette</h3>
           <div className="grid grid-cols-6 md:grid-cols-12 gap-2">
             {palette.map((c) => (
-              <button key={c} className="h-9 rounded-md border border-gray-200" style={{ backgroundColor: c }} title={c} onClick={() => setInput(c)} />
+              <button key={c} className="h-9 rounded-md border border-gray-200 dark:border-gray-600" style={{ backgroundColor: c }} title={c} onClick={() => loadFromPalette(c)} />
             ))}
           </div>
         </div>
