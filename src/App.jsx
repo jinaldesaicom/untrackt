@@ -157,7 +157,7 @@ export default function App() {
             <Route path="/favorites" element={<FavoritesPage />} />
             <Route path="/my-stats" element={<MyStatsPage />} />
             <Route path="/about" element={<AboutPage />} />
-            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPage />} />
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/search" element={<SearchResultsPage />} />
             <Route path="/tags/:tag" element={<TagPage />} />

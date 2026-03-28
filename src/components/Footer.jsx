@@ -27,7 +27,7 @@ export default function Footer() {
             <div className="mt-4 flex flex-wrap gap-3 text-sm">
               <Link to="/favorites" className="text-indigo-600 dark:text-indigo-400 hover:underline">Favorites</Link>
               <Link to="/my-stats" className="text-indigo-600 dark:text-indigo-400 hover:underline">My Stats</Link>
-              <Link to="/privacy" className="text-indigo-600 dark:text-indigo-400 hover:underline">Privacy Policy</Link>
+              <Link to="/privacy-policy" className="text-indigo-600 dark:text-indigo-400 hover:underline">Privacy Policy</Link>
               <Link to="/terms" className="text-indigo-600 dark:text-indigo-400 hover:underline">Terms of Use</Link>
               <Link to="/about" className="text-indigo-600 dark:text-indigo-400 hover:underline">About</Link>
             </div>

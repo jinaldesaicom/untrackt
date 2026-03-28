@@ -44,7 +44,7 @@ const pageModules = {
   '/favorites': () => import('../pages/FavoritesPage.jsx'),
   '/my-stats': () => import('../pages/MyStatsPage.jsx'),
   '/about': () => import('../pages/AboutPage.jsx'),
-  '/privacy': () => import('../pages/PrivacyPage.jsx'),
+  '/privacy-policy': () => import('../pages/PrivacyPage.jsx'),
   '/terms': () => import('../pages/TermsPage.jsx'),
   '/search': () => import('../pages/SearchResultsPage.jsx'),
 }
