@@ -1,6 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { vi } from 'vitest'
 import PasswordGenerator from '../../../tools/general/PasswordGenerator.jsx'
 
 // Mock crypto.getRandomValues so tests are deterministic

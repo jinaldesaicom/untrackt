@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import tools, { categories } from '../src/data/tools.js'
 
-const today = '2026-03-01'
+const today = new Date().toISOString().split('T')[0]
 const urls = []
 
 function add(loc, changefreq, priority) {
@@ -13,7 +13,7 @@ add('https://untrackt.com/favorites', 'monthly', '0.3')
 categories.forEach((category) => add(`https://untrackt.com/category/${category.id}`, 'monthly', '0.8'))
 tools.forEach((tool) => add(`https://untrackt.com${tool.path}`, 'monthly', '0.7'))
 add('https://untrackt.com/about', 'yearly', '0.3')
-add('https://untrackt.com/privacy', 'yearly', '0.2')
+add('https://untrackt.com/privacy-policy', 'yearly', '0.2')
 add('https://untrackt.com/terms', 'yearly', '0.2')
 
 const xml = [

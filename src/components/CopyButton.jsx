@@ -1,20 +1,30 @@
 import { Copy, Check } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import useToast from '../hooks/useToast.jsx'
 import useAnnouncer from '../hooks/useAnnouncer.jsx'
 
 export default function CopyButton({ text, label = 'Copy', className = '' }) {
   const [copied, setCopied] = useState(false)
+  const timerRef = useRef(null)
   const { showToast } = useToast()
   const { announce, announceUrgent } = useAnnouncer()
+
+  useEffect(() => {
+    return () => clearTimeout(timerRef.current)
+  }, [])
+
+  const markCopied = () => {
+    setCopied(true)
+    clearTimeout(timerRef.current)
+    timerRef.current = setTimeout(() => setCopied(false), 2000)
+  }
 
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(text)
-      setCopied(true)
+      markCopied()
       showToast({ message: 'Copied to clipboard!', type: 'success' })
       announce('Copied to clipboard')
-      setTimeout(() => setCopied(false), 2000)
     } catch {
       // Fallback for older browsers
       try {
@@ -24,10 +34,9 @@ export default function CopyButton({ text, label = 'Copy', className = '' }) {
         textarea.select()
         document.execCommand('copy')
         document.body.removeChild(textarea)
-        setCopied(true)
+        markCopied()
         showToast({ message: 'Copied to clipboard!', type: 'success' })
         announce('Copied to clipboard')
-        setTimeout(() => setCopied(false), 2000)
       } catch {
         showToast({ message: 'Error copying to clipboard', type: 'error' })
         announceUrgent('Copy failed')

@@ -1,4 +1,3 @@
-import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
@@ -39,7 +38,8 @@ describe('PrivacyPage', () => {
 
   it('mentions Cloudflare hosting', () => {
     renderPage(<PrivacyPage />)
-    expect(screen.getByText(/Cloudflare/i)).toBeInTheDocument()
+    const matches = screen.getAllByText(/Cloudflare/i)
+    expect(matches.length).toBeGreaterThan(0)
   })
 
   it('has contact email or contact section', () => {

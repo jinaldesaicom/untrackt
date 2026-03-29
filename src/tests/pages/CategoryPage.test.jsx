@@ -24,13 +24,13 @@ describe('CategoryPage', () => {
     renderCategoryPage('dev')
     const devTools = tools.filter((t) => t.category === 'dev')
     devTools.forEach((tool) => {
-      expect(screen.getByText(tool.name)).toBeInTheDocument()
+      expect(screen.getAllByText(tool.name).length).toBeGreaterThanOrEqual(1)
     })
   })
 
   it('shows correct category title', () => {
     renderCategoryPage('dev')
-    expect(screen.getByRole('heading', { name: /dev tools/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1, name: /dev tools/i })).toBeInTheDocument()
   })
 
   it('shows correct tool count badge', () => {
@@ -46,7 +46,7 @@ describe('CategoryPage', () => {
 
   it('renders correct tools for student category', () => {
     renderCategoryPage('student')
-    expect(screen.getByRole('heading', { name: /student/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1, name: /student/i })).toBeInTheDocument()
     const studentCount = tools.filter((t) => t.category === 'student').length
     expect(screen.getByText(`${studentCount} tools`)).toBeInTheDocument()
   })

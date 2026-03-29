@@ -23,6 +23,8 @@ function ToolCard({ tool }) {
     general: 'border-l-gray-500',
     health: 'border-l-green-500',
     finance: 'border-l-emerald-500',
+    seo: 'border-l-rose-500',
+    productivity: 'border-l-cyan-500',
   }
 
   return (

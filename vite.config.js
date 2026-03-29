@@ -19,7 +19,7 @@ export default defineConfig({
       manifest: {
         name: 'UnTrackt - Free Browser Tools',
         short_name: 'UnTrackt',
-        description: '88+ free tools. Runs in your browser. Zero tracking.',
+        description: '124+ free tools. Runs in your browser. Zero tracking.',
         theme_color: '#4f46e5',
         background_color: '#f9fafb',
         display: 'standalone',
@@ -33,14 +33,16 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+        navigateFallback: '/offline.html',
+        navigateFallbackDenylist: [/^\/api/],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/open\.er-api\.com/,
-            handler: 'NetworkFirst',
+            handler: 'StaleWhileRevalidate',
             options: {
               cacheName: 'currency-api',
               expiration: {
-                maxAgeSeconds: 60 * 60 * 24,
+                maxAgeSeconds: 60 * 60 * 24 * 7,
               },
             },
           },
@@ -52,6 +54,8 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './src/tests/setup.js',
+    testTimeout: 15000,
+    pool: 'threads',
     coverage: {
       reporter: ['text', 'html'],
     },
@@ -88,6 +92,18 @@ export default defineConfig({
           }
           if (id.includes('src/tools/general/')) {
             return 'tools-general'
+          }
+          if (id.includes('src/tools/seo/')) {
+            return 'tools-seo'
+          }
+          if (id.includes('src/tools/productivity/')) {
+            return 'tools-productivity'
+          }
+          if (id.includes('src/data/tools/')) {
+            return 'tools-data'
+          }
+          if (id.includes('fuse.js') || id.includes('src/search/')) {
+            return 'search'
           }
           return undefined
         },

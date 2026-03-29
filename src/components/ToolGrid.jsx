@@ -48,7 +48,7 @@ function ToolGrid({ tools }) {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" onKeyDown={handleGridKeyDown} role="status" aria-live="polite">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 [content-visibility:auto]" onKeyDown={handleGridKeyDown} role="status" aria-live="polite">
       {visibleTools.map((tool) => (
         <ToolCard key={tool.id} tool={tool} />
       ))}

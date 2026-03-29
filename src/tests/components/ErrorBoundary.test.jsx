@@ -1,4 +1,3 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import ErrorBoundary from '../../components/ErrorBoundary.jsx'
 import * as errorReporter from '../../utils/errorReporter'

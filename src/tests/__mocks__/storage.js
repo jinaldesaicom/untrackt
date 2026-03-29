@@ -1,4 +1,3 @@
-import { vi } from 'vitest'
 
 export const getItem = vi.fn((key, defaultValue = null) => defaultValue)
 export const setItem = vi.fn()

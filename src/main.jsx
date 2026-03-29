@@ -7,7 +7,10 @@ import { FavoritesProvider } from './hooks/useFavorites.js'
 import { ToastProvider } from './hooks/useToast.jsx'
 import { AnnouncerProvider } from './hooks/useAnnouncer.jsx'
 import App from './App.jsx'
+import { installGlobalHandlers } from './utils/errorReporter.js'
 import './index.css'
+
+installGlobalHandlers()
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

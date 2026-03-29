@@ -1,0 +1,35 @@
+import { lazy } from 'react'
+
+const PasswordGenerator = lazy(() => import('../../tools/general/PasswordGenerator.jsx'))
+const QrCodeGenerator = lazy(() => import('../../tools/general/QrCodeGenerator.jsx'))
+const TipSplitter = lazy(() => import('../../tools/general/TipSplitter.jsx'))
+const ColorPaletteGenerator = lazy(() => import('../../tools/general/ColorPaletteGenerator.jsx'))
+const AspectRatioCalculator = lazy(() => import('../../tools/general/AspectRatioCalculator.jsx'))
+const ImageToBase64 = lazy(() => import('../../tools/general/ImageToBase64.jsx'))
+const CountdownTimer = lazy(() => import('../../tools/general/CountdownTimer.jsx'))
+const WordFrequencyCounter = lazy(() => import('../../tools/general/WordFrequencyCounter.jsx'))
+const TypingSpeedTest = lazy(() => import('../../tools/general/TypingSpeedTest.jsx'))
+const RandomNumberGenerator = lazy(() => import('../../tools/general/RandomNumberGenerator.jsx'))
+const BinaryTextConverter = lazy(() => import('../../tools/general/BinaryTextConverter.jsx'))
+const CaseConverter = lazy(() => import('../../tools/general/CaseConverter.jsx'))
+const JsonToCsvConverter = lazy(() => import('../../tools/general/JsonToCsvConverter.jsx'))
+const TextToSlug = lazy(() => import('../../tools/general/TextToSlug.jsx'))
+const MetaTagGenerator = lazy(() => import('../../tools/general/MetaTagGenerator.jsx'))
+
+export const generalTools = [
+  { id: 'password-generator', name: 'Password Generator', description: 'Generate cryptographically secure random passwords', category: 'general', subcategory: 'generators', icon: 'ShieldCheck', path: '/tools/password-generator', component: PasswordGenerator, tags: ['password', 'generator', 'secure', 'random', 'crypto', 'security'], isPopular: true, isNew: false },
+  { id: 'qr-code-generator', name: 'QR Code Generator', description: 'Generate QR codes for URLs or any text, download as PNG', category: 'general', subcategory: 'generators', icon: 'QrCode', path: '/tools/qr-code-generator', component: QrCodeGenerator, tags: ['qr code', 'qr', 'barcode', 'url', 'share', 'scan'], isPopular: false, isNew: false },
+  { id: 'tip-splitter', name: 'Tip & Bill Splitter', description: 'Split bills and calculate tips between people', category: 'general', subcategory: 'calculators', icon: 'Receipt', path: '/tools/tip-splitter', component: TipSplitter, tags: ['tip', 'bill', 'split', 'restaurant', 'percent', 'share'], isPopular: true, isNew: false },
+  { id: 'color-palette-generator', name: 'Color Palette Generator', description: 'Generate palettes from a base color, random style, or uploaded image', category: 'general', subcategory: 'generators', icon: 'Palette', path: '/tools/color-palette-generator', component: ColorPaletteGenerator, tags: ['color palette', 'design', 'harmony', 'swatches', 'css variables', 'tailwind'], isPopular: false, isNew: false },
+  { id: 'aspect-ratio-calculator', name: 'Aspect Ratio Calculator', description: 'Resize images and layouts while preserving aspect ratio', category: 'general', subcategory: 'calculators', icon: 'Crop', path: '/tools/aspect-ratio-calculator', component: AspectRatioCalculator, tags: ['aspect ratio', 'image size', 'resize', 'dimensions', 'preview', 'social media'], isPopular: false, isNew: false },
+  { id: 'image-to-base64', name: 'Image to Base64', description: 'Convert image files or URLs into Base64 strings and Data URLs', category: 'general', subcategory: 'utilities', icon: 'Image', path: '/tools/image-to-base64', component: ImageToBase64, tags: ['base64', 'image', 'data url', 'file upload', 'embed', 'preview'], isPopular: false, isNew: false },
+  { id: 'countdown-timer', name: 'Countdown Timer', description: 'Track live countdowns for upcoming events with saved presets', category: 'general', subcategory: 'utilities', icon: 'Timer', path: '/tools/countdown-timer', component: CountdownTimer, tags: ['countdown', 'timer', 'event', 'new year', 'birthday', 'reminder'], isPopular: false, isNew: false },
+  { id: 'word-frequency-counter', name: 'Word Frequency Counter', description: 'Analyze text frequency, top words, and export word counts', category: 'general', subcategory: 'text', icon: 'BarChart3', path: '/tools/word-frequency-counter', component: WordFrequencyCounter, tags: ['word frequency', 'text analysis', 'word cloud', 'csv export', 'writing', 'counter'], isPopular: false, isNew: false },
+  { id: 'typing-speed-test', name: 'Typing Speed Test', description: 'Measure WPM, CPM, accuracy, and errors across different typing modes', category: 'general', subcategory: 'utilities', icon: 'Keyboard', path: '/tools/typing-speed-test', component: TypingSpeedTest, tags: ['typing', 'wpm', 'cpm', 'accuracy', 'keyboard', 'practice'], isPopular: false, isNew: false },
+  { id: 'random-number-generator', name: 'Random Number Generator', description: 'Generate secure random numbers, dice rolls, list picks, and coin flips', category: 'general', subcategory: 'generators', icon: 'Dices', path: '/tools/random-number-generator', component: RandomNumberGenerator, tags: ['random', 'number generator', 'dice', 'coin flip', 'crypto', 'picker'], isPopular: false, isNew: false },
+  { id: 'binary-text-converter', name: 'Binary Text Converter', description: 'Convert text with binary, Morse code, hex, and ASCII formats', category: 'general', subcategory: 'text', icon: 'Binary', path: '/tools/binary-text-converter', component: BinaryTextConverter, tags: ['binary', 'morse', 'hex', 'ascii', 'converter', 'encoding'], isPopular: false, isNew: false },
+  { id: 'case-converter', name: 'Case Converter', description: 'Convert text into sentence case, snake_case, kebab-case, and more', category: 'general', subcategory: 'text', icon: 'CaseSensitive', path: '/tools/case-converter', component: CaseConverter, tags: ['case converter', 'camelCase', 'snake_case', 'kebab-case', 'text transform', 'title case'], isPopular: false, isNew: false },
+  { id: 'json-to-csv-converter', name: 'JSON to CSV Converter', description: 'Convert JSON arrays to CSV and CSV back to JSON with previews', category: 'general', subcategory: 'utilities', icon: 'FileJson', path: '/tools/json-to-csv-converter', component: JsonToCsvConverter, tags: ['json', 'csv', 'converter', 'download', 'table', 'export'], isPopular: false, isNew: false },
+  { id: 'text-to-slug', name: 'Text to Slug', description: 'Turn titles and text into clean URL slugs, hashtags, and file-safe names', category: 'general', subcategory: 'text', icon: 'Link2', path: '/tools/text-to-slug', component: TextToSlug, tags: ['slug', 'seo', 'url', 'hashtag', 'transliteration', 'batch'], isPopular: false, isNew: false },
+  { id: 'meta-tag-generator', name: 'Meta Tag Generator', description: 'Generate page meta tags, Open Graph, Twitter cards, and JSON-LD', category: 'general', subcategory: 'utilities', icon: 'Tags', path: '/tools/meta-tag-generator', component: MetaTagGenerator, tags: ['meta tags', 'seo', 'open graph', 'twitter card', 'json-ld', 'html'], isPopular: false, isNew: false },
+]

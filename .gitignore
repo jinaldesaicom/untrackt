@@ -21,3 +21,10 @@ Thumbs.db
 *-report.json
 test-output*.txt
 latest-full.txt
+cov2.txt
+coverage-*.txt
+err-test.txt
+test-fix*.txt
+test-run.txt
+test-*.txt
+cov-*.txt

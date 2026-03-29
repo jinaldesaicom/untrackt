@@ -1,4 +1,3 @@
-import { vi } from 'vitest'
 
 // matchMedia mock
 Object.defineProperty(window, 'matchMedia', {
