@@ -67,6 +67,11 @@ const wikiModules = {
   'json-to-csv-converter': () => import('./general/jsonToCsvConverter.js'),
   'text-to-slug': () => import('./general/textToSlug.js'),
   'meta-tag-generator': () => import('./general/metaTagGenerator.js'),
+  'image-compressor': () => import('./general/imageCompressor.js'),
+  'image-converter': () => import('./general/imageConverter.js'),
+  'time-zone-converter': () => import('./general/timeZoneConverter.js'),
+  'clipboard-manager': () => import('./general/clipboardManager.js'),
+  'text-snippets': () => import('./general/textSnippets.js'),
 
   // Health tools
   'bmr-calculator': () => import('./health/bmrCalculator.js'),
@@ -85,6 +90,7 @@ const wikiModules = {
   'medical-unit-converter': () => import('./health/medicalUnitConverter.js'),
   'vaccination-age-guide': () => import('./health/vaccinationAgeGuide.js'),
   'mood-tracker': () => import('./health/moodTracker.js'),
+  'symptom-journal': () => import('./health/symptomJournal.js'),
 
   // Finance tools
   'compound-interest-calculator': () => import('./finance/compoundInterestCalculator.js'),
@@ -121,6 +127,7 @@ const wikiModules = {
   'canonical-tag-generator': () => import('./seo/canonicalTagGenerator.js'),
   'page-speed-recommendations': () => import('./seo/pageSpeedRecommendations.js'),
   'seo-content-brief': () => import('./seo/seoContentBrief.js'),
+  'dns-records': () => import('./seo/dnsRecords.js'),
 
   // Productivity tools
   'todo-list': () => import('./productivity/todoList.js'),

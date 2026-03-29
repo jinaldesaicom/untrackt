@@ -1,10 +1,11 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import FireNumberCalculator from '../../../tools/finance/FireNumberCalculator.jsx'
+import { HelmetProvider } from 'react-helmet-async'
 
 describe('FireNumberCalculator', () => {
   it('renders all inputs', () => {
-    render(<FireNumberCalculator />)
+    render(<HelmetProvider><FireNumberCalculator /></HelmetProvider>)
     expect(screen.getByText('Annual Expenses ($)')).toBeInTheDocument()
     expect(screen.getByText('Expected Return Rate (%)')).toBeInTheDocument()
     expect(screen.getByText('Safe Withdrawal Rate (%)')).toBeInTheDocument()
@@ -15,7 +16,7 @@ describe('FireNumberCalculator', () => {
 
   it('calculates FIRE number: $40,000 expenses at 4% withdrawal = $1,000,000', async () => {
     const user = userEvent.setup()
-    render(<FireNumberCalculator />)
+    render(<HelmetProvider><FireNumberCalculator /></HelmetProvider>)
     // spinbutton order: expenses[0], returnRate[1], withdrawalRate[2], currentSavings[3], monthlySavings[4]
     const inputs = screen.getAllByRole('spinbutton')
     await user.clear(inputs[0]); await user.type(inputs[0], '40000')
@@ -26,7 +27,7 @@ describe('FireNumberCalculator', () => {
 
   it('years to FIRE is a positive number when monthly savings > 0', async () => {
     const user = userEvent.setup()
-    render(<FireNumberCalculator />)
+    render(<HelmetProvider><FireNumberCalculator /></HelmetProvider>)
     // Default has monthly savings > 0, so years to FIRE should render
     expect(screen.getByText(/years to fire/i)).toBeInTheDocument()
     // The years value should be a number (not "—")
@@ -38,7 +39,7 @@ describe('FireNumberCalculator', () => {
 
   it('"how much you still need" = FIRE number - current savings', async () => {
     const user = userEvent.setup()
-    render(<FireNumberCalculator />)
+    render(<HelmetProvider><FireNumberCalculator /></HelmetProvider>)
     const inputs = screen.getAllByRole('spinbutton')
     await user.clear(inputs[0]); await user.type(inputs[0], '40000')
     await user.clear(inputs[2]); await user.type(inputs[2], '4')
@@ -50,13 +51,13 @@ describe('FireNumberCalculator', () => {
   })
 
   it('FIRE explanation text is visible in the UI', () => {
-    render(<FireNumberCalculator />)
+    render(<HelmetProvider><FireNumberCalculator /></HelmetProvider>)
     expect(screen.getByText(/what is fire/i)).toBeInTheDocument()
     expect(screen.getByText(/financial independence, retire early/i)).toBeInTheDocument()
   })
 
   it('disclaimer text is present', () => {
-    render(<FireNumberCalculator />)
+    render(<HelmetProvider><FireNumberCalculator /></HelmetProvider>)
     expect(screen.getByText(/consult a financial advisor/i)).toBeInTheDocument()
   })
 })

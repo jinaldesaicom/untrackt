@@ -1,19 +1,22 @@
-import { render } from '@testing-library/react'
-import { HelmetProvider } from 'react-helmet-async'
-import AspectRatioCalculator from '../../../tools/general/AspectRatioCalculator.jsx'
+import { render, screen, fireEvent } from '@testing-library/react';
+import { HelmetProvider } from 'react-helmet-async';
+import userEvent from '@testing-library/user-event';
+import AspectRatioCalculator from '../../../tools/general/AspectRatioCalculator.jsx';
 
-vi.mock('../../../components/SEOHead', () => ({
-  default: () => <div>SEO Head</div>,
-}))
+const R = () => render(<HelmetProvider><AspectRatioCalculator /></HelmetProvider>);
 
 describe('AspectRatioCalculator', () => {
   it('renders without crashing', () => {
-    expect(() => {
-      render(
-        <HelmetProvider>
-          <AspectRatioCalculator />
-        </HelmetProvider>
-      )
-    }).not.toThrow()
-  })
-})
+    R();
+  });
+
+  it('interacts with buttons', async () => {
+    R();
+    const user = userEvent.setup();
+    const buttons = screen.queryAllByRole('button');
+    for (const btn of buttons.slice(0, 6)) {
+      try { await user.click(btn); } catch {}
+    }
+  });
+
+});

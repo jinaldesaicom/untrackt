@@ -1,10 +1,11 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import LoanCalculator from '../../../tools/finance/LoanCalculator.jsx'
+import { HelmetProvider } from 'react-helmet-async'
 
 describe('LoanCalculator', () => {
   it('renders loan amount, rate, and term inputs', () => {
-    render(<LoanCalculator />)
+    render(<HelmetProvider><LoanCalculator /></HelmetProvider>)
     expect(screen.getByText(/loan amount/i)).toBeInTheDocument()
     expect(screen.getByText(/annual interest rate/i)).toBeInTheDocument()
     expect(screen.getByText(/loan term/i)).toBeInTheDocument()
@@ -13,7 +14,7 @@ describe('LoanCalculator', () => {
 
   it('calculates EMI: $10,000 loan at 12% annual for 12 months ≈ $888.49', async () => {
     const user = userEvent.setup()
-    render(<LoanCalculator />)
+    render(<HelmetProvider><LoanCalculator /></HelmetProvider>)
     const [loanInput, rateInput, termInput] = screen.getAllByRole('spinbutton')
     await user.clear(loanInput); await user.type(loanInput, '10000')
     await user.clear(rateInput); await user.type(rateInput, '12')
@@ -24,7 +25,7 @@ describe('LoanCalculator', () => {
 
   it('total payment > loan amount (interest is added)', async () => {
     const user = userEvent.setup()
-    render(<LoanCalculator />)
+    render(<HelmetProvider><LoanCalculator /></HelmetProvider>)
     // Default loan is $250,000 > 0 so total payment should be visible and > loan
     expect(screen.getByText(/total payment/i)).toBeInTheDocument()
     expect(screen.getByText(/total interest/i)).toBeInTheDocument()
@@ -32,7 +33,7 @@ describe('LoanCalculator', () => {
 
   it('amortization table renders first 12 rows', async () => {
     const user = userEvent.setup()
-    render(<LoanCalculator />)
+    render(<HelmetProvider><LoanCalculator /></HelmetProvider>)
     const [loanInput, rateInput, termInput] = screen.getAllByRole('spinbutton')
     await user.clear(loanInput); await user.type(loanInput, '10000')
     await user.clear(rateInput); await user.type(rateInput, '12')
@@ -44,7 +45,7 @@ describe('LoanCalculator', () => {
 
   it('"Show all" toggle reveals full table', async () => {
     const user = userEvent.setup()
-    render(<LoanCalculator />)
+    render(<HelmetProvider><LoanCalculator /></HelmetProvider>)
     const [loanInput, , termInput] = screen.getAllByRole('spinbutton')
     await user.clear(loanInput); await user.type(loanInput, '10000')
     await user.clear(termInput); await user.type(termInput, '24')

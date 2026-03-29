@@ -1,10 +1,11 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import CompoundInterestCalculator from '../../../tools/finance/CompoundInterestCalculator.jsx'
+import { HelmetProvider } from 'react-helmet-async'
 
 describe('CompoundInterestCalculator', () => {
   it('renders all inputs', () => {
-    render(<CompoundInterestCalculator />)
+    render(<HelmetProvider><CompoundInterestCalculator /></HelmetProvider>)
     expect(screen.getByText(/principal/i)).toBeInTheDocument()
     expect(screen.getByText(/annual interest rate/i)).toBeInTheDocument()
     expect(screen.getByText(/compounding frequency/i)).toBeInTheDocument()
@@ -16,7 +17,7 @@ describe('CompoundInterestCalculator', () => {
 
   it('calculates $1,000 at 10% yearly compounding for 1 year → $1,100', async () => {
     const user = userEvent.setup()
-    render(<CompoundInterestCalculator />)
+    render(<HelmetProvider><CompoundInterestCalculator /></HelmetProvider>)
     // spinbutton order: principal[0], rate[1], years[2], monthly[3]
     const [principalInput, rateInput, yearsInput, monthlyInput] = screen.getAllByRole('spinbutton')
     const freqSelect = screen.getAllByRole('combobox')[0]
@@ -32,14 +33,14 @@ describe('CompoundInterestCalculator', () => {
 
   it('final balance is greater than principal', async () => {
     const user = userEvent.setup()
-    render(<CompoundInterestCalculator />)
+    render(<HelmetProvider><CompoundInterestCalculator /></HelmetProvider>)
     // Default values exist — just verify final balance section shows
     expect(screen.getByText(/final balance/i)).toBeInTheDocument()
   })
 
   it('year-by-year table renders with correct number of rows', async () => {
     const user = userEvent.setup()
-    render(<CompoundInterestCalculator />)
+    render(<HelmetProvider><CompoundInterestCalculator /></HelmetProvider>)
     const yearsInput = screen.getAllByRole('spinbutton')[2]
     await user.clear(yearsInput); await user.type(yearsInput, '5')
     await waitFor(() => {
@@ -49,7 +50,7 @@ describe('CompoundInterestCalculator', () => {
   })
 
   it('disclaimer text is present', () => {
-    render(<CompoundInterestCalculator />)
+    render(<HelmetProvider><CompoundInterestCalculator /></HelmetProvider>)
     expect(screen.getByText(/not financial advice/i)).toBeInTheDocument()
   })
 })

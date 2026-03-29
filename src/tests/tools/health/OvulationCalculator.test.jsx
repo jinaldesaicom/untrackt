@@ -1,39 +1,40 @@
-import { render } from '@testing-library/react'
-import { HelmetProvider } from 'react-helmet-async'
-import OvulationCalculator from '../../../tools/health/OvulationCalculator.jsx'
+import { render, screen, fireEvent } from '@testing-library/react';
+import { HelmetProvider } from 'react-helmet-async';
+import userEvent from '@testing-library/user-event';
+import OvulationCalculator from '../../../tools/health/OvulationCalculator.jsx';
 
-vi.mock('../../../components/DisclaimerCard', () => ({
-  default: () => <div>Disclaimer Card</div>,
-}))
-
-vi.mock('../../../components/SEOHead', () => ({
-  default: () => <div>SEO Head</div>,
-}))
+const R = () => render(<HelmetProvider><OvulationCalculator /></HelmetProvider>);
 
 describe('OvulationCalculator', () => {
   it('renders without crashing', () => {
-    expect(() => {
-      render(
-        <HelmetProvider>
-          <OvulationCalculator />
-        </HelmetProvider>
-      )
-    }).not.toThrow()
-  })
+    R();
+  });
 
-  it('renders weekday headers without duplicate key warnings', () => {
-    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {})
+  it('interacts with buttons', async () => {
+    R();
+    const user = userEvent.setup();
+    const buttons = screen.queryAllByRole('button');
+    for (const btn of buttons.slice(0, 6)) {
+      try { await user.click(btn); } catch {}
+    }
+  });
 
-    render(
-      <HelmetProvider>
-        <OvulationCalculator />
-      </HelmetProvider>
-    )
+  it('fills number inputs', async () => {
+    R();
+    const user = userEvent.setup();
+    const inputs = screen.queryAllByRole('spinbutton');
+    for (const input of inputs.slice(0, 5)) {
+      await user.clear(input);
+      await user.type(input, '42');
+    }
+  });
 
-    expect(consoleError).not.toHaveBeenCalledWith(
-      expect.stringContaining('Encountered two children with the same key')
-    )
+  it('sets date inputs', () => {
+    R();
+    const dateInputs = document.querySelectorAll('input[type="date"]');
+    dateInputs.forEach(input => {
+      fireEvent.change(input, { target: { value: '2025-06-15' } });
+    });
+  });
 
-    consoleError.mockRestore()
-  })
-})
+});

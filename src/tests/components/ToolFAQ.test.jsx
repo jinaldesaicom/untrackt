@@ -132,4 +132,50 @@ describe('ToolFAQ', () => {
       renderWithHelmet(<ToolFAQ toolId={undefined} />)
     }).not.toThrow()
   })
+
+  it('expand all button expands all FAQs', async () => {
+    const user = userEvent.setup()
+    renderWithHelmet(<ToolFAQ toolId="json-formatter" />)
+    const expandAllBtn = screen.getByText(/expand all/i).closest('button')
+    await user.click(expandAllBtn)
+    // Both answers should be visible
+    expect(screen.getByText('No, nothing is sent to any server.')).toBeInTheDocument()
+    expect(screen.getByText('Yes, UnTrackt works offline.')).toBeInTheDocument()
+  })
+
+  it('collapse all after expand all', async () => {
+    const user = userEvent.setup()
+    renderWithHelmet(<ToolFAQ toolId="json-formatter" />)
+    const expandAllBtn = screen.getByText(/expand all/i).closest('button')
+    await user.click(expandAllBtn)
+    // Now says "Collapse all"
+    const collapseBtn = screen.getByText(/collapse all/i).closest('button')
+    await user.click(collapseBtn)
+    // Answers should be hidden
+    expect(screen.queryByText('No, nothing is sent to any server.')).not.toBeInTheDocument()
+    expect(screen.queryByText('Yes, UnTrackt works offline.')).not.toBeInTheDocument()
+  })
+
+  it('clicking FAQ while allExpanded sets single item mode', async () => {
+    const user = userEvent.setup()
+    renderWithHelmet(<ToolFAQ toolId="json-formatter" />)
+    const expandAllBtn = screen.getByText(/expand all/i).closest('button')
+    await user.click(expandAllBtn)
+    // Click on first FAQ button while all expanded
+    const firstBtn = screen.getByText('Does this store my data?').closest('button')
+    await user.click(firstBtn)
+    // Should switch to single-item mode with only item 0 open
+    expect(screen.getByText('No, nothing is sent to any server.')).toBeInTheDocument()
+  })
+
+  it('keyboard ArrowDown/ArrowUp navigates between FAQs', async () => {
+    const user = userEvent.setup()
+    renderWithHelmet(<ToolFAQ toolId="json-formatter" />)
+    const firstBtn = screen.getByText('Does this store my data?').closest('button')
+    firstBtn.focus()
+    await user.keyboard('{ArrowDown}')
+    await user.keyboard('{ArrowUp}')
+    await user.keyboard('{Home}')
+    await user.keyboard('{End}')
+  })
 })

@@ -1,17 +1,18 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import TipSplitter from '../../../tools/general/TipSplitter.jsx'
+import { HelmetProvider } from 'react-helmet-async'
 
 describe('TipSplitter', () => {
   it('renders bill amount, tip %, and people count inputs', () => {
-    render(<TipSplitter />)
+    render(<HelmetProvider><TipSplitter /></HelmetProvider>)
     expect(screen.getByText(/bill amount/i)).toBeInTheDocument()
     expect(screen.getByText(/number of people/i)).toBeInTheDocument()
     expect(screen.getByRole('slider')).toBeInTheDocument()
   })
 
   it('calculates correct tip amount, total, and per person for Bill $100, Tip 20%, 4 people', async () => {
-    render(<TipSplitter />)
+    render(<HelmetProvider><TipSplitter /></HelmetProvider>)
     const spinbuttons = screen.getAllByRole('spinbutton')
     // Bill amount is first number input, people count is second
     fireEvent.change(spinbuttons[0], { target: { value: '100' } })
@@ -26,7 +27,7 @@ describe('TipSplitter', () => {
   })
 
   it('changing number of people updates per person amount', async () => {
-    render(<TipSplitter />)
+    render(<HelmetProvider><TipSplitter /></HelmetProvider>)
     const spinbuttons = screen.getAllByRole('spinbutton')
     fireEvent.change(spinbuttons[0], { target: { value: '100' } })
 
@@ -40,7 +41,7 @@ describe('TipSplitter', () => {
   })
 
   it('tip percentage slider updates tip amount in real-time', async () => {
-    render(<TipSplitter />)
+    render(<HelmetProvider><TipSplitter /></HelmetProvider>)
     const spinbuttons = screen.getAllByRole('spinbutton')
     fireEvent.change(spinbuttons[0], { target: { value: '200' } })
     const slider = screen.getByRole('slider')
@@ -51,7 +52,7 @@ describe('TipSplitter', () => {
 
   it('custom split toggle shows individual name fields', async () => {
     const user = userEvent.setup()
-    render(<TipSplitter />)
+    render(<HelmetProvider><TipSplitter /></HelmetProvider>)
     await user.click(screen.getByText(/custom split by person/i))
     // Custom split section should show name inputs
     expect(screen.getByDisplayValue('Person 1')).toBeInTheDocument()

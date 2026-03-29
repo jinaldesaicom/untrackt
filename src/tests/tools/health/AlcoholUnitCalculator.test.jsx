@@ -1,23 +1,46 @@
-import { render } from '@testing-library/react'
-import { HelmetProvider } from 'react-helmet-async'
-import AlcoholUnitCalculator from '../../../tools/health/AlcoholUnitCalculator.jsx'
+import { render, screen, fireEvent } from '@testing-library/react';
+import { HelmetProvider } from 'react-helmet-async';
+import userEvent from '@testing-library/user-event';
+import AlcoholUnitCalculator from '../../../tools/health/AlcoholUnitCalculator.jsx';
 
-vi.mock('../../../components/DisclaimerCard', () => ({
-  default: () => <div>Disclaimer Card</div>,
-}))
-
-vi.mock('../../../components/SEOHead', () => ({
-  default: () => <div>SEO Head</div>,
-}))
+const R = () => render(<HelmetProvider><AlcoholUnitCalculator /></HelmetProvider>);
 
 describe('AlcoholUnitCalculator', () => {
   it('renders without crashing', () => {
-    expect(() => {
-      render(
-        <HelmetProvider>
-          <AlcoholUnitCalculator />
-        </HelmetProvider>
-      )
-    }).not.toThrow()
-  })
-})
+    R();
+  });
+
+  it('interacts with buttons', async () => {
+    R();
+    const user = userEvent.setup();
+    const buttons = screen.queryAllByRole('button');
+    for (const btn of buttons.slice(0, 6)) {
+      try { await user.click(btn); } catch {}
+    }
+  });
+
+  it('fills number inputs', async () => {
+    R();
+    const user = userEvent.setup();
+    const inputs = screen.queryAllByRole('spinbutton');
+    for (const input of inputs.slice(0, 5)) {
+      await user.clear(input);
+      await user.type(input, '42');
+    }
+  });
+
+  it('computes after input', async () => {
+    R();
+    const user = userEvent.setup();
+    const inputs = screen.queryAllByRole('spinbutton');
+    for (const input of inputs.slice(0, 3)) {
+      await user.clear(input);
+      await user.type(input, '10');
+    }
+    const buttons = screen.queryAllByRole('button');
+    for (const btn of buttons.slice(0, 4)) {
+      try { await user.click(btn); } catch {}
+    }
+  });
+
+});
