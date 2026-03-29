@@ -8,7 +8,7 @@ export default function PrivacyPage() {
       <SEOHead
         title="Privacy Policy | UnTrackt"
         description="How UnTrackt protects your privacy with a browser-only architecture and zero tracking."
-        path="/privacy"
+        path="/privacy-policy"
       />
 
       <h1>Privacy Policy</h1>
@@ -32,8 +32,51 @@ export default function PrivacyPage() {
       <p>All of this data stays on your device. It never leaves your browser and is never sent to any server. You can clear it any time via My Stats or your browser settings.</p>
 
       <h2>4. Third-Party Services</h2>
-      <p>UnTrackt uses no third-party analytics, advertising, or tracking services.</p>
-      <p>The Currency Converter tool fetches live exchange rates from open.er-api.com. This is the only external request made by UnTrackt, and only when you use that tool.</p>
+      <p>UnTrackt uses no third-party analytics, advertising, or tracking services. A small number of tools make external requests to provide their functionality. These requests are only made when you actively use the tool — never in the background.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Tool</th>
+            <th>External Service</th>
+            <th>What Is Sent</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Currency Converter</strong></td>
+            <td>open.er-api.com</td>
+            <td>A standard HTTP request to fetch the latest exchange rates. No personal data is sent.</td>
+          </tr>
+          <tr>
+            <td><strong>PageSpeed Recommendations</strong></td>
+            <td>googleapis.com (PageSpeed Insights API)</td>
+            <td>The URL you enter for analysis, plus your chosen strategy (mobile/desktop). If you provide a Google API key, it is sent with the request. No other data is transmitted.</td>
+          </tr>
+          <tr>
+            <td><strong>Robots.txt Tester</strong></td>
+            <td>The domain you enter</td>
+            <td>A direct browser fetch to <code>/robots.txt</code> on the domain you specify. No data beyond the standard browser request headers is sent.</td>
+          </tr>
+          <tr>
+            <td><strong>Image to Base64</strong></td>
+            <td>The image URL you enter</td>
+            <td>When you paste a remote image URL, your browser fetches that image directly. No data beyond the standard browser request headers is sent.</td>
+          </tr>
+          <tr>
+            <td><strong>DNS Records</strong></td>
+            <td>cloudflare-dns.com (Cloudflare DNS over HTTPS)</td>
+            <td>The domain name you enter is sent to Cloudflare&apos;s public DoH resolver to look up DNS records. No personal data is transmitted.</td>
+          </tr>
+          <tr>
+            <td><strong>DataSync (Bring Your Own Storage)</strong></td>
+            <td>googleapis.com (Google Drive API)</td>
+            <td>When you choose to sync your data via Google Drive, you authenticate directly with Google using your own account. UnTrackt reads and writes only its own app-specific files in your Drive. Your Google credentials are handled entirely by Google&apos;s OAuth flow and are never seen or stored by UnTrackt.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>All other tools run entirely in your browser with zero external requests.</p>
 
       <h2>5. Hosting Infrastructure</h2>
       <p>UnTrackt is hosted on Cloudflare Pages. Cloudflare may maintain standard infrastructure logs such as IP addresses and request timestamps. See Cloudflare&apos;s privacy documentation for their data handling details.</p>
