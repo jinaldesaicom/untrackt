@@ -25,7 +25,7 @@ const staticPages = [
   { name: 'My Stats', path: '/my-stats', icon: BarChart2, description: 'Usage statistics' },
   { name: 'Search', path: '/search', icon: Search, description: 'Find any tool' },
   { name: 'About', path: '/about', icon: Info, description: 'About UnTrackt' },
-  { name: 'Privacy Policy', path: '/privacy', icon: ShieldCheck, description: 'How we protect your data' },
+  { name: 'Privacy Policy', path: '/privacy-policy', icon: ShieldCheck, description: 'How we protect your data' },
   { name: 'Terms of Use', path: '/terms', icon: FileText, description: 'Terms and conditions' },
 ]
 
