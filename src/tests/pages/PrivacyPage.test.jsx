@@ -38,7 +38,8 @@ describe('PrivacyPage', () => {
 
   it('mentions Cloudflare hosting', () => {
     renderPage(<PrivacyPage />)
-    expect(screen.getByText(/Cloudflare/i)).toBeInTheDocument()
+    const matches = screen.getAllByText(/Cloudflare/i)
+    expect(matches.length).toBeGreaterThan(0)
   })
 
   it('has contact email or contact section', () => {
