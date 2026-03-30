@@ -1075,6 +1075,23 @@ export const richDescriptions = {
     ],
   },
 
+  'data-sync': {
+    shortDescription: 'Export, import, and QR-transfer your data between devices.',
+    longDescription: 'The Data Sync & Backup tool lets you export all your UnTrackt data (favorites, stats, theme, preferences) as a JSON file, import it on another device, or transfer via QR code / copy-paste — all with total privacy. Everything runs 100% in your browser.',
+    keywords: ['data backup', 'export import', 'sync data', 'qr transfer', 'local storage backup', 'privacy sync', 'cross device'],
+    faqs: [
+      { q: 'Is my data sent to any server?', a: 'No. Export/import and QR transfer are 100% local — nothing leaves your browser.' },
+      { q: 'What data is included?', a: 'All UnTrackt data: favorites, theme preference, recent tools, usage stats, and any stored tool preferences.' },
+      { q: 'What is the difference between merge and overwrite?', a: 'Merge keeps your existing data and only adds keys that are missing. Overwrite replaces all matching keys with the imported values.' },
+      { q: 'What if my data is too large for a QR code?', a: 'The tool will notify you and suggest using the Copy Text option instead. You can paste the text on the other device to import.' },
+    ],
+    guide: [
+      { title: 'Export & Import', body: '1. Click "Download Backup" to save a JSON file of all your data.\n2. Transfer the file to another device (email, USB, cloud drive).\n3. On that device, click "Select Backup File" and choose the JSON.\n4. Pick Merge or Overwrite mode, then confirm the import.\n5. Reload the page to see your restored data.' },
+      { title: 'QR Code Transfer', body: '1. Switch to the "QR Transfer" tab.\n2. Click "Generate QR" to create a scannable QR code.\n3. On the other device, scan the QR with your camera (it copies the text).\n4. Paste the text into the "Receive" box and click "Import from Text".\n5. If data is too large for QR, use "Copy Text" and paste directly.' },
+      { title: 'Tips', body: '• Export regularly as a backup before clearing browser data.\n• The tool compresses data for smaller QR codes.\n• Cloud sync (Google Drive, OneDrive) is coming soon as an additional option.\n• Your privacy-first local export will always remain available.' },
+    ],
+  },
+
   // ── Dev tools (remaining) ──
   'hash-generator': {
     shortDescription: 'Generate MD5 and SHA hashes.',

@@ -28,7 +28,7 @@ const staticPages = [
   { name: 'Tool Wiki', path: '/wiki', icon: BookOpen, description: 'In-depth guides for every tool' },
   { name: 'Sitemap', path: '/sitemap', icon: Map, description: 'Complete site directory' },
   { name: 'About', path: '/about', icon: Info, description: 'About UnTrackt' },
-  { name: 'Privacy Policy', path: '/privacy', icon: ShieldCheck, description: 'How we protect your data' },
+  { name: 'Privacy Policy', path: '/privacy-policy', icon: ShieldCheck, description: 'How we protect your data' },
   { name: 'Terms of Use', path: '/terms', icon: FileText, description: 'Terms and conditions' },
 ]
 

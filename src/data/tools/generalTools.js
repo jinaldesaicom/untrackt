@@ -20,6 +20,7 @@ const ImageConverter = lazy(() => import('../../tools/general/ImageConverter.jsx
 const TimeZoneConverter = lazy(() => import('../../tools/general/TimeZoneConverter.jsx'))
 const ClipboardManager = lazy(() => import('../../tools/general/ClipboardManager.jsx'))
 const TextSnippets = lazy(() => import('../../tools/general/TextSnippets.jsx'))
+const DataSync = lazy(() => import('../../tools/general/DataSync.jsx'))
 
 export const generalTools = [
   { id: 'password-generator', name: 'Password Generator', description: 'Generate cryptographically secure random passwords', category: 'general', subcategory: 'generators', icon: 'ShieldCheck', path: '/tools/password-generator', component: PasswordGenerator, tags: ['password', 'generator', 'secure', 'random', 'crypto', 'security'], isPopular: true, isNew: false },
@@ -42,4 +43,5 @@ export const generalTools = [
   { id: 'time-zone-converter', name: 'Time Zone Converter', description: 'Convert times between time zones and compare multiple zones at once', category: 'general', subcategory: 'utilities', icon: 'Clock', path: '/tools/time-zone-converter', component: TimeZoneConverter, tags: ['time zone', 'timezone', 'convert', 'utc', 'gmt', 'world clock', 'international', 'schedule'], isPopular: false, isNew: true },
   { id: 'clipboard-manager', name: 'Clipboard Manager', description: 'Save, search, pin, and copy text clips with duplicate detection', category: 'general', subcategory: 'utilities', icon: 'Clipboard', path: '/tools/clipboard-manager', component: ClipboardManager, tags: ['clipboard', 'copy', 'paste', 'clips', 'snippets', 'save', 'pin', 'text'], isPopular: false, isNew: true },
   { id: 'text-snippets', name: 'Text Snippets', description: 'Create shortcode expansions with dynamic placeholders and prefix triggers', category: 'general', subcategory: 'text', icon: 'Braces', path: '/tools/text-snippets', component: TextSnippets, tags: ['snippets', 'text expansion', 'shortcode', 'template', 'macro', 'clipboard', 'placeholder'], isPopular: false, isNew: true },
+  { id: 'data-sync', name: 'Data Sync & Backup', description: 'Export, import, and QR-transfer your data between devices', category: 'general', subcategory: 'utilities', icon: 'HardDrive', path: '/tools/data-sync', component: DataSync, tags: ['backup', 'export', 'import', 'sync', 'transfer', 'qr code', 'data', 'privacy'], isPopular: false, isNew: true },
 ]
