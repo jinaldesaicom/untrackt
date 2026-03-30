@@ -471,12 +471,6 @@ export default function DataSync() {
         </div>
       )}
 
-      {/* Future cloud sync hint */}
-      <div className="p-3.5 rounded-xl border border-dashed border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/50">
-        <p className="text-xs text-gray-500 dark:text-gray-400">
-          <strong>Coming soon:</strong> Optional cloud sync (Google Drive, OneDrive) for automatic cross-device backup. Your privacy-first export options will always remain available.
-        </p>
-      </div>
     </div>
   )
 }
