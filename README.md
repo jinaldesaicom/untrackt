@@ -1,6 +1,6 @@
 # UnTrackt
 
-124+ free browser-based tools.
+225+ free browser-based tools.
 Zero tracking. Zero accounts.
 100% private.
 

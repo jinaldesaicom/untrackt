@@ -30,7 +30,7 @@ function buildSvg(title, from, to) {
   </g>
   <text x="600" y="250" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="88" font-weight="700">UnTrackt</text>
   <text x="600" y="325" text-anchor="middle" fill="#e0e7ff" font-family="Arial, sans-serif" font-size="40" font-weight="600">${title}</text>
-  <text x="600" y="390" text-anchor="middle" fill="#f8fafc" font-family="Arial, sans-serif" font-size="34">124+ Free Browser Tools</text>
+  <text x="600" y="390" text-anchor="middle" fill="#f8fafc" font-family="Arial, sans-serif" font-size="34">225+ Free Browser Tools</text>
   <text x="600" y="445" text-anchor="middle" fill="#f8fafc" font-family="Arial, sans-serif" font-size="28">Zero Tracking • Zero Accounts • 100% Private</text>
 </svg>`
 }

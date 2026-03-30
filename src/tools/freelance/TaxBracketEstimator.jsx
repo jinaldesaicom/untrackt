@@ -41,9 +41,9 @@ const TAX_BRACKETS = {
       Federal: [
         { min: 0, max: 55867, rate: 0.15 },
         { min: 55867, max: 111733, rate: 0.205 },
-        { min: 111733, max: 173205, rate: 0.26 },
-        { min: 173205, max: 246752, rate: 0.29 },
-        { min: 246752, max: Infinity, rate: 0.33 },
+        { min: 111733, max: 154906, rate: 0.26 },
+        { min: 154906, max: 220000, rate: 0.29 },
+        { min: 220000, max: Infinity, rate: 0.33 },
       ],
     },
   },
@@ -51,16 +51,24 @@ const TAX_BRACKETS = {
     2024: {
       Standard: [
         { min: 0, max: 18200, rate: 0.0 },
-        { min: 18200, max: 45000, rate: 0.19 },
-        { min: 45000, max: 120000, rate: 0.325 },
-        { min: 120000, max: 180000, rate: 0.37 },
-        { min: 180000, max: Infinity, rate: 0.45 },
+        { min: 18200, max: 45000, rate: 0.16 },
+        { min: 45000, max: 135000, rate: 0.30 },
+        { min: 135000, max: 190000, rate: 0.37 },
+        { min: 190000, max: Infinity, rate: 0.45 },
       ],
     },
   },
   India: {
     2024: {
-      Standard: [
+      'New Regime': [
+        { min: 0, max: 300000, rate: 0.0 },
+        { min: 300000, max: 700000, rate: 0.05 },
+        { min: 700000, max: 1000000, rate: 0.10 },
+        { min: 1000000, max: 1200000, rate: 0.15 },
+        { min: 1200000, max: 1500000, rate: 0.20 },
+        { min: 1500000, max: Infinity, rate: 0.30 },
+      ],
+      'Old Regime': [
         { min: 0, max: 250000, rate: 0.0 },
         { min: 250000, max: 500000, rate: 0.05 },
         { min: 500000, max: 1000000, rate: 0.20 },
@@ -72,19 +80,23 @@ const TAX_BRACKETS = {
     2024: {
       Standard: [
         { min: 0, max: 11604, rate: 0.0 },
-        { min: 11604, max: 62810, rate: 0.42 },
-        { min: 62810, max: Infinity, rate: 0.45 },
+        { min: 11604, max: 17005, rate: 0.19 },
+        { min: 17005, max: 32000, rate: 0.27 },
+        { min: 32000, max: 50000, rate: 0.33 },
+        { min: 50000, max: 66760, rate: 0.39 },
+        { min: 66760, max: 277826, rate: 0.42 },
+        { min: 277826, max: Infinity, rate: 0.45 },
       ],
     },
   },
   France: {
     2024: {
       Standard: [
-        { min: 0, max: 10084, rate: 0.0 },
-        { min: 10084, max: 27746, rate: 0.11 },
-        { min: 27746, max: 74517, rate: 0.30 },
-        { min: 74517, max: 157806, rate: 0.41 },
-        { min: 157806, max: Infinity, rate: 0.45 },
+        { min: 0, max: 11294, rate: 0.0 },
+        { min: 11294, max: 28797, rate: 0.11 },
+        { min: 28797, max: 82341, rate: 0.30 },
+        { min: 82341, max: 177106, rate: 0.41 },
+        { min: 177106, max: Infinity, rate: 0.45 },
       ],
     },
   },
@@ -92,13 +104,15 @@ const TAX_BRACKETS = {
     2024: {
       Standard: [
         { min: 0, max: 20000, rate: 0.0 },
-        { min: 20000, max: 30000, rate: 0.025 },
-        { min: 30000, max: 40000, rate: 0.05 },
-        { min: 40000, max: 80000, rate: 0.075 },
-        { min: 80000, max: 120000, rate: 0.11 },
+        { min: 20000, max: 30000, rate: 0.02 },
+        { min: 30000, max: 40000, rate: 0.035 },
+        { min: 40000, max: 80000, rate: 0.07 },
+        { min: 80000, max: 120000, rate: 0.115 },
         { min: 120000, max: 160000, rate: 0.15 },
         { min: 160000, max: 200000, rate: 0.18 },
-        { min: 200000, max: 320000, rate: 0.19 },
+        { min: 200000, max: 240000, rate: 0.19 },
+        { min: 240000, max: 280000, rate: 0.195 },
+        { min: 280000, max: 320000, rate: 0.20 },
         { min: 320000, max: Infinity, rate: 0.22 },
       ],
     },
