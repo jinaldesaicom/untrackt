@@ -1092,6 +1092,23 @@ export const richDescriptions = {
     ],
   },
 
+  'image-resizer': {
+    shortDescription: 'Resize images to exact pixel dimensions in your browser.',
+    longDescription: 'Resize any image to custom dimensions with an optional aspect-ratio lock. Choose from common presets like HD or Full HD, pick an output format (PNG, JPEG, WebP), and download the result — all processed locally in your browser with zero uploads.',
+    keywords: ['image resizer', 'resize image online', 'change image dimensions', 'scale image', 'aspect ratio', 'photo resizer', 'pixel resize'],
+    faqs: [
+      { q: 'Is my image uploaded to a server?', a: 'No. All processing happens in your browser using the Canvas API — nothing leaves your device.' },
+      { q: 'Can I preserve the aspect ratio?', a: 'Yes. The lock button between width and height keeps the aspect ratio when you change either dimension.' },
+      { q: 'What formats are supported?', a: 'You can upload any browser-supported image (PNG, JPEG, WebP, GIF, BMP, SVG) and export as PNG, JPEG, or WebP.' },
+      { q: 'Is there a file size limit?', a: 'There is no hard limit, but very large images may be slow since processing is done in the browser.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Drop an image or click the upload area to select a file.\n2. Enter a custom width and height, or pick a preset size.\n3. Toggle the lock icon to preserve or unlock the aspect ratio.\n4. Choose an output format (PNG, JPEG, or WebP) and quality.\n5. Click "Resize Image" and download the result.' },
+      { title: 'Aspect ratio explained', body: '• When the lock icon is active, changing width automatically adjusts height (and vice versa) to maintain the original proportions.\n• Unlock the aspect ratio to stretch or squash the image to any arbitrary size.\n• Presets respect the lock: if locked, the image fits within the preset while keeping proportions.' },
+      { title: 'Tips', body: '• Use WebP format for the smallest file sizes with good quality.\n• The quality slider only applies to JPEG and WebP — PNG is always lossless.\n• You can resize the same image multiple times with different settings without re-uploading.' },
+    ],
+  },
+
   // ── Dev tools (remaining) ──
   'hash-generator': {
     shortDescription: 'Generate MD5 and SHA hashes.',

@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react'
-import { Plus, Trash2, ChevronUp, ChevronDown } from 'lucide-react'
+import { Plus, Trash2, ChevronUp, ChevronDown, Printer } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import SEOHead from '../../components/SEOHead.jsx'
 import DisclaimerCard from '../../components/DisclaimerCard.jsx'
-import PrintButton from '../../components/PrintButton.jsx'
 import CopyButton from '../../components/CopyButton.jsx'
 import * as storage from '../../utils/storage.js'
 import { getLocaleCurrency } from '../../utils/currency.js'
+
+function esc(str) {
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+}
 
 const CURRENCIES = {
   USD: '$',
@@ -64,7 +67,17 @@ export default function InvoiceGenerator() {
     const savedTemplate = storage.getItem(TEMPLATE_KEY)
     const lastNumber = storage.getItem(LAST_NUMBER_KEY, 1000)
     if (savedTemplate) {
-      setFrom(savedTemplate)
+      // Backwards compat: old templates saved only the 'from' object
+      if (savedTemplate.name && !savedTemplate.from) {
+        setFrom(savedTemplate)
+      } else {
+        if (savedTemplate.from) setFrom(savedTemplate.from)
+        if (savedTemplate.totals) setTotals(savedTemplate.totals)
+        if (savedTemplate.notes) setNotes(savedTemplate.notes)
+        if (savedTemplate.currency) {
+          setInvoiceDetails(prev => ({ ...prev, currency: savedTemplate.currency }))
+        }
+      }
     }
     setInvoiceDetails(prev => ({
       ...prev,
@@ -120,17 +133,114 @@ export default function InvoiceGenerator() {
   }
 
   const saveTemplate = () => {
-    storage.setItem(TEMPLATE_KEY, from)
+    storage.setItem(TEMPLATE_KEY, {
+      from,
+      totals,
+      notes,
+      currency: invoiceDetails.currency,
+    })
     alert('Invoice template saved!')
   }
 
   const loadTemplate = () => {
     const template = storage.getItem(TEMPLATE_KEY)
     if (template) {
-      setFrom(template)
+      if (template.from) setFrom(template.from)
+      if (template.totals) setTotals(template.totals)
+      if (template.notes) setNotes(template.notes)
+      if (template.currency) {
+        setInvoiceDetails(prev => ({ ...prev, currency: template.currency }))
+      }
       alert('Template loaded!')
     } else {
       alert('No saved template found')
+    }
+  }
+
+  const handlePrint = () => {
+    const itemRows = lineItems.map(item => {
+      const qty = parseFloat(item.quantity) || 0
+      const rate = parseFloat(item.rate) || 0
+      return `<tr>
+        <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb">${esc(item.description)}</td>
+        <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;text-align:right">${qty.toFixed(2)}</td>
+        <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;text-align:right">${esc(currencySymbol)}${fmt(rate)}</td>
+        <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;text-align:right">${esc(currencySymbol)}${fmt(qty * rate)}</td>
+      </tr>`
+    }).join('')
+
+    const totalsRows = [
+      `<tr><td style="padding:6px 10px;text-align:right">Subtotal</td><td style="padding:6px 10px;text-align:right;font-weight:500">${esc(currencySymbol)}${fmt(subtotal)}</td></tr>`,
+      discount > 0 ? `<tr><td style="padding:6px 10px;text-align:right">Discount</td><td style="padding:6px 10px;text-align:right;font-weight:500">-${esc(currencySymbol)}${fmt(discount)}</td></tr>` : '',
+      `<tr><td style="padding:6px 10px;text-align:right">${esc(totals.taxLabel)} (${parseFloat(totals.taxRate) || 0}%)</td><td style="padding:6px 10px;text-align:right;font-weight:500">${esc(currencySymbol)}${fmt(tax)}</td></tr>`,
+      `<tr style="border-top:2px solid #374151"><td style="padding:10px 10px;text-align:right;font-weight:700;font-size:15px">Total</td><td style="padding:10px 10px;text-align:right;font-weight:700;font-size:17px">${esc(currencySymbol)}${fmt(total)}</td></tr>`,
+    ].join('')
+
+    const notesHtml = (notes.paymentTerms || notes.message) ? `
+      <div style="margin-top:24px;font-size:12px">
+        ${notes.paymentTerms ? `<div style="margin-bottom:8px"><p style="font-weight:600;color:#6b7280;margin:0 0 2px">Payment Terms</p><p style="margin:0;color:#111827;white-space:pre-wrap">${esc(notes.paymentTerms)}</p></div>` : ''}
+        ${notes.message ? `<p style="margin:0;color:#111827;font-style:italic">${esc(notes.message)}</p>` : ''}
+      </div>` : ''
+
+    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Invoice ${esc(invoiceDetails.number)}</title>
+      <style>body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;max-width:800px;margin:0 auto;padding:32px;color:#374151}
+      table{border-collapse:collapse;width:100%}
+      @media print{body{padding:0}}</style></head><body>
+      <div>
+        ${from.name ? `<h1 style="font-size:24px;font-weight:700;color:#111827;margin:0">${esc(from.name)}</h1>` : ''}
+        ${from.address ? `<p style="font-size:13px;color:#6b7280;margin:4px 0;white-space:pre-wrap">${esc(from.address)}</p>` : ''}
+        ${from.email ? `<p style="font-size:13px;color:#6b7280;margin:2px 0">${esc(from.email)}</p>` : ''}
+        ${from.phone ? `<p style="font-size:13px;color:#6b7280;margin:2px 0">${esc(from.phone)}</p>` : ''}
+        ${from.website ? `<p style="font-size:13px;color:#4f46e5;margin:2px 0">${esc(from.website)}</p>` : ''}
+      </div>
+      <hr style="border:none;border-top:1px solid #e5e7eb;margin:20px 0">
+      <p style="font-size:32px;font-weight:700;color:#111827;margin:0 0 16px">INVOICE</p>
+      <div style="display:flex;gap:40px;font-size:13px;margin-bottom:20px">
+        <div><p style="color:#6b7280;margin:0 0 2px">Invoice Number</p><p style="font-weight:600;color:#111827;margin:0">${esc(invoiceDetails.number)}</p></div>
+        <div><p style="color:#6b7280;margin:0 0 2px">Invoice Date</p><p style="font-weight:600;color:#111827;margin:0">${esc(invoiceDetails.date)}</p></div>
+        <div><p style="color:#6b7280;margin:0 0 2px">Due Date</p><p style="font-weight:600;color:#111827;margin:0">${esc(invoiceDetails.dueDate)}</p></div>
+      </div>
+      ${to.name ? `<div style="background:#f9fafb;padding:12px 16px;border-radius:8px;margin-bottom:20px">
+        <p style="font-size:11px;color:#6b7280;text-transform:uppercase;margin:0 0 6px">Bill To</p>
+        <p style="font-weight:600;color:#111827;margin:0">${esc(to.name)}</p>
+        ${to.address ? `<p style="font-size:13px;color:#6b7280;margin:4px 0;white-space:pre-wrap">${esc(to.address)}</p>` : ''}
+        ${to.email ? `<p style="font-size:13px;color:#6b7280;margin:2px 0">${esc(to.email)}</p>` : ''}
+      </div>` : ''}
+      <table style="font-size:13px;margin-bottom:16px">
+        <thead><tr style="border-bottom:2px solid #d1d5db">
+          <th style="text-align:left;padding:8px 10px;color:#374151;font-weight:600">Description</th>
+          <th style="text-align:right;padding:8px 10px;color:#374151;font-weight:600;width:60px">Qty</th>
+          <th style="text-align:right;padding:8px 10px;color:#374151;font-weight:600;width:80px">Rate</th>
+          <th style="text-align:right;padding:8px 10px;color:#374151;font-weight:600;width:80px">Amount</th>
+        </tr></thead>
+        <tbody>${itemRows}</tbody>
+      </table>
+      <div style="display:flex;justify-content:flex-end">
+        <table style="width:240px;font-size:13px">
+          <tbody>${totalsRows}</tbody>
+        </table>
+      </div>
+      ${notesHtml}
+      </body></html>`
+
+    const blob = new Blob([html], { type: 'text/html' })
+    const url = URL.createObjectURL(blob)
+
+    let iframe = document.getElementById('invoice-print-frame')
+    if (iframe) iframe.remove()
+    iframe = document.createElement('iframe')
+    iframe.id = 'invoice-print-frame'
+    iframe.style.cssText = 'position:fixed;top:-10000px;left:-10000px;width:800px;height:600px'
+    document.body.appendChild(iframe)
+    iframe.src = url
+
+    iframe.onload = () => {
+      try {
+        iframe.contentWindow.print()
+      } catch {
+        window.open(url, '_blank')
+      }
+      setTimeout(() => { iframe.remove(); URL.revokeObjectURL(url) }, 5000)
     }
   }
 
@@ -219,7 +329,13 @@ export default function InvoiceGenerator() {
 
       <div className="space-y-6">
         <div className="flex flex-wrap gap-2 mb-4">
-          <PrintButton label="Print / Save as PDF" />
+          <button
+            onClick={handlePrint}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 text-white font-medium text-sm hover:bg-blue-700 transition-colors"
+          >
+            <Printer className="w-4 h-4" />
+            Print / Save as PDF
+          </button>
           <button onClick={saveTemplate} className="btn-secondary text-sm">
             Save Template
           </button>
@@ -739,23 +855,6 @@ export default function InvoiceGenerator() {
         </div>
       </div>
 
-      <style>{`
-        @media print {
-          body * { visibility: hidden; }
-          #invoice-preview,
-          #invoice-preview * { visibility: visible; }
-          #invoice-preview {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            display: block !important;
-            box-shadow: none !important;
-            border: none !important;
-            padding: 0 !important;
-          }
-        }
-      `}</style>
     </>
   )
 }
