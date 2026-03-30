@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import SEOHead from '../../components/SEOHead.jsx'
 import DisclaimerCard from '../../components/DisclaimerCard.jsx'
+import { formatCurrency } from '../../utils/currency.js'
 
 export default function EmergencyFundCalculator() {
   const [expenses, setExpenses] = useState([
@@ -22,7 +23,7 @@ export default function EmergencyFundCalculator() {
   const isComplete = currentSavings >= targetFund
   const percentComplete = Math.min(100, (currentSavings / targetFund) * 100)
 
-  const fmt = (v) => v.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
+  const fmt = (v) => formatCurrency(v, { maximumFractionDigits: 0 })
 
   const savingsRates = [100, 250, 500, 1000]
   const getSavingsPlan = (monthlyRate) => {

@@ -16,6 +16,7 @@ const ROICalculator = lazy(() => import('../../tools/finance/ROICalculator.jsx')
 const CurrencyConverter = lazy(() => import('../../tools/finance/CurrencyConverter.jsx'))
 const EmergencyFundCalculator = lazy(() => import('../../tools/finance/EmergencyFundCalculator.jsx'))
 const DailyExpenseTracker = lazy(() => import('../../tools/finance/DailyExpenseTracker.jsx'))
+const PersonalFinanceDashboard = lazy(() => import('../../tools/finance/PersonalFinanceDashboard.jsx'))
 
 export const financeTools = [
   { id: 'compound-interest-calculator', name: 'Compound Interest Calculator', description: 'See how your investments grow with compound interest', category: 'finance', subcategory: 'investing', icon: 'TrendingUp', path: '/tools/compound-interest-calculator', component: CompoundInterestCalculator, tags: ['compound interest', 'investment', 'savings', 'growth', 'interest rate'], isPopular: true, isNew: false },
@@ -34,4 +35,5 @@ export const financeTools = [
   { id: 'currency-converter', name: 'Currency Converter', description: 'Convert between 20+ currencies with real-time rates and offline fallback', category: 'finance', subcategory: 'calculators', icon: 'DollarSign', path: '/tools/currency-converter', component: CurrencyConverter, tags: ['currency', 'converter', 'exchange rate', 'forex', 'international', 'rates'], isPopular: false, isNew: false },
   { id: 'emergency-fund-calculator', name: 'Emergency Fund Calculator', description: 'Calculate emergency fund needs based on monthly essentials and coverage months', category: 'finance', subcategory: 'planning', icon: 'ShieldCheck', path: '/tools/emergency-fund-calculator', component: EmergencyFundCalculator, tags: ['emergency fund', 'savings', 'financial security', 'essentials', 'planning', 'safety'], isPopular: false, isNew: false },
   { id: 'daily-expense-tracker', name: 'Daily Expense Tracker', description: 'Track daily expenses, visualize spending by category, and get monthly predictions', category: 'finance', subcategory: 'planning', icon: 'Receipt', path: '/tools/daily-expense-tracker', component: DailyExpenseTracker, tags: ['expense', 'tracker', 'budget', 'spending', 'daily', 'categories', 'charts'], isPopular: false, isNew: true },
+  { id: 'personal-finance-dashboard', name: 'Personal Finance Dashboard', description: 'Get a complete overview of income vs expenses, net cash flow, and savings rate', category: 'finance', subcategory: 'planning', icon: 'BarChart3', path: '/tools/personal-finance-dashboard', component: PersonalFinanceDashboard, tags: ['dashboard', 'finance', 'income', 'expenses', 'cash flow', 'savings rate', 'overview'], isPopular: false, isNew: true },
 ]

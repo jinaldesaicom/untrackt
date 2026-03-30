@@ -2,6 +2,7 @@ import { useState } from 'react'
 import SEOHead from '../../components/SEOHead.jsx'
 import DisclaimerCard from '../../components/DisclaimerCard.jsx'
 import useDebounce from '../../hooks/useDebounce.js'
+import { formatCurrency, getCurrencySymbol } from '../../utils/currency.js'
 
 export default function RetirementCalculator() {
   const [inputs, setInputs] = useState({
@@ -54,7 +55,7 @@ export default function RetirementCalculator() {
   if (balance >= monthlyExpensesAdjusted * 24) status = 'On Track'
   else if (balance >= 0) status = 'Needs Attention'
 
-  const fmt = (v) => v.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
+  const fmt = (v) => formatCurrency(v, { maximumFractionDigits: 0 })
 
   // Projection table
   const projections = []
@@ -108,7 +109,7 @@ export default function RetirementCalculator() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Current Savings ($)</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Current Savings ({getCurrencySymbol()})</label>
               <input
                 type="number"
                 value={inputs.currentSavings}
@@ -118,7 +119,7 @@ export default function RetirementCalculator() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Monthly Contribution ($)</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Monthly Contribution ({getCurrencySymbol()})</label>
               <input
                 type="number"
                 value={inputs.monthlyContribution}
@@ -150,7 +151,7 @@ export default function RetirementCalculator() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Monthly Expenses ($)</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Monthly Expenses ({getCurrencySymbol()})</label>
               <input
                 type="number"
                 value={inputs.monthlyExpenses}

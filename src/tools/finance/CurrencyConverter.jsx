@@ -3,6 +3,7 @@ import { RefreshCw } from 'lucide-react'
 import SEOHead from '../../components/SEOHead.jsx'
 import CopyButton from '../../components/CopyButton.jsx'
 import { getItem, setItem } from '../../utils/storage.js'
+import { formatCurrency } from '../../utils/currency.js'
 
 const FALLBACK_RATES = {
   'USD': 1, 'EUR': 0.92, 'GBP': 0.79, 'JPY': 149.50, 'AUD': 1.53,
@@ -67,7 +68,7 @@ export default function CurrencyConverter() {
     setToCurrency(fromCurrency)
   }
 
-  const fmt = (v) => v.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
+  const fmt = (v) => formatCurrency(v, { maximumFractionDigits: 2 })
 
   return (
     <>

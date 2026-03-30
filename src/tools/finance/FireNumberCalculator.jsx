@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { formatCurrency, getCurrencySymbol } from '../../utils/currency.js'
 
 export default function FireNumberCalculator() {
   const [expenses, setExpenses] = useState('40000')
@@ -33,7 +34,7 @@ export default function FireNumberCalculator() {
     yearsToFire = savings >= fireNumber ? 0 : null
   }
 
-  const fmt = (n) => n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
+  const fmt = (n) => formatCurrency(n, { maximumFractionDigits: 0 })
 
   return (
     <div className="space-y-5">
@@ -46,7 +47,7 @@ export default function FireNumberCalculator() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Annual Expenses ($)</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Annual Expenses ({getCurrencySymbol()})</label>
           <input type="number" value={expenses} onChange={(e) => setExpenses(e.target.value)} className="input-field" min="0" />
         </div>
         <div>
@@ -59,11 +60,11 @@ export default function FireNumberCalculator() {
           <p className="text-xs text-gray-400 mt-0.5">Typically 3–4%. The "4% rule" is a common benchmark.</p>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Current Savings ($)</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Current Savings ({getCurrencySymbol()})</label>
           <input type="number" value={currentSavings} onChange={(e) => setCurrentSavings(e.target.value)} className="input-field" min="0" />
         </div>
         <div className="sm:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Monthly Savings ($)</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Monthly Savings ({getCurrencySymbol()})</label>
           <input type="number" value={monthlySavings} onChange={(e) => setMonthlySavings(e.target.value)} className="input-field" min="0" />
         </div>
       </div>

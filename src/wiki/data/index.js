@@ -50,6 +50,7 @@ const wikiModules = {
   'client-profitability-estimator': () => import('./freelance/clientProfitabilityEstimator.js'),
   'late-payment-fee-calculator': () => import('./freelance/latePaymentFeeCalculator.js'),
   'timezone-scheduler': () => import('./freelance/timezoneScheduler.js'),
+  'invoice-tracker': () => import('./freelance/invoiceTracker.js'),
 
   // General tools
   'password-generator': () => import('./general/passwordGenerator.js'),
@@ -72,6 +73,7 @@ const wikiModules = {
   'time-zone-converter': () => import('./general/timeZoneConverter.js'),
   'clipboard-manager': () => import('./general/clipboardManager.js'),
   'text-snippets': () => import('./general/textSnippets.js'),
+  'data-sync': () => import('./general/dataSync.js'),
 
   // Health tools
   'bmr-calculator': () => import('./health/bmrCalculator.js'),
@@ -109,6 +111,7 @@ const wikiModules = {
   'currency-converter': () => import('./finance/currencyConverter.js'),
   'emergency-fund-calculator': () => import('./finance/emergencyFundCalculator.js'),
   'daily-expense-tracker': () => import('./finance/dailyExpenseTracker.js'),
+  'personal-finance-dashboard': () => import('./finance/personalFinanceDashboard.js'),
 
   // SEO tools
   'keyword-density-analyzer': () => import('./seo/keywordDensityAnalyzer.js'),
@@ -148,6 +151,7 @@ const wikiModules = {
   'energy-level-planner': () => import('./productivity/energyLevelPlanner.js'),
   'two-minute-task-filter': () => import('./productivity/twoMinuteTaskFilter.js'),
   'daily-journal': () => import('./productivity/dailyJournal.js'),
+  'mind-map': () => import('./productivity/mindMap.js'),
 
   // Agile tools
   'sprint-planner': () => import('./agile/sprintPlanner.js'),

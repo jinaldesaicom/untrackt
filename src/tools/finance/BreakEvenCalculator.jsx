@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import SEOHead from '../../components/SEOHead.jsx'
 import DisclaimerCard from '../../components/DisclaimerCard.jsx'
+import { formatCurrency, getCurrencySymbol } from '../../utils/currency.js'
 
 export default function BreakEvenCalculator() {
   const [mode, setMode] = useState('product')
@@ -34,7 +35,7 @@ export default function BreakEvenCalculator() {
       profit: (breakEvenRevenue * vol + breakEvenRevenue - fixedCosts - varCost * (breakEvenUnits * vol)),
     }))
 
-    const fmt = (v) => v.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
+    const fmt = (v) => formatCurrency(v, { maximumFractionDigits: 2 })
 
     return (
       <>
@@ -53,7 +54,7 @@ export default function BreakEvenCalculator() {
               <h2 className="font-semibold text-lg text-gray-900">Product/Business Mode</h2>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Fixed Costs ($)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Fixed Costs ({getCurrencySymbol()})</label>
                 <input
                   type="number"
                   value={product.fixed}
@@ -64,7 +65,7 @@ export default function BreakEvenCalculator() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Variable Cost per Unit ($)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Variable Cost per Unit ({getCurrencySymbol()})</label>
                 <input
                   type="number"
                   value={product.variable}
@@ -76,7 +77,7 @@ export default function BreakEvenCalculator() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Selling Price per Unit ($)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Selling Price per Unit ({getCurrencySymbol()})</label>
                 <input
                   type="number"
                   value={product.price}
@@ -143,7 +144,7 @@ export default function BreakEvenCalculator() {
     const monthsToBreakEven = monthlyProfit > 0 ? purchasePrice / monthlyProfit : 0
     const totalBreakEven = purchasePrice
 
-    const fmt = (v) => v.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
+    const fmt = (v) => formatCurrency(v, { maximumFractionDigits: 2 })
 
     return (
       <>
@@ -162,7 +163,7 @@ export default function BreakEvenCalculator() {
               <h2 className="font-semibold text-lg text-gray-900">Investment Mode</h2>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Purchase Price ($)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Purchase Price ({getCurrencySymbol()})</label>
                 <input
                   type="number"
                   value={investment.cost}
@@ -173,7 +174,7 @@ export default function BreakEvenCalculator() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Monthly Costs ($)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Monthly Costs ({getCurrencySymbol()})</label>
                 <input
                   type="number"
                   value={investment.monthly}
@@ -184,7 +185,7 @@ export default function BreakEvenCalculator() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Monthly Revenue ($)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Monthly Revenue ({getCurrencySymbol()})</label>
                 <input
                   type="number"
                   value={investment.revenue}

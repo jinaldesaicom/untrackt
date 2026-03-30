@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import useDebounce from '../../hooks/useDebounce.js'
+import { formatCurrency, getCurrencySymbol } from '../../utils/currency.js'
 
 const FREQ_OPTIONS = [
   { label: 'Daily (365×/year)', n: 365 },
@@ -34,14 +35,14 @@ export default function CompoundInterestCalculator() {
   }
 
   const final = rows[rows.length - 1] || { balance: P, contributed: P, interest: 0 }
-  const fmt = (n) => n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
+  const fmt = (n) => formatCurrency(n, { maximumFractionDigits: 0 })
   const displayRows = showAll ? rows : rows.slice(0, 12)
 
   return (
     <div className="space-y-5">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Principal ($)</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Principal ({getCurrencySymbol()})</label>
           <input type="number" value={principal} onChange={(e) => setPrincipal(e.target.value)} className="input-field" min="0" />
         </div>
         <div>
@@ -61,7 +62,7 @@ export default function CompoundInterestCalculator() {
           <input type="number" value={years} onChange={(e) => setYears(e.target.value)} className="input-field" min="1" max="100" />
         </div>
         <div className="sm:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Monthly Contribution ($)</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Monthly Contribution ({getCurrencySymbol()})</label>
           <input type="number" value={monthly} onChange={(e) => setMonthly(e.target.value)} className="input-field" min="0" />
         </div>
       </div>

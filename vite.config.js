@@ -30,7 +30,7 @@ export default defineConfig(({ mode }) => ({
       manifest: {
         name: 'UnTrackt - Free Browser Tools',
         short_name: 'UnTrackt',
-        description: '225+ free tools. Runs in your browser. Zero tracking.',
+        description: '227+ free tools. Runs in your browser. Zero tracking.',
         theme_color: '#4f46e5',
         background_color: '#f9fafb',
         display: 'standalone',

@@ -1,10 +1,11 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 vi.mock('../../../utils/storage', () => ({ getItem: vi.fn((_k, d) => d ?? null), setItem: vi.fn(), removeItem: vi.fn() }));
 import InvoiceGenerator from '../../../tools/freelance/InvoiceGenerator.jsx';
 
-const R = () => render(<HelmetProvider><InvoiceGenerator /></HelmetProvider>);
+const R = () => render(<HelmetProvider><MemoryRouter><InvoiceGenerator /></MemoryRouter></HelmetProvider>);
 
 describe('InvoiceGenerator', () => {
   it('renders without crashing', () => {

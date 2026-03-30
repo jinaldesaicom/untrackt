@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Plus, Trash2 } from 'lucide-react'
 import SEOHead from '../../components/SEOHead.jsx'
+import { formatCurrency, getCurrencySymbol } from '../../utils/currency.js'
 
 export default function ClientProfitabilityEstimator() {
   const [clients, setClients] = useState([])
@@ -59,7 +60,7 @@ export default function ClientProfitabilityEstimator() {
     .map(c => ({ ...c, metrics: calculateMetrics(c) }))
     .sort((a, b) => b.metrics.profitScore - a.metrics.profitScore)
 
-  const fmt = (v) => v.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
+  const fmt = (v) => formatCurrency(v, { maximumFractionDigits: 2 })
 
   return (
     <>
@@ -105,7 +106,7 @@ export default function ClientProfitabilityEstimator() {
 
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                     <div>
-                      <label className="text-xs text-gray-600 block mb-1">Monthly Revenue ($)</label>
+                      <label className="text-xs text-gray-600 block mb-1">Monthly Revenue ({getCurrencySymbol()})</label>
                       <input
                         type="number"
                         value={client.revenue}

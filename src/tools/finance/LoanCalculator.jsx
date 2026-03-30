@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { formatCurrency, getCurrencySymbol } from '../../utils/currency.js'
 
 export default function LoanCalculator() {
   const [loanAmount, setLoanAmount] = useState('250000')
@@ -15,7 +16,7 @@ export default function LoanCalculator() {
   const totalPayment = emi * n
   const totalInterest = totalPayment - P
 
-  const fmt = (v) => v.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
+  const fmt = (v) => formatCurrency(v, { maximumFractionDigits: 2 })
 
   // Amortization table
   const schedule = []
@@ -36,7 +37,7 @@ export default function LoanCalculator() {
     <div className="space-y-5">
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Loan Amount ($)</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Loan Amount ({getCurrencySymbol()})</label>
           <input type="number" value={loanAmount} onChange={(e) => setLoanAmount(e.target.value)} className="input-field" min="0" />
         </div>
         <div>

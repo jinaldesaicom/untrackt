@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async'
 const SITE_NAME = 'UnTrackt'
 const BASE_URL = 'https://untrackt.com'
 const DEFAULT_DESCRIPTION =
-  '225+ free browser-based tools. No tracking, no accounts, no data sent to any server. Runs 100% in your browser.'
+  '227+ free browser-based tools. No tracking, no accounts, no data sent to any server. Runs 100% in your browser.'
 
 export default function SEOHead({
   title,

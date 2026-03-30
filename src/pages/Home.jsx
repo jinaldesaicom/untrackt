@@ -50,7 +50,7 @@ export default function Home() {
     <div>
       <SEOHead
         title="Free Online Tools - No Tracking | UnTrackt"
-        description="225+ free tools for developers, students, freelancers and more. Runs entirely in your browser. Zero tracking, zero accounts, zero data collection."
+        description="227+ free tools for developers, students, freelancers and more. Runs entirely in your browser. Zero tracking, zero accounts, zero data collection."
         path="/"
       />
 
