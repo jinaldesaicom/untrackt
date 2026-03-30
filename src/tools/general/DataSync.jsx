@@ -1,7 +1,6 @@
-import { useState, useRef, useCallback, useMemo, useEffect } from 'react'
+import { useState, useRef, useCallback, useMemo } from 'react'
 import { QRCodeCanvas } from 'qrcode.react'
-import { Download, Upload, Copy, Check, QrCode, FileJson, AlertTriangle, Shield, ChevronRight, Smartphone, Cloud, LogIn, LogOut, RefreshCw, Trash2, CloudUpload, CloudDownload } from 'lucide-react'
-import * as gdrive from '../../utils/googleDrive'
+import { Download, Upload, Copy, Check, QrCode, FileJson, AlertTriangle, Shield, ChevronRight, Smartphone } from 'lucide-react'
 
 /* All known localStorage key prefixes used by UnTrackt tools */
 const KNOWN_PREFIXES = [
@@ -40,7 +39,7 @@ function restoreData(data, mode) {
       const existing = localStorage.getItem(key)
       if (existing !== null) continue
     }
-    try { localStorage.setItem(key, typeof value === 'string' ? value : JSON.stringify(value)); restored++ }
+    try { localStorage.setItem(key, JSON.stringify(value)); restored++ }
     catch { /* full storage */ }
   }
   return { restored, total: valid.length }
@@ -106,7 +105,6 @@ async function decompressFromString(str) {
 const TABS = [
   { id: 'export', label: 'Export / Import', icon: FileJson },
   { id: 'transfer', label: 'QR Transfer', icon: QrCode },
-  { id: 'gdrive', label: 'Google Drive', icon: Cloud },
 ]
 
 /* ── Component ────────────────────────────────────────────── */
@@ -114,7 +112,7 @@ const TABS = [
 export default function DataSync() {
   const [tab, setTab] = useState('export')
   const [status, setStatus] = useState(null)
-  const [importMode, setImportMode] = useState('merge')
+  const [importMode, setImportMode] = useState('overwrite')
   const [showConfirm, setShowConfirm] = useState(null)
 
   // Export/Import state
@@ -126,12 +124,6 @@ export default function DataSync() {
   const [pasteText, setPasteText] = useState('')
   const [copied, setCopied] = useState(false)
   const qrCanvasRef = useRef(null)
-
-  // Google Drive state
-  const [driveSignedIn, setDriveSignedIn] = useState(gdrive.isSignedIn)
-  const [driveLoading, setDriveLoading] = useState(false)
-  const [driveBackups, setDriveBackups] = useState([])
-  const [driveLastSync, setDriveLastSync] = useState(() => localStorage.getItem('untrackt:gdrive-last-sync') || null)
 
   const dataSnapshot = useMemo(() => gatherData(), [])
   const keyCount = Object.keys(dataSnapshot).length
@@ -155,7 +147,7 @@ export default function DataSync() {
     a.href = url
     a.download = `untrackt-backup-${exportTimestamp()}.json`
     a.click()
-    URL.revokeObjectURL(url)
+    setTimeout(() => URL.revokeObjectURL(url), 1000)
     flash(`Exported ${Object.keys(data).length} keys`)
   }, [flash])
 
@@ -254,97 +246,6 @@ export default function DataSync() {
     a.download = `untrackt-qr-${exportTimestamp()}.png`
     a.click()
   }, [])
-
-  /* ── Google Drive handlers ── */
-  const refreshDriveBackups = useCallback(async () => {
-    try {
-      const files = await gdrive.listBackups()
-      setDriveBackups(files)
-    } catch { /* ignore - handled by caller */ }
-  }, [])
-
-  const handleDriveSignIn = useCallback(async () => {
-    setDriveLoading(true)
-    try {
-      await gdrive.signIn()
-      setDriveSignedIn(true)
-      await refreshDriveBackups()
-      flash('Signed in to Google Drive')
-    } catch (err) {
-      flash(err.message || 'Sign-in failed', 'error')
-    } finally {
-      setDriveLoading(false)
-    }
-  }, [flash, refreshDriveBackups])
-
-  const handleDriveSignOut = useCallback(async () => {
-    await gdrive.signOut()
-    setDriveSignedIn(false)
-    setDriveBackups([])
-    flash('Signed out from Google Drive')
-  }, [flash])
-
-  const handleDriveBackup = useCallback(async () => {
-    setDriveLoading(true)
-    try {
-      const data = gatherData()
-      await gdrive.uploadBackup(data)
-      const now = new Date().toISOString()
-      setDriveLastSync(now)
-      localStorage.setItem('untrackt:gdrive-last-sync', now)
-      await refreshDriveBackups()
-      flash(`Backed up ${Object.keys(data).length} keys to Google Drive`)
-    } catch (err) {
-      if (err.message?.includes('Not signed in') || err.message?.includes('Session expired')) {
-        setDriveSignedIn(false)
-      }
-      flash(err.message || 'Backup failed', 'error')
-    } finally {
-      setDriveLoading(false)
-    }
-  }, [flash, refreshDriveBackups])
-
-  const handleDriveRestore = useCallback(async () => {
-    setDriveLoading(true)
-    try {
-      const result = await gdrive.downloadBackup()
-      if (!result) { flash('No backup found on Google Drive', 'error'); return }
-
-      const { data, meta } = result
-      if (typeof data !== 'object' || Array.isArray(data)) throw new Error('Invalid backup format')
-      const validKeys = Object.keys(data).filter(isAppKey)
-      if (!validKeys.length) { flash('No valid UnTrackt data in backup', 'error'); return }
-
-      setShowConfirm({ data, keys: validKeys.length, meta, mode: importMode, source: 'gdrive' })
-    } catch (err) {
-      if (err.message?.includes('Not signed in') || err.message?.includes('Session expired')) {
-        setDriveSignedIn(false)
-      }
-      flash(err.message || 'Restore failed', 'error')
-    } finally {
-      setDriveLoading(false)
-    }
-  }, [flash, importMode])
-
-  const handleDriveDelete = useCallback(async (fileId) => {
-    setDriveLoading(true)
-    try {
-      await gdrive.deleteBackup(fileId)
-      await refreshDriveBackups()
-      flash('Backup deleted from Google Drive')
-    } catch (err) {
-      flash(err.message || 'Delete failed', 'error')
-    } finally {
-      setDriveLoading(false)
-    }
-  }, [flash, refreshDriveBackups])
-
-  // Refresh backup list when switching to Drive tab while signed in
-  useEffect(() => {
-    if (tab === 'gdrive' && driveSignedIn) {
-      refreshDriveBackups()
-    }
-  }, [tab, driveSignedIn, refreshDriveBackups])
 
   return (
     <div className="space-y-5">
@@ -524,129 +425,6 @@ export default function DataSync() {
         </div>
       )}
 
-      {/* ── Tab: Google Drive ── */}
-      {tab === 'gdrive' && (
-        <div className="space-y-4">
-          {!driveSignedIn ? (
-            /* Sign-in card */
-            <div className="p-6 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-center space-y-4">
-              <div className="flex justify-center">
-                <div className="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center">
-                  <Cloud className="w-7 h-7 text-blue-600 dark:text-blue-400" />
-                </div>
-              </div>
-              <div>
-                <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-1">Connect Google Drive</h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed max-w-sm mx-auto">
-                  Back up your UnTrackt data to a private app folder in your Google Drive.
-                  Only this app can access the backup file — we never see your other Drive files.
-                </p>
-              </div>
-              <button
-                onClick={handleDriveSignIn}
-                disabled={driveLoading}
-                className="btn-primary text-sm inline-flex items-center gap-2 px-6 disabled:opacity-50"
-              >
-                {driveLoading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <LogIn className="w-4 h-4" />}
-                {driveLoading ? 'Connecting…' : 'Sign in with Google'}
-              </button>
-              <p className="text-[11px] text-gray-400 dark:text-gray-500">
-                Uses <code className="text-[10px] bg-gray-100 dark:bg-gray-800 px-1 rounded">drive.appdata</code> scope — minimal, privacy-safe permission.
-              </p>
-            </div>
-          ) : (
-            /* Signed-in view */
-            <>
-              {/* Status bar */}
-              <div className="flex items-center justify-between p-3.5 rounded-xl border border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-900/20">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-green-500" />
-                  <span className="text-xs font-medium text-blue-800 dark:text-blue-300">Connected to Google Drive</span>
-                </div>
-                <button onClick={handleDriveSignOut} className="text-xs text-gray-500 hover:text-red-600 dark:hover:text-red-400 flex items-center gap-1 transition-colors">
-                  <LogOut className="w-3.5 h-3.5" />
-                  Sign out
-                </button>
-              </div>
-
-              {/* Action buttons */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 space-y-3">
-                  <div className="flex items-center gap-2">
-                    <CloudUpload className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
-                    <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Backup to Drive</h3>
-                  </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-                    Upload your current data to Google Drive. This replaces any existing backup.
-                  </p>
-                  {driveLastSync && (
-                    <p className="text-[11px] text-gray-400 dark:text-gray-500">
-                      Last backup: {new Date(driveLastSync).toLocaleString()}
-                    </p>
-                  )}
-                  <button
-                    onClick={handleDriveBackup}
-                    disabled={driveLoading}
-                    className="btn-primary text-sm flex items-center gap-2 w-full justify-center disabled:opacity-50"
-                  >
-                    {driveLoading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <CloudUpload className="w-4 h-4" />}
-                    {driveLoading ? 'Uploading…' : `Backup Now (${dataSize})`}
-                  </button>
-                </div>
-
-                <div className="p-5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 space-y-3">
-                  <div className="flex items-center gap-2">
-                    <CloudDownload className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-                    <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Restore from Drive</h3>
-                  </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-                    Download your latest backup from Google Drive and import it. Choose merge or overwrite mode above.
-                  </p>
-                  <button
-                    onClick={handleDriveRestore}
-                    disabled={driveLoading}
-                    className="btn-secondary text-sm flex items-center gap-2 w-full justify-center disabled:opacity-50"
-                  >
-                    {driveLoading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <CloudDownload className="w-4 h-4" />}
-                    {driveLoading ? 'Downloading…' : 'Restore Latest Backup'}
-                  </button>
-                </div>
-              </div>
-
-              {/* Backup history */}
-              {driveBackups.length > 0 && (
-                <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 overflow-hidden">
-                  <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-800">
-                    <h3 className="text-xs font-semibold text-gray-700 dark:text-gray-300">Backups on Drive</h3>
-                  </div>
-                  <ul className="divide-y divide-gray-100 dark:divide-gray-800">
-                    {driveBackups.map((f) => (
-                      <li key={f.id} className="px-4 py-3 flex items-center justify-between">
-                        <div>
-                          <div className="text-xs font-medium text-gray-800 dark:text-gray-200">{f.name}</div>
-                          <div className="text-[11px] text-gray-400 dark:text-gray-500">
-                            {new Date(f.modifiedTime).toLocaleString()}
-                            {f.size && ` · ${(Number(f.size) / 1024).toFixed(1)} KB`}
-                          </div>
-                        </div>
-                        <button
-                          onClick={() => handleDriveDelete(f.id)}
-                          disabled={driveLoading}
-                          className="text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors disabled:opacity-40"
-                          title="Delete backup"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </>
-          )}
-        </div>
-      )}
-
       {/* ── Confirmation modal ── */}
       {showConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4" onClick={() => setShowConfirm(null)}>
@@ -696,7 +474,7 @@ export default function DataSync() {
       {/* Future cloud sync hint */}
       <div className="p-3.5 rounded-xl border border-dashed border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/50">
         <p className="text-xs text-gray-500 dark:text-gray-400">
-          <strong>Coming soon:</strong> Optional OneDrive sync for automatic cross-device backup. Your privacy-first export options will always remain available.
+          <strong>Coming soon:</strong> Optional cloud sync (Google Drive, OneDrive) for automatic cross-device backup. Your privacy-first export options will always remain available.
         </p>
       </div>
     </div>
