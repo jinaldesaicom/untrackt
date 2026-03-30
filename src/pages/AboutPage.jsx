@@ -11,7 +11,7 @@ export default function AboutPage() {
       />
 
       <h1>About UnTrackt</h1>
-      <p>UnTrackt is a privacy-focused tool suite with 124+ free browser tools. Every core feature is built to run on your device with zero accounts and zero tracking.</p>
+      <p>UnTrackt is a privacy-focused tool suite with 227+ free browser tools. Every core feature is built to run on your device with zero accounts and zero tracking.</p>
 
       <h2>What is UnTrackt?</h2>
       <p>UnTrackt is a collection of practical tools for developers, students, freelancers, finance workflows, health estimates, and daily utility tasks.</p>

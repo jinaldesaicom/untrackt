@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Copy } from 'lucide-react'
 import SEOHead from '../../components/SEOHead.jsx'
 import CopyButton from '../../components/CopyButton.jsx'
+import { formatCurrency, getCurrencySymbol } from '../../utils/currency.js'
 
 export default function LatePaymentFeeCalculator() {
   const [invoice, setInvoice] = useState({
@@ -73,11 +74,11 @@ export default function LatePaymentFeeCalculator() {
 This is a friendly reminder that your invoice is now ${daysOverdue} days overdue.
 
 Invoice Details:
-- Original Amount: $${(parseFloat(invoice.amount) || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+- Original Amount: ${formatCurrency((parseFloat(invoice.amount) || 0), { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
 - Invoice Date: ${invoiceDateFormatted}
 - Originally Due: ${dueDateFormatted}
-- Current Late Fee: $${lateFee.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-- Total Now Due: $${totalOwed.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+- Current Late Fee: ${formatCurrency(lateFee, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+- Total Now Due: ${formatCurrency(totalOwed, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
 
 Please remit payment at your earliest convenience to avoid further late fees.
 
@@ -86,7 +87,7 @@ If payment has already been made, please disregard this message.
 Thank you,`
   }
 
-  const fmt = (v) => v.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  const fmt = (v) => formatCurrency(v, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 
   return (
     <>
@@ -105,7 +106,7 @@ Thank you,`
             <h2 className="font-semibold text-lg text-gray-900">Invoice Details</h2>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Invoice Amount ($)</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Invoice Amount ({getCurrencySymbol()})</label>
               <input
                 type="number"
                 value={invoice.amount}
@@ -155,15 +156,15 @@ Thank you,`
                 className="input-field"
               >
                 <option value="flat">Flat Amount</option>
-                <option value="daily">Daily Rate ($)</option>
-                <option value="monthly">Monthly Rate ($)</option>
+                <option value="daily">Daily Rate ({getCurrencySymbol()})</option>
+                <option value="monthly">Monthly Rate ({getCurrencySymbol()})</option>
                 <option value="annual">Annual Rate (%)</option>
               </select>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                {invoice.feeType === 'flat' ? 'Fee Amount' : invoice.feeType === 'daily' ? 'Daily Fee ($)' : invoice.feeType === 'monthly' ? 'Monthly Fee ($)' : 'Annual Rate (%)'}
+                {invoice.feeType === 'flat' ? 'Fee Amount' : invoice.feeType === 'daily' ? `Daily Fee (${getCurrencySymbol()})` : invoice.feeType === 'monthly' ? `Monthly Fee (${getCurrencySymbol()})` : 'Annual Rate (%)'}
               </label>
               <input
                 type="number"

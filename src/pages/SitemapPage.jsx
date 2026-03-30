@@ -17,6 +17,7 @@ import {
   Star,
   Sparkles,
   ExternalLink,
+  BookOpen,
 } from 'lucide-react'
 
 const staticPages = [
@@ -24,6 +25,8 @@ const staticPages = [
   { name: 'Favorites', path: '/favorites', icon: Heart, description: 'Your saved tools' },
   { name: 'My Stats', path: '/my-stats', icon: BarChart2, description: 'Usage statistics' },
   { name: 'Search', path: '/search', icon: Search, description: 'Find any tool' },
+  { name: 'Tool Wiki', path: '/wiki', icon: BookOpen, description: 'In-depth guides for every tool' },
+  { name: 'Sitemap', path: '/sitemap', icon: Map, description: 'Complete site directory' },
   { name: 'About', path: '/about', icon: Info, description: 'About UnTrackt' },
   { name: 'Privacy Policy', path: '/privacy-policy', icon: ShieldCheck, description: 'How we protect your data' },
   { name: 'Terms of Use', path: '/terms', icon: FileText, description: 'Terms and conditions' },

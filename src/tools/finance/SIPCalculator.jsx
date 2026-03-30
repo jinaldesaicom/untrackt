@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import SEOHead from '../../components/SEOHead.jsx'
 import DisclaimerCard from '../../components/DisclaimerCard.jsx'
+import { formatCurrency, getCurrencySymbol } from '../../utils/currency.js'
 
 export default function SIPCalculator() {
   const [mode, setMode] = useState('sip')
@@ -57,7 +58,7 @@ export default function SIPCalculator() {
     yearlyData.push({ year, invested: yearInvested, value: yearValue, returns: yearValue - yearInvested })
   }
 
-  const fmt = (v) => v.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
+  const fmt = (v) => formatCurrency(v, { maximumFractionDigits: 0 })
 
   return (
     <>
@@ -92,7 +93,7 @@ export default function SIPCalculator() {
             {mode === 'sip' ? (
               <>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Monthly Investment ($)</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Monthly Investment ({getCurrencySymbol()})</label>
                   <input
                     type="number"
                     value={inputs.monthlyAmount}
@@ -116,7 +117,7 @@ export default function SIPCalculator() {
               </>
             ) : (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Lumpsum Amount ($)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Lumpsum Amount ({getCurrencySymbol()})</label>
                 <input
                   type="number"
                   value={inputs.lumpsumAmount}

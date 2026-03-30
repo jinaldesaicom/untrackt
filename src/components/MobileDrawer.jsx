@@ -1,6 +1,6 @@
 import { memo, useEffect, useRef } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import { X, Heart, BarChart3 } from 'lucide-react'
+import { X, Heart, BarChart3, HardDrive } from 'lucide-react'
 import { categories, categoryColorMap } from '../data/tools.js'
 import { getIcon } from '../icons.js'
 
@@ -76,6 +76,9 @@ function MobileDrawer({ open, onClose }) {
           </Link>
           <Link to="/my-stats" onClick={onClose} className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
             <BarChart3 className="w-4 h-4" /> My Stats
+          </Link>
+          <Link to="/tools/data-sync" onClick={onClose} className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
+            <HardDrive className="w-4 h-4" /> Data Sync & Backup
           </Link>
         </div>
       </nav>

@@ -8,16 +8,17 @@ vi.mock('qrcode.react', () => ({
 }))
 
 import QrCodeGenerator from '../../../tools/general/QrCodeGenerator.jsx'
+import { HelmetProvider } from 'react-helmet-async'
 
 describe('QrCodeGenerator', () => {
   it('renders input field', () => {
-    render(<QrCodeGenerator />)
+    render(<HelmetProvider><QrCodeGenerator /></HelmetProvider>)
     expect(screen.getByPlaceholderText(/or any text/i)).toBeInTheDocument()
   })
 
   it('typing text renders a QR code element', async () => {
     const user = userEvent.setup()
-    render(<QrCodeGenerator />)
+    render(<HelmetProvider><QrCodeGenerator /></HelmetProvider>)
     const input = screen.getByPlaceholderText(/or any text/i)
     await user.clear(input)
     await user.type(input, 'https://example.com')
@@ -26,21 +27,21 @@ describe('QrCodeGenerator', () => {
 
   it('QR code is not shown for empty input', async () => {
     const user = userEvent.setup()
-    render(<QrCodeGenerator />)
+    render(<HelmetProvider><QrCodeGenerator /></HelmetProvider>)
     const input = screen.getByPlaceholderText(/or any text/i)
     await user.clear(input)
     expect(screen.queryByTestId('qr-canvas')).not.toBeInTheDocument()
   })
 
   it('size selector buttons are present (Small/Medium/Large)', () => {
-    render(<QrCodeGenerator />)
+    render(<HelmetProvider><QrCodeGenerator /></HelmetProvider>)
     expect(screen.getByRole('button', { name: /small/i })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /medium/i })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /large/i })).toBeInTheDocument()
   })
 
   it('download button is present when QR is generated', async () => {
-    render(<QrCodeGenerator />)
+    render(<HelmetProvider><QrCodeGenerator /></HelmetProvider>)
     // Default value is 'https://example.com' so QR is shown
     expect(screen.getByRole('button', { name: /download/i })).toBeInTheDocument()
   })

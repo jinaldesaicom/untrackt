@@ -1,6 +1,6 @@
 import { memo, useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
-import { Wrench, Moon, Sun, Monitor, Heart, BarChart3, Menu, Search } from 'lucide-react'
+import { Wrench, Moon, Sun, Monitor, Heart, BarChart3, HardDrive, Menu, Search } from 'lucide-react'
 import SearchBar from './SearchBar.jsx'
 import CategoriesDropdown from './CategoriesDropdown.jsx'
 import MobileDrawer from './MobileDrawer.jsx'
@@ -117,6 +117,15 @@ export default function Header() {
               title="My Stats"
             >
               <BarChart3 className="w-5 h-5" />
+            </Link>
+
+            <Link
+              to="/tools/data-sync"
+              className="relative shrink-0 p-2 rounded-lg text-gray-500 hover:text-emerald-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-emerald-300 dark:hover:bg-gray-800 transition-colors duration-200 hidden sm:block"
+              aria-label="Data Sync & Backup"
+              title="Data Sync & Backup"
+            >
+              <HardDrive className="w-5 h-5" />
             </Link>
 
             <FavoritesLink />

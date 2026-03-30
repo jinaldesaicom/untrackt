@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import SEOHead from '../../components/SEOHead.jsx'
 import DisclaimerCard from '../../components/DisclaimerCard.jsx'
+import { formatCurrency } from '../../utils/currency.js'
 
 export default function ROICalculator() {
   const [mode, setMode] = useState('basic')
@@ -8,7 +9,7 @@ export default function ROICalculator() {
   const [realEstateInputs, setRealEstateInputs] = useState({ purchasePrice: 300000, downPayment: 60000, annualRent: 36000, annualExpenses: 6000, appreciation: 3 })
   const [marketingInputs, setMarketingInputs] = useState({ marketingCost: 5000, revenue: 50000, previousRevenue: 40000 })
 
-  const fmt = (v) => v.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
+  const fmt = (v) => formatCurrency(v, { maximumFractionDigits: 0 })
   const pct = (v) => v.toFixed(2)
 
   const basicROI = (basicInputs.returns / basicInputs.investment) * 100

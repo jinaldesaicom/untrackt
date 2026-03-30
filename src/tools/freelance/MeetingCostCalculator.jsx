@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Play, Square } from 'lucide-react'
+import { formatCurrency, getCurrencySymbol } from '../../utils/currency.js'
 
 export default function MeetingCostCalculator() {
   const [attendees, setAttendees] = useState('8')
@@ -17,7 +18,7 @@ export default function MeetingCostCalculator() {
   const liveCost = elapsed * costPerSecond
   const isEmailWorthy = plannedTotal > 500
 
-  const fmt = (n) => n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
+  const fmt = (n) => formatCurrency(n, { maximumFractionDigits: 2 })
 
   useEffect(() => {
     if (running) {
@@ -51,7 +52,7 @@ export default function MeetingCostCalculator() {
           <input type="number" value={attendees} onChange={(e) => { setAttendees(e.target.value); setRunning(false); setElapsed(0) }} className="input-field" min="1" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Avg Hourly Salary ($)</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Avg Hourly Salary ({getCurrencySymbol()})</label>
           <input type="number" value={salary} onChange={(e) => { setSalary(e.target.value); setRunning(false); setElapsed(0) }} className="input-field" min="0" />
         </div>
         <div>

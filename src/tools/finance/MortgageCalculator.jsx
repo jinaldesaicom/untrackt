@@ -2,6 +2,7 @@ import { useState } from 'react'
 import SEOHead from '../../components/SEOHead.jsx'
 import DisclaimerCard from '../../components/DisclaimerCard.jsx'
 import useDebounce from '../../hooks/useDebounce.js'
+import { formatCurrency, getCurrencySymbol } from '../../utils/currency.js'
 
 export default function MortgageCalculator() {
   const [inputs, setInputs] = useState({
@@ -63,7 +64,7 @@ export default function MortgageCalculator() {
     schedule.push({ year, principal: yearPrincipal, interest: yearInterest, balance })
   }
 
-  const fmt = (v) => v.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
+  const fmt = (v) => formatCurrency(v, { maximumFractionDigits: 2 })
 
   const pctPrincipal = totalPayment > 0 ? (principal / totalPayment) * 100 : 0
   const pctInterest = 100 - pctPrincipal
@@ -84,7 +85,7 @@ export default function MortgageCalculator() {
         <div className="lg:col-span-1 space-y-4">
           <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Home Price ($)</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Home Price ({getCurrencySymbol()})</label>
               <input
                 type="number"
                 value={inputs.homePrice}
@@ -142,7 +143,7 @@ export default function MortgageCalculator() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Annual Property Tax ($)</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Annual Property Tax ({getCurrencySymbol()})</label>
               <input
                 type="number"
                 value={inputs.propertyTax}
@@ -153,7 +154,7 @@ export default function MortgageCalculator() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Annual Home Insurance ($)</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Annual Home Insurance ({getCurrencySymbol()})</label>
               <input
                 type="number"
                 value={inputs.homeInsurance}
@@ -176,7 +177,7 @@ export default function MortgageCalculator() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monthly HOA Fees ($)</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Monthly HOA Fees ({getCurrencySymbol()})</label>
               <input
                 type="number"
                 value={inputs.hoaFees}

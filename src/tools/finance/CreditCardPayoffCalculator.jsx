@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import SEOHead from '../../components/SEOHead.jsx'
 import DisclaimerCard from '../../components/DisclaimerCard.jsx'
+import { formatCurrency } from '../../utils/currency.js'
 
 export default function CreditCardPayoffCalculator() {
   const [inputs, setInputs] = useState({
@@ -39,7 +40,7 @@ export default function CreditCardPayoffCalculator() {
   }
 
   const result = calculate()
-  const fmt = (v) => v.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
+  const fmt = (v) => formatCurrency(v, { maximumFractionDigits: 0 })
 
   const comparePayment = (extra) => {
     let balance = inputs.balance

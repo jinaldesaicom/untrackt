@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import { Plus, Trash2 } from 'lucide-react'
+import { formatCurrency, getCurrencySymbol } from '../../utils/currency.js'
 
 export default function TipSplitter() {
   const [bill, setBill] = useState('85.00')
@@ -21,7 +22,7 @@ export default function TipSplitter() {
 
   const totalCustomPct = customSplits.reduce((s, p) => s + p.pct, 0)
 
-  const fmt = (n) => n.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })
+  const fmt = (n) => formatCurrency(n, { minimumFractionDigits: 2 })
 
   const addPerson = () => {
     setCustomSplits((cs) => [...cs, { id: nextId.current++, name: `Person ${cs.length + 1}`, pct: 0 }])
@@ -37,7 +38,7 @@ export default function TipSplitter() {
     <div className="space-y-5">
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Bill Amount ($)</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Bill Amount ({getCurrencySymbol()})</label>
           <input type="number" value={bill} onChange={(e) => setBill(e.target.value)} className="input-field" min="0" />
         </div>
         <div>

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import SEOHead from '../../components/SEOHead.jsx'
 import CopyButton from '../../components/CopyButton.jsx'
+import { formatCurrency, getCurrencySymbol } from '../../utils/currency.js'
 
 export default function DiscountMarkupCalculator() {
   const [activeTab, setActiveTab] = useState('discount')
@@ -28,7 +29,7 @@ export default function DiscountMarkupCalculator() {
   const [bulkPrice, setBulkPrice] = useState(100)
   const discounts = [5, 10, 15, 20, 25, 30]
 
-  const fmt = (v) => v.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
+  const fmt = (v) => formatCurrency(v, { maximumFractionDigits: 2 })
 
   const tabs = [
     { id: 'discount', label: 'Discount Calculator' },
@@ -73,7 +74,7 @@ export default function DiscountMarkupCalculator() {
 
               <div className="space-y-3">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Original Price ($)</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Original Price ({getCurrencySymbol()})</label>
                   <input
                     type="number"
                     value={discount.originalPrice}
@@ -137,12 +138,12 @@ export default function DiscountMarkupCalculator() {
                 {discount.discountMethod === 'percent' ? (
                   <>
                     <p>Sale Price = Original × (1 - Discount%)</p>
-                    <p className="text-xs text-gray-600 dark:text-gray-300">= ${discount.originalPrice} × (1 - {discount.discountValue}%)</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-300">= {getCurrencySymbol()}{discount.originalPrice} × (1 - {discount.discountValue}%)</p>
                   </>
                 ) : (
                   <>
                     <p>Sale Price = Original - Discount Amount</p>
-                    <p className="text-xs text-gray-600 dark:text-gray-300">= ${discount.originalPrice} - ${discount.discountValue}</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-300">= {getCurrencySymbol()}{discount.originalPrice} - {getCurrencySymbol()}{discount.discountValue}</p>
                   </>
                 )}
               </div>
@@ -158,7 +159,7 @@ export default function DiscountMarkupCalculator() {
 
               <div className="space-y-3">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Cost Price ($)</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Cost Price ({getCurrencySymbol()})</label>
                   <input
                     type="number"
                     value={markup.costPrice}
@@ -222,12 +223,12 @@ export default function DiscountMarkupCalculator() {
                 {markup.markupMethod === 'percent' ? (
                   <>
                     <p>Selling = Cost × (1 + Markup%)</p>
-                    <p className="text-xs text-gray-600 dark:text-gray-300">= ${markup.costPrice} × (1 + {markup.markupValue}%)</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-300">= {getCurrencySymbol()}{markup.costPrice} × (1 + {markup.markupValue}%)</p>
                   </>
                 ) : (
                   <>
                     <p>Selling = Cost + Markup Amount</p>
-                    <p className="text-xs text-gray-600 dark:text-gray-300">= ${markup.costPrice} + ${markup.markupValue}</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-300">= {getCurrencySymbol()}{markup.costPrice} + {getCurrencySymbol()}{markup.markupValue}</p>
                   </>
                 )}
               </div>
@@ -243,7 +244,7 @@ export default function DiscountMarkupCalculator() {
 
               <div className="space-y-3">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Revenue ($)</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Revenue ({getCurrencySymbol()})</label>
                   <input
                     type="number"
                     value={margin.revenue}
@@ -255,7 +256,7 @@ export default function DiscountMarkupCalculator() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Cost ($)</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Cost ({getCurrencySymbol()})</label>
                   <input
                     type="number"
                     value={margin.cost}
@@ -295,7 +296,7 @@ export default function DiscountMarkupCalculator() {
               <h3 className="font-semibold text-gray-900 dark:text-gray-100">Formula</h3>
               <div className="bg-white dark:bg-gray-800 p-4 rounded-lg font-mono text-sm text-gray-700 dark:text-gray-200 space-y-2">
                 <p>Gross Margin % = (Revenue - Cost) / Revenue × 100</p>
-                <p className="text-xs text-gray-600 dark:text-gray-300">= (${margin.revenue} - ${margin.cost}) / ${margin.revenue} × 100</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300">= ({getCurrencySymbol()}{margin.revenue} - {getCurrencySymbol()}{margin.cost}) / {getCurrencySymbol()}{margin.revenue} × 100</p>
                 <p className="text-xs text-gray-600 dark:text-gray-300">= {marginPercent.toFixed(2)}%</p>
               </div>
             </div>
@@ -309,7 +310,7 @@ export default function DiscountMarkupCalculator() {
               <h2 className="font-semibold text-lg text-gray-900 mb-4">Bulk Discount Table Generator</h2>
 
               <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Enter Price ($)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Enter Price ({getCurrencySymbol()})</label>
                 <input
                   type="number"
                   value={bulkPrice}

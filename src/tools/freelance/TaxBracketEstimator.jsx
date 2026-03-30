@@ -2,6 +2,7 @@ import { useState } from 'react'
 import SEOHead from '../../components/SEOHead.jsx'
 import DisclaimerCard from '../../components/DisclaimerCard.jsx'
 import * as storage from '../../utils/storage.js'
+import { formatCurrencyForCountry, getCurrencySymbolForCountry } from '../../utils/currency.js'
 
 const TAX_BRACKETS = {
   US: {
@@ -41,9 +42,9 @@ const TAX_BRACKETS = {
       Federal: [
         { min: 0, max: 55867, rate: 0.15 },
         { min: 55867, max: 111733, rate: 0.205 },
-        { min: 111733, max: 173205, rate: 0.26 },
-        { min: 173205, max: 246752, rate: 0.29 },
-        { min: 246752, max: Infinity, rate: 0.33 },
+        { min: 111733, max: 154906, rate: 0.26 },
+        { min: 154906, max: 220000, rate: 0.29 },
+        { min: 220000, max: Infinity, rate: 0.33 },
       ],
     },
   },
@@ -51,16 +52,24 @@ const TAX_BRACKETS = {
     2024: {
       Standard: [
         { min: 0, max: 18200, rate: 0.0 },
-        { min: 18200, max: 45000, rate: 0.19 },
-        { min: 45000, max: 120000, rate: 0.325 },
-        { min: 120000, max: 180000, rate: 0.37 },
-        { min: 180000, max: Infinity, rate: 0.45 },
+        { min: 18200, max: 45000, rate: 0.16 },
+        { min: 45000, max: 135000, rate: 0.30 },
+        { min: 135000, max: 190000, rate: 0.37 },
+        { min: 190000, max: Infinity, rate: 0.45 },
       ],
     },
   },
   India: {
     2024: {
-      Standard: [
+      'New Regime': [
+        { min: 0, max: 300000, rate: 0.0 },
+        { min: 300000, max: 700000, rate: 0.05 },
+        { min: 700000, max: 1000000, rate: 0.10 },
+        { min: 1000000, max: 1200000, rate: 0.15 },
+        { min: 1200000, max: 1500000, rate: 0.20 },
+        { min: 1500000, max: Infinity, rate: 0.30 },
+      ],
+      'Old Regime': [
         { min: 0, max: 250000, rate: 0.0 },
         { min: 250000, max: 500000, rate: 0.05 },
         { min: 500000, max: 1000000, rate: 0.20 },
@@ -72,19 +81,23 @@ const TAX_BRACKETS = {
     2024: {
       Standard: [
         { min: 0, max: 11604, rate: 0.0 },
-        { min: 11604, max: 62810, rate: 0.42 },
-        { min: 62810, max: Infinity, rate: 0.45 },
+        { min: 11604, max: 17005, rate: 0.19 },
+        { min: 17005, max: 32000, rate: 0.27 },
+        { min: 32000, max: 50000, rate: 0.33 },
+        { min: 50000, max: 66760, rate: 0.39 },
+        { min: 66760, max: 277826, rate: 0.42 },
+        { min: 277826, max: Infinity, rate: 0.45 },
       ],
     },
   },
   France: {
     2024: {
       Standard: [
-        { min: 0, max: 10084, rate: 0.0 },
-        { min: 10084, max: 27746, rate: 0.11 },
-        { min: 27746, max: 74517, rate: 0.30 },
-        { min: 74517, max: 157806, rate: 0.41 },
-        { min: 157806, max: Infinity, rate: 0.45 },
+        { min: 0, max: 11294, rate: 0.0 },
+        { min: 11294, max: 28797, rate: 0.11 },
+        { min: 28797, max: 82341, rate: 0.30 },
+        { min: 82341, max: 177106, rate: 0.41 },
+        { min: 177106, max: Infinity, rate: 0.45 },
       ],
     },
   },
@@ -92,13 +105,15 @@ const TAX_BRACKETS = {
     2024: {
       Standard: [
         { min: 0, max: 20000, rate: 0.0 },
-        { min: 20000, max: 30000, rate: 0.025 },
-        { min: 30000, max: 40000, rate: 0.05 },
-        { min: 40000, max: 80000, rate: 0.075 },
-        { min: 80000, max: 120000, rate: 0.11 },
+        { min: 20000, max: 30000, rate: 0.02 },
+        { min: 30000, max: 40000, rate: 0.035 },
+        { min: 40000, max: 80000, rate: 0.07 },
+        { min: 80000, max: 120000, rate: 0.115 },
         { min: 120000, max: 160000, rate: 0.15 },
         { min: 160000, max: 200000, rate: 0.18 },
-        { min: 200000, max: 320000, rate: 0.19 },
+        { min: 200000, max: 240000, rate: 0.19 },
+        { min: 240000, max: 280000, rate: 0.195 },
+        { min: 280000, max: 320000, rate: 0.20 },
         { min: 320000, max: Infinity, rate: 0.22 },
       ],
     },
@@ -212,7 +227,7 @@ export default function TaxBracketEstimator() {
             </div>
             <div>
               <p className="text-xs text-gray-600">Estimated Tax Owed</p>
-              <p className="text-2xl font-bold text-red-600">${totalTax.toLocaleString('en-US', { maximumFractionDigits: 2 })}</p>
+              <p className="text-2xl font-bold text-red-600">{formatCurrencyForCountry(totalTax, country, { maximumFractionDigits: 2 })}</p>
             </div>
           </div>
         </div>
@@ -223,15 +238,15 @@ export default function TaxBracketEstimator() {
           <div className="grid grid-cols-3 gap-4">
             <div className="bg-green-50 border border-green-200 rounded-xl p-4">
               <p className="text-xs text-green-600 mb-1">Annual Take-Home</p>
-              <p className="text-2xl font-bold text-green-700">${takeHome.toLocaleString('en-US', { maximumFractionDigits: 2 })}</p>
+              <p className="text-2xl font-bold text-green-700">{formatCurrencyForCountry(takeHome, country, { maximumFractionDigits: 2 })}</p>
             </div>
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
               <p className="text-xs text-blue-600 mb-1">Monthly Take-Home</p>
-              <p className="text-2xl font-bold text-blue-700">${takeHomeMonthly.toLocaleString('en-US', { maximumFractionDigits: 2 })}</p>
+              <p className="text-2xl font-bold text-blue-700">{formatCurrencyForCountry(takeHomeMonthly, country, { maximumFractionDigits: 2 })}</p>
             </div>
             <div className="bg-purple-50 border border-purple-200 rounded-xl p-4">
               <p className="text-xs text-purple-600 mb-1">Weekly Take-Home</p>
-              <p className="text-2xl font-bold text-purple-700">${takeHomeWeekly.toLocaleString('en-US', { maximumFractionDigits: 2 })}</p>
+              <p className="text-2xl font-bold text-purple-700">{formatCurrencyForCountry(takeHomeWeekly, country, { maximumFractionDigits: 2 })}</p>
             </div>
           </div>
 
@@ -252,11 +267,11 @@ export default function TaxBracketEstimator() {
                   {bracketBreakdown.map((bracket, idx) => (
                     <tr key={idx} className="border-b border-gray-200 hover:bg-gray-50">
                       <td className="px-3 py-2 text-gray-900">
-                        ${bracket.min.toLocaleString()} - ${bracket.max === Infinity ? '∞' : bracket.max.toLocaleString()}
+                        {getCurrencySymbolForCountry(country)}{bracket.min.toLocaleString()} - {bracket.max === Infinity ? '∞' : getCurrencySymbolForCountry(country) + bracket.max.toLocaleString()}
                       </td>
                       <td className="px-3 py-2 text-center text-gray-900 font-medium">{(bracket.rate * 100).toFixed(2)}%</td>
-                      <td className="px-3 py-2 text-right text-gray-900">${bracket.incomeInBracket.toLocaleString('en-US', { maximumFractionDigits: 2 })}</td>
-                      <td className="px-3 py-2 text-right text-gray-900 font-medium">${bracket.taxInBracket.toLocaleString('en-US', { maximumFractionDigits: 2 })}</td>
+                      <td className="px-3 py-2 text-right text-gray-900">{formatCurrencyForCountry(bracket.incomeInBracket, country, { maximumFractionDigits: 2 })}</td>
+                      <td className="px-3 py-2 text-right text-gray-900 font-medium">{formatCurrencyForCountry(bracket.taxInBracket, country, { maximumFractionDigits: 2 })}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -289,11 +304,11 @@ export default function TaxBracketEstimator() {
                 <div className="grid grid-cols-2 gap-2 text-xs mt-2">
                   <div className="flex items-center gap-2">
                     <span className="w-3 h-3 rounded bg-green-500" />
-                    <span className="text-gray-600">Take-home: ${takeHome.toLocaleString('en-US', { maximumFractionDigits: 0 })}</span>
+                    <span className="text-gray-600">Take-home: {formatCurrencyForCountry(takeHome, country, { maximumFractionDigits: 0 })}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="w-3 h-3 rounded bg-red-500" />
-                    <span className="text-gray-600">Taxes: ${totalTax.toLocaleString('en-US', { maximumFractionDigits: 0 })}</span>
+                    <span className="text-gray-600">Taxes: {formatCurrencyForCountry(totalTax, country, { maximumFractionDigits: 0 })}</span>
                   </div>
                 </div>
               </div>

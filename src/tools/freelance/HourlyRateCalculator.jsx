@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { formatCurrency, getCurrencySymbol } from '../../utils/currency.js'
 
 export default function HourlyRateCalculator() {
   const [income, setIncome] = useState('80000')
@@ -25,13 +26,13 @@ export default function HourlyRateCalculator() {
   }
 
   const r = calculate()
-  const fmt = (n) => n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
+  const fmt = (n) => formatCurrency(n, { maximumFractionDigits: 2 })
 
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Annual Income Goal ($)</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Annual Income Goal ({getCurrencySymbol()})</label>
           <input type="number" value={income} onChange={(e) => setIncome(e.target.value)} className="input-field" min="0" />
         </div>
         <div>
@@ -43,7 +44,7 @@ export default function HourlyRateCalculator() {
           <input type="number" value={hoursPerWeek} onChange={(e) => setHoursPerWeek(e.target.value)} className="input-field" min="1" max="80" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Annual Business Expenses ($)</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Annual Business Expenses ({getCurrencySymbol()})</label>
           <input type="number" value={expenses} onChange={(e) => setExpenses(e.target.value)} className="input-field" min="0" />
         </div>
         <div>

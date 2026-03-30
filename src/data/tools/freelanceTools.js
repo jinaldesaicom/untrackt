@@ -12,6 +12,7 @@ const ProposalBuilder = lazy(() => import('../../tools/freelance/ProposalBuilder
 const ClientProfitabilityEstimator = lazy(() => import('../../tools/freelance/ClientProfitabilityEstimator.jsx'))
 const LatePaymentFeeCalculator = lazy(() => import('../../tools/freelance/LatePaymentFeeCalculator.jsx'))
 const TimeZoneScheduler = lazy(() => import('../../tools/freelance/TimeZoneScheduler.jsx'))
+const InvoiceTracker = lazy(() => import('../../tools/freelance/InvoiceTracker.jsx'))
 
 export const freelanceTools = [
   { id: 'hourly-rate-calculator', name: 'Hourly Rate Calculator', description: 'Calculate your minimum and recommended freelance rate', category: 'freelance', subcategory: 'calculators', icon: 'DollarSign', path: '/tools/hourly-rate-calculator', component: HourlyRateCalculator, tags: ['hourly rate', 'freelance', 'salary', 'income', 'consulting'], isPopular: false, isNew: false },
@@ -26,4 +27,5 @@ export const freelanceTools = [
   { id: 'client-profitability-estimator', name: 'Client Profitability Estimator', description: 'Track client profitability with hourly rate, overhead, and stress factors', category: 'freelance', subcategory: 'planning', icon: 'Users', path: '/tools/client-profitability-estimator', component: ClientProfitabilityEstimator, tags: ['client', 'profitability', 'score', 'comparison', 'revenue', 'metrics'], isPopular: false, isNew: false },
   { id: 'late-payment-fee-calculator', name: 'Late Payment Fee Calculator', description: 'Calculate late payment fees with daily/monthly compounding and payment reminders', category: 'freelance', subcategory: 'billing', icon: 'AlertCircle', path: '/tools/late-payment-fee-calculator', component: LatePaymentFeeCalculator, tags: ['late payment', 'fee', 'invoice', 'reminder', 'penalty', 'debt'], isPopular: false, isNew: false },
   { id: 'timezone-scheduler', name: 'Time Zone Scheduler', description: 'Find overlapping meeting times across 8+ time zones with DST support', category: 'freelance', subcategory: 'scheduling', icon: 'Globe', path: '/tools/timezone-scheduler', component: TimeZoneScheduler, tags: ['timezone', 'scheduling', 'meeting', 'asia', 'europe', 'dst'], isPopular: false, isNew: false },
+  { id: 'invoice-tracker', name: 'Invoice Tracker', description: 'Track invoices, monitor payment status, spot overdue payments, and see revenue summaries', category: 'freelance', subcategory: 'billing', icon: 'ClipboardList', path: '/tools/invoice-tracker', component: InvoiceTracker, tags: ['invoice', 'tracker', 'payment', 'overdue', 'revenue', 'billing', 'status'], isPopular: false, isNew: true },
 ]

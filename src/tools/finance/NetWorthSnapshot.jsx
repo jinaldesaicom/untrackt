@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { Plus, Trash2, PieChart, Save, Download } from 'lucide-react'
 import SEOHead from '../../components/SEOHead.jsx'
 import { getItem, setItem } from '../../utils/storage.js'
+import { formatCurrency } from '../../utils/currency.js'
 
 const STORAGE_KEY = 'untrackt:pref:netWorthSnapshot'
 
@@ -32,7 +33,7 @@ export default function NetWorthSnapshot() {
   const totalLiabilities = liabilities.reduce((sum, l) => sum + (parseFloat(l.value) || 0), 0)
   const netWorth = totalAssets - totalLiabilities
 
-  const fmt = (v) => v.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
+  const fmt = (v) => formatCurrency(v, { maximumFractionDigits: 0 })
 
   const assetCategories = ['Cash & Savings', 'Investments', 'Real Estate', 'Vehicles', 'Other Assets']
   const liabilityCategories = ['Mortgage', 'Student Loans', 'Car Loans', 'Credit Cards', 'Other Debt']

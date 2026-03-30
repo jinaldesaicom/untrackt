@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Plus, Trash2, ChevronUp, ChevronDown } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import SEOHead from '../../components/SEOHead.jsx'
 import DisclaimerCard from '../../components/DisclaimerCard.jsx'
 import PrintButton from '../../components/PrintButton.jsx'
 import CopyButton from '../../components/CopyButton.jsx'
 import * as storage from '../../utils/storage.js'
+import { getLocaleCurrency } from '../../utils/currency.js'
 
 const CURRENCIES = {
   USD: '$',
@@ -38,7 +40,7 @@ export default function InvoiceGenerator() {
     number: '1001',
     date: new Date().toISOString().split('T')[0],
     dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-    currency: 'USD',
+    currency: Object.keys(CURRENCIES).includes(getLocaleCurrency()) ? getLocaleCurrency() : 'USD',
   })
 
   const [lineItems, setLineItems] = useState([
@@ -141,7 +143,57 @@ export default function InvoiceGenerator() {
     }
   }
 
+  const saveToTracker = () => {
+    if (!to.name || total <= 0) {
+      alert('Add a client name and at least one line item before saving to tracker.')
+      return
+    }
+    const tracked = storage.getItem('untrackt_invoices', [])
+    const exists = tracked.some(inv => inv.number === invoiceDetails.number)
+    if (exists) {
+      alert(`Invoice #${invoiceDetails.number} is already tracked.`)
+      return
+    }
+    tracked.push({
+      id: Date.now().toString(),
+      number: invoiceDetails.number,
+      client: to.name,
+      email: to.email,
+      amount: total,
+      currency: invoiceDetails.currency,
+      date: invoiceDetails.date,
+      dueDate: invoiceDetails.dueDate,
+      status: 'sent',
+      lineItems: lineItems.map(li => ({ description: li.description, quantity: li.quantity, rate: li.rate })),
+      createdAt: new Date().toISOString(),
+    })
+    storage.setItem('untrackt_invoices', tracked)
+    alert(`Invoice #${invoiceDetails.number} saved to Invoice Tracker!`)
+  }
+
   const newInvoice = () => {
+    // Save current invoice to shared tracker before clearing
+    if (to.name && total > 0) {
+      const tracked = storage.getItem('untrackt_invoices', [])
+      const exists = tracked.some(inv => inv.number === invoiceDetails.number)
+      if (!exists) {
+        tracked.push({
+          id: Date.now().toString(),
+          number: invoiceDetails.number,
+          client: to.name,
+          email: to.email,
+          amount: total,
+          currency: invoiceDetails.currency,
+          date: invoiceDetails.date,
+          dueDate: invoiceDetails.dueDate,
+          status: 'sent',
+          lineItems: lineItems.map(li => ({ description: li.description, quantity: li.quantity, rate: li.rate })),
+          createdAt: new Date().toISOString(),
+        })
+        storage.setItem('untrackt_invoices', tracked)
+      }
+    }
+
     const nextNumber = (parseInt(invoiceDetails.number) || 1000) + 1
     storage.setItem(LAST_NUMBER_KEY, nextNumber)
     setInvoiceDetails(prev => ({
@@ -174,12 +226,18 @@ export default function InvoiceGenerator() {
           <button onClick={loadTemplate} className="btn-secondary text-sm">
             Load Template
           </button>
+          <button onClick={saveToTracker} className="btn-secondary text-sm">
+            Save to Tracker
+          </button>
           <button onClick={newInvoice} className="btn-secondary text-sm">
             New Invoice
           </button>
           <button onClick={clearAll} className="btn-secondary text-sm">
             Clear
           </button>
+          <Link to="/tools/invoice-tracker" className="btn-secondary text-sm inline-flex items-center gap-1">
+            Open Invoice Tracker
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

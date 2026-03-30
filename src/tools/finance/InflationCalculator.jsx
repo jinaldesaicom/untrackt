@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import SEOHead from '../../components/SEOHead.jsx'
 import { calculateInflation, calculateFutureValue, getAvailableYears } from '../../data/inflationData.js'
+import { formatCurrency, getCurrencySymbol } from '../../utils/currency.js'
 
 export default function InflationCalculator() {
   const [mode, setMode] = useState('pastToPresent')
@@ -49,7 +50,7 @@ export default function InflationCalculator() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Amount ($)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Amount ({getCurrencySymbol()})</label>
                 <input
                   type="number"
                   value={amount}
@@ -94,11 +95,11 @@ export default function InflationCalculator() {
                 <div className="grid grid-cols-3 gap-3">
                   <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 min-w-0">
                     <p className="text-xs text-blue-600 mb-1">Original Amount</p>
-                    <p className="text-xl sm:text-2xl font-bold text-blue-700 break-all leading-tight">${parseFloat(amount).toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
+                    <p className="text-xl sm:text-2xl font-bold text-blue-700 break-all leading-tight">{formatCurrency(parseFloat(amount), { minimumFractionDigits: 2 })}</p>
                   </div>
                   <div className="bg-green-50 border border-green-200 rounded-xl p-4 min-w-0">
                     <p className="text-xs text-green-600 mb-1">Adjusted Value</p>
-                    <p className="text-xl sm:text-2xl font-bold text-green-700 break-all leading-tight">${result.adjustedAmount.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
+                    <p className="text-xl sm:text-2xl font-bold text-green-700 break-all leading-tight">{formatCurrency(result.adjustedAmount, { minimumFractionDigits: 2 })}</p>
                   </div>
                   <div className="bg-orange-50 border border-orange-200 rounded-xl p-4">
                     <p className="text-xs text-orange-600 mb-1">Cumulative Inflation</p>
@@ -120,7 +121,7 @@ export default function InflationCalculator() {
                         {yearData.map((row, idx) => (
                           <tr key={idx} className="border-b border-gray-100 hover:bg-gray-50">
                             <td className="px-3 py-2 text-gray-900 font-medium">{row.year}</td>
-                            <td className="px-3 py-2 text-right text-gray-900">${row.value.toLocaleString('en-US', { minimumFractionDigits: 2 })}</td>
+                            <td className="px-3 py-2 text-right text-gray-900">{formatCurrency(row.value, { minimumFractionDigits: 2 })}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -165,7 +166,7 @@ export default function InflationCalculator() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Amount ($)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Amount ({getCurrencySymbol()})</label>
                 <input
                   type="number"
                   value={amount}
@@ -204,16 +205,16 @@ export default function InflationCalculator() {
             <div className="grid grid-cols-2 gap-3">
               <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 min-w-0">
                 <p className="text-xs text-blue-600 mb-1">Current Amount</p>
-                <p className="text-xl sm:text-2xl font-bold text-blue-700 break-all leading-tight">${parseFloat(amount).toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
+                <p className="text-xl sm:text-2xl font-bold text-blue-700 break-all leading-tight">{formatCurrency(parseFloat(amount), { minimumFractionDigits: 2 })}</p>
               </div>
               <div className="bg-red-50 border border-red-200 rounded-xl p-4 min-w-0">
                 <p className="text-xs text-red-600 mb-1">Future Spending Power</p>
-                <p className="text-xl sm:text-2xl font-bold text-red-700 break-all leading-tight">${futureVal.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
+                <p className="text-xl sm:text-2xl font-bold text-red-700 break-all leading-tight">{formatCurrency(futureVal, { minimumFractionDigits: 2 })}</p>
               </div>
             </div>
 
             <div className="bg-amber-50 p-4 rounded-xl border border-amber-200 text-sm text-amber-900">
-              <p>To maintain today's purchasing power in {toYear} years at {inflationRate}% inflation, you'll need ${futureVal.toLocaleString('en-US', { minimumFractionDigits: 2 })}.</p>
+              <p>To maintain today's purchasing power in {toYear} years at {inflationRate}% inflation, you'll need {formatCurrency(futureVal, { minimumFractionDigits: 2 })}.</p>
             </div>
           </div>
         </div>

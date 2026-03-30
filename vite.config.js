@@ -2,10 +2,21 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 import { visualizer } from 'rollup-plugin-visualizer'
+import istanbul from 'vite-plugin-istanbul'
 
-export default defineConfig({
+const isTest = process.env.VITEST || process.env.NODE_ENV === 'test'
+const testFolder = process.env.TEST_FOLDER
+
+export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
+    isTest && istanbul({
+      include: 'src/**/*',
+      exclude: ['node_modules', 'src/tests/**'],
+      extension: ['.js', '.jsx'],
+      requireEnv: false,
+      forceBuildInstrument: true,
+    }),
     process.env.ANALYZE
       ? visualizer({
         open: true,
@@ -19,7 +30,7 @@ export default defineConfig({
       manifest: {
         name: 'UnTrackt - Free Browser Tools',
         short_name: 'UnTrackt',
-        description: '124+ free tools. Runs in your browser. Zero tracking.',
+        description: '227+ free tools. Runs in your browser. Zero tracking.',
         theme_color: '#4f46e5',
         background_color: '#f9fafb',
         display: 'standalone',
@@ -55,9 +66,15 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './src/tests/setup.js',
     testTimeout: 15000,
-    pool: 'threads',
+    include: testFolder
+      ? [`src/tests/${testFolder}/**/*.test.*`]
+      : ['src/**/*.test.*'],
     coverage: {
-      reporter: ['text', 'html'],
+      provider: 'istanbul',
+      reporter: ['text', 'json-summary'],
+      include: ['src/**/*.{js,jsx}'],
+      exclude: ['src/tests/**', 'src/**/*.test.*'],
+      reportsDirectory: './coverage',
     },
   },
   build: {
@@ -116,4 +133,4 @@ export default defineConfig({
       clientFiles: ['./src/App.jsx']
     }
   }
-})
+}))

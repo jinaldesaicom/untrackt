@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo, useCallback } from 'react'
 import { Plus, Trash2, Download, ChevronLeft, ChevronRight, TrendingUp, TrendingDown, DollarSign, PieChart, BarChart3, Filter, Tag, X, Edit2, Check, ArrowUpCircle, ArrowDownCircle, Scale, Calendar, RotateCcw } from 'lucide-react'
 import SEOHead from '../../components/SEOHead.jsx'
 import { getItem, setItem } from '../../utils/storage.js'
+import { formatCurrency, getCurrencySymbol } from '../../utils/currency.js'
 
 const STORAGE_KEY = 'untrackt_daily_expenses'
 
@@ -29,6 +30,12 @@ const DEFAULT_INCOME_SOURCES = [
   { id: 'rental', name: 'Rental Income', color: '#f59e0b', icon: '🏘️' },
   { id: 'business', name: 'Business', color: '#3b82f6', icon: '🏢' },
   { id: 'side-hustle', name: 'Side Hustle', color: '#ec4899', icon: '🔧' },
+  { id: 'dividends', name: 'Dividends', color: '#7c3aed', icon: '🏦' },
+  { id: 'interest', name: 'Interest', color: '#0ea5e9', icon: '🪙' },
+  { id: 'pension', name: 'Pension', color: '#65a30d', icon: '🧓' },
+  { id: 'commission', name: 'Commission', color: '#d946ef', icon: '🤝' },
+  { id: 'bonus', name: 'Bonus', color: '#ea580c', icon: '🎯' },
+  { id: 'royalties', name: 'Royalties', color: '#a855f7', icon: '📕' },
   { id: 'gift-income', name: 'Gifts Received', color: '#f43f5e', icon: '🎉' },
   { id: 'refund', name: 'Refund', color: '#14b8a6', icon: '↩️' },
   { id: 'other-income', name: 'Other', color: '#6b7280', icon: '💵' },
@@ -62,12 +69,13 @@ function getDaysInMonth(ym) {
 }
 
 function fmt(v) {
-  return v.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })
+  return formatCurrency(v, { minimumFractionDigits: 2 })
 }
 
 function fmtShort(v) {
-  if (Math.abs(v) >= 1000) return (v < 0 ? '-' : '') + '$' + (Math.abs(v) / 1000).toFixed(1) + 'k'
-  return '$' + v.toFixed(0)
+  const sym = getCurrencySymbol()
+  if (Math.abs(v) >= 1000) return (v < 0 ? '-' : '') + sym + (Math.abs(v) / 1000).toFixed(1) + 'k'
+  return sym + v.toFixed(0)
 }
 
 export default function DailyExpenseTracker() {

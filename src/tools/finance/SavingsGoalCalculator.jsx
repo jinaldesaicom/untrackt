@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Plus, Trash2 } from 'lucide-react'
 import SEOHead from '../../components/SEOHead.jsx'
 import DisclaimerCard from '../../components/DisclaimerCard.jsx'
+import { formatCurrency } from '../../utils/currency.js'
 
 export default function SavingsGoalCalculator() {
   const [goals, setGoals] = useState([
@@ -12,7 +13,7 @@ export default function SavingsGoalCalculator() {
   const removeGoal = (id) => setGoals(goals.filter(g => g.id !== id))
   const updateGoal = (id, field, value) => setGoals(goals.map(g => g.id === id ? { ...g, [field]: value } : g))
 
-  const fmt = (v) => v.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
+  const fmt = (v) => formatCurrency(v, { maximumFractionDigits: 0 })
 
   const getProgress = (goal) => {
     if (!goal.deadline) return 0
