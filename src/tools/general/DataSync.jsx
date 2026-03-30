@@ -348,13 +348,6 @@ export default function DataSync() {
 
   return (
     <div className="space-y-5">
-      {/* Privacy badge */}
-      <div className="flex items-start gap-3 p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800">
-        <Shield className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-        <div className="text-sm text-emerald-800 dark:text-emerald-300">
-          <strong>100% Private</strong> — All data stays on your device. No accounts, no servers, no tracking. Export files and QR codes are generated entirely in your browser.
-        </div>
-      </div>
 
       {/* Data summary */}
       <div className="flex flex-wrap gap-4 p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
