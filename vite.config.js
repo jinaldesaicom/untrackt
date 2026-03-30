@@ -5,6 +5,7 @@ import { visualizer } from 'rollup-plugin-visualizer'
 import istanbul from 'vite-plugin-istanbul'
 
 const isTest = process.env.VITEST || process.env.NODE_ENV === 'test'
+const testFolder = process.env.TEST_FOLDER
 
 export default defineConfig(({ mode }) => ({
   plugins: [
@@ -65,6 +66,9 @@ export default defineConfig(({ mode }) => ({
     environment: 'jsdom',
     setupFiles: './src/tests/setup.js',
     testTimeout: 15000,
+    include: testFolder
+      ? [`src/tests/${testFolder}/**/*.test.*`]
+      : ['src/**/*.test.*'],
     coverage: {
       provider: 'istanbul',
       reporter: ['text', 'json-summary'],

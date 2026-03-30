@@ -18,6 +18,7 @@ const ProjectScopeDefiner = lazy(() => import('../../tools/productivity/ProjectS
 const EnergyLevelPlanner = lazy(() => import('../../tools/productivity/EnergyLevelPlanner.jsx'))
 const TwoMinuteTaskFilter = lazy(() => import('../../tools/productivity/TwoMinuteTaskFilter.jsx'))
 const DailyJournal = lazy(() => import('../../tools/productivity/DailyJournal.jsx'))
+const MindMap = lazy(() => import('../../tools/productivity/MindMap.jsx'))
 
 export const productivityTools = [
   { id: 'todo-list', name: 'Todo List', description: 'Simple, private todo list that saves in your browser', category: 'productivity', subcategory: 'tasks', icon: 'CheckSquare', path: '/tools/todo-list', component: TodoList, tags: ['todo', 'tasks', 'list', 'productivity', 'organize'], isPopular: true, isNew: false },
@@ -38,4 +39,5 @@ export const productivityTools = [
   { id: 'energy-level-planner', name: 'Energy Level Planner', description: 'Match tasks to your natural energy rhythm throughout the day', category: 'productivity', subcategory: 'focus', icon: 'Zap', path: '/tools/energy-level-planner', component: EnergyLevelPlanner, tags: ['energy', 'planner', 'rhythm', 'productivity', 'schedule', 'tasks'], isPopular: false, isNew: false },
   { id: 'two-minute-task-filter', name: 'Two-Minute Task Filter', description: 'Sort tasks by the GTD two-minute rule for quick wins', category: 'productivity', subcategory: 'tasks', icon: 'Timer', path: '/tools/two-minute-task-filter', component: TwoMinuteTaskFilter, tags: ['two minute', 'gtd', 'quick wins', 'filter', 'tasks', 'productivity'], isPopular: false, isNew: false },
   { id: 'daily-journal', name: 'Daily Journal', description: 'Private freeform journal with tags, search, and writing streaks', category: 'productivity', subcategory: 'writing', icon: 'BookOpen', path: '/tools/daily-journal', component: DailyJournal, tags: ['journal', 'diary', 'writing', 'daily', 'reflection', 'tags', 'search'], isPopular: false, isNew: true },
+  { id: 'mind-map', name: 'Mindmap', description: 'Visual mind mapping tool with unlimited depth, auto-layout, and multiple maps', category: 'productivity', subcategory: 'planning', icon: 'Share2', path: '/tools/mind-map', component: MindMap, tags: ['mind map', 'mindmap', 'brainstorm', 'diagram', 'tree', 'ideas', 'visual', 'nodes'], isPopular: false, isNew: true },
 ]

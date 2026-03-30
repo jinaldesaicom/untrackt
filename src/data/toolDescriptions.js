@@ -2318,4 +2318,21 @@ export const richDescriptions = {
     ],
     guide: [{ title: 'How to use', body: '1. Enter a number or use examples.\n2. View scientific/engineering notation.\n3. Use calculate mode for arithmetic.' }],
   },
+  'mind-map': {
+    shortDescription: 'Create visual mind maps with unlimited depth and auto-layout.',
+    longDescription: 'The UnTrackt Mindmap tool lets you brainstorm, plan, and organize ideas visually. Build unlimited-depth mind maps with auto-layout (tree or radial), color-coded branches, zoom and pan controls, and keyboard shortcuts. Manage multiple maps, import from indented text, and export as SVG, text, or Markdown — all 100% private in your browser.',
+    keywords: ['mind map', 'mindmap', 'brainstorm', 'diagram', 'visual thinking', 'idea map', 'concept map', 'tree diagram', 'radial layout'],
+    faqs: [
+      { q: 'Where is my data stored?', a: 'All mind maps are saved in your browser localStorage. Nothing is sent to any server.' },
+      { q: 'Can I have multiple mind maps?', a: 'Yes. Create, duplicate, rename, and switch between as many mind maps as you like.' },
+      { q: 'How do I add a child node?', a: 'Select a node and click the + button, or press Tab on your keyboard.' },
+      { q: 'Can I export my mind map?', a: 'Yes. Export as SVG (vector image), plain-text outline, or Markdown. You can also print directly.' },
+      { q: 'What layouts are available?', a: 'Tree (horizontal hierarchy) and Radial (circular) layouts. Switch with one click.' },
+    ],
+    guide: [
+      { title: 'How to use', body: '1. Click the central topic to select it, then double-click or press F2 to edit.\n2. Click the + button or press Tab to add child nodes.\n3. Build out your tree with unlimited nesting depth.\n4. Switch between Tree and Radial layouts.\n5. Use Ctrl+scroll to zoom, or drag the background to pan.' },
+      { title: 'Tips & tricks', body: '• Press Space to collapse/expand a branch and focus on specific areas.\n• Use Import to paste an indented text outline and instantly create a mind map.\n• Duplicate a map to experiment with alternative structures.\n• Export as Markdown for use in documentation or notes apps.\n• Color coding is automatic — each branch from the root gets its own color.' },
+      { title: 'Keyboard shortcuts', body: '• Tab or Insert → Add child node\n• F2 or Enter → Edit selected node\n• Delete → Remove selected node and children\n• Space → Collapse/expand branch\n• Ctrl + Scroll → Zoom in/out\n• Escape → Cancel editing' },
+    ],
+  },
 }
