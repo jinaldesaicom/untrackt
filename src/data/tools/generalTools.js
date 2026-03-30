@@ -15,6 +15,7 @@ const CaseConverter = lazy(() => import('../../tools/general/CaseConverter.jsx')
 const JsonToCsvConverter = lazy(() => import('../../tools/general/JsonToCsvConverter.jsx'))
 const TextToSlug = lazy(() => import('../../tools/general/TextToSlug.jsx'))
 const MetaTagGenerator = lazy(() => import('../../tools/general/MetaTagGenerator.jsx'))
+const DataSync = lazy(() => import('../../tools/general/DataSync.jsx'))
 
 export const generalTools = [
   { id: 'password-generator', name: 'Password Generator', description: 'Generate cryptographically secure random passwords', category: 'general', subcategory: 'generators', icon: 'ShieldCheck', path: '/tools/password-generator', component: PasswordGenerator, tags: ['password', 'generator', 'secure', 'random', 'crypto', 'security'], isPopular: true, isNew: false },
@@ -32,4 +33,5 @@ export const generalTools = [
   { id: 'json-to-csv-converter', name: 'JSON to CSV Converter', description: 'Convert JSON arrays to CSV and CSV back to JSON with previews', category: 'general', subcategory: 'utilities', icon: 'FileJson', path: '/tools/json-to-csv-converter', component: JsonToCsvConverter, tags: ['json', 'csv', 'converter', 'download', 'table', 'export'], isPopular: false, isNew: false },
   { id: 'text-to-slug', name: 'Text to Slug', description: 'Turn titles and text into clean URL slugs, hashtags, and file-safe names', category: 'general', subcategory: 'text', icon: 'Link2', path: '/tools/text-to-slug', component: TextToSlug, tags: ['slug', 'seo', 'url', 'hashtag', 'transliteration', 'batch'], isPopular: false, isNew: false },
   { id: 'meta-tag-generator', name: 'Meta Tag Generator', description: 'Generate page meta tags, Open Graph, Twitter cards, and JSON-LD', category: 'general', subcategory: 'utilities', icon: 'Tags', path: '/tools/meta-tag-generator', component: MetaTagGenerator, tags: ['meta tags', 'seo', 'open graph', 'twitter card', 'json-ld', 'html'], isPopular: false, isNew: false },
+  { id: 'data-sync', name: 'Data Sync & Backup', description: 'Export, import, QR-transfer, or sync via Google Drive between devices', category: 'general', subcategory: 'utilities', icon: 'HardDrive', path: '/tools/data-sync', component: DataSync, tags: ['backup', 'export', 'import', 'sync', 'transfer', 'qr code', 'data', 'privacy', 'google drive', 'cloud'], isPopular: false, isNew: true },
 ]
