@@ -9,7 +9,7 @@ export default {
     },
     whyUse: {
       heading: 'Why Use This Tool?',
-      body: 'Browser local storage is private and fast, but it is also tied to a single browser on a single device. If you clear your browser data, switch devices, or reinstall your browser, all your saved tool data is lost. Data Sync & Backup protects against this by letting you create portable backups and transfer data anywhere. It is your safety net for all 227+ tools in UnTrackt.'
+      body: 'Browser local storage is private and fast, but it is also tied to a single browser on a single device. If you clear your browser data, switch devices, or reinstall your browser, all your saved tool data is lost. Data Sync & Backup protects against this by letting you create portable backups and transfer data anywhere. It is your safety net for all 228+ tools in UnTrackt.'
     },
     howToUse: {
       heading: 'How to Use',

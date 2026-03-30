@@ -21,6 +21,7 @@ const TimeZoneConverter = lazy(() => import('../../tools/general/TimeZoneConvert
 const ClipboardManager = lazy(() => import('../../tools/general/ClipboardManager.jsx'))
 const TextSnippets = lazy(() => import('../../tools/general/TextSnippets.jsx'))
 const DataSync = lazy(() => import('../../tools/general/DataSync.jsx'))
+const ImageResizer = lazy(() => import('../../tools/general/ImageResizer.jsx'))
 
 export const generalTools = [
   { id: 'password-generator', name: 'Password Generator', description: 'Generate cryptographically secure random passwords', category: 'general', subcategory: 'generators', icon: 'ShieldCheck', path: '/tools/password-generator', component: PasswordGenerator, tags: ['password', 'generator', 'secure', 'random', 'crypto', 'security'], isPopular: true, isNew: false },
@@ -44,4 +45,5 @@ export const generalTools = [
   { id: 'clipboard-manager', name: 'Clipboard Manager', description: 'Save, search, pin, and copy text clips with duplicate detection', category: 'general', subcategory: 'utilities', icon: 'Clipboard', path: '/tools/clipboard-manager', component: ClipboardManager, tags: ['clipboard', 'copy', 'paste', 'clips', 'snippets', 'save', 'pin', 'text'], isPopular: false, isNew: true },
   { id: 'text-snippets', name: 'Text Snippets', description: 'Create shortcode expansions with dynamic placeholders and prefix triggers', category: 'general', subcategory: 'text', icon: 'Braces', path: '/tools/text-snippets', component: TextSnippets, tags: ['snippets', 'text expansion', 'shortcode', 'template', 'macro', 'clipboard', 'placeholder'], isPopular: false, isNew: true },
   { id: 'data-sync', name: 'Data Sync & Backup', description: 'Export, import, and QR-transfer your data between devices', category: 'general', subcategory: 'utilities', icon: 'HardDrive', path: '/tools/data-sync', component: DataSync, tags: ['backup', 'export', 'import', 'sync', 'transfer', 'qr code', 'data', 'privacy'], isPopular: false, isNew: true },
+  { id: 'image-resizer', name: 'Image Resizer', description: 'Resize images to exact dimensions with optional aspect-ratio lock', category: 'general', subcategory: 'utilities', icon: 'Scale', path: '/tools/image-resizer', component: ImageResizer, tags: ['image', 'resize', 'scale', 'dimensions', 'aspect ratio', 'photo', 'crop', 'pixel'], isPopular: false, isNew: true },
 ]

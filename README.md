@@ -1,6 +1,6 @@
 # UnTrackt
 
-227+ free browser-based tools.
+228+ free browser-based tools.
 Zero tracking. Zero accounts.
 100% private.
 
@@ -14,7 +14,7 @@ Every tool runs in the browser. Inputs are processed locally. There is no backen
 
 ## Features
 
-- 88 tools across 6 categories
+- 228 tools across 12 categories
 - Runs 100% in the browser
 - No data collected or transmitted
 - PWA support with offline capability

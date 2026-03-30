@@ -74,6 +74,7 @@ const wikiModules = {
   'clipboard-manager': () => import('./general/clipboardManager.js'),
   'text-snippets': () => import('./general/textSnippets.js'),
   'data-sync': () => import('./general/dataSync.js'),
+  'image-resizer': () => import('./general/imageResizer.js'),
 
   // Health tools
   'bmr-calculator': () => import('./health/bmrCalculator.js'),
