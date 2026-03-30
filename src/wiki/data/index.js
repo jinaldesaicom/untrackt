@@ -1,0 +1,162 @@
+// Wiki data index -- lazy-loads each tool's wiki entry by ID for code splitting
+const wikiModules = {
+  // Dev tools
+  'json-formatter': () => import('./dev/jsonFormatter.js'),
+  'base64-tool': () => import('./dev/base64Tool.js'),
+  'uuid-generator': () => import('./dev/uuidGenerator.js'),
+  'regex-tester': () => import('./dev/regexTester.js'),
+  'jwt-decoder': () => import('./dev/jwtDecoder.js'),
+  'hash-generator': () => import('./dev/hashGenerator.js'),
+  'unix-timestamp-converter': () => import('./dev/unixTimestampConverter.js'),
+  'cron-parser': () => import('./dev/cronParser.js'),
+  'html-entity-encoder': () => import('./dev/htmlEntityEncoder.js'),
+  'color-converter': () => import('./dev/colorConverter.js'),
+  'css-gradient-generator': () => import('./dev/cssGradientGenerator.js'),
+  'http-status-lookup': () => import('./dev/httpStatusLookup.js'),
+  'lorem-ipsum-generator': () => import('./dev/loremIpsumGenerator.js'),
+  'text-diff-checker': () => import('./dev/textDiffChecker.js'),
+  'markdown-previewer': () => import('./dev/markdownPreviewer.js'),
+  'number-base-converter': () => import('./dev/numberBaseConverter.js'),
+  'svg-optimizer': () => import('./dev/svgOptimizer.js'),
+  'url-encoder-decoder': () => import('./dev/urlEncoderDecoder.js'),
+  'text-to-flowchart': () => import('./dev/textToFlowchart.js'),
+  'text-to-uml': () => import('./dev/textToUml.js'),
+
+  // Student tools
+  'gpa-calculator': () => import('./student/gpaCalculator.js'),
+  'word-counter': () => import('./student/wordCounter.js'),
+  'pomodoro-timer': () => import('./student/pomodoroTimer.js'),
+  'citation-generator': () => import('./student/citationGenerator.js'),
+  'readability-scorer': () => import('./student/readabilityScorer.js'),
+  'percentage-calculator': () => import('./student/percentageCalculator.js'),
+  'roman-numeral-converter': () => import('./student/romanNumeralConverter.js'),
+  'scientific-calculator': () => import('./student/scientificCalculator.js'),
+  'unit-converter': () => import('./student/unitConverter.js'),
+  'essay-outline-builder': () => import('./student/essayOutlineBuilder.js'),
+  'flashcard-session': () => import('./student/flashcardSession.js'),
+  'quadratic-solver': () => import('./student/quadraticSolver.js'),
+  'study-timer': () => import('./student/studyTimer.js'),
+
+  // Freelance tools
+  'hourly-rate-calculator': () => import('./freelance/hourlyRateCalculator.js'),
+  'meeting-cost-calculator': () => import('./freelance/meetingCostCalculator.js'),
+  'working-days-calculator': () => import('./freelance/workingDaysCalculator.js'),
+  'invoice-generator': () => import('./freelance/invoiceGenerator.js'),
+  'project-timeline-estimator': () => import('./freelance/projectTimelineEstimator.js'),
+  'tax-bracket-estimator': () => import('./freelance/taxBracketEstimator.js'),
+  'discount-markup-calculator': () => import('./freelance/discountMarkupCalculator.js'),
+  'contract-analyzer': () => import('./freelance/contractAnalyzer.js'),
+  'proposal-builder': () => import('./freelance/proposalBuilder.js'),
+  'client-profitability-estimator': () => import('./freelance/clientProfitabilityEstimator.js'),
+  'late-payment-fee-calculator': () => import('./freelance/latePaymentFeeCalculator.js'),
+  'timezone-scheduler': () => import('./freelance/timezoneScheduler.js'),
+
+  // General tools
+  'password-generator': () => import('./general/passwordGenerator.js'),
+  'qr-code-generator': () => import('./general/qrCodeGenerator.js'),
+  'tip-splitter': () => import('./general/tipSplitter.js'),
+  'color-palette-generator': () => import('./general/colorPaletteGenerator.js'),
+  'aspect-ratio-calculator': () => import('./general/aspectRatioCalculator.js'),
+  'image-to-base64': () => import('./general/imageToBase64.js'),
+  'countdown-timer': () => import('./general/countdownTimer.js'),
+  'word-frequency-counter': () => import('./general/wordFrequencyCounter.js'),
+  'typing-speed-test': () => import('./general/typingSpeedTest.js'),
+  'random-number-generator': () => import('./general/randomNumberGenerator.js'),
+  'binary-text-converter': () => import('./general/binaryTextConverter.js'),
+  'case-converter': () => import('./general/caseConverter.js'),
+  'json-to-csv-converter': () => import('./general/jsonToCsvConverter.js'),
+  'text-to-slug': () => import('./general/textToSlug.js'),
+  'meta-tag-generator': () => import('./general/metaTagGenerator.js'),
+
+  // Health tools
+  'bmr-calculator': () => import('./health/bmrCalculator.js'),
+  'water-intake-calculator': () => import('./health/waterIntakeCalculator.js'),
+  'sleep-cycle-calculator': () => import('./health/sleepCycleCalculator.js'),
+  'tdee-calculator': () => import('./health/tdeeCalculator.js'),
+  'ideal-weight-calculator': () => import('./health/idealWeightCalculator.js'),
+  'body-fat-calculator': () => import('./health/bodyFatCalculator.js'),
+  'macro-calculator': () => import('./health/macroCalculator.js'),
+  'blood-pressure-classifier': () => import('./health/bloodPressureClassifier.js'),
+  'heart-rate-zone-calculator': () => import('./health/heartRateZoneCalculator.js'),
+  'pregnancy-due-date-calculator': () => import('./health/pregnancyDueDateCalculator.js'),
+  'ovulation-calculator': () => import('./health/ovulationCalculator.js'),
+  'alcohol-unit-calculator': () => import('./health/alcoholUnitCalculator.js'),
+  'calorie-burn-estimator': () => import('./health/calorieBurnEstimator.js'),
+  'medical-unit-converter': () => import('./health/medicalUnitConverter.js'),
+  'vaccination-age-guide': () => import('./health/vaccinationAgeGuide.js'),
+  'mood-tracker': () => import('./health/moodTracker.js'),
+
+  // Finance tools
+  'compound-interest-calculator': () => import('./finance/compoundInterestCalculator.js'),
+  'loan-calculator': () => import('./finance/loanCalculator.js'),
+  'fire-number-calculator': () => import('./finance/fireNumberCalculator.js'),
+  'mortgage-calculator': () => import('./finance/mortgageCalculator.js'),
+  'sip-calculator': () => import('./finance/sipCalculator.js'),
+  'retirement-calculator': () => import('./finance/retirementCalculator.js'),
+  'rule-of-72-calculator': () => import('./finance/ruleOf72Calculator.js'),
+  'break-even-calculator': () => import('./finance/breakEvenCalculator.js'),
+  'inflation-calculator': () => import('./finance/inflationCalculator.js'),
+  'net-worth-snapshot': () => import('./finance/netWorthSnapshot.js'),
+  'savings-goal-calculator': () => import('./finance/savingsGoalCalculator.js'),
+  'credit-card-payoff-calculator': () => import('./finance/creditCardPayoffCalculator.js'),
+  'roi-calculator': () => import('./finance/roiCalculator.js'),
+  'currency-converter': () => import('./finance/currencyConverter.js'),
+  'emergency-fund-calculator': () => import('./finance/emergencyFundCalculator.js'),
+  'daily-expense-tracker': () => import('./finance/dailyExpenseTracker.js'),
+
+  // SEO tools
+  'keyword-density-analyzer': () => import('./seo/keywordDensityAnalyzer.js'),
+  'title-tag-checker': () => import('./seo/titleTagChecker.js'),
+  'meta-description-analyzer': () => import('./seo/metaDescriptionAnalyzer.js'),
+  'robots-txt-generator': () => import('./seo/robotsTxtGenerator.js'),
+  'robots-txt-tester': () => import('./seo/robotsTxtTester.js'),
+  'xml-sitemap-generator': () => import('./seo/xmlSitemapGenerator.js'),
+  'open-graph-previewer': () => import('./seo/openGraphPreviewer.js'),
+  'schema-markup-generator': () => import('./seo/schemaMarkupGenerator.js'),
+  'hreflang-generator': () => import('./seo/hreflangGenerator.js'),
+  'breadcrumb-schema-generator': () => import('./seo/breadcrumbSchemaGenerator.js'),
+  'alt-text-analyzer': () => import('./seo/altTextAnalyzer.js'),
+  'internal-link-analyzer': () => import('./seo/internalLinkAnalyzer.js'),
+  'reading-level-optimizer': () => import('./seo/readingLevelOptimizer.js'),
+  'canonical-tag-generator': () => import('./seo/canonicalTagGenerator.js'),
+  'page-speed-recommendations': () => import('./seo/pageSpeedRecommendations.js'),
+  'seo-content-brief': () => import('./seo/seoContentBrief.js'),
+
+  // Productivity tools
+  'todo-list': () => import('./productivity/todoList.js'),
+  'notepad': () => import('./productivity/notepad.js'),
+  'sticky-notes': () => import('./productivity/stickyNotes.js'),
+  'kanban-board': () => import('./productivity/kanbanBoard.js'),
+  'daily-planner': () => import('./productivity/dailyPlanner.js'),
+  'eisenhower-matrix': () => import('./productivity/eisenhowerMatrix.js'),
+  'decision-matrix': () => import('./productivity/decisionMatrix.js'),
+  'smart-goal-setter': () => import('./productivity/smartGoalSetter.js'),
+  'weekly-review-template': () => import('./productivity/weeklyReviewTemplate.js'),
+  'meeting-agenda-builder': () => import('./productivity/meetingAgendaBuilder.js'),
+  'meeting-minutes': () => import('./productivity/meetingMinutes.js'),
+  'okr-planner': () => import('./productivity/okrPlanner.js'),
+  'focus-session-logger': () => import('./productivity/focusSessionLogger.js'),
+  'brain-dump-capture': () => import('./productivity/brainDumpCapture.js'),
+  'project-scope-definer': () => import('./productivity/projectScopeDefiner.js'),
+  'energy-level-planner': () => import('./productivity/energyLevelPlanner.js'),
+  'two-minute-task-filter': () => import('./productivity/twoMinuteTaskFilter.js'),
+  'daily-journal': () => import('./productivity/dailyJournal.js'),
+}
+
+/** Lazy-load a single wiki entry by tool ID. Returns the data object or null. */
+export async function getWikiEntry(toolId) {
+  const loader = wikiModules[toolId]
+  if (!loader) return null
+  const mod = await loader()
+  return mod.default
+}
+
+/** Check if a wiki entry exists for a given tool ID (synchronous). */
+export function hasWikiEntry(toolId) {
+  return toolId in wikiModules
+}
+
+/** Get all tool IDs that have wiki entries. */
+export function getWikiToolIds() {
+  return Object.keys(wikiModules)
+}

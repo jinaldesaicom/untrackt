@@ -10,6 +10,9 @@ const PrivacyPage = lazy(() => import('./pages/PrivacyPage.jsx'))
 const TermsPage = lazy(() => import('./pages/TermsPage.jsx'))
 const SearchResultsPage = lazy(() => import('./pages/SearchResultsPage.jsx'))
 const TagPage = lazy(() => import('./pages/TagPage.jsx'))
+const SitemapPage = lazy(() => import('./pages/SitemapPage.jsx'))
+const WikiIndexPage = lazy(() => import('./pages/WikiIndexPage.jsx'))
+const WikiToolPage = lazy(() => import('./pages/WikiToolPage.jsx'))
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage.jsx'))
 import DisclaimerBadge from './components/DisclaimerBadge.jsx'
 import RelatedTools from './components/RelatedTools.jsx'
@@ -26,7 +29,8 @@ import { getIcon } from './icons.js'
 import { addRecentTool } from './utils/storage.js'
 import { recordToolVisit } from './utils/localStats.js'
 import { useTheme } from './hooks/useTheme.js'
-import { Share2, Tag } from 'lucide-react'
+import { Share2, Tag, BookOpen } from 'lucide-react'
+import { hasWikiEntry } from './wiki/data/index.js'
 
 function ToolPage() {
   const { toolId } = useParams()
@@ -131,6 +135,17 @@ function ToolPage() {
 
       <ToolGuide toolId={tool.id} />
 
+      {hasWikiEntry(tool.id) && (
+        <Link
+          to={`/wiki/${tool.id}`}
+          className="mt-4 inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors group"
+        >
+          <BookOpen className="w-4 h-4 opacity-60 group-hover:opacity-100 transition-opacity" />
+          <span>Read the full guide for this tool</span>
+          <span aria-hidden="true" className="text-xs opacity-0 group-hover:opacity-60 transition-opacity">&rarr;</span>
+        </Link>
+      )}
+
       {richContent?.longDescription ? (
         <section aria-label="Tool details" className="mt-8 rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-900">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">About this tool</h2>
@@ -157,10 +172,13 @@ export default function App() {
             <Route path="/favorites" element={<FavoritesPage />} />
             <Route path="/my-stats" element={<MyStatsPage />} />
             <Route path="/about" element={<AboutPage />} />
-            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPage />} />
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/search" element={<SearchResultsPage />} />
             <Route path="/tags/:tag" element={<TagPage />} />
+            <Route path="/sitemap" element={<SitemapPage />} />
+            <Route path="/wiki" element={<WikiIndexPage />} />
+            <Route path="/wiki/:toolId" element={<WikiToolPage />} />
             <Route path="/category/:categoryId" element={<CategoryPage />} />
             <Route path="/tools/:toolId" element={<ToolPage />} />
             <Route path="*" element={<NotFoundPage />} />
