@@ -185,6 +185,28 @@ export default function Home() {
         </section>
       )}
 
+      {/* AI Tools Directory CTA */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <Link
+          to="/ai-directory"
+          className="block rounded-2xl border border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 p-6 sm:p-8 hover:shadow-lg hover:border-blue-200 transition-all dark:border-gray-700 dark:from-blue-950/30 dark:to-purple-950/30 dark:hover:border-blue-600"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                🤖 AI Tools Directory
+              </h2>
+              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400 max-w-lg">
+                Explore 120+ curated AI tools — writing, coding, image generation, and more. Honest reviews, no paid listings.
+              </p>
+              <span className="inline-flex items-center gap-1 mt-3 text-sm font-medium text-blue-600 dark:text-blue-400">
+                Browse AI Directory →
+              </span>
+            </div>
+            <span className="hidden sm:block text-5xl" aria-hidden="true">🤖</span>
+          </div>
+        </Link>
+      </section>
 
     </div>
   )

@@ -80,6 +80,12 @@ function MobileDrawer({ open, onClose }) {
           <Link to="/tools/data-sync" onClick={onClose} className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
             <HardDrive className="w-4 h-4" /> Data Sync & Backup
           </Link>
+
+          <hr className="my-3 border-gray-200 dark:border-gray-700" />
+
+          <Link to="/ai-directory" onClick={onClose} className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
+            <span className="text-base">🤖</span> AI Tools Directory
+          </Link>
         </div>
       </nav>
     </div>
