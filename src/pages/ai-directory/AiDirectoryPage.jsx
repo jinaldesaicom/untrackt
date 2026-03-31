@@ -171,7 +171,7 @@ export default function AiDirectoryPage() {
         path="/ai-directory"
       />
 
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto pt-6 sm:pt-10">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
