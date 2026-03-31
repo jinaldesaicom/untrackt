@@ -31,6 +31,7 @@ export default function Footer() {
               <Link to="/terms" className="text-indigo-600 dark:text-indigo-400 hover:underline">Terms of Use</Link>
               <Link to="/about" className="text-indigo-600 dark:text-indigo-400 hover:underline">About</Link>
               <Link to="/wiki" className="text-indigo-600 dark:text-indigo-400 hover:underline">Wiki</Link>
+              <Link to="/ai-directory" className="text-indigo-600 dark:text-indigo-400 hover:underline">AI Directory</Link>
               <Link to="/sitemap" className="text-indigo-600 dark:text-indigo-400 hover:underline">Sitemap</Link>
             </div>
           </div>

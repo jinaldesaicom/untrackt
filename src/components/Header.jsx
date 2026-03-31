@@ -91,6 +91,12 @@ export default function Header() {
             {/* Desktop: Categories dropdown + search */}
             <div className="hidden lg:flex items-center gap-2 ml-2">
               <CategoriesDropdown />
+              <Link
+                to="/ai-directory"
+                className="px-3 py-1.5 rounded-lg text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-blue-400 dark:hover:bg-gray-800 transition-colors"
+              >
+                🤖 AI Directory
+              </Link>
             </div>
 
             <div className="flex-1 max-w-sm hidden sm:block">

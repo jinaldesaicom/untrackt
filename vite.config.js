@@ -128,6 +128,9 @@ export default defineConfig(({ mode }) => ({
           if (id.includes('src/tools/maths-science/')) {
             return 'tools-maths-science'
           }
+          if (id.includes('src/data/ai-directory/') || id.includes('src/pages/ai-directory/') || id.includes('src/hooks/useAiDirectory')) {
+            return 'ai-directory'
+          }
           if (id.includes('src/data/tools/')) {
             return 'tools-data'
           }

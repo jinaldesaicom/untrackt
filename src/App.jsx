@@ -18,6 +18,9 @@ const WikiIndexPage = lazy(() => import('./pages/WikiIndexPage.jsx'))
 const WikiToolPage = lazy(() => import('./pages/WikiToolPage.jsx'))
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage.jsx'))
 const ToolPage = lazy(() => import('./pages/ToolPage.jsx'))
+const AiDirectoryPage = lazy(() => import('./pages/ai-directory/AiDirectoryPage.jsx'))
+const AiToolDetailPage = lazy(() => import('./pages/ai-directory/AiToolDetailPage.jsx'))
+const AiComparePage = lazy(() => import('./pages/ai-directory/AiComparePage.jsx'))
 
 export default function App() {
   const { theme, isDark } = useTheme()
@@ -54,6 +57,9 @@ export default function App() {
             <Route path="/wiki/:toolId" element={<WikiToolPage />} />
             <Route path="/category/:categoryId" element={<CategoryPage />} />
             <Route path="/tools/:toolId" element={<ToolPage />} />
+            <Route path="/ai-directory" element={<AiDirectoryPage />} />
+            <Route path="/ai-directory/compare" element={<AiComparePage />} />
+            <Route path="/ai-directory/:toolId" element={<AiToolDetailPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
