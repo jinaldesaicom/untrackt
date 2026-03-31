@@ -1,6 +1,6 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { Search, Shuffle, ExternalLink, Bookmark, BookmarkCheck, Scale, Filter, X } from 'lucide-react'
+import { Search, Shuffle, ExternalLink, Bookmark, BookmarkCheck, Scale, Filter, X, ChevronDown, ChevronUp, Star, Sparkles } from 'lucide-react'
 import SEOHead from '../../components/SEOHead.jsx'
 import {
   aiTools,
@@ -11,6 +11,8 @@ import {
   AI_DIRECTORY_LAST_UPDATED,
 } from '../../data/ai-directory/index.js'
 import { useAiBookmarks, useAiSearch } from '../../hooks/useAiDirectory.js'
+
+const PREVIEW_COUNT = 3
 
 const pricingColors = {
   free: 'bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300',
@@ -130,6 +132,16 @@ export default function AiDirectoryPage() {
   } = useAiSearch(aiTools)
   const [compareList, setCompareList] = useState([])
   const [showFilters, setShowFilters] = useState(false)
+  const [expandedCategories, setExpandedCategories] = useState({})
+
+  const toggleCategoryExpand = useCallback((catId) => {
+    setExpandedCategories((prev) => ({ ...prev, [catId]: !prev[catId] }))
+  }, [])
+
+  const featuredTools = useMemo(
+    () => aiTools.filter((t) => t.badges?.includes('editorsPick')).slice(0, 6),
+    []
+  )
 
   // Apply initial category from URL
   useState(() => {
@@ -166,8 +178,8 @@ export default function AiDirectoryPage() {
   return (
     <>
       <SEOHead
-        title="AI Tools Directory — 120+ Curated AI Tools"
-        description="Explore 120+ handpicked AI tools across writing, coding, image generation, video, audio, and more. Honest descriptions, no paid listings."
+        title="AI Tools Directory — 200+ Curated AI Tools"
+        description="Explore 200+ handpicked AI tools across writing, coding, image generation, video, audio, and more. Honest descriptions, no paid listings."
         path="/ai-directory"
       />
 
@@ -334,6 +346,28 @@ export default function AiDirectoryPage() {
           })}
         </div>
 
+        {/* Editor's Picks — featured strip */}
+        {!query && !hasActiveFilters && featuredTools.length > 0 && (
+          <div className="mb-8">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+              <Sparkles size={18} className="text-pink-500" />
+              Editor&apos;s Picks
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {featuredTools.map((tool) => (
+                <AiToolCard
+                  key={tool.id}
+                  tool={tool}
+                  isBookmarked={isBookmarked(tool.id)}
+                  onToggleBookmark={toggleBookmark}
+                  isCompareSelected={compareList.includes(tool.id)}
+                  onToggleCompare={toggleCompare}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Compare bar */}
         {compareList.length > 0 && (
           <div className="mb-6 p-3 rounded-xl border border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-900/20 flex items-center justify-between">
@@ -399,11 +433,14 @@ export default function AiDirectoryPage() {
             <p className="text-sm">Try a different search term or clear the filters.</p>
           </div>
         ) : !query && !categoryFilter && !pricingFilter && !platformFilter ? (
-          /* Grouped by category when showing all tools unfiltered */
+          /* Grouped by category — collapsed to PREVIEW_COUNT per section */
           <div className="space-y-10">
             {aiCategories.map((cat) => {
               const catTools = filtered.filter((t) => t.category === cat.id)
               if (catTools.length === 0) return null
+              const isExpanded = expandedCategories[cat.id]
+              const visibleTools = isExpanded ? catTools : catTools.slice(0, PREVIEW_COUNT)
+              const hasMore = catTools.length > PREVIEW_COUNT
               return (
                 <section key={cat.id}>
                   <div className="flex items-center justify-between mb-4">
@@ -422,7 +459,7 @@ export default function AiDirectoryPage() {
                     </button>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 [content-visibility:auto]">
-                    {catTools.map((tool) => (
+                    {visibleTools.map((tool) => (
                       <AiToolCard
                         key={tool.id}
                         tool={tool}
@@ -433,6 +470,24 @@ export default function AiDirectoryPage() {
                       />
                     ))}
                   </div>
+                  {hasMore && (
+                    <button
+                      onClick={() => toggleCategoryExpand(cat.id)}
+                      className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+                    >
+                      {isExpanded ? (
+                        <>
+                          <ChevronUp size={16} />
+                          Show less
+                        </>
+                      ) : (
+                        <>
+                          <ChevronDown size={16} />
+                          Show {catTools.length - PREVIEW_COUNT} more
+                        </>
+                      )}
+                    </button>
+                  )}
                 </section>
               )
             })}

@@ -185,27 +185,30 @@ export default function Home() {
         </section>
       )}
 
-      {/* AI Tools Directory CTA */}
+      {/* Resources Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-        <Link
-          to="/ai-directory"
-          className="block rounded-2xl border border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 p-6 sm:p-8 hover:shadow-lg hover:border-blue-200 transition-all dark:border-gray-700 dark:from-blue-950/30 dark:to-purple-950/30 dark:hover:border-blue-600"
-        >
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                🤖 AI Tools Directory
-              </h2>
-              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400 max-w-lg">
-                Explore 120+ curated AI tools — writing, coding, image generation, and more. Honest reviews, no paid listings.
-              </p>
-              <span className="inline-flex items-center gap-1 mt-3 text-sm font-medium text-blue-600 dark:text-blue-400">
-                Browse AI Directory →
-              </span>
-            </div>
-            <span className="hidden sm:block text-5xl" aria-hidden="true">🤖</span>
-          </div>
-        </Link>
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">📚 Resources</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          {[
+            { emoji: '🤖', name: 'AI Tools Directory', desc: '200+ AI tools', to: '/ai-directory', border: 'border-violet-200', darkBorder: 'dark:border-violet-800', bg: 'bg-violet-50', darkBg: 'dark:bg-violet-950/30', text: 'text-violet-700', darkText: 'dark:text-violet-300' },
+            { emoji: '📡', name: 'Status Pages', desc: '200+ status links', to: '/status-pages', border: 'border-emerald-200', darkBorder: 'dark:border-emerald-800', bg: 'bg-emerald-50', darkBg: 'dark:bg-emerald-950/30', text: 'text-emerald-700', darkText: 'dark:text-emerald-300' },
+            { emoji: '⭐', name: 'GitHub Stars', desc: '200+ top repos', to: '/github-stars', border: 'border-amber-200', darkBorder: 'dark:border-amber-800', bg: 'bg-amber-50', darkBg: 'dark:bg-amber-950/30', text: 'text-amber-700', darkText: 'dark:text-amber-300' },
+            { emoji: '🧠', name: 'AI Learning', desc: '150+ learning resources', to: '/ai-learning', border: 'border-purple-200', darkBorder: 'dark:border-purple-800', bg: 'bg-purple-50', darkBg: 'dark:bg-purple-950/30', text: 'text-purple-700', darkText: 'dark:text-purple-300' },
+            { emoji: '🎓', name: 'Certifications', desc: '140+ cert guides', to: '/certifications', border: 'border-teal-200', darkBorder: 'dark:border-teal-800', bg: 'bg-teal-50', darkBg: 'dark:bg-teal-950/30', text: 'text-teal-700', darkText: 'dark:text-teal-300' },
+            { emoji: '🏗️', name: 'System Design', desc: '100+ resources', to: '/system-design', border: 'border-fuchsia-200', darkBorder: 'dark:border-fuchsia-800', bg: 'bg-fuchsia-50', darkBg: 'dark:bg-fuchsia-950/30', text: 'text-fuchsia-700', darkText: 'dark:text-fuchsia-300' },
+            { emoji: '💼', name: 'Interview Prep', desc: '100+ resources', to: '/interview-prep', border: 'border-rose-200', darkBorder: 'dark:border-rose-800', bg: 'bg-rose-50', darkBg: 'dark:bg-rose-950/30', text: 'text-rose-700', darkText: 'dark:text-rose-300' },
+          ].map((r) => (
+            <Link
+              key={r.to}
+              to={r.to}
+              className={`flex flex-col items-center text-center p-4 rounded-xl border ${r.border} ${r.darkBorder} ${r.bg} ${r.darkBg} hover:shadow-md hover:-translate-y-0.5 transition-all duration-200`}
+            >
+              <span className="text-2xl mb-2" aria-hidden="true">{r.emoji}</span>
+              <span className={`font-semibold text-sm ${r.text} ${r.darkText}`}>{r.name}</span>
+              <span className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{r.desc}</span>
+            </Link>
+          ))}
+        </div>
       </section>
 
     </div>

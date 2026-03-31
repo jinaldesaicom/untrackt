@@ -25,6 +25,7 @@ function CategoriesDropdown() {
         aria-expanded={open}
         aria-haspopup="true"
       >
+        <span>📂</span>
         Categories
         <ChevronDown className={`w-4 h-4 transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
