@@ -116,6 +116,18 @@ export default defineConfig(({ mode }) => ({
           if (id.includes('src/tools/productivity/')) {
             return 'tools-productivity'
           }
+          if (id.includes('src/tools/agile/')) {
+            return 'tools-agile'
+          }
+          if (id.includes('src/tools/css-html/')) {
+            return 'tools-css-html'
+          }
+          if (id.includes('src/tools/pm/')) {
+            return 'tools-pm'
+          }
+          if (id.includes('src/tools/maths-science/')) {
+            return 'tools-maths-science'
+          }
           if (id.includes('src/data/tools/')) {
             return 'tools-data'
           }
@@ -126,7 +138,7 @@ export default defineConfig(({ mode }) => ({
         },
       }
     },
-    chunkSizeWarningLimit: 300,
+    chunkSizeWarningLimit: 350,
   },
   server: {
     warmup: {
