@@ -1,10 +1,9 @@
 import { useMemo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Heart, Lock, Zap, Globe, Dices } from 'lucide-react'
+import { Lock, Zap, Globe, Dices } from 'lucide-react'
 import SearchBar from '../components/SearchBar.jsx'
 import ToolGrid from '../components/ToolGrid.jsx'
 import SEOHead from '../components/SEOHead.jsx'
-import EmptyState from '../components/EmptyState.jsx'
 import tools, { categories, categoryColorMap, getToolsByCategory } from '../data/tools.js'
 import { getIcon } from '../icons.js'
 import { getRecentTools } from '../utils/storage.js'
@@ -83,13 +82,24 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10" aria-label="Tool of the day">
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white">Tool of the day</h2>
-        <Link to={toolOfTheDay.path} className="mt-4 block rounded-2xl border border-indigo-200 bg-indigo-50 p-6 transition-all hover:shadow-lg dark:border-indigo-700 dark:bg-indigo-900/30">
-          <p className="text-xs uppercase tracking-wide text-indigo-600 dark:text-indigo-300">Try today&apos;s tool</p>
-          <h3 className="mt-1 text-2xl font-bold text-indigo-900 dark:text-indigo-100">{toolOfTheDay.name}</h3>
-          <p className="mt-2 text-sm text-indigo-800/90 dark:text-indigo-200">{toolOfTheDay.description}</p>
-        </Link>
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10" aria-label="Discover tools">
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Discover</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Link to={toolOfTheDay.path} className="rounded-2xl border border-indigo-200 bg-indigo-50 p-6 transition-all hover:shadow-lg dark:border-indigo-700 dark:bg-indigo-900/30">
+            <p className="text-xs uppercase tracking-wide text-indigo-600 dark:text-indigo-300">Tool of the day</p>
+            <h3 className="mt-1 text-2xl font-bold text-indigo-900 dark:text-indigo-100">{toolOfTheDay.name}</h3>
+            <p className="mt-2 text-sm text-indigo-800/90 dark:text-indigo-200">{toolOfTheDay.description}</p>
+          </Link>
+          <button
+            onClick={goToRandom}
+            className="rounded-2xl border border-dashed border-indigo-300 dark:border-indigo-700 bg-indigo-50 dark:bg-indigo-900/20 p-6 text-center transition-all hover:shadow-lg hover:border-indigo-400 dark:hover:border-indigo-500 cursor-pointer"
+          >
+            <Dices className="w-8 h-8 text-indigo-500 mx-auto mb-2" />
+            <p className="text-xs uppercase tracking-wide text-indigo-600 dark:text-indigo-300">Feeling lucky?</p>
+            <h3 className="mt-1 text-2xl font-bold text-gray-900 dark:text-white">Random Tool</h3>
+            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Discover something new</p>
+          </button>
+        </div>
       </section>
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
@@ -120,29 +130,22 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-        <div className="flex items-end justify-between mb-6">
-          <div>
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white">Saved tools</h2>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Quick access to the tools you use most</p>
+      {favoriteTools.length > 0 && (
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+          <div className="flex items-end justify-between mb-6">
+            <div>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white">Saved tools</h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Quick access to the tools you use most</p>
+            </div>
+            {favoriteTools.length > 6 && (
+              <Link to="/favorites" className="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline">
+                View all favorites
+              </Link>
+            )}
           </div>
-          {favoriteTools.length > 6 && (
-            <Link to="/favorites" className="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline">
-              View all favorites
-            </Link>
-          )}
-        </div>
-
-        {favoriteTools.length > 0 ? (
           <ToolGrid tools={favoriteTools.slice(0, 6)} />
-        ) : (
-          <EmptyState
-            icon={Heart}
-            title="No saved tools yet"
-            description="Click the heart icon on any tool card to save it here."
-          />
-        )}
-      </section>
+        </section>
+      )}
 
       {recentTools.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
@@ -156,7 +159,7 @@ export default function Home() {
         </section>
       )}
 
-      {popularTools.length > 0 && (
+      {popularTools.length > 0 && favoriteTools.length < 6 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white">Popular Tools</h2>
@@ -182,24 +185,7 @@ export default function Home() {
         </section>
       )}
 
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-        <div className="rounded-2xl border border-dashed border-indigo-300 dark:border-indigo-700 bg-indigo-50 dark:bg-indigo-900/20 p-6 text-center">
-          <Dices className="w-8 h-8 text-indigo-500 mx-auto mb-2" />
-          <h2 className="text-lg font-bold text-gray-900 dark:text-white">Not sure what to use?</h2>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 mb-4">Try a random tool and discover something new.</p>
-          <button
-            onClick={goToRandom}
-            className="btn-primary inline-flex items-center gap-2"
-          >
-            <Dices className="w-4 h-4" /> Open Random Tool
-          </button>
-        </div>
-      </section>
 
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">All Tools</h2>
-        <ToolGrid tools={tools} />
-      </section>
     </div>
   )
 }
