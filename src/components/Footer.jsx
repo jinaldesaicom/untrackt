@@ -32,6 +32,12 @@ export default function Footer() {
               <Link to="/about" className="text-indigo-600 dark:text-indigo-400 hover:underline">About</Link>
               <Link to="/wiki" className="text-indigo-600 dark:text-indigo-400 hover:underline">Wiki</Link>
               <Link to="/ai-directory" className="text-indigo-600 dark:text-indigo-400 hover:underline">AI Directory</Link>
+              <Link to="/status-pages" className="text-indigo-600 dark:text-indigo-400 hover:underline">Status Pages</Link>
+              <Link to="/github-stars" className="text-indigo-600 dark:text-indigo-400 hover:underline">GitHub Stars</Link>
+              <Link to="/ai-learning" className="text-indigo-600 dark:text-indigo-400 hover:underline">AI Learning</Link>
+              <Link to="/certifications" className="text-indigo-600 dark:text-indigo-400 hover:underline">Certifications</Link>
+              <Link to="/system-design" className="text-indigo-600 dark:text-indigo-400 hover:underline">System Design</Link>
+              <Link to="/interview-prep" className="text-indigo-600 dark:text-indigo-400 hover:underline">Interview Prep</Link>
               <Link to="/sitemap" className="text-indigo-600 dark:text-indigo-400 hover:underline">Sitemap</Link>
             </div>
           </div>

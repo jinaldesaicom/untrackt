@@ -21,6 +21,12 @@ const ToolPage = lazy(() => import('./pages/ToolPage.jsx'))
 const AiDirectoryPage = lazy(() => import('./pages/ai-directory/AiDirectoryPage.jsx'))
 const AiToolDetailPage = lazy(() => import('./pages/ai-directory/AiToolDetailPage.jsx'))
 const AiComparePage = lazy(() => import('./pages/ai-directory/AiComparePage.jsx'))
+const StatusPagesDirectory = lazy(() => import('./pages/StatusPagesDirectory.jsx'))
+const GitHubStarsDirectory = lazy(() => import('./pages/GitHubStarsDirectory.jsx'))
+const AILearningDirectory = lazy(() => import('./pages/AILearningDirectory.jsx'))
+const CloudCertificationsDirectory = lazy(() => import('./pages/CloudCertificationsDirectory.jsx'))
+const SystemDesignDirectory = lazy(() => import('./pages/SystemDesignDirectory.jsx'))
+const InterviewPrepDirectory = lazy(() => import('./pages/InterviewPrepDirectory.jsx'))
 
 export default function App() {
   const { theme, isDark } = useTheme()
@@ -60,6 +66,12 @@ export default function App() {
             <Route path="/ai-directory" element={<AiDirectoryPage />} />
             <Route path="/ai-directory/compare" element={<AiComparePage />} />
             <Route path="/ai-directory/:toolId" element={<AiToolDetailPage />} />
+            <Route path="/status-pages" element={<StatusPagesDirectory />} />
+            <Route path="/github-stars" element={<GitHubStarsDirectory />} />
+            <Route path="/ai-learning" element={<AILearningDirectory />} />
+            <Route path="/certifications" element={<CloudCertificationsDirectory />} />
+            <Route path="/system-design" element={<SystemDesignDirectory />} />
+            <Route path="/interview-prep" element={<InterviewPrepDirectory />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
