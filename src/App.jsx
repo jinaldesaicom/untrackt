@@ -27,6 +27,8 @@ const AILearningDirectory = lazy(() => import('./pages/AILearningDirectory.jsx')
 const CloudCertificationsDirectory = lazy(() => import('./pages/CloudCertificationsDirectory.jsx'))
 const SystemDesignDirectory = lazy(() => import('./pages/SystemDesignDirectory.jsx'))
 const InterviewPrepDirectory = lazy(() => import('./pages/InterviewPrepDirectory.jsx'))
+const CheatsheetsDirectory = lazy(() => import('./pages/CheatsheetsDirectory.jsx'))
+const CheatsheetPage = lazy(() => import('./pages/CheatsheetPage.jsx'))
 
 export default function App() {
   const { theme, isDark } = useTheme()
@@ -72,6 +74,8 @@ export default function App() {
             <Route path="/certifications" element={<CloudCertificationsDirectory />} />
             <Route path="/system-design" element={<SystemDesignDirectory />} />
             <Route path="/interview-prep" element={<InterviewPrepDirectory />} />
+            <Route path="/cheatsheets" element={<CheatsheetsDirectory />} />
+            <Route path="/cheatsheets/:sheetId" element={<CheatsheetPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

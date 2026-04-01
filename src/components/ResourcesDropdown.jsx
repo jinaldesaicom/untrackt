@@ -59,6 +59,14 @@ const resources = [
     color: 'text-rose-600 dark:text-rose-400',
     bg: 'bg-rose-50 dark:bg-rose-900/30',
   },
+  {
+    to: '/cheatsheets',
+    emoji: '📋',
+    name: 'Cheatsheets',
+    description: '50+ developer command quick-references',
+    color: 'text-orange-600 dark:text-orange-400',
+    bg: 'bg-orange-50 dark:bg-orange-900/30',
+  },
 ]
 
 function ResourcesDropdown() {

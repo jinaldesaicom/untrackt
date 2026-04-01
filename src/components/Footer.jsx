@@ -38,6 +38,7 @@ export default function Footer() {
               <Link to="/certifications" className="text-indigo-600 dark:text-indigo-400 hover:underline">Certifications</Link>
               <Link to="/system-design" className="text-indigo-600 dark:text-indigo-400 hover:underline">System Design</Link>
               <Link to="/interview-prep" className="text-indigo-600 dark:text-indigo-400 hover:underline">Interview Prep</Link>
+              <Link to="/cheatsheets" className="text-indigo-600 dark:text-indigo-400 hover:underline">Cheatsheets</Link>
               <Link to="/sitemap" className="text-indigo-600 dark:text-indigo-400 hover:underline">Sitemap</Link>
             </div>
           </div>
