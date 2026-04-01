@@ -197,6 +197,7 @@ export default function Home() {
             { emoji: '🎓', name: 'Certifications', desc: '140+ cert guides', to: '/certifications', border: 'border-teal-200', darkBorder: 'dark:border-teal-800', bg: 'bg-teal-50', darkBg: 'dark:bg-teal-950/30', text: 'text-teal-700', darkText: 'dark:text-teal-300' },
             { emoji: '🏗️', name: 'System Design', desc: '100+ resources', to: '/system-design', border: 'border-fuchsia-200', darkBorder: 'dark:border-fuchsia-800', bg: 'bg-fuchsia-50', darkBg: 'dark:bg-fuchsia-950/30', text: 'text-fuchsia-700', darkText: 'dark:text-fuchsia-300' },
             { emoji: '💼', name: 'Interview Prep', desc: '100+ resources', to: '/interview-prep', border: 'border-rose-200', darkBorder: 'dark:border-rose-800', bg: 'bg-rose-50', darkBg: 'dark:bg-rose-950/30', text: 'text-rose-700', darkText: 'dark:text-rose-300' },
+            { emoji: '📋', name: 'Cheatsheets', desc: '50+ quick refs', to: '/cheatsheets', border: 'border-orange-200', darkBorder: 'dark:border-orange-800', bg: 'bg-orange-50', darkBg: 'dark:bg-orange-950/30', text: 'text-orange-700', darkText: 'dark:text-orange-300' },
           ].map((r) => (
             <Link
               key={r.to}

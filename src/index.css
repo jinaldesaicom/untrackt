@@ -216,3 +216,34 @@
     outline-offset: 2px;
   }
 }
+
+/* ── Print styles for Cheatsheet pages ──────────────── */
+@media print {
+  /* Hide site chrome */
+  header,
+  footer,
+  [class*="BackToTop"],
+  a[href="#main-content"] {
+    display: none !important;
+  }
+
+  /* Reset background and layout */
+  body,
+  #root,
+  [data-theme] {
+    background: white !important;
+    color: black !important;
+    min-height: auto !important;
+  }
+
+  /* Remove shadows, transforms, and unnecessary spacing */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Print-only trademark */
+  .print-trademark {
+    display: block !important;
+  }
+}

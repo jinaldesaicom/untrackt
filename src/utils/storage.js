@@ -350,3 +350,39 @@ export function addRecentIp(id) {
   const next = [id, ...current.filter((i) => i !== id)].slice(0, 8)
   setItem(RECENT_IP_KEY, next)
 }
+
+// ── Cheatsheet Favorites ──────────────────
+const CS_FAVORITES_KEY = 'untrackt:csFavorites'
+const RECENT_CS_KEY = 'untrackt:recentCs'
+
+export function getCsFavorites() {
+  const favorites = getItem(CS_FAVORITES_KEY, [])
+  return Array.isArray(favorites) ? favorites.filter(Boolean) : []
+}
+
+export function addCsFavorite(id) {
+  if (!id) return
+  const current = getCsFavorites()
+  if (current.includes(id)) return
+  setItem(CS_FAVORITES_KEY, [...current, id])
+}
+
+export function removeCsFavorite(id) {
+  setItem(CS_FAVORITES_KEY, getCsFavorites().filter((i) => i !== id))
+}
+
+export function isCsFavorite(id) {
+  return getCsFavorites().includes(id)
+}
+
+export function getRecentCs() {
+  const recent = getItem(RECENT_CS_KEY, [])
+  return Array.isArray(recent) ? recent.slice(0, 8) : []
+}
+
+export function addRecentCs(id) {
+  if (!id) return
+  const current = getRecentCs()
+  const next = [id, ...current.filter((i) => i !== id)].slice(0, 8)
+  setItem(RECENT_CS_KEY, next)
+}
