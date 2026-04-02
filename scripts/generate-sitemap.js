@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import tools, { categories } from '../src/data/tools.js'
+import blogPosts from '../src/data/blogPosts.js'
 
 const today = new Date().toISOString().split('T')[0]
 const urls = []
@@ -15,6 +16,8 @@ tools.forEach((tool) => add(`https://untrackt.com${tool.path}`, 'monthly', '0.7'
 add('https://untrackt.com/about', 'yearly', '0.3')
 add('https://untrackt.com/privacy-policy', 'yearly', '0.2')
 add('https://untrackt.com/terms', 'yearly', '0.2')
+add('https://untrackt.com/blog', 'weekly', '0.7')
+blogPosts.forEach((post) => add(`https://untrackt.com/blog/${post.slug}`, 'monthly', '0.6'))
 
 const xml = [
   '<?xml version="1.0" encoding="UTF-8"?>',

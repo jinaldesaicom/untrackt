@@ -124,6 +124,10 @@ function MobileDrawer({ open, onClose }) {
             </Link>
           </AccordionSection>
 
+          <Link to="/blog" onClick={onClose} className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
+            <span className="text-base">📝</span> Blog
+          </Link>
+
           <hr className="my-3 border-gray-200 dark:border-gray-700" />
 
           <Link to="/favorites" onClick={onClose} className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">

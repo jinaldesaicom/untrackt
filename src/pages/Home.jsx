@@ -10,6 +10,7 @@ import { getRecentTools } from '../utils/storage.js'
 import { useFavorites } from '../hooks/useFavorites.js'
 import { getAllStats, getTotalVisits } from '../utils/localStats.js'
 import { getToolOfTheDay, getPopularTools, getNewTools, getAllTags } from '../search/searchEngine.js'
+import blogPosts from '../data/blogPosts.js'
 
 export default function Home() {
   const navigate = useNavigate()
@@ -18,6 +19,7 @@ export default function Home() {
   const popularTools = useMemo(() => getPopularTools().slice(0, 6), [])
   const newTools = useMemo(() => getNewTools().slice(0, 6), [])
   const topTags = useMemo(() => getAllTags().slice(0, 20), [])
+  const latestBlogPosts = useMemo(() => [...blogPosts].slice(0, 3), [])
 
   const totalVisits = getTotalVisits()
   const isReturning = totalVisits > 5
@@ -55,9 +57,6 @@ export default function Home() {
 
       <section className="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20 text-center">
-          <div className="mb-4 flex justify-center">
-            <span className="beta-badge">Beta Release</span>
-          </div>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 dark:text-white mb-3">
             <span className="inline-block animate-count-up">{tools.length}+</span> free tools. Runs in your browser. Zero tracking.
           </h1>
@@ -207,6 +206,26 @@ export default function Home() {
               <span className="text-2xl mb-2" aria-hidden="true">{r.emoji}</span>
               <span className={`font-semibold text-sm ${r.text} ${r.darkText}`}>{r.name}</span>
               <span className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{r.desc}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white">📝 Blog</h2>
+          <Link to="/blog" className="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline">View all posts</Link>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {latestBlogPosts.map((post) => (
+            <Link
+              key={post.slug}
+              to={`/blog/${post.slug}`}
+              className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-5 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+            >
+              <h3 className="text-base font-semibold text-gray-900 dark:text-white leading-snug">{post.title}</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 line-clamp-3">{post.description}</p>
+              <p className="text-xs text-indigo-600 dark:text-indigo-400 mt-3">{post.readingMinutes} min read</p>
             </Link>
           ))}
         </div>

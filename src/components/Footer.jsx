@@ -12,10 +12,7 @@ export default function Footer() {
               <div className="bg-indigo-600 p-1.5 rounded-lg">
                 <Wrench className="w-4 h-4 text-white" />
               </div>
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-gray-900 dark:text-white text-lg">UnTrackt</span>
-                <span className="beta-badge">Beta</span>
-              </div>
+              <span className="font-bold text-gray-900 dark:text-white text-lg">UnTrackt</span>
             </div>
             <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
               Free, private, and always in your browser. No accounts. No servers. No nonsense.
@@ -25,21 +22,14 @@ export default function Footer() {
               <span>No tracking. No cookies. No accounts. Ever.</span>
             </div>
             <div className="mt-4 flex flex-wrap gap-3 text-sm">
-              <Link to="/favorites" className="text-indigo-600 dark:text-indigo-400 hover:underline">Favorites</Link>
-              <Link to="/my-stats" className="text-indigo-600 dark:text-indigo-400 hover:underline">My Stats</Link>
-              <Link to="/privacy-policy" className="text-indigo-600 dark:text-indigo-400 hover:underline">Privacy Policy</Link>
-              <Link to="/terms" className="text-indigo-600 dark:text-indigo-400 hover:underline">Terms of Use</Link>
-              <Link to="/about" className="text-indigo-600 dark:text-indigo-400 hover:underline">About</Link>
-              <Link to="/wiki" className="text-indigo-600 dark:text-indigo-400 hover:underline">Wiki</Link>
-              <Link to="/ai-directory" className="text-indigo-600 dark:text-indigo-400 hover:underline">AI Directory</Link>
-              <Link to="/status-pages" className="text-indigo-600 dark:text-indigo-400 hover:underline">Status Pages</Link>
-              <Link to="/github-stars" className="text-indigo-600 dark:text-indigo-400 hover:underline">GitHub Stars</Link>
-              <Link to="/ai-learning" className="text-indigo-600 dark:text-indigo-400 hover:underline">AI Learning</Link>
-              <Link to="/certifications" className="text-indigo-600 dark:text-indigo-400 hover:underline">Certifications</Link>
-              <Link to="/system-design" className="text-indigo-600 dark:text-indigo-400 hover:underline">System Design</Link>
-              <Link to="/interview-prep" className="text-indigo-600 dark:text-indigo-400 hover:underline">Interview Prep</Link>
-              <Link to="/cheatsheets" className="text-indigo-600 dark:text-indigo-400 hover:underline">Cheatsheets</Link>
-              <Link to="/sitemap" className="text-indigo-600 dark:text-indigo-400 hover:underline">Sitemap</Link>
+              <Link to="/favorites" className="text-indigo-600 text-sm font-medium dark:text-indigo-400 hover:underline">Favorites</Link>
+              <Link to="/my-stats" className="text-indigo-600 text-sm font-medium dark:text-indigo-400 hover:underline">My Stats</Link>
+              <Link to="/wiki" className="text-indigo-600 text-sm font-medium dark:text-indigo-400 hover:underline">Wiki</Link>
+              <Link to="/blog" className="text-indigo-600 text-sm font-medium dark:text-indigo-400 hover:underline">Blog</Link>
+              <Link to="/about" className="text-indigo-600 text-sm font-medium dark:text-indigo-400 hover:underline">About</Link>
+            <Link to="/sitemap" className="text-indigo-600 text-sm font-medium dark:text-indigo-400 hover:underline">Sitemap</Link>
+            <Link to="/privacy-policy" className="text-indigo-600 text-sm font-medium dark:text-indigo-400 hover:underline">Privacy Policy</Link>
+            <Link to="/terms" className="text-indigo-600 text-sm font-medium dark:text-indigo-400 hover:underline">Terms of Use</Link>
             </div>
           </div>
 

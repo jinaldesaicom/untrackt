@@ -54,6 +54,48 @@
     <priority>0.8</priority>
     <lastmod>2026-04-01</lastmod>
   </url>
+  <url>
+    <loc>https://untrackt.com/blog</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-04-02</lastmod>
+  </url>
+  <url>
+    <loc>https://untrackt.com/blog/pomodoro-vs-52-17-which-actually-works</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-02</lastmod>
+  </url>
+  <url>
+    <loc>https://untrackt.com/blog/notion-vs-browser-only-tools-privacy-comparison</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-02</lastmod>
+  </url>
+  <url>
+    <loc>https://untrackt.com/blog/why-i-stopped-using-google-tools-for-sensitive-calculations</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-02</lastmod>
+  </url>
+  <url>
+    <loc>https://untrackt.com/blog/why-your-online-tools-should-not-track-you</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-02</lastmod>
+  </url>
+  <url>
+    <loc>https://untrackt.com/blog/the-hidden-cost-of-free-tools</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-02</lastmod>
+  </url>
+  <url>
+    <loc>https://untrackt.com/blog/why-we-built-untrackt-without-a-database</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-04-02</lastmod>
+  </url>
 
   <!-- Category pages (12) -->
   <url>
