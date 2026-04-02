@@ -29,6 +29,8 @@ const SystemDesignDirectory = lazy(() => import('./pages/SystemDesignDirectory.j
 const InterviewPrepDirectory = lazy(() => import('./pages/InterviewPrepDirectory.jsx'))
 const CheatsheetsDirectory = lazy(() => import('./pages/CheatsheetsDirectory.jsx'))
 const CheatsheetPage = lazy(() => import('./pages/CheatsheetPage.jsx'))
+const BlogIndexPage = lazy(() => import('./pages/BlogIndexPage.jsx'))
+const BlogPostPage = lazy(() => import('./pages/BlogPostPage.jsx'))
 
 export default function App() {
   const { theme, isDark } = useTheme()
@@ -76,6 +78,8 @@ export default function App() {
             <Route path="/interview-prep" element={<InterviewPrepDirectory />} />
             <Route path="/cheatsheets" element={<CheatsheetsDirectory />} />
             <Route path="/cheatsheets/:sheetId" element={<CheatsheetPage />} />
+            <Route path="/blog" element={<BlogIndexPage />} />
+            <Route path="/blog/:slug" element={<BlogPostPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

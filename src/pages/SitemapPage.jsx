@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import SEOHead from '../components/SEOHead.jsx'
 import tools, { categories, categoryColorMap } from '../data/tools.js'
+import blogPosts from '../data/blogPosts.js'
 import { getIcon } from '../icons.js'
 import {
   Map,
@@ -26,6 +27,7 @@ const staticPages = [
   { name: 'My Stats', path: '/my-stats', icon: BarChart2, description: 'Usage statistics' },
   { name: 'Search', path: '/search', icon: Search, description: 'Find any tool' },
   { name: 'Tool Wiki', path: '/wiki', icon: BookOpen, description: 'In-depth guides for every tool' },
+  { name: 'Blog', path: '/blog', icon: BookOpen, description: 'Privacy and productivity articles' },
   { name: 'Sitemap', path: '/sitemap', icon: Map, description: 'Complete site directory' },
   { name: 'About', path: '/about', icon: Info, description: 'About UnTrackt' },
   { name: 'Privacy Policy', path: '/privacy-policy', icon: ShieldCheck, description: 'How we protect your data' },
@@ -291,6 +293,33 @@ export default function SitemapPage() {
             </button>
           </div>
         )}
+      </section>
+
+      <section className="mt-10">
+        <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+          <div className="w-1.5 h-6 rounded-full bg-emerald-500" />
+          Blog Articles
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {blogPosts.map((post) => (
+            <Link
+              key={post.slug}
+              to={`/blog/${post.slug}`}
+              className="group flex items-center gap-3 p-3.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/50 hover:border-emerald-300 dark:hover:border-emerald-700 transition-colors"
+            >
+              <div className="p-2 rounded-lg bg-emerald-50 dark:bg-emerald-900/30">
+                <BookOpen className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 truncate">
+                  {post.title}
+                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{post.readingMinutes} min read</p>
+              </div>
+              <ExternalLink className="w-3.5 h-3.5 text-gray-300 dark:text-gray-600" />
+            </Link>
+          ))}
+        </div>
       </section>
     </div>
   )

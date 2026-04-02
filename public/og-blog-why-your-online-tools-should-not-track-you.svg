@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Why Your Online Tools Should Not Track You (Our Philosophy) OG image">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#312e81" />
+      <stop offset="100%" stop-color="#0f766e" />
+    </linearGradient>
+    <radialGradient id="glow" cx="65%" cy="20%" r="70%">
+      <stop offset="0%" stop-color="#c4b5fd" stop-opacity="0.30" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <rect width="1200" height="630" fill="url(#glow)" />
+  <g opacity="0.16" fill="#ffffff">
+    <circle cx="1030" cy="110" r="130" />
+    <circle cx="1110" cy="220" r="72" />
+    <circle cx="940" cy="470" r="180" />
+  </g>
+  <rect x="90" y="80" rx="22" ry="22" width="250" height="42" fill="rgba(255,255,255,0.16)" />
+  <text x="115" y="108" fill="#eef2ff" font-family="Arial, sans-serif" font-size="24" font-weight="700">Our Philosophy</text>
+  <text x="90" y="220" fill="#ffffff" font-family="Arial, sans-serif" font-size="64" font-weight="700">Why Your Online Tools</text>
+  <text x="90" y="302" fill="#ffffff" font-family="Arial, sans-serif" font-size="64" font-weight="700">Should Not Track You</text>
+  <text x="90" y="384" fill="#ffffff" font-family="Arial, sans-serif" font-size="64" font-weight="700">(Our Philosophy)</text>
+  <text x="90" y="500" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="30">The core philosophy behind UnTrackt: utility software should solve tasks, not build behavioral profiles. A dee...</text>
+  <text x="90" y="565" fill="#ffffff" font-family="Arial, sans-serif" font-size="26" font-weight="600">UnTrackt Blog</text>
+  <text x="1080" y="565" text-anchor="end" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="24">No tracking • Browser-first</text>
+</svg>
