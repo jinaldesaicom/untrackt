@@ -531,7 +531,7 @@ export default function AiDirectoryPage() {
           <p className="text-sm text-gray-500 dark:text-gray-400">
             Know a great AI tool we should add?{' '}
             <a
-              href="mailto:hello@untrackt.com?subject=AI%20Tool%20Suggestion"
+              href="mailto:support@untrackt.com?subject=AI%20Tool%20Suggestion"
               className="text-blue-600 hover:text-blue-700 dark:text-blue-400 font-medium"
             >
               Suggest a tool →

@@ -8,6 +8,7 @@ import IPCard from '../components/interviewPrep/IPCard.jsx'
 import IPCardCompact from '../components/interviewPrep/IPCardCompact.jsx'
 import { categoryColorMap, levelColorMap } from '../components/interviewPrep/IPCategoryTabs.jsx'
 import { useInterviewPrepFavorites } from '../hooks/useInterviewPrepFavorites.js'
+import SponsorBanner from '../components/SponsorBanner.jsx'
 import { useRecentInterviewPrep } from '../hooks/useRecentInterviewPrep.js'
 import {
   interviewPrepResources,
@@ -350,11 +351,13 @@ export default function InterviewPrepDirectory() {
         {/* Footer Note */}
         <div className="mt-12 text-center text-xs text-gray-400 dark:text-gray-500">
           <p>Resources are curated and verified. If you find a broken link or have a suggestion,</p>
-          <a href="mailto:hello@untrackt.com?subject=Interview Prep Resource Suggestion" className="text-indigo-500 hover:underline">
+          <a href="mailto:support@untrackt.com?subject=Interview Prep Resource Suggestion" className="text-indigo-500 hover:underline">
             let us know
           </a>
           .
         </div>
+
+        <SponsorBanner />
       </div>
     </div>
   )

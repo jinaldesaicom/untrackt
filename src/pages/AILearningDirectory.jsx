@@ -8,6 +8,7 @@ import LearningCard from '../components/aiLearning/LearningCard.jsx'
 import LearningCardCompact from '../components/aiLearning/LearningCardCompact.jsx'
 import { categoryColorMap, levelColorMap } from '../components/aiLearning/AILearningCategoryTabs.jsx'
 import useAILearningFavorites from '../hooks/useAILearningFavorites.js'
+import SponsorBanner from '../components/SponsorBanner.jsx'
 import useRecentAILearning from '../hooks/useRecentAILearning.js'
 import {
   aiLearningResources,
@@ -365,6 +366,8 @@ export default function AILearningDirectory() {
             .
           </p>
         </div>
+
+        <SponsorBanner />
       </div>
     </div>
   )

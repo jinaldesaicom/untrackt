@@ -8,6 +8,7 @@ import RepoCard from '../components/githubStars/RepoCard.jsx'
 import RepoCardCompact from '../components/githubStars/RepoCardCompact.jsx'
 import { categoryColorMap } from '../components/githubStars/GhCategoryTabs.jsx'
 import useGithubStarsFavorites from '../hooks/useGithubStarsFavorites.js'
+import SponsorBanner from '../components/SponsorBanner.jsx'
 import useRecentGithubRepos from '../hooks/useRecentGithubRepos.js'
 import {
   githubStars,
@@ -254,6 +255,8 @@ export default function GitHubStarsDirectory() {
             Star counts are approximate snapshots last updated March 2026. Repository data is maintained manually.
           </p>
         </div>
+
+        <SponsorBanner />
       </div>
     </div>
   )

@@ -6,6 +6,7 @@ import { categoryColorMap } from '../components/cheatsheets/CheatsheetCategoryTa
 import useCheatsheetFavorites from '../hooks/useCheatsheetFavorites.js'
 import useRecentCheatsheets from '../hooks/useRecentCheatsheets.js'
 import useToast from '../hooks/useToast.jsx'
+import SponsorBanner from '../components/SponsorBanner.jsx'
 import {
   getCheatsheetById,
   cheatsheetCategories,
@@ -327,6 +328,8 @@ export default function CheatsheetPage() {
         <div className="print-trademark hidden mt-8 pt-4 border-t border-gray-300 text-center text-xs text-gray-500">
           untrackt.com — Free developer cheatsheets
         </div>
+
+        <SponsorBanner />
       </div>
     </div>
   )

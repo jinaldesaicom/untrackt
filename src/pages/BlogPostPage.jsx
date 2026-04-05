@@ -3,6 +3,7 @@ import { CalendarDays, Clock3, ChevronLeft, Wrench, BookOpen, ShieldCheck, Arrow
 import SEOHead from '../components/SEOHead.jsx'
 import blogPosts, { getBlogPostBySlug } from '../data/blogPosts.js'
 import { getBlogEnhancement } from '../data/blogEnhancements.js'
+import SponsorBanner from '../components/SponsorBanner.jsx'
 import NotFoundPage from './NotFoundPage.jsx'
 
 const BASE_URL = 'https://untrackt.com'
@@ -187,6 +188,10 @@ export default function BlogPostPage() {
           </div>
         </section>
       )}
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SponsorBanner />
+      </div>
     </div>
   )
 }

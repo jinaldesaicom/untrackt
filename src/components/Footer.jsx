@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ShieldCheck, Wrench, MessageSquare } from 'lucide-react'
+import { ShieldCheck, Wrench, MessageSquare, Heart } from 'lucide-react'
 import tools, { categories } from '../data/tools.js'
 
 export default function Footer() {
@@ -65,6 +65,18 @@ export default function Footer() {
           <p>&copy; {new Date().getFullYear()} UnTrackt</p>
           <p>Made with ♥ for privacy</p>
           <p>{tools.length} free tools. All computation runs in your browser.</p>
+          <p className="flex items-center justify-center gap-1 pt-1">
+            <Heart className="w-3 h-3 text-pink-500" />
+            <span>UnTrackt is free and open source.</span>
+            <a
+              href="https://github.com/sponsors/jinaldesaicom"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-pink-500 hover:text-pink-600 dark:hover:text-pink-400 hover:underline"
+            >
+              Support on GitHub Sponsors
+            </a>
+          </p>
         </div>
       </div>
     </footer>

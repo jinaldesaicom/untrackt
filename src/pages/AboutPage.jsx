@@ -58,6 +58,19 @@ export default function AboutPage() {
       <h2>Open source</h2>
       <p>UnTrackt is open source so anyone can review how data is handled and verify the browser-only model.</p>
 
+      <h2>Support UnTrackt</h2>
+      <p>UnTrackt is community-funded. There are no ads, no paywalls, and no premium tiers. If you find it useful, you can support the project through GitHub Sponsors.</p>
+      <p>
+        <a
+          href="https://github.com/sponsors/jinaldesaicom"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-pink-50 dark:bg-pink-950/30 border border-pink-200 dark:border-pink-800/40 text-pink-600 dark:text-pink-400 text-sm font-medium no-underline hover:bg-pink-100 dark:hover:bg-pink-950/50 transition-colors"
+        >
+          ❤️ Sponsor on GitHub
+        </a>
+      </p>
+
       <h2>Tool count</h2>
       <p>Current tool count: <strong>{tools.length}</strong> tools.</p>
 

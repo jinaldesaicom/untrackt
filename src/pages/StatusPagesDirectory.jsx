@@ -8,6 +8,7 @@ import ServiceCard from '../components/statusPages/ServiceCard.jsx'
 import ServiceCardCompact from '../components/statusPages/ServiceCardCompact.jsx'
 import { categoryColorMap } from '../components/statusPages/CategoryTabs.jsx'
 import useStatusFavorites from '../hooks/useStatusFavorites.js'
+import SponsorBanner from '../components/SponsorBanner.jsx'
 import useRecentStatusPages from '../hooks/useRecentStatusPages.js'
 import useToast from '../hooks/useToast.jsx'
 import {
@@ -279,6 +280,8 @@ export default function StatusPagesDirectory() {
             .
           </p>
         </div>
+
+        <SponsorBanner />
       </div>
     </div>
   )

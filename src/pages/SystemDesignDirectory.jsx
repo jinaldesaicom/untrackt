@@ -8,6 +8,7 @@ import SDCard from '../components/systemDesign/SDCard.jsx'
 import SDCardCompact from '../components/systemDesign/SDCardCompact.jsx'
 import { categoryColorMap, levelColorMap } from '../components/systemDesign/SDCategoryTabs.jsx'
 import { useSystemDesignFavorites } from '../hooks/useSystemDesignFavorites.js'
+import SponsorBanner from '../components/SponsorBanner.jsx'
 import { useRecentSystemDesign } from '../hooks/useRecentSystemDesign.js'
 import {
   systemDesignResources,
@@ -355,11 +356,13 @@ export default function SystemDesignDirectory() {
         {/* Footer Note */}
         <div className="mt-12 text-center text-xs text-gray-400 dark:text-gray-500">
           <p>Resources are curated and verified. If you find a broken link or have a suggestion,</p>
-          <a href="mailto:hello@untrackt.com?subject=System Design Resource Suggestion" className="text-indigo-500 hover:underline">
+          <a href="mailto:support@untrackt.com?subject=System Design Resource Suggestion" className="text-indigo-500 hover:underline">
             let us know
           </a>
           .
         </div>
+
+        <SponsorBanner />
       </div>
     </div>
   )
