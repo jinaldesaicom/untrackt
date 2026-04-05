@@ -13,6 +13,7 @@ import {
 import CertCategoryTabs from '../components/certifications/CertCategoryTabs.jsx'
 import CertCard from '../components/certifications/CertCard.jsx'
 import CertCardCompact from '../components/certifications/CertCardCompact.jsx'
+import SponsorBanner from '../components/SponsorBanner.jsx'
 import CertSearch from '../components/certifications/CertSearch.jsx'
 import useCertFavorites from '../hooks/useCertFavorites.js'
 import useRecentCerts from '../hooks/useRecentCerts.js'
@@ -306,6 +307,8 @@ export default function CloudCertificationsDirectory() {
             Suggest an update
           </a>
         </div>
+
+        <SponsorBanner />
       </div>
     </div>
   )

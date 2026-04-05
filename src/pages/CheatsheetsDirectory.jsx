@@ -8,6 +8,7 @@ import CheatsheetCard from '../components/cheatsheets/CheatsheetCard.jsx'
 import CheatsheetCardCompact from '../components/cheatsheets/CheatsheetCardCompact.jsx'
 import { categoryColorMap } from '../components/cheatsheets/CheatsheetCategoryTabs.jsx'
 import useCheatsheetFavorites from '../hooks/useCheatsheetFavorites.js'
+import SponsorBanner from '../components/SponsorBanner.jsx'
 import useRecentCheatsheets from '../hooks/useRecentCheatsheets.js'
 import {
   cheatsheets,
@@ -261,6 +262,8 @@ export default function CheatsheetsDirectory() {
             .
           </p>
         </div>
+
+        <SponsorBanner />
       </div>
     </div>
   )

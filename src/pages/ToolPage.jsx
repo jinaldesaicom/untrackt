@@ -4,6 +4,7 @@ import DisclaimerBadge from '../components/DisclaimerBadge.jsx'
 import RelatedTools from '../components/RelatedTools.jsx'
 import ToolFAQ from '../components/ToolFAQ.jsx'
 import ToolGuide from '../components/ToolGuide.jsx'
+import SponsorBanner from '../components/SponsorBanner.jsx'
 import ToolSkeleton from '../components/ToolSkeleton.jsx'
 import SEOHead from '../components/SEOHead.jsx'
 import Breadcrumb from '../components/Breadcrumb.jsx'
@@ -137,6 +138,8 @@ export default function ToolPage() {
           <p className="mt-2 text-sm leading-relaxed text-gray-600 dark:text-gray-300">{richContent.longDescription}</p>
         </section>
       ) : null}
+
+      <SponsorBanner />
 
       <RelatedTools currentToolId={tool.id} category={tool.category} />
       <ToolFAQ toolId={tool.id} />

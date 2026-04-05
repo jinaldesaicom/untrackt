@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { CalendarDays, Clock3, ArrowRight, Newspaper } from 'lucide-react'
 import SEOHead from '../components/SEOHead.jsx'
 import blogPosts from '../data/blogPosts.js'
+import SponsorBanner from '../components/SponsorBanner.jsx'
 import { getBlogEnhancement } from '../data/blogEnhancements.js'
 
 const sortedPosts = [...blogPosts].sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt))
@@ -110,6 +111,8 @@ export default function BlogIndexPage() {
             </article>
           ))}
         </div>
+
+        <SponsorBanner />
       </section>
     </div>
   )
