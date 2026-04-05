@@ -4,7 +4,7 @@
 
 [![Website](https://img.shields.io/website?label=untrackt.com&style=for-the-badge&url=https%3A%2F%2Funtrackt.com)](https://untrackt.com)
 
-[![Sponsor](https://img.shields.io/github/sponsors/jinaldesaicom?style=flat&logo=github&label=Sponsor)](https://github.com/sponsors/jinaldesaicom)
+[![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/jinaldesaicom)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 ---
