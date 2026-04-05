@@ -5,6 +5,7 @@ import blogPosts, { getBlogPostBySlug } from '../data/blogPosts.js'
 import { getBlogEnhancement } from '../data/blogEnhancements.js'
 import SponsorBanner from '../components/SponsorBanner.jsx'
 import NotFoundPage from './NotFoundPage.jsx'
+import BlogFeaturedImage from '../data/blogFeaturedImages.jsx'
 
 const BASE_URL = 'https://untrackt.com'
 
@@ -88,6 +89,7 @@ export default function BlogPostPage() {
         </Link>
 
         <header className="mb-8">
+          <BlogFeaturedImage slug={post.slug} className="mb-6 rounded-2xl overflow-hidden" />
           <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white leading-tight">
             {post.title}
           </h1>
@@ -124,7 +126,7 @@ export default function BlogPostPage() {
 
           <h2>Quick summary</h2>
           <ul>
-            {post.sections.slice(0, 3).map((section) => (
+            {post.sections.slice(0, 5).map((section) => (
               <li key={section.heading}>{section.heading}</li>
             ))}
           </ul>

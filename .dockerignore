@@ -1,0 +1,13 @@
+node_modules
+dist
+coverage
+.git
+.gitignore
+*.md
+!README.md
+test-output.txt
+cov-output.txt
+.vscode
+.idea
+.env*
+src/tests

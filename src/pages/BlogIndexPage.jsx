@@ -4,6 +4,7 @@ import SEOHead from '../components/SEOHead.jsx'
 import blogPosts from '../data/blogPosts.js'
 import SponsorBanner from '../components/SponsorBanner.jsx'
 import { getBlogEnhancement } from '../data/blogEnhancements.js'
+import BlogFeaturedImage from '../data/blogFeaturedImages.jsx'
 
 const sortedPosts = [...blogPosts].sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt))
 
@@ -65,49 +66,54 @@ export default function BlogIndexPage() {
           {sortedPosts.map((post) => (
             <article
               key={post.slug}
-              className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-6 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+              className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
             >
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white leading-tight">
-                <Link to={`/blog/${post.slug}`} className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-                  {post.title}
-                </Link>
-              </h2>
-
-              <div className="mt-3 flex flex-wrap items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
-                <span className="inline-flex items-center gap-1.5">
-                  <CalendarDays className="w-3.5 h-3.5" />
-                  {new Date(post.publishedAt).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric',
-                  })}
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <Clock3 className="w-3.5 h-3.5" />
-                  {post.readingMinutes} min read
-                </span>
-              </div>
-
-              <p className="mt-4 text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{post.description}</p>
-
-              <div className="mt-5 flex flex-wrap gap-2">
-                {post.keywords.slice(0, 3).map((keyword) => (
-                  <span
-                    key={keyword}
-                    className="inline-flex rounded-full border border-gray-200 dark:border-gray-700 px-2.5 py-1 text-[11px] text-gray-500 dark:text-gray-400"
-                  >
-                    {keyword}
-                  </span>
-                ))}
-              </div>
-
-              <Link
-                to={`/blog/${post.slug}`}
-                className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline"
-              >
-                Read article
-                <ArrowRight className="w-4 h-4" />
+              <Link to={`/blog/${post.slug}`} tabIndex="-1" aria-hidden="true">
+                <BlogFeaturedImage slug={post.slug} />
               </Link>
+              <div className="p-6">
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white leading-tight">
+                  <Link to={`/blog/${post.slug}`} className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                    {post.title}
+                  </Link>
+                </h2>
+
+                <div className="mt-3 flex flex-wrap items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
+                  <span className="inline-flex items-center gap-1.5">
+                    <CalendarDays className="w-3.5 h-3.5" />
+                    {new Date(post.publishedAt).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'short',
+                      day: 'numeric',
+                    })}
+                  </span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <Clock3 className="w-3.5 h-3.5" />
+                    {post.readingMinutes} min read
+                  </span>
+                </div>
+
+                <p className="mt-4 text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{post.description}</p>
+
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {post.keywords.slice(0, 3).map((keyword) => (
+                    <span
+                      key={keyword}
+                      className="inline-flex rounded-full border border-gray-200 dark:border-gray-700 px-2.5 py-1 text-[11px] text-gray-500 dark:text-gray-400"
+                    >
+                      {keyword}
+                    </span>
+                  ))}
+                </div>
+
+                <Link
+                  to={`/blog/${post.slug}`}
+                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline"
+                >
+                  Read article
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
             </article>
           ))}
         </div>
