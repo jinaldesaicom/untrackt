@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ShieldCheck, Wrench, MessageSquare, Heart } from 'lucide-react'
+import { ShieldCheck, Wrench, MessageSquare, Heart, Github, Container } from 'lucide-react'
 import tools, { categories } from '../data/tools.js'
 
 export default function Footer() {
@@ -58,6 +58,38 @@ export default function Footer() {
               <MessageSquare className="w-3.5 h-3.5" />
               Submit feedback
             </a>
+
+            <div className="mt-5 flex flex-col gap-2.5">
+              <a
+                href="https://github.com/jinaldesaicom/untrackt"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 px-3 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 hover:border-gray-900 dark:hover:border-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-150 group"
+              >
+                <div className="flex-shrink-0 w-7 h-7 flex items-center justify-center rounded-md bg-gray-900 dark:bg-white">
+                  <Github className="w-4 h-4 text-white dark:text-gray-900" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold text-gray-900 dark:text-gray-100 leading-tight">GitHub</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 leading-tight">Open source · Star us ⭐</p>
+                </div>
+              </a>
+
+              <a
+                href="https://hub.docker.com/r/jinaldesailive/untrackt"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 px-3 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 hover:border-blue-500 dark:hover:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-150 group"
+              >
+                <div className="flex-shrink-0 w-7 h-7 flex items-center justify-center rounded-md bg-blue-500">
+                  <Container className="w-4 h-4 text-white" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold text-gray-900 dark:text-gray-100 leading-tight">Docker Hub</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 leading-tight">Official image · Self-host</p>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
 
